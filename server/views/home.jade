@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  section#head-banner.dark-bg
+    .container
+        .row
+          #tour-1.col-md-12
+            h1.tagline.centered.normal
+              | Welcome to
+              span.bolder Katemi
+            h3.centered.lighter Perfect Landing Page Template for Your Products or Apps
+          .col-md-12.head-cta
+            .row
+              .col-md-6.col-sm-6.col-xs-6
+                a#startTourBtn.medium-btn.btn-default.green-btn.btn-default.pull-right(href='#') Take a Tour
+              .col-md-6.col-sm-6.col-xs-6
+                a.medium-btn.btn-default.yellow-btn.btn-default.pull-left(href='#') Get The App
+          .col-md-12.product-teaser
+            .row
+              .col-md-3.col-sm-3.left-desc
+                p.product-teaser-title Lorem ipsum dolor sit amet
+                p.product-teaser-desc
+                  | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est commodo.
+              #tour-2.col-md-6.col-sm-6
+                a(href='http://youtu.be/SZEflIVnhH8', rel='prettyPhoto', title='Video Lightbox')
+                  // Link to your youtube/vimeo video
+                  span.play-button.animated.bounceIn
+                  img.center-image.img-responsive(src='img/ss.png', alt='product-teaser')
+              .col-md-3.col-sm-3.right-desc
+                p.product-teaser-title Lorem ipsum dolor sit amet
+                p.product-teaser-desc
+                  | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est commodo.
