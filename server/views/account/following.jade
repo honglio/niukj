@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+  .container-fluid
+    header.row
+        .col-sm-2
+            a.profile-picture(href='#')
+              img.img-responsive.img-circle(src='#{account.gravatar()}')
+          .col-sm-7
+            ul.profile-info-sections
+              li
+                .profile-name
+                  strong
+                    a(href='/account/' + account.id) #{account.profile.name}
+
+                  span
+                    a(href='#') #{account.email}
+              li
+                .col-separator.col-separator-first.box
+                    h4.margin-none.innerAll.border-bottom.margin-none Followings List
+                    .innerAll
+                        .widget.widget-heading-simple.widget-body-simple.text-right.margin-none
+                          form.input-group
+                            input.form-control(type='text', placeholder='Filter by Name ')
+                            span.input-group-btn
+                              button.btn.btn-inverse(type='submit') Search
+                    .col-separator-h.box
+
+                - each following in account.contacts.followings
+                  .innerAll.pull-left
+                      .media.innerAll.margin-none.box
+                          a.pull-left(href='#')
+                            img.media-object.profile(src='#{following.gravatar()}', alt='photo', width='100', height='100')
+                          .media-body
+                            a.strong(href='/account/' + following.id) #{following.profile.name}
+                            a.clearfix.text-primary.strong(href='') #{following.profile.email}
+                            .media-icons
+                              a(href='')
+                                i.fa.text-faded.fa-fw.fa-clock-o
+                              a(href='')
+                                i.fa.text-faded.fa-fw.fa-calendar
+                              a(href='')
+                                i.fa.text-faded.fa-fw.fa-user
+                              a(href='')
+                                i.fa.text-faded.fa-fw.fa-star
+

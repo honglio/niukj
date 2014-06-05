@@ -63,6 +63,8 @@ module.exports = function (app, passport) {
   app.param('uid', accounts.load);
 
   app.get('/account/:uid', passportConf.isAuthenticated, accounts.accountbyId);
+  app.get('/account/:uid/followers', passportConf.isAuthenticated, accounts.followerbyId);
+  app.get('/account/:uid/followings', passportConf.isAuthenticated, accounts.followingbyId);
   app.post('/account/:uid/contact', passportConf.isAuthenticated, accounts.addContact);
   app.delete('/account/:uid/contact', passportConf.isAuthenticated, accounts.removeContact);
 

@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
   section#head-banner.dark-bg
     .container
         .row
@@ -30,3 +31,319 @@ block content
                 p.product-teaser-title Lorem ipsum dolor sit amet
                 p.product-teaser-desc
                   | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est commodo.
+
+
+  section#marketing(style='margin-top: 60px;')
+    .container
+      .row
+        .col-md-12.col-sm-12.centered.section-title-wrapper
+          h3.section-title
+            | What Will You Get
+            span.normal From Katemi
+          p.section-subtitle
+            | Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus.
+        .col-md-4.col-sm-4.marketing-content.centered
+          img.marketing-icon(src='img/keyframes.png', alt='Marketing Icon')
+          h5 Engaging Landing Page
+          p
+            | Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor.
+        .col-md-4.col-sm-4.marketing-content.centered
+          img.marketing-icon(src='img/phone.png', alt='Marketing Icon')
+          h5 Fully Responsive Layout
+          p
+            | Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor.
+        .col-md-4.col-sm-4.marketing-content.centered
+          img.marketing-icon(src='img/settings.png', alt='Marketing Icon')
+          h5 Easy to Customize
+          p
+            | Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor.
+
+
+  .container
+    .row
+        .col-md-12
+          hr.content-hr
+
+
+  section#featurettes
+    .container
+      .row
+        #tour-3.col-md-12.centered.section-title-wrapper
+          h3.section-title
+            | See All New
+            span.normal Katemi Features
+          p.section-subtitle
+            | Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus.
+        .col-md-6.col-sm-6.featurettes-content
+          h4
+            | Pro Support.
+            span.lighter All your problems will solved quickly with Live Chat support.
+          a(href='img/teehanlax.jpg', rel='prettyPhoto[gallery]', title='You can add caption to pictures.')
+            span.col-md-6.rollover
+            img#tour-4.center-image.img-responsive(src='img/screenshot.png', alt='feature')
+          p
+            | Nullam quis risus eget urna mollis ornare vel eu leo. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Maecenas faucibus mollis interdum.
+          a.large-link(href='#') Learn More
+        .col-md-6.col-sm-6.featurettes-content
+          h4
+            | Mobile First.
+            span.lighter Never lose your potential customer, sign them on the go.
+          .row.featurettes-inner-section
+            #tour-5.col-md-6.col-xs-6
+              .flexslider-featurettes
+                ul.slides
+                  li
+                    img.center-image(src='img/iphone-ss1.png', alt='feature')
+                  li
+                    img.center-image(src='img/iphone-ss2.png', alt='feature')
+            .col-md-6.col-xs-6
+              ul.checklist
+                li.green-list Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                li.green-list Nullam quis risus eget urna leo.
+                li.green-list Pellentesque ornare sem lacinia quam venenatis vestibulum.
+                li.green-list Nullam quis risus eget urna leo.
+          p
+            | Nullam quis risus eget urna mollis ornare vel eu leo. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Maecenas faucibus mollis interdum.
+          a.large-link(href='#') Learn More
+
+
+  .container
+    .row
+      .col-md-12
+        hr.content-hr
+
+
+  section#annotations
+    .container
+      .row
+        .col-md-12.centered.section-title-wrapper
+          h3.section-title
+            | Let's Take
+            span.normal a Closer Look
+            | - shared on weidea.net
+          p.section-subtitle
+            | Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus.
+
+        .col-md-12
+          a.annotation-link.product-dot1(href='#', data-toggle='tooltip', data-placement='top', title='', data-original-title='Pharetra Mattis Vestibulum Fringilla Fusce')
+          a.annotation-link.product-dot2(href='#', data-toggle='tooltip', data-placement='top', title='', data-original-title='Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.')
+          a.annotation-link.product-dot3(href='#', data-toggle='tooltip', data-placement='right', title='', data-original-title='Cras mattis consectetur purus sit amet fermentum.')
+          a.annotation-link.product-dot4(href='#', data-toggle='tooltip', data-placement='left', title='', data-original-title='Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.')
+          a.annotation-link.product-dot5(href='#', data-toggle='tooltip', data-placement='bottom', title='', data-original-title='Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.')
+          a.annotation-link.product-dot6(href='#', data-toggle='tooltip', data-placement='right', title='', data-original-title='Cras mattis consectetur purus sit amet fermentum.')
+          a.annotation-link.product-dot7(href='#', data-toggle='tooltip', data-placement='left', title='', data-original-title='Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.')
+          a.annotation-link.product-dot8(href='#', data-toggle='tooltip', data-placement='bottom', title='', data-original-title='Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.')
+          img#tour-7.center-image.img-responsive(src='img/big-ss.png', alt='annotation')
+
+  .container
+    .row
+      .col-md-12
+        hr.content-hr
+  section#lower-content
+    .container
+      .row
+        .col-md-12.centered.section-title-wrapper
+          h3.section-title
+            | See Plans
+            span.normal and Pricing
+          p.section-subtitle
+            | Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus.
+
+        .col-md-3.col-sm-3.pricing-table.centered
+          .pricing-head
+            h5 Bronze
+            .the-price
+              h1
+                | $10
+                span.subscript /mo
+              small 1 month FREE trial
+
+          .pricing-content
+            ul
+              li 1 Account
+              li 1 Project
+              li 100K API Access
+              li 100MB Storage
+              li Custom Cloud Services
+              li Performance Management
+              li Weekly Reports
+
+          .pricing-table-button
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
+
+        .col-md-3.col-sm-3.pricing-table.centered
+          .pricing-head
+            h5 Silver
+            .the-price
+              h1
+                | $20
+                span.subscript /mo
+              small 1 month FREE trial
+
+          .pricing-content
+            ul
+              li 2 Accounts
+              li 5 Projects
+              li 100K API Access
+              li 200MB Storage
+              li Custom Cloud Services
+              li Performance Management
+              li Weekly Reports
+
+          .pricing-table-button
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
+
+        #tour-8.col-md-3.col-sm-3.pricing-table.popular.centered
+          .pricing-head
+            h5 Gold
+            .the-price
+              h1
+                | $35
+                span.subscript /mo
+              small 1 month FREE trial
+
+          .pricing-content
+            ul
+              li 5 Accountd
+              li 20 Projectd
+              li 300K API Access
+              li 500MB Storage
+              li Custom Cloud Services
+              li Performance Management
+              li Weekly Reports
+
+          .pricing-table-button
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
+
+        .col-md-3.col-sm-3.pricing-table.centered
+          .pricing-head
+            h5 Platinum
+            .the-price
+              h1
+                | $55
+                span.subscript /mo
+              small 1 month FREE trial
+
+          .pricing-content
+            ul
+              li 10 Accounts
+              li 35 Project
+              li 500K API Access
+              li 1000MB Storage
+              li Custom Cloud Services
+              li Performance Management
+              li Weekly Reports
+
+          .pricing-table-button
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
+
+        .col-md-12.centered
+          p(style='margin: 20px 0;')
+            | Do you have any other ideas regarding the service plans? We'd love to hear from you! Let's
+            a#tour-9(href='#contactModal', data-toggle='modal') Contact Us
+            | .
+
+  section#breakline.dark-bg
+    .container
+      .row
+        .col-md-7.col-sm-7
+          h3.centered.normal Subscribe and be the first to know all updates and special offers!
+        #tour-9.col-md-5.col-sm-5
+          form#subscribe_form(action='#', method='post')
+            input#subscribe_email.subscribe-input(placeholder='Enter your valid email address...', type='text', value='', name='subscribe')
+            input#subscribe_btn.subscribe-submit.yellow-btn.btn-default(type='submit', value='Subscribe')
+
+          .row
+            .subscribe-alert
+              #subscribe_error.alert.alert-error.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-fire.icon-white
+                strong Error!
+                | Please enter your valid email address.
+              #subscribe_success.alert.alert-success.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-thumbs-up.icon-white
+                strong Success!
+                | You've been subscribed.
+              #subscribe_fail.alert.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-bullhorn.icon-white
+                strong Sorry!
+                | An error occured when subscribing your email.
+
+          p.subscribe-text.centered * Don't worry to subscribe. We hate spam too!
+
+  #contactModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+          h5.modal-label Contact Us
+
+        .modal-body.contact-form-container
+          form#contact_form(name='contactForm', action='#', method='post')
+            .row
+
+              #name_error.alert.alert-error.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-fire.icon-white
+                strong Error!
+                | Please enter your name.
+              #email_error.alert.alert-error.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-fire.icon-white
+                strong Error!
+                | Please enter your valid email address.
+              #subject_error.alert.alert-error.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-fire.icon-white
+                strong Error!
+                | Please enter your subject.
+              #message_error.alert.alert-error.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-fire.icon-white
+                strong Error!
+                | Please enter your message.
+
+            .row
+              .col-md-6
+                label Name :
+                input#name.contact-input(name='thename', type='text', placeholder='Input your name..')
+              .col-md-6
+                label Email :
+                input#email.contact-input(name='email', type='text', placeholder='Input your email..')
+
+            .row
+              .col-md-12
+                label Subject :
+                input#subject.contact-input(name='subject', type='text', placeholder='Input your subject..')
+
+            .row
+              .col-md-12
+                label Message :
+                textarea#message(name='message', rows='7', placeholder='Your message')
+
+            .row
+              #mail_success.alert.alert-success.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-thumbs-up.icon-white
+                strong Success!
+                | Your message has been sent successfully.
+              #mail_fail.alert.form-error-message
+                button.close(type='button', data-dismiss='alert') ×
+                span.alert-icon
+                  i.fa.fa-bullhorn.icon-white
+                strong Sorry!
+                | An error occured this time sending your message.
+
+            .row
+              #submit.col-md-12
+                input#send_message.send-button.green-btn.btn-default(type='submit', name='submit', value='Send Message')
