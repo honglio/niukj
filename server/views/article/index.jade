@@ -2,8 +2,8 @@ extends ../layout
 
 block content
   .container-fluid
-    h1= title
-    hr
+    .page-header
+      h2= title
     - if (articles.length)
       - each article in articles
         .article

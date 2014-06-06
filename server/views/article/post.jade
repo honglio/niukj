@@ -2,8 +2,8 @@ extends ../layout
 
 block content
   .container-fluid
-    h1= article.title
-    hr
+    .page-header
+      h1= article.title
     .row
       .col-md-6
         p=article.body
@@ -29,7 +29,7 @@ block content
     form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('Are you sure?')")
       input(type='hidden', name='_csrf', value=_csrf)
       a.btn.btn-default(href='/articles/'+article._id+'/edit', title="edit") Edit
-      | &nbsp;
+      | &nbsp;&nbsp;
       input(type="hidden", name="_method", value="DELETE")
       button.btn.btn-danger(type="submit") Delete
 

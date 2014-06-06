@@ -14,6 +14,7 @@ html
     link(rel='stylesheet', href='/css/styles.css')
     link(rel='stylesheet', href='/css/style-responsive.css')
     link(rel='stylesheet', href='/css/neon.css')
+    link(rel='stylesheet', href='/css/neon-core.css')
     link(rel='stylesheet', href='/css/lib/animate.min.css')
     link(rel='stylesheet', href='/css/lib/flexslider.css')
     link(rel='stylesheet', href='/css/lib/hopscotch-0.1.2.min.css', type='text/css', media='screen')
@@ -41,6 +42,7 @@ html
     include partials/footer
 
     block scripts
+        script(type='text/javascript', src='/js/vendors/gsap/main-gsap.js')
         script(type='text/javascript', src='/js/vendors/jquery.js')
         script(type='text/javascript', src='/js/vendors/bootstrap.js')
         script(type='text/javascript', src='/js/vendors/jquery.flexslider-min.js')
@@ -50,3 +52,19 @@ html
         script(type='text/javascript', src='/js/vendors/hopscotch-0.1.2.min.js')
         script(type='text/javascript', src='/js/vendors/katemi.js')
         script(type='text/javascript', src='/js/vendors/katemi-take-tour2.js')
+        script(type='text/javascript', src='/js/vendors/neon-custom.js')
+
+        script(type='text/javascript').
+            $(document).ready(function($) {
+                $(".nav li a").click(function(ev) {
+                    show_loading_bar({
+                        pct: 20,
+                        delay: .1,
+                        finish: function(pct) {
+                            show_loading_bar({
+                                pct: 100
+                            });
+                        }
+                    });
+                });
+            });

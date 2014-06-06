@@ -56,7 +56,7 @@ exports.index = function(req, res){
  */
 
 exports.new = function(req, res){
-  res.render('article/new', {
+  res.render('article/edit', {
     title: 'New Article',
     article: new Article({})
   });
@@ -76,7 +76,7 @@ exports.create = function (req, res) {
       return res.redirect('/articles/'+article._id);
     }
 
-    res.render('article/new', {
+    res.render('article/edit', {
       title: 'New Article',
       article: article,
       error: utils.errors(err.errors || err)
@@ -111,7 +111,7 @@ exports.update = function(req, res){
     }
 
     res.render('article/edit', {
-      title: 'Edit Article',
+      title: 'Edit' + article.title,
       article: article,
       error: utils.errors(err.errors || err)
     });

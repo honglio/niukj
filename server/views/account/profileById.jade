@@ -2,38 +2,40 @@ extends ../layout
 
 block content
   .container-fluid
-    header.row
+    header.page-header
+      h3 User
+    .row
       .col-sm-2
-          a.profile-picture(href='#')
-            img.img-responsive.img-circle(src='#{account.gravatar()}')
-        .col-sm-7
-          ul.profile-info-sections
-            li
-              .profile-name
-                strong
-                  a(href='/account/' + account.id) #{account.profile.name}
-
-                span
-                  a(href='#') #{account.email}
-            li
-              .profile-stat
-                h3 #{account.contacts.followers.length}
-                span
-                  a(href='/account/' + account.id + '/followers') followers
-            li
-              .profile-stat
-                h3 #{account.contacts.followings.length}
-                span
-                  a(href='/account/' + account.id + '/followings') following
-        .col-sm-3
-          form.form-horizontal(action='/account/' + account.id + '/contact', method='POST')
-            input(type='hidden', name='_csrf', value=_csrf)
-            .form-group
-            if !followed
-              button.btn.btn-primary(type='submit')
-                i.fa.fa-user
-                | Follow
-            else
-              button.btn.btn-danger(type="submit" name="_method", value="DELETE")
-                i.fa.fa-user
-                | UnFollow
+        a.profile-picture(href='#')
+          img.img-responsive.img-circle(src='#{account.gravatar()}')
+      .col-sm-7
+        ul.profile-info-sections
+          li
+            .profile-name
+              strong
+                a(href='/account/' + account.id) #{account.profile.name}
+              &#160;&#160;&#160;
+              span
+                a(href='#') #{account.email}
+          li
+            .profile-stat
+              h3 #{account.contacts.followers.length}
+              span
+                a(href='/account/' + account.id + '/followers') followers
+          li
+            .profile-stat
+              h3 #{account.contacts.followings.length}
+              span
+                a(href='/account/' + account.id + '/followings') following
+      .col-sm-3
+        form.form-horizontal(action='/account/' + account.id + '/contact', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+          if !followed
+            button.btn.btn-primary(type='submit')
+              i.fa.fa-user
+              | Follow
+          else
+            button.btn.btn-danger(type="submit" name="_method", value="DELETE")
+              i.fa.fa-user
+              | UnFollow
