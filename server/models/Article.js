@@ -23,6 +23,12 @@ var setTags = function (tags) {
  * Article Schema
  */
 
+            // _id: null,
+            // fileName: "",
+            // slides: "",
+            // activeSlide: "",
+            // background: "",
+            // picture: null
 var ArticleSchema = new mongoose.Schema({
   title: {type : String, default : '', trim : true},
   body: {type : String, default : '', trim : true},

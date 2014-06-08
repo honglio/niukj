@@ -10,6 +10,17 @@ exports.home = function(req, res) {
 };
 
 /**
+ * GET /
+ * Home page.
+ */
+
+exports.app = function(req, res) {
+  res.render('app', {
+    title: 'App'
+  });
+};
+
+/**
  * GET /login
  * Login page.
  */

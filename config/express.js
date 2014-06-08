@@ -25,6 +25,8 @@ module.exports = function (app, passport) {
     app.use(express.favicon())
     app.use(express.static(config.root + '/public'))
 
+    winston.add(winston.transports.File, {filename: '../log/all-logs.txt'});
+
     var log = {
       stream: {
         write: function (message, encoding) {

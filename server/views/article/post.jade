@@ -29,6 +29,7 @@ block content
     form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('Are you sure?')")
       input(type='hidden', name='_csrf', value=_csrf)
       a.btn.btn-default(href='/articles/'+article._id+'/edit', title="edit") Edit
+        i.icon-edit
       | &nbsp;&nbsp;
       input(type="hidden", name="_method", value="DELETE")
       button.btn.btn-danger(type="submit") Delete
