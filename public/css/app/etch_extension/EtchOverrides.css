@@ -1,0 +1,19 @@
+.etch-editor-panel > div {
+    display:inline-block;
+}
+.etch-editor-panel {
+    height:32px; /* the height of the editor bar */
+    /*box-shadow*/
+    -webkit-box-shadow:inset 1px 0 0 #dfdfdf, inset 0 1px 0 #dfdfdf, inset -1px 0 0 #dfdfdf, inset 0 -1px 0 #dfdfdf, 0 0 5px rgba(0, 0, 0, .3);
+    -moz-box-shadow:inset 1px 0 0 #dfdfdf, inset 0 1px 0 #dfdfdf, inset -1px 0 0 #dfdfdf, inset 0 -1px 0 #dfdfdf, 0 0 5px rgba(0, 0, 0, .3);
+    box-shadow:inset 1px 0 0 #dfdfdf, inset 0 1px 0 #dfdfdf, inset -1px 0 0 #dfdfdf, inset 0 -1px 0 #dfdfdf, 0 0 5px rgba(0, 0, 0, .3);
+}
+.etch-bold {
+    font-weight:bold;
+}
+.etch-italic {
+    font-style:italic;
+}
+.etch-underline {
+    text-decoration:underline;
+}

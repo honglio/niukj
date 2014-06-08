@@ -1,0 +1,8 @@
+.fileBrowser {
+	min-height: 50px;
+}
+
+.fileBrowser .nav-pills .close {
+	position: relative;
+	top: -4px;
+}

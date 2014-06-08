@@ -1,0 +1,28 @@
+deck < Backbone.Model{
+	fileName
+	background
+	thumbnail
+	slides[]
+	activeSlide
+}
+
+spatialObject < Backbone.Model{
+	transformations (rotate, scale)
+	position (x,y)
+}
+
+slide < spatialObject: {
+	background
+	components
+	active component
+}
+
+component < spatialObject: {
+	type
+	selected
+}
+
+textbox < component: {
+	text
+	size
+}

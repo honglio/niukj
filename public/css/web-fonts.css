@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(fonts/Lato-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(fonts/Lato-BoldItalic.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(fonts/Lato-Regular.woff) format('woff');
+}
+@font-face {
+  font-family: '黑体';
+  font-style: normal;
+  font-weight: 400;
+  src: local('hei'), local('hei'), url(fonts/hei.woff) format('woff');
+}
+@font-face {
+  font-family: '宋体';
+  font-style: normal;
+  font-weight: 400;
+  src: local('song'), local('song'), url(fonts/song.woff) format('woff');
+}
+@font-face {
+  font-family: '楷体';
+  font-style: normal;
+  font-weight: 400;
+  src: local('kai'), local('kai'), url(fonts/kai.woff) format('woff');
+}
+@font-face {
+  font-family: '魏碑';
+  font-style: normal;
+  font-weight: 400;
+  src: local('weibei'), local('weibei'), url(fonts/weibei.woff) format('woff');
+}

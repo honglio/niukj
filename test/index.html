@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Mocha Spec Runner</title>
+    <link rel="stylesheet" href="lib/mocha/mocha.css">
+</head>
+<body>
+    <div id="mocha"></div>
+    <script>window.isOptimized = true;
+            window.slideConfig = {
+                size: {
+                    width: 1024,
+                    height: 768
+                }
+            };
+    </script>
+    <script src="lib/mocha/mocha.js"></script>
+    <script>mocha.setup({ ui: 'bdd', ignoreLeaks: true, globals: ['_', '$', 'jQuery*', 'Backbone', 'JST', 'browserPrefix'] });</script>
+    <!-- assertion framework -->
+    <script src="lib/chai.js"></script>
+    <script>expect = chai.expect;</script>
+    <script src="lib/sinon-chai.js"></script>
+    <!-- dbtest framework -->
+    <script src="lib/sinon.js"></script>
+    <!-- Load application -->
+    <script data-main="./config" src="../scripts/libs/require.js"></script>
+</body>
+</html>

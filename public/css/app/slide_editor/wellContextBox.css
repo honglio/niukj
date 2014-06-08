@@ -1,0 +1,9 @@
+.wellContextBox {
+	z-index: 2;
+	border: 1px solid #FF7F50;
+	margin: 10%;
+}
+
+.wellContextBox .addBtn {
+	margin: 18% 36%;
+}

@@ -1,0 +1,24 @@
+.slideWell .scrollbar {
+    position: relative;
+}
+.slideWell .slideSnapshot .badge:before {
+    counter-increment: slideSnapshot;
+    content: counter(slideSnapshot);
+}
+.slideWell .slideSnapshot {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.slideWell {
+    float: left;
+    -ms-overflow-y: auto;
+    overflow-y: auto;
+    width: 15%;
+    position: relative;
+    margin-right: 1%;
+}
+body {
+    counter-reset: slideSnapshot;
+}
