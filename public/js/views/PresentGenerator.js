@@ -1,4 +1,4 @@
-define(["lodash", "handlebars", "common/Math2",
+define(["underscore", "handlebars", "common/Math2",
         "hbs!templates/ppt_gen/Image",
         "hbs!templates/ppt_gen/TextBox",
         "hbs!templates/ppt_gen/ComponentContainer",

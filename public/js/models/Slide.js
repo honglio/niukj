@@ -1,7 +1,7 @@
-define(["lodash",
+define(["underscore",
 	"backbone",
     "./SpatialObject",
-    "cloudslide/slide_components/ComponentFactory",
+    "../views/slide_components/ComponentFactory",
     "common/Math2",
 	"./ComponentCommands",
     "common/web/undo_support/UndoHistoryFactory"

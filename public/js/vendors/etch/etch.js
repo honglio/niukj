@@ -120,7 +120,7 @@ define(['backbone'], function(Backbone) {
             }
 
             this.$fontFamilyReadout.text(face);
-            this.$colorChooser.spectrum('set', color);
+            // this.$colorChooser.spectrum('set', color);
         },
 
         changeEditable: function() {
@@ -181,42 +181,42 @@ define(['backbone'], function(Backbone) {
 
             $(this.el).show('fast');
 
-            var $colorChooser = this.$el.find(".color-chooser");
-            if ($colorChooser.length > 0) {
-                var hex = '222';
-                $colorChooser.spectrum({
-                    color: '#' + hex,
-                    showSelectionPalette: true,
-                    localStorageKey: 'cloudslide.fontColorChooser',
-                    showPalette: true,
-                    showInitial: true,
-                    showInput: true,
-                    palette: [],
-                    clickoutFiresChange: true,
-                    theme: 'sp-dark',
-                    move: function(color) {
-                        $colorChooser.find("div").css("backgroundColor", "#" + hex);
-                        // Set the color of the actual text
-                        //view.model.get('editableModel').set('color', hex)
-                        document.execCommand('foreColor', false, color.toHexString());
-                    }
-                });
+            // var $colorChooser = this.$el.find(".color-chooser");
+            // if ($colorChooser.length > 0) {
+            //     var hex = '222';
+            //     $colorChooser.spectrum({
+            //         color: '#' + hex,
+            //         showSelectionPalette: true,
+            //         localStorageKey: 'cloudslide.fontColorChooser',
+            //         showPalette: true,
+            //         showInitial: true,
+            //         showInput: true,
+            //         palette: [],
+            //         clickoutFiresChange: true,
+            //         theme: 'sp-dark',
+            //         move: function(color) {
+            //             $colorChooser.find("div").css("backgroundColor", "#" + hex);
+            //             // Set the color of the actual text
+            //             //view.model.get('editableModel').set('color', hex)
+            //             document.execCommand('foreColor', false, color.toHexString());
+            //         }
+            //     });
 
-                var prevent = function(e) {
-                    e.preventDefault();
-                };
+            //     var prevent = function(e) {
+            //         e.preventDefault();
+            //     };
 
-                $(".sp-replacer").mousedown(prevent);
-                $(".sp-container").mousedown(prevent);
-                $colorChooser.mousedown(prevent);
+            //     $(".sp-replacer").mousedown(prevent);
+            //     $(".sp-container").mousedown(prevent);
+            //     $colorChooser.mousedown(prevent);
 
-                $colorChooser.find("div").css("backgroundColor", '#' + hex);
-            }
+            //     $colorChooser.find("div").css("backgroundColor", '#' + hex);
+            // }
 
             var $toggle = this.$el.find('.dropdown-toggle');
             $toggle.dropdown();
             this.$fontSizeReadout = this.$el.find('.fontSizeReadout');
-            this.$colorChooser = $colorChooser;
+            // this.$colorChooser = $colorChooser;
             this.$fontFamilyReadout = this.$el.find('.fontFamilyBtn > .text');
         },
 

@@ -6,7 +6,7 @@ define([
     "hbs!templates/etch_extension/colorChooser",
     "hbs!templates/etch_extension/align",
     "hbs!templates/etch_extension/defaultButton",
-    "css!styles/etch_extension/EtchOverrides.css"
+    "css!styles/app/etch_extension/EtchOverrides.css"
 ], function (_, etch, FontSizeSelectionTemplate, FontFamilySelectionTemplate,
     ColorChooserTemplate, AlignTemplate, DefaultButtonTemplate, css) {
     "use strict";

@@ -1,5 +1,5 @@
 define([
-    "lodash",
+    "underscore",
     "common/EventEmitter",
     "common/collections/LinkedList"
 ], function(_, EventEmitter, LinkedList) {

@@ -11,8 +11,9 @@ define(["CustomView",
         },
 
         initialize: function() {
-            this._well = new SlideWell(this._editorModel);
-            this._opTable = new OperatingTable(this._editorModel);
+            console.log(this.model.clipboard);
+            this._well = new SlideWell({model: this.model});
+            this._opTable = new OperatingTable({model: this.model});
         },
 
         render: function() {
@@ -26,11 +27,6 @@ define(["CustomView",
             this._well.dispose();
             this._opTable.dispose();
             Backbone.View.prototype.dispose.call(this);
-        },
-
-        constructor: function SlideEditorView(editorModel) {
-            this._editorModel = editorModel;
-            Backbone.View.prototype.constructor.apply(this, arguments);
         }
     });
 });

@@ -1,4 +1,4 @@
-define(['router'], function(router) {
+define(['router', 'etch_extension', 'bootstrap'], function(router, Etch, Bootstrap) {
   var initialize = function() {
     // TODO: we'll have to make a more generic one that hooks into
     // the storage providers...
@@ -36,6 +36,7 @@ define(['router'], function(router) {
         window.browserPrefix = "";
     }
 
+    Etch.initialize();
     // Backbone App start
     Backbone.history.start();
   };

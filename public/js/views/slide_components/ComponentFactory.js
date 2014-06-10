@@ -1,7 +1,7 @@
 define(function() {
     "use strict";
 
-    function ComponentFactory(registry) {
+    function ComponentFactory() {
         // Look up cloudslide.Component s
         // create our view map based on their component types
         // ComponentType must be same in model and view.
@@ -74,10 +74,10 @@ define(function() {
     };
 
     return {
-        initialize: function(registry) {
+        initialize: function() {
             console.log('Init ComponentFactory');
             if (!this.instance) {
-                this.instance = new ComponentFactory(registry);
+                this.instance = new ComponentFactory();
             }
         }
     };

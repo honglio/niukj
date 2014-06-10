@@ -1,19 +1,19 @@
 define(["backbone",
-    "cloudslide/deck/Deck",
-    "cloudslide/slide_components/ComponentFactory",
+    "models/Deck",
+    "./views/slide_components/ComponentFactory",
     "common/web/interactions/Clipboard",
     "common/web/undo_support/UndoHistoryFactory",
-    "storage/StorageInterface"
+    "./views/storage/StorageInterface"
 ], function(Backbone, Deck, ComponentFactory,
     Clipboard, UndoHistoryFactory, StorageInterface) {
     "use strict";
 
     return Backbone.Model.extend({
         initialize: function() {
-            this._deck = new Deck(); // TODO: or storageInterface.load(id)
+            this._deck = new Deck();
 
             this.clipboard = new Clipboard();
-
+            console.log(this.clipboard);
             var storageInterface = new StorageInterface();
 
             var self = this;

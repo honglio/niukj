@@ -1,9 +1,9 @@
 define(["jquery", "underscore",
     "CustomView",
-    "cloudslide/slide_snapshot/SlideSnapshot",
+    "../slide_snapshot/SlideSnapshot",
     "./WellContextBox",
     "common/web/interactions/Sortable",
-    "css!styles/slide_editor/slideWell.css"
+    "css!styles/app/slide_editor/slideWell.css"
 ], function($, _, CustomView, SlideSnapshot, WellContextBox, Sortable, css) {
     "use strict";
 
@@ -16,6 +16,7 @@ define(["jquery", "underscore",
         },
 
         initialize: function() {
+            this._deck = this.model.deck();
             this._deck.on("slideAdded", this._slideAdded, this);
             // this._deck.on("slideMoved", this._slideMoved, this);
 			this._deck.get('slides').on("reset", this._slidesReset, this);
@@ -24,7 +25,7 @@ define(["jquery", "underscore",
 			this._deck.get('slides').on("reset", this.setSlideIndex, this);
 			this._deck.get('slides').on("change", this.setSlideIndex, this);
 
-            this._contextBox = new WellContextBox(this._editorModel);
+            this._contextBox = new WellContextBox({model: this.model});
             this._contextBox.render();
             this.$slides = $('<div class="scrollbar">');
             this.$slides.on('click', '.slideSnapshot', this._clicked);
@@ -37,7 +38,7 @@ define(["jquery", "underscore",
 
             this._sortable.on("sortstop", this._sortStopped, this);
 
-            this._clipboard = this._editorModel.clipboard;
+            this._clipboard = this.model.clipboard;
 
             // size setting
 			this._calculateLayout = this._calculateLayout.bind(this);
@@ -67,12 +68,12 @@ define(["jquery", "underscore",
          */
         _focus: function() {
 			console.log('_focus');
-            this._editorModel.set('scope', 'slideWell');
+            this.model.set('scope', 'slideWell');
         },
 
 
 		__isFocused: function() {
-			return this._editorModel.get('scope') === 'slideWell';
+			return this.model.get('scope') === 'slideWell';
 		},
 
 		/**
@@ -178,7 +179,7 @@ define(["jquery", "underscore",
             var index = options.at;
 			console.log(index);
             // Append it in the correct position in the well
-            var snapshot = new SlideSnapshot(slide, this._deck, this._registry);
+            var snapshot = new SlideSnapshot({model: slide});
             if (index === 0) {
                 this.$slides.prepend(snapshot.render().$el);
             } else {
@@ -208,13 +209,12 @@ define(["jquery", "underscore",
          * @returns {*}
          */
         render: function() {
-			console.log('render');
             this.$slides.empty();
             this.$el.html(this.$slides);
 
             this._deck.get('slides').forEach(function(slide) {
                 console.log(this._deck);
-                var snapshot = new SlideSnapshot(slide, this._deck, this._registry);
+                var snapshot = new SlideSnapshot({model: slide, deck: this._deck});
                 this.$slides.append(snapshot.render().$el);
             }, this);
 
@@ -233,12 +233,6 @@ define(["jquery", "underscore",
             this._sortable.dispose();
 			// TODO: snapshot view dispose.
 			Backbone.View.prototype.dispose.call(this);
-        },
-
-        constructor: function SlideWell(editorModel) {
-            this._deck = editorModel.deck();
-            this._editorModel = editorModel;
-            Backbone.View.prototype.constructor.call(this);
         }
     });
 });

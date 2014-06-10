@@ -1,7 +1,6 @@
-define([
-	"lodash",
-    "backbone",
-	"css!styles/widgets/widgets.css"
+define(["underscore",
+        "backbone",
+        "css!styles/app/widgets/widgets.css"
 ], function(_, Backbone, css) {
 	"use strict";
 	function Dropdown(model, template) {

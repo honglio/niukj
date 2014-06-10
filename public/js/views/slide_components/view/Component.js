@@ -292,9 +292,6 @@ define(["CustomView",
             this.model.setInt( axis, ( (slideSize/2) - (textSize/2) ) );
             var cmd = new ComponentCommands.Move(originPos, this.model);
             undoHistory.push(cmd);
-        },
-        constructor: function() {
-            Backbone.View.prototype.constructor.apply(this, arguments);
         }
     });
 });

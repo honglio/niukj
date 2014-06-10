@@ -1,10 +1,10 @@
-define(["underscore", "backbone", "hbs!./templates/ItemImportModal",
-], function(_, Backbone, ItemImportModalTemplate) {
+define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
+], function(_, CustomView, ItemImportModalTemplate) {
     "use strict";
     var modalCache = {};
     var reg = /[a-z]+:/;
 
-    var ItemImportModal = Backbone.View.extend({
+    var ItemImportModal = CustomView.extend({
         className: "itemGrabber modal hide",
         events: {
             "click .ok": "_okClicked",
@@ -94,6 +94,7 @@ define(["underscore", "backbone", "hbs!./templates/ItemImportModal",
         render: function() {
             this.$el.html(ItemImportModalTemplate(this.options));
             this.$el.modal("hide");
+            console.log(this.options.tag);
             this.$preview = this.$el.find(this.options.tag)[0];
 
             var self = this;
@@ -108,9 +109,6 @@ define(["underscore", "backbone", "hbs!./templates/ItemImportModal",
             this.$input = this.$el.find("input[name='itemUrl']");
 
             return this.$el;
-        },
-        constructor: function ItemImportModal() {
-            Backbone.View.prototype.constructor.apply(this, arguments);
         }
     });
 

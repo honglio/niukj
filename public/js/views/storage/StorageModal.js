@@ -1,57 +1,39 @@
 define(["CustomView",
-    "common/web/widgets/FileBrowser",
-    "hbs!templates/StorageModal"
-    "css!styles/storage/storageModal.css"
-], function(CustomView, FileBrowser, StorageModal, css) {
+    "./StorageInterface",
+    "hbs!templates/StorageModal",
+    "css!styles/app/storage/storageModal.css"
+], function(CustomView, StorageInterface, StorageModalTemplate, css) {
     "use strict";
     return CustomView.extend({
-        className: "storageModal modal hide",
         events: {
-            "click a[data-provider]": '_providerSelected',
+            "keyup #filename": '_filenameEnterd',
             "click .ok": '_okClicked',
             destroyed: 'remove'
         },
 
         initialize: function() {
             this.storageInterface = new StorageInterface();
-            this.storageInterface.on("change:providers", this.render, this);
-
-            this.fileBrowser = new FileBrowser(this.storageInterface, this.editorModel);
-        },
-
-        title: function(title) {
-            this.$el.find('.title').html(title);
-        },
-
-        dispose: function() {
-            this.storageInterface.off(null, null, this);
-            this.fileBrowser.dispose();
-			Backbone.View.prototype.dispose.call(this);
         },
 
         render: function() {
-			console.log('render');
 
-            // Don't load the data for a provider until its tab is selected.
-            var providerNames = this.storageInterface.providerNames();
-            this.$el.html(StorageModal({
-                title: 'none',
-                tabs: providerNames
+            this.$el.html(StorageModalTemplate({
+                title: '保存',
+                filename: this.model.deck().get('fileName')
             }));
-
-            var currentTab = this.$el.find('[data-provider="' +
-                    this.storageInterface.currentProviderId() +
-                    '"]').parent();
-            currentTab.addClass('active');
-
-            this.$el.find('.tabContent').append(this.fileBrowser.render().$el);
-
             return this;
         },
 
         show: function() {
-            this.title('保存');
             this.$el.modal('show'); // bootstrap function
+        },
+
+        _filenameEnterd: function() {
+            if(this.$el.find("#fileName").val()) {
+                this.$el.find(".ok").removeAttr('disabled');
+            } else {
+                this.$el.find(".ok").attr('disabled', 'disabled');
+            }
         },
 
         _okClicked: function(e) {
@@ -61,14 +43,10 @@ define(["CustomView",
             } else {
                 e.returnValue = false;
             }
-            if (this.fileBrowser.fileName() === "") {
-                alert('课件名不能为空');
-                return;
-            }
-
             var self = this;
-            storageInterface.savePresentation(filename
-                , this.model.exportPresentation(filename)
+
+            // TODO: use saveAs if window.location.href has id.
+            storageInterface.store(this.model.exportPresentation(filename)
                 , function(err) {
                     if (!err) {
                         self.$el.modal('hide');
@@ -78,16 +56,6 @@ define(["CustomView",
                         alert('保存失败，请稍后再试！');
                     }
                 });
-        },
-
-        _providerSelected: function(e) {
-            // change the storageInterface's selected storage provider
-            this.storageInterface.selectProvider(e.target.dataset.provider);
-        },
-
-        constructor: function StorageModal(editorModel) {
-            this.editorModel = editorModel;
-            Backbone.View.prototype.constructor.apply(this, arguments);
         }
     });
 });

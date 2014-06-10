@@ -1,14 +1,13 @@
 /**
  * @module model.presentation
  */
-define(["lodash",
+define(["underscore",
     "backbone",
     "./SlideCollection",
     "./SlideCommands",
     "common/web/undo_support/UndoHistoryFactory",
-    "cloudslide/hotkey/GlobalEvents",
     "./Slide",
-], function (_, Backbone, SlideCollection, SlideCommands, UndoHistoryFactory, key, Slide) {
+], function (_, Backbone, SlideCollection, SlideCommands, UndoHistoryFactory, Slide) {
     "use strict";
     var slideConfig = window.config.slide;
     /**

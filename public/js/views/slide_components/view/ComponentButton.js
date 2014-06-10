@@ -11,20 +11,17 @@ define(["CustomView"
 		},
 
 		initialize: function() {
+						console.log(this.options.componentType);
             this.$el.attr('data-compType', this.options.componentType);
 		},
 
 		_clicked: function() {
-			this.options.editorModel.addComponent(this.options.componentType);
+			this.model.addComponent(this.componentType);
 		},
 
 		render: function() {
 			this.$el.html('<i class="' + this.options.icon + '"></i> <strong>' + this.options.name + '</strong>');
 			return this;
 		},
-
-		constructor: function() {
-			Backbone.View.prototype.constructor.apply(this, arguments);
-		}
 	});
 });

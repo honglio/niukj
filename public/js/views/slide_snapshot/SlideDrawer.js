@@ -31,7 +31,7 @@ define(["underscore",
         this._drawers.TextBox = new TextBoxDrawer(this.g2d);
         this._drawers.TextBox.scale = this.scale;
         this._drawers.Image = new ImageDrawer(this.g2d);
-        this._drawers.Image.scale this.scale;
+        this._drawers.Image.scale = this.scale;
 
     }
 

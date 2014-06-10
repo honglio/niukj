@@ -1,4 +1,4 @@
-define(["lodash", "common/EventEmitter"],
+define(["underscore", "common/EventEmitter"],
 function(_, EventEmitter) {
 	"use strict";
 

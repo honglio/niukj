@@ -1,10 +1,10 @@
 define(["CustomView",
-    "AddSlideButton",
-    "css!styles/slide_editor/wellContextBox.css"
+    "./AddSlideButton",
+    "css!styles/app/slide_editor/wellContextBox.css"
 ], function(CustomView, AddSlideButton, css) {
     "use strict";
 
-    return Backbone.View.extend({
+    return CustomView.extend({
         className: 'wellContextBox',
 
         events: {
@@ -34,12 +34,7 @@ define(["CustomView",
         },
 
         render: function() {
-			this.$el.html(new AddSlideButton(this._editorModel, this));
-        },
-
-        constructor: function WellContextBox(editorModel) {
-            this._editorModel = editorModel;
-            Backbone.View.prototype.constructor.call(this);
+			this.$el.html(new AddSlideButton({model: this.model}));
         }
     });
 });

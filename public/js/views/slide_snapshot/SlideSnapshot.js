@@ -4,11 +4,11 @@ define(["underscore",
     "./SlideDrawer",
     "./Slide2Image",
     "hbs!templates/SlideSnapshot",
-    "css!styles/slide_snapshot/slideSnapshot.css"
-], function(_, $, CustomView, SlideDrawer, Slide2Image, SlideSnapshot, css) {
+    "css!styles/app/slide_snapshot/slideSnapshot.css"
+], function(_, $, CustomView, SlideDrawer, Slide2Image, SlideSnapshotTemplate, css) {
     "use strict";
 
-    return Backbone.View.extend({
+    return CustomView.extend({
         className: 'slideSnapshot',
         events: {
             select: '_selected',
@@ -22,7 +22,7 @@ define(["underscore",
 			// this.model.on("change:background", this._bgChanged, this);
             // this.model.on("dispose", this.dispose, this);
 
-			this._deck.on("change:background", this._bgChanged, this);
+			this.options.deck.on("change:background", this._bgChanged, this);
 
 			this._calculateLayout = this._calculateLayout.bind(this);
             var lazyLayout = _.debounce(this._calculateLayout, 300);
@@ -38,8 +38,8 @@ define(["underscore",
             this.model.on("contentsChanged", this._repaint, this);
             this.model.on("contentsChanged", this.updatePicture, this);
 
-            this._deck.on("change:background", this._repaint, this);
-            this._deck.on("change:background", this.updatePicture, this);
+            this.options.deck.on("change:background", this._repaint, this);
+            this.options.deck.on("change:background", this.updatePicture, this);
         },
 
         /**
@@ -89,11 +89,11 @@ define(["underscore",
             this._slideDrawer.dispose();
             this.$el.data('jsView', null);
             this.model.off(null, null, this);
-            this._deck.off(null, null, this);
+            this.options.deck.off(null, null, this);
             Backbone.View.prototype.remove.apply(this, arguments);
 
             if (removeModel) {
-                this._deck.remove(this.model);
+                this.options.deck.remove(this.model);
             }
         },
 
@@ -118,7 +118,7 @@ define(["underscore",
 
         _bgChanged: function() {
             console.log('BGGGG');
-            var bg = this._deck.get('background') || 'defaultbg';
+            var bg = this.options.deck.get('background') || 'defaultbg';
             this.$el.removeClass();
             var classStr = 'slideSnapshot ' + bg;
             console.log(this.model.get('active'));
@@ -157,7 +157,7 @@ define(["underscore",
                 this._slideDrawer.dispose();
             }
 
-            this.$el.html(SlideSnapshot(this.model.attributes));
+            this.$el.html(SlideSnapshotTemplate(this.model.attributes));
 
             this._bgChanged();
 
@@ -189,18 +189,13 @@ define(["underscore",
             console.log('updatePicture');
             if(this.isSelected()) {
                 var img = this._toImage(this.$el.find('canvas')[0]);
-                this._deck.set('picture', img.src);
+                this.options.deck.set('picture', img.src);
             }
 
         },
 
         _toImage: function(oCanvas) {
             return Slide2Image.saveAsPNG(oCanvas, true, 150, 125);
-        },
-
-        constructor: function SlideSnapshot(slide, deck, registry) {
-            this._deck = deck;
-            Backbone.View.prototype.constructor.apply(this, [{model: slide}]);
         }
     });
 });

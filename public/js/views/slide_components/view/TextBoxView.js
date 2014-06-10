@@ -138,7 +138,6 @@ define(["underscore",
         },
 
         render: function() {
-			console.log(this.model.slide);
             ComponentView.prototype.render.call(this);
             this.$textEl = this.$el.find('.content');
             this.$textEl.html(this.model.get('text'));
@@ -148,10 +147,6 @@ define(["underscore",
                 // height: config.slide.size.height - 260
             });
             return this.$el;
-        },
-
-        constructor: function TextBoxView() {
-            ComponentView.prototype.constructor.apply(this, arguments);
         }
     });
 });

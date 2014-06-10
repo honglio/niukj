@@ -1,4 +1,4 @@
-define(["lodash", "./SpatialObject"], function(_, SpatialObject) {
+define(["underscore", "./SpatialObject"], function(_, SpatialObject) {
     "use strict";
     var defaults = { x: config.slide.size.width / 4, y: config.slide.size.height / 4 };
 

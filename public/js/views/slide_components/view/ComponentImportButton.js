@@ -5,7 +5,6 @@ function(ComponentButton, ItemImportModal) {
 	return ComponentButton.extend({
 		initialize: function() {
 			ComponentButton.prototype.initialize.apply(this, arguments);
-
 			this._modal = ItemImportModal.get(this.options);
 			this._itemImported = this._itemImported.bind(this);
 		},
@@ -15,14 +14,10 @@ function(ComponentButton, ItemImportModal) {
 		},
 
 		_itemImported: function(src) {
-			this.options.editorModel.addComponent({
+			this.model.addComponent({
 				src: src,
 				type: this.options.componentType
 			});
-		},
-
-		constructor: function ComponentImportButton() {
-			ComponentButton.prototype.constructor.apply(this, arguments);
 		}
 	});
 });

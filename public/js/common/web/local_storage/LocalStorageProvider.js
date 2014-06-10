@@ -5,8 +5,6 @@ define(function() {
 
     function LocalStorageProvider() {
         this.storageImpl = localStorage;
-        this.name = "Local Storage";
-        this.id = "localstorage";
     }
 
     LocalStorageProvider.prototype = {
@@ -55,9 +53,9 @@ define(function() {
             return item;
         },
 
-        setContents: function(fname, data, cb) {
+        setContents: function(data, cb) {
             try {
-                this.storageImpl.setItem(prefix + fname, JSON.stringify(data));
+                this.storageImpl.setItem(prefix + data.filename, JSON.stringify(data));
                 cb();
             } catch (e) {
                 cb(e);

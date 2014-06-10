@@ -1,4 +1,4 @@
-define(["css!styles/themes/backgroundClasses.css"
+define(["css!styles/app/themes/backgroundClasses.css"
 ], function() {
     "use strict";
     return {

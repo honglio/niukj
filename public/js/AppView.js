@@ -1,9 +1,10 @@
-define(["backbone",
+define(["CustomView",
         "AppModel",
-        "./headbar/HeadbarView"
-], function(Backbone, AppModel, HeadbarView) {
+        "./views/headbar/HeadbarView",
+        "./views/slide_editor/SlideEditorView"
+], function(CustomView, AppModel, HeadbarView, SlideEditorView) {
 	"use strict";
-    return Backbone.View.extend({
+    return CustomView.extend({
         className: 'container-fluid',
 		id: 'slide-editor',
         events: {
@@ -12,8 +13,8 @@ define(["backbone",
 
         initialize: function() {
             var model = new AppModel();
-            this._headbar = new HeadbarView(model);
-            this._slideEditorView = new SlideEditorView(model);
+            this._headbar = new HeadbarView({model: model});
+            this._slideEditorView = new SlideEditorView({model: model});
         },
 
         render: function() {

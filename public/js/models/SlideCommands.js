@@ -1,4 +1,4 @@
-define(["cloudslide/deck/Slide"], function(Slide) {
+define(["./Slide"], function(Slide) {
     "use strict";
 
     /**

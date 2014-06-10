@@ -18,13 +18,7 @@ function(CustomView) {
         },
 
         _addSlide: function() {
-            this._editorModel.addSlide(this._wellContextBox.slideIndex());
-        },
-
-        constructor: function AddSlideButton(editorModel, wellContextBox) {
-            Backbone.View.prototype.constructor.call(this);
-            this._editorModel = editorModel;
-            this._wellContextBox = wellContextBox;
+            this.model.addSlide(this._wellContextBox.slideIndex());
         }
     });
 });

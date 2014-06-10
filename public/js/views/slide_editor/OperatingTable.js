@@ -15,14 +15,14 @@ define(["CustomView",
         },
 
         initialize: function() {
+            this._deck = this.model.deck();
+            this._clipboard = this.model.clipboard;
+
             this._calculateLayout = this._calculateLayout.bind(this);
             var lazyLayout = _.debounce(this._calculateLayout, 300);
             $(window).resize(lazyLayout);
 
             this.setModel(this._deck.get('activeSlide'));
-
-            this._clipboard = this._editorModel.clipboard;
-
             // Re-render when active slide changes in the deck
             this._deck.on("change:activeSlide", function(deck, model) {
                 this.setModel(model);
@@ -58,7 +58,7 @@ define(["CustomView",
         },
 
         _cut: function() {
-            if (this._editorModel.get('scope') === 'operatingTable') {
+            if (this.model.get('scope') === 'operatingTable') {
                 var comp = this.model.lastSelection;
                 if (comp) {
                     this.model.remove(comp);
@@ -69,7 +69,7 @@ define(["CustomView",
         },
 
         _copy: function() {
-            if (this._editorModel.get('scope') === 'operatingTable') {
+            if (this.model.get('scope') === 'operatingTable') {
                 var comp = this.model.lastSelection;
                 if (comp) {
                     this._clipboard.item = comp;
@@ -90,7 +90,7 @@ define(["CustomView",
         },
 
         _delete: function() {
-            if (this._editorModel.get('scope') === 'operatingTable') {
+            if (this.model.get('scope') === 'operatingTable') {
                 var comp = this.model.lastSelection;
                 if (comp) {
                     this.model.remove(comp);
@@ -114,7 +114,7 @@ define(["CustomView",
         },
 
         _focus: function() {
-            this._editorModel.set('scope', 'operatingTable');
+            this.model.set('scope', 'operatingTable');
         },
 
         _dragover: function(e) {
@@ -212,12 +212,6 @@ define(["CustomView",
 
             this._$slideContainer.css(window.browserPrefix + 'transform', 'scale(' + scale + ')');
             this.$el.css('height', newHeight);
-        },
-
-        constructor: function OperatingTable(editorModel) {
-            this._deck = editorModel.deck();
-            this._editorModel = editorModel;
-            Backbone.View.prototype.constructor.call(this);
         }
     });
 });
