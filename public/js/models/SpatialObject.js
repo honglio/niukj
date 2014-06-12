@@ -4,6 +4,7 @@ define(["backbone",
     "use strict";
     return Backbone.Model.extend({
         initialize: function() {
+            Backbone.Model.prototype.initialize.apply(this, arguments);
         },
 
         setInt: function(name, value) {
@@ -30,7 +31,7 @@ define(["backbone",
             this.set(name, value);
         },
 
-        constructor: function SpatialObject() {
+        constructor: function TextBox() {
             Backbone.Model.prototype.constructor.apply(this, arguments);
         }
     });

@@ -24,7 +24,7 @@ exports.load = function(req, res, next, id){
 exports.index = function(req, res){
 
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 3;
+  var perPage = 8;
   var options = {
     perPage: perPage,
     page: page
@@ -42,7 +42,36 @@ exports.index = function(req, res){
     console.log('article list:' + articles);
     Article.count().exec(function (err, count) {
       res.render('article/index', {
-        title: 'Articles',
+        title: 'Browse Article',
+        articles: articles,
+        page: page + 1,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
+};
+
+/**
+ * List
+ */
+
+exports.my = function(req, res){
+
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var perPage = 8;
+
+  var options = {
+    perPage: perPage,
+    page: page,
+    criteria: {user: req.user}
+  };
+
+  Article.list(options, function(err, articles) {
+    if (err) return res.render('500');
+    console.log('article list:' + articles);
+    Article.count().exec(function (err, count) {
+      res.render('article/index', {
+        title: 'My Article',
         articles: articles,
         page: page + 1,
         pages: Math.ceil(count / perPage)
@@ -57,7 +86,7 @@ exports.index = function(req, res){
 
 exports.new = function(req, res){
   res.render('article/edit', {
-    title: 'New Article',
+    title: 'Create Article',
     article: new Article({})
   });
 };
@@ -66,22 +95,18 @@ exports.new = function(req, res){
  * Create an article
  */
 
-exports.create = function (req, res) {
-  var article = new Article(req.body);
+exports.create = function (req, res, next) {
+
+  var article = new Article(req.body.article);
   article.user = req.user;
+  console.log(article);
 
-  article.uploadAndSave(req.files.image, function (err) {
-    if (!err) {
-      req.flash('success', {msg: 'Successfully created article!'});
-      return res.redirect('/articles/'+article._id);
-    }
-
-    res.render('article/edit', {
-      title: 'New Article',
-      article: article,
-      error: utils.errors(err.errors || err)
-    });
+  article.save(function (err) {
+    if (err) return next(err);
+    req.flash('success', {msg: 'Successfully created article!'});
+    return res.send(article._id);
   });
+
 };
 
 /**
@@ -90,8 +115,7 @@ exports.create = function (req, res) {
 
 exports.edit = function (req, res) {
   res.render('article/edit', {
-    title: 'Edit ' + req.article.title,
-    article: req.article,
+    title: 'Edit ' + req.article.fileName,
     oss: config.oss
   });
 };
@@ -100,23 +124,20 @@ exports.edit = function (req, res) {
  * Update article
  */
 
-exports.update = function(req, res){
+exports.update = function(req, res, next){
+  console.log(req.body);
   var article = req.article;
-  article = extend(article, req.body);
-
+  article = extend(article, req.body.article);
   console.log(article);
-  article.uploadAndSave(req.files.image, function(err) {
-    if (!err) {
-      return res.redirect('/articles/' + article._id);
-    }
-
-    res.render('article/edit', {
-      title: 'Edit' + article.title,
-      article: article,
-      error: utils.errors(err.errors || err)
-    });
+  article.save(function(err) {
+    if (err) return next(err);
+    return res.send(article._id);
   });
 };
+
+exports.getContent = function(req, res) {
+  res.send(req.article);
+}
 
 /**
  * Show

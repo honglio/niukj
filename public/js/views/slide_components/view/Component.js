@@ -1,8 +1,8 @@
 define(["CustomView",
     "common/web/widgets/DeltaDragControl",
     "common/Math2",
-    "css!styles/slide_components/Component.css",
-    "cloudslide/deck/ComponentCommands",
+    "css!styles/app/slide_components/Component.css",
+    "models/ComponentCommands",
     "common/web/undo_support/UndoHistoryFactory",
     "hbs!templates/Component"
 ], function(CustomView, DeltaDragControl, Math2, css,
@@ -182,22 +182,24 @@ define(["CustomView",
                 this.dragScale = parseFloat(this.dragScale.substring(7, this.dragScale.indexOf(","))) || 1;
                 this._dragging = true;
                 this.$el.addClass("dragged");
+                console.log(this.dragScale);
                 this._prevPos = {
                     x: this.model.get('x'),
                     y: this.model.get('y')
                 };
+                console.log(this._prevPos);
                 this._prevMousePos = {
                     x: e.pageX,
                     y: e.pageY
                 };
+                console.log(this._prevMousePos);
             }
         },
         render: function() {
             var self = this;
             this.$el.html(ComponentTemplate(this.model.attributes));
             this.$el.find('span[data-delta]').each(function(idx, elem) {
-                var deltaDrag;
-                deltaDrag = new DeltaDragControl($(elem), true);
+                var deltaDrag = new DeltaDragControl($(elem), true);
                 return self._deltaDrags.push(deltaDrag);
             });
             this.$content = this.$el.find('.content');
@@ -205,17 +207,7 @@ define(["CustomView",
             this._selectionChanged(this.model, this.model.get('selected'));
             this.$xInput = this.$el.find("[data-option='x']");
             this.$yInput = this.$el.find("[data-option='y']");
-            this.$el.css({
-                top: this.model.get('y'),
-                left: this.model.get('x')
-            });
-            var size = {
-                width: this.$el.width(),
-                height: this.$el.height()
-            };
-            if (size.width > 0 && size.height > 0) {
-                this.origSize = size;
-            }
+
             this._setUpdatedTransform();
             return this.$el;
         },
@@ -237,20 +229,25 @@ define(["CustomView",
             });
             $(document).unbind("mouseup", this._mouseup);
             $(document).unbind("mousemove", this._mousemove);
-            Backbone.View.prototype.dispose.call(this);
+            CustomView.prototype.dispose.call(this);
         },
         mousemove: function(e) {
             if (this._dragging && this.allowDragging) {
                 var snapToGrid = true;
                 var dx = e.pageX - this._prevMousePos.x;
                 var dy = e.pageY - this._prevMousePos.y;
-                var newX = this._prevPos.x + dx / this.dragScale;
-                var newY = this._prevPos.y + dy / this.dragScale;
+                console.log(this._prevPos.x);
+                console.log(this._prevPos.y);
+                var newX = parseInt(this._prevPos.x, 10) + dx / this.dragScale;
+                var newY = parseInt(this._prevPos.y, 10) + dy / this.dragScale;
                 if (snapToGrid) {
+                    console.log('hhhhhhhhhhhh');
                     var gridSize = 20;
                     newX = Math.floor(newX / gridSize) * gridSize;
                     newY = Math.floor(newY / gridSize) * gridSize;
                 }
+                console.log(newX);
+                console.log(newY);
                 this.model.setInt("x", newX);
                 this.model.setInt("y", newY);
                 if (this.dragStartLoc == null) {

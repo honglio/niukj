@@ -9,16 +9,16 @@ function(CustomView) {
         },
 
 		initialize: function() {
-			this.render();
 		},
 
         render: function() {
-            this.$el.html('<center><i class="icon-plus icon-white"></i></center>');
+            this.$el.html('<center><i class="fa fa-plus fa-lg"></i></center>');
             return this;
         },
 
         _addSlide: function() {
-            this.model.addSlide(this._wellContextBox.slideIndex());
+            console.log('_addSlide')
+            this.model.addSlide(this.options.wellContextBox.slideIndex());
         }
     });
 });

@@ -142,9 +142,10 @@ define(["underscore",
             this.$textEl = this.$el.find('.content');
             this.$textEl.html(this.model.get('text'));
             this.$el.css({
-                fontSize: this.model.get('size'),
-                // width: config.slide.size.width - 200,
-                // height: config.slide.size.height - 260
+                fontSize: this.model.get('size') + 'pt',
+                color: '#' + this.model.get('color'),
+                top: this.model.get('y') + 'px',
+                left: this.model.get('x') + 'px',
             });
             return this.$el;
         }

@@ -12,6 +12,8 @@ define(["underscore",
         className: 'slideSnapshot',
         events: {
             select: '_selected',
+            "mouseenter .remove-icon": '_removeSelected',
+            "mouseleave .remove-icon": '_removeUnselected',
             "click .remove-icon": '_removeClicked',
             "mousedown .remove-icon": '_removePressed',
             destroyed: 'remove'
@@ -24,9 +26,9 @@ define(["underscore",
 
 			this.options.deck.on("change:background", this._bgChanged, this);
 
-			this._calculateLayout = this._calculateLayout.bind(this);
-            var lazyLayout = _.debounce(this._calculateLayout, 300);
-            $(window).resize(lazyLayout);
+			// this._calculateLayout = this._calculateLayout.bind(this);
+   //          var lazyLayout = _.debounce(this._calculateLayout, 300);
+   //          $(window).resize(lazyLayout);
 
             this.updatePicture = this.updatePicture.bind(this);
             this._repaint = this._repaint.bind(this);
@@ -80,6 +82,13 @@ define(["underscore",
             e.stopPropagation();
         },
 
+        _removeSelected: function(e) {
+
+        },
+
+        _removeUnselected: function(e) {
+
+        },
         /**
          * Remove slide from the presentation.
          *

@@ -18,10 +18,9 @@ define(["CustomView",
             this._deck = this.model.deck();
             this._clipboard = this.model.clipboard;
 
-            this._calculateLayout = this._calculateLayout.bind(this);
-            var lazyLayout = _.debounce(this._calculateLayout, 300);
-            $(window).resize(lazyLayout);
-
+            // this._calculateLayout = this._calculateLayout.bind(this);
+            // var lazyLayout = _.debounce(this._calculateLayout, 300);
+            // $(window).resize(lazyLayout);
             this.setModel(this._deck.get('activeSlide'));
             // Re-render when active slide changes in the deck
             this._deck.on("change:activeSlide", function(deck, model) {
@@ -43,9 +42,9 @@ define(["CustomView",
             var self = this;
             setTimeout(function() {
                 self._rendered = true;
-                self._calculateLayout();
+                // self._calculateLayout();
                 self._renderContents();
-            }, 10);
+            }, 100);
             return this;
         },
 
@@ -135,9 +134,10 @@ define(["CustomView",
             var reader = new FileReader();
             var self = this;
             console.log(ComponentFactory);
+            var compFactory = new ComponentFactory();
             reader.onload = function(e) {
                 self.model.add(
-                    ComponentFactory.instance.createModel({
+                    compFactory.instance.createModel({
                         type: 'Image',
                         src: e.target.result
                     }));
@@ -147,27 +147,35 @@ define(["CustomView",
         },
 
         _componentAdded: function(model, comp) {
-            var view = ComponentFactory.instance.createView(comp);
+            var compFactory = new ComponentFactory();
+            var view = compFactory.instance.createView(comp);
             this._$slideContainer.append(view.render());
         },
 
         setModel: function(model) {
+            console.log('1')
             var prevModel = this.model;
             if (this.model === model) { return; }
-
+            console.log('2')
             if (this.model) {
                 this.model.off(null, null, this);
             }
+            console.log('3')
             this.model = model;
+            console.log('4')
             if (this.model) {
+                console.log('6')
                 this.model.on("change:components.add", this._componentAdded, this);
                 this.model.on("change:background", this._updateBg, this);
             }
+            console.log('5')
             this._renderContents(prevModel);
+            console.log('7')
             return this;
         },
 
         _renderContents: function(prevModel) {
+            console.log(prevModel);
             if (prevModel) {
                 prevModel.trigger("unrender", true);
             }
@@ -178,10 +186,12 @@ define(["CustomView",
             console.log(ComponentFactory);
             if (this.model) {
                 var components = this.model.get('components');
+                var compFactory = new ComponentFactory();
+                var self = this;
                 components.forEach(function(comp) {
-                    var view = ComponentFactory.instance.createView(comp);
-                    this._$slideContainer.append(view.render());
-                }, this);
+                    var view = compFactory.instance.createView(comp);
+                    self._$slideContainer.append(view.render());
+                });
             }
         },
 

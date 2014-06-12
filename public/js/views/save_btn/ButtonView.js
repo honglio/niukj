@@ -3,6 +3,8 @@ define(["CustomView",
 ], function(CustomView, StorageModal) {
     "use strict";
     return CustomView.extend({
+        className: 'btn btn-success',
+        tagName: 'a',
         events: {
             click: 'save',
             destroyed: 'remove'
@@ -14,7 +16,7 @@ define(["CustomView",
         },
 
         render: function() {
-            this.$el.find('.save-button').html('<a>保存</a>');
+            this.$el.html('保存');
             return this;
         },
 

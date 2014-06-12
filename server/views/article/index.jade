@@ -1,56 +1,44 @@
 extends ../layout
 
-//- <li class="thumbnail" style="text-align: center; height: 200px; text-decoration: none;">
-//-     <img src="{{#if picture}} {{picture}} {{else}} /pics/generic.png{{/if}}" height="150" width="125" alt="">
-//-     <div>
-//-     <h4>
-//-             {{!-- TODO: input disable by default, with an edit button after. --}}
-//-       <input style="text-align:center;border:0px;font-size:24px;background-color:transparent;cursor:default" id="fileName" value={{#if fileName}}{{fileName}}{{else}}新课件{{/if}}>
-//-     </h4>
-//-   </div>
-//-     <ul class="row-fluid unstyled inline">
-//-         <li class="span1">
-//-             <a href="#decks/{{_id}}" id="editBtn" class="btn">
-//-         <i class="icon-pencil"></i>
-//-             </a>
-//-         </li>
-//-         <li class="span1">
-//-             <a href="#" id="trashBtn" class="btn">
-//-                 <i class="icon-trash"></i>
-//-             </a>
-//-         </li>
-//-     </ul>
-//- </li>
-
 block content
-  .container-fluid
+  .container-fluid.modul-space-twentyone
     .page-header
       h2= title
+    #Grid.row
     - if (articles.length)
       - each article in articles
-        .article
-          h3
-            a(href='/articles/'+article._id, title=article.title) #{article.title}
-          p= article.body
+        .col-xs-12.col-sm-6.col-md-3.mix.category_1.mix_all
+          .portlio-list(data-cat='1', style='display: inline-block; opacity: 1;')
+              .grid.cs-style-2
+                figure
+                  - var pic = article.picture ? article.picture : '/img/generic.png'
+                  img.portlio-list-img(src=pic, alt='')
+                  figcaption
+                    .image-buttons.hidden-xs
+                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id)
+                        i.fa.fa-camera(data-toggle='tooltip', data-placement='top', title='Look Photo')
+                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/edit')
+                        i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='View Video')
+              h6 #{article.fileName}
 
-          .meta
-            span.text-muted= formatDate(article.createdAt)
+              .meta
+                span.text-muted= formatDate(article.createdAt)
 
-            - if (article.user)
-              | &nbsp; - &nbsp;
-              span Author &nbsp;
+              - if (article.user)
+                | &nbsp; - &nbsp;
+                span Author &nbsp;
 
-              - var name = article.user.profile.name ? article.user.profile.name : article.user.email
+                - var name = article.user.profile.name ? article.user.profile.name : article.user.email
 
-              a(href="/account/"+article.user._id)= name
+                a(href="/account/"+article.user._id)= name
 
-            - if (article.tags)
-              | &nbsp; - &nbsp;
-              span Tags &nbsp;
-              - each tag in article.tags.split(',')
-                i.text-muted.fa.fa-tag &nbsp;
-                a.tag(href="/tags/"+tag)= tag
-                | &nbsp;&nbsp;
+              - if (article.tags)
+                | &nbsp; - &nbsp;
+                span Tags &nbsp;
+                - each tag in article.tags.split(',')
+                  i.text-muted.fa.fa-tag &nbsp;
+                  a.tag(href="/tags/"+tag)= tag
+                  | &nbsp;&nbsp;
 
       - if (pages > 1)
         ul.pagination

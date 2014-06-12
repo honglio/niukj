@@ -1,21 +1,22 @@
 define(["CustomView",
     "../save_btn/ButtonView",
-    "./ThemeProviderView",
+    "./ThemeProviderBtn",
     "../slide_components/view/ComponentButton",
     "../slide_components/view/ComponentImportButton",
+    "../themes/BackgroundProvider",
     "hbs!templates/Headbar"
-], function(CustomView, SaveButton, ThemeProviderView,
+], function(CustomView, SaveButton, ThemeProviderBtn,
             ComponentButton, ComponentImportButton,
-            HeadbarTemplate) {
+            BackgroundProvider, HeadbarTemplate) {
 	"use strict";
     return CustomView.extend({
-        className: 'row-fluid headbar',
+        className: 'page-header',
         events: {
             destroyed: 'remove'
         },
         initialize: function() {
             this._saveButton = new SaveButton({model: this.model});
-            this._themeProviderView = new ThemeProviderView({model: this.model});
+            this._ThemeProviderBtn = new ThemeProviderBtn({model: this.model});
             this._textBoxButton = new ComponentButton({
                 componentType: 'TextBox',
                 icon: 'icon-text-width',
@@ -45,16 +46,15 @@ define(["CustomView",
             var $createCompButtons = this.$el.find('.create-comp-buttons > div');
             $createCompButtons.append(this._textBoxButton.render().$el);
             $createCompButtons.append(this._imageButton.render().$el);
-
-            var $themeButtons = this.$el.find('.theme-buttons');
-            $themeButtons.append(this._themeProviderView.render().$el);
+            $createCompButtons.append(this._ThemeProviderBtn.render().$el);
+            $createCompButtons.append(new BackgroundProvider(this.model).view().render().$el);
 
             return this;
         },
 
         dispose: function(){
             this._saveButton.dispose();
-            this._themeProviderView.dispose();
+            this._ThemeProviderBtn.dispose();
             this._textBoxButton.dispose();
             this._imageButton.dispose();
             CustomView.dispose.call(this);

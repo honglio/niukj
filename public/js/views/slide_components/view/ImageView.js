@@ -11,7 +11,10 @@ function(ComponentView, Mixers) {
         _finishRender: function($img) {
             var naturalWidth = $img[0].naturalWidth;
             var naturalHeight = $img[0].naturalHeight;
-
+            this.$el.css({
+                top: this.model.get('y') + 'px',
+                left: this.model.get('x') + 'px'
+            });
             this.origSize = {
                 width: naturalWidth,
                 height: naturalHeight

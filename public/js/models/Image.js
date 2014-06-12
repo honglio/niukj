@@ -1,4 +1,4 @@
-define(["cloudslide/deck/Component",
+define(["./Component",
 		"common/FileUtils"],
 function(Component, FileUtils) {
 	"use strict";

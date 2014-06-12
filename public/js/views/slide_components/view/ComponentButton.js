@@ -2,7 +2,7 @@ define(["CustomView"
 ], function(CustomView) {
 	"use strict";
 	return CustomView.extend({
-		className: 'btn',
+		className: 'btn btn-primary btn-icon icon-left hidden-print',
 		tagName: 'a',
 
 		events: {
@@ -16,7 +16,7 @@ define(["CustomView"
 		},
 
 		_clicked: function() {
-			this.model.addComponent(this.componentType);
+			this.model.addComponent(this.options.componentType);
 		},
 
 		render: function() {

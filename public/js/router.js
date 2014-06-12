@@ -1,5 +1,5 @@
-define([, 'AppView'],
-function(AppModel, AppView) {
+define(['AppView'],
+function(AppView) {
   var AppRouter = Backbone.Router.extend({
 
     routes: {
@@ -7,7 +7,7 @@ function(AppModel, AppView) {
     },
 
     home: function() {
-      new AppView().render();
+      $('#content').append(new AppView().render().$el);
     }
 
   });

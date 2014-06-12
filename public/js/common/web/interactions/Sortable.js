@@ -22,7 +22,7 @@ function(_, EventEmitter) {
 			y: 0
 		};
 
-        _.extend(this, new EventEmitter());
+    _.extend(this, new EventEmitter());
 	}
 
 	Sortable.prototype = {
@@ -99,6 +99,7 @@ function(_, EventEmitter) {
 			this._dragging = false;
 			if (this._$currentTarget == null) {return;}
 			console.log(this._$currentTarget);
+			this._$currentTarget.removeClass('ui-sortable-helper')
 			this._$currentTarget.css({
 				position: '',
 				top: '',
@@ -131,6 +132,7 @@ function(_, EventEmitter) {
 			if (this._dragging) {
 				if (this._index === null || this._index === undefined) {
 					this._$children = this._$container.find(this._selector);
+
 					this._index = this._buildIndex(this._$children);
 					this._$placeholder = $('<div>').css({
 						width: this._$currentTarget.outerWidth(),
@@ -138,7 +140,7 @@ function(_, EventEmitter) {
 						margin: 0,
 						padding: 0
 					});
-
+					this._$currentTarget.addClass('ui-sortable-helper')
 					this._$currentTarget.css({
 						position: 'absolute',
 						'z-index': 1

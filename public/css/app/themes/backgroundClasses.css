@@ -131,13 +131,14 @@
     background: radial-gradient(ellipse at center, rgba(238, 238, 238, 1) 0%, rgba(204, 204, 204, 1) 100%);*/
 }
 .nobg {
-    background-image:url(img/nobg.png);
+    background:url(img/nobg.png) no-repeat center;
     /*background-size*/
-    -webkit-background-size:40px 40px;
-    -moz-background-size:40px 40px;
-    -o-background-size:40px 40px;
-    background-size:40px 40px;
+    -webkit-background-size:30px 30px;
+    -moz-background-size:30px 30px;
+    -o-background-size:30px 30px;
+    background-size:30px 30px;
 }
 .themeProviders .thumbnail {
     height:30px;
+    width:30px;
 }

@@ -7,13 +7,11 @@ define([], function() {
 
         read: function(deckId, cb) {
             $.ajax({
-                url: '/articles/' + deckId,
+                url: '/articles/' + deckId + '/get',
                 method: 'GET',
                 success: function(deck) {
+                    console.log(deck);
                     cb(deck);
-                },
-                error: function(err) {
-                    cb(err);
                 }
             });
         },
@@ -33,24 +31,26 @@ define([], function() {
         },
 
         create: function(deck, cb) {
-            $.post('/articles', {articles: deck}, function(result) {
-                cb(result);
-            }).error(function(err) {
-                cb(err);
+            console.log(deck.article.picture);
+            $.ajax({
+                url:'/articles',
+                type: 'POST',
+                data: deck,
+                success: function(result) {
+                    cb(result);
+                }
             });
         },
 
         update: function(deck, cb) {
+            console.log(deck.article.picture);
             $.ajax({
-                url: '/articles/' + deck.id,
+                url: '/articles/' + deck.article.id,
                 type: 'PUT',
-                data: {article: deck},
-            })
-            .done(function(result) {
-                cb(result);
-            })
-            .fail(function(err) {
-                cb(err);
+                data: deck,
+                success: function(result) {
+                    cb(result);
+                }
             });
         }
 

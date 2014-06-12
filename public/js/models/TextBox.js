@@ -1,4 +1,4 @@
-define(["cloudslide/deck/Component"],
+define(["./Component"],
 function(Component) {
 	"use strict";
 	return Component.extend({

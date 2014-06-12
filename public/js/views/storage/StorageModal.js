@@ -5,8 +5,10 @@ define(["CustomView",
 ], function(CustomView, StorageInterface, StorageModalTemplate, css) {
     "use strict";
     return CustomView.extend({
+        className: "storageModal modal fade",
         events: {
-            "keyup #filename": '_filenameEnterd',
+            "paste input[name='filename']": '_filenameEnterd',
+            "keyup input[name='filename']": '_filenameEnterd',
             "click .ok": '_okClicked',
             destroyed: 'remove'
         },
@@ -16,11 +18,14 @@ define(["CustomView",
         },
 
         render: function() {
+            var fileName = this.model.deck().get('fileName');
 
             this.$el.html(StorageModalTemplate({
                 title: '保存',
-                filename: this.model.deck().get('fileName')
+                filename: fileName
             }));
+
+            this._filenameEnterd();
             return this;
         },
 
@@ -29,7 +34,8 @@ define(["CustomView",
         },
 
         _filenameEnterd: function() {
-            if(this.$el.find("#fileName").val()) {
+            this.$input = this.$el.find("input[name='filename']");
+            if(this.$input.val()) {
                 this.$el.find(".ok").removeAttr('disabled');
             } else {
                 this.$el.find(".ok").attr('disabled', 'disabled');
@@ -44,18 +50,32 @@ define(["CustomView",
                 e.returnValue = false;
             }
             var self = this;
+            var filename = this.$input.val();
 
+            var csrf = $("input[name='_csrf']").val();
+
+            var serialized = {
+                article: this.model.exportPresentation(filename),
+                _csrf: csrf
+            }
             // TODO: use saveAs if window.location.href has id.
-            storageInterface.store(this.model.exportPresentation(filename)
-                , function(err) {
-                    if (!err) {
+            if(!this.model.deck().get('id')) {
+                this.storageInterface.store(serialized, function(id) {
+                    if(id) {
                         self.$el.modal('hide');
                         alert('保存成功');
-                    } else {
-                        console.log(err.stack);
-                        alert('保存失败，请稍后再试！');
+                        window.location.replace("/articles/" + id + '/edit');
                     }
                 });
+            } else {
+                this.storageInterface.saveAs(serialized, function(id) {
+                    if(id) {
+                        self.$el.modal('hide');
+                        alert('保存成功');
+                        window.location.replace("/articles/" + id + '/edit');
+                    }
+                });
+            }
         }
     });
 });

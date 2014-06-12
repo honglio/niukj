@@ -1,22 +1,36 @@
-define(function() {
+define(['models/TextBox',
+        'models/Image',
+        './view/TextBoxView',
+        './view/ImageView',
+        './drawers/TextBoxDrawer',
+        './drawers/ImageDrawer'
+], function(TextBox, Image,
+            TextBoxView, ImageView,
+            TextBoxDrawer, ImageDrawer) {
     "use strict";
 
     function ComponentFactory() {
+        if (ComponentFactory.prototype.instance) {
+            return ComponentFactory.prototype.instance;
+        }
+        ComponentFactory.prototype.instance = this;
         // Look up cloudslide.Component s
         // create our view map based on their component types
         // ComponentType must be same in model and view.
         // it is how they are mapped to one another.
-        this._modelCtors = {};
-        this._modelCtors.TextBox = TextBox;
-        this._modelCtors.Image = Image;
+        this._modelCtors = {
+            'TextBox': TextBox,
+            'Image': Image
+        };
+        this._viewCtors = {
+            'TextBox': TextBoxView,
+            'Image': ImageView
+        };
 
-        this._viewCtors = {};
-        this._viewCtors.TextBox = TextBoxView;
-        this._viewCtors.Image = ImageView;
-
-        this._drawers = {};
-        this._drawers.TextBox = TextBoxDrawer;
-        this._drawers.Image = ImageDrawer;
+        this._drawers = {
+            'TextBox': TextBoxDrawer,
+            'Image': ImageDrawer
+        };
     }
 
     ComponentFactory.prototype = {
@@ -55,6 +69,7 @@ define(function() {
             } else {
                 type = rawModel.type;
             }
+            console.log(type);
             var Ctor = this._modelCtors[type];
             if (Ctor) {
                 console.log(rawModel);
@@ -73,12 +88,5 @@ define(function() {
         }
     };
 
-    return {
-        initialize: function() {
-            console.log('Init ComponentFactory');
-            if (!this.instance) {
-                this.instance = new ComponentFactory();
-            }
-        }
-    };
+    return ComponentFactory;
 });

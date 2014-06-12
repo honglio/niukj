@@ -9,8 +9,8 @@
 }
 .component:hover .remove-icon { display: inline }
 .component .remove-icon {
-    font-size: 20px;
-    color: #FF7F50;
+    /* font-size: 20px; */
+    /* color: #FF7F50; */
     display: none;
     position: absolute;
     top: -7px;
@@ -82,7 +82,7 @@
 }
 .component input {
     width: 25px;
-    height: 12px;
+    height: 25px;
     line-height: 12px;
 	visibility: hidden;
 }

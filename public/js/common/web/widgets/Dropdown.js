@@ -4,7 +4,7 @@ define(["underscore",
 ], function(_, Backbone, css) {
 	"use strict";
 	function Dropdown(model, template) {
-		this.$el = $('<div class="dropdown btn-group">');
+		this.$el = $('<div class="notifications dropdown" id="dropdown-menu">');
 		this._template = template;
 
 		var self = this;

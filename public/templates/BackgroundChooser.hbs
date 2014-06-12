@@ -1,14 +1,10 @@
-<a class="btn dropdown-toggle" data-toggle="dropdown">
-    <i class="icon-gear"></i>
-    <strong>背景</strong>
-</a>
-<ul class="dropdown-menu horizontalDropdown" role="menu" style="min-width: 127px; width: 127px">
+<ul class="dropdown-menu" role="menu">
     {{#backgrounds}}
-    <li>
-        <a class="{{klass}} thumbnail" alt="{{description}}" data-class="{{klass}}"></a>
+    <li class="{{klass}} thumbnail pull-left">
+        <a alt="{{description}}" data-class="{{klass}}"></a>
     </li>
     {{/backgrounds}}
-    <li>
+    <li class="pull-left">
         <a class="nobg thumbnail" data-class="defaultbg"></a>
     </li>
 </ul>

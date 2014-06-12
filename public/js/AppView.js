@@ -12,16 +12,16 @@ define(["CustomView",
         },
 
         initialize: function() {
-            var model = new AppModel();
-            this._headbar = new HeadbarView({model: model});
-            this._slideEditorView = new SlideEditorView({model: model});
+            this.model = new AppModel();
         },
 
         render: function() {
             this.$el.empty(); // this.$el = 'container-fluid'
-
-            this.$el.append(this._headbar.render().$el);
-            this.$el.append(this._slideEditorView.render().$el);
+            var self = this;
+            setTimeout(function() {
+                self.$el.append(new HeadbarView({model: self.model}).render().$el);
+                self.$el.append(new SlideEditorView({model: self.model}).render().$el);
+            }, 100);
             return this;
         }
     });

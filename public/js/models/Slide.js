@@ -25,12 +25,13 @@ define(["underscore",
 
         initialize: function() {
 			console.log('Slide initialize');
+            SpatialObject.prototype.initialize.apply(this, arguments);
             var components = this.get('components');
             if (!components) {
                 this.set('components', []);
             } else {
                 var hydratedComps = [];
-                this.set('components', hydratedComps);
+                var compFactory = new ComponentFactory();
                 components.forEach(function(rawComp) {
                     var comp;
 
@@ -38,13 +39,14 @@ define(["underscore",
                         comp = rawComp.clone();
                         hydratedComps.push(comp);
                     } else {
-                        comp = ComponentFactory.instance.createModel(rawComp);
+                        comp = compFactory.instance.createModel(rawComp);
                         hydratedComps.push(comp);
                     }
                     this._registerWithComponent(comp);
+
                 }, this);
+                this.set('components', hydratedComps);
             }
-            _.defaults(this.attributes, defaults);
             this.on("unrender", this._unrendered, this);
         },
 
@@ -52,9 +54,12 @@ define(["underscore",
          * React on slide being unrendered.
          */
         _unrendered: function() {
-            this.get('components').forEach(function(component) {
-                component.trigger("unrender", true);
-            });
+            console.log(this);
+            if(this.get('components')) {
+                this.get('components').forEach(function(component) {
+                    component.trigger("unrender", true);
+                });
+            }
         },
 
         /**

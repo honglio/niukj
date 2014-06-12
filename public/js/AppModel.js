@@ -13,25 +13,20 @@ define(["backbone",
             this._deck = new Deck();
 
             this.clipboard = new Clipboard();
-            console.log(this.clipboard);
+
             var storageInterface = new StorageInterface();
 
+            var length = Backbone.history.location.href.length;
+            if(length > 34) {
+                var id = Backbone.history.location.href.substr(length-29, 24);
+            }
+
             var self = this;
-
-            // TODO: get the id from Backbone.history.location.href
-            // or window.location.href
-            console.log(Backbone.history.location.href);
-            // Backbone.history.location.search
-            var id = Backbone.history.location.href;
-
             if(id == null) {
-                appModel.addSlide(0);
+                this.addSlide(0);
             } else {
-                storageInterface.load(id, function(deck, err) {
-                    if(err) {
-                        console.log(err.stack);
-                        return;
-                    }
+                console.log(id);
+                storageInterface.load(id, function(deck) {
                     if (deck) {
                         self.importPresentation(deck);
                     }
@@ -49,7 +44,21 @@ define(["backbone",
             if (filename) {
                 this._deck.set('fileName', filename);
             }
-            return this._deck.toJSON(false, true);
+            var exportData = this._deck.toJSON();
+            exportData.activeSlide = exportData.activeSlide.toJSON();
+            // exportData.activeSlide.components.forEach(function (component, i) {
+            //     exportData.activeSlide.components[i] = component.toJSON();
+            // })
+            exportData.slides = exportData.slides.toJSON();
+
+            exportData.slides.forEach(function (slide, i) {
+                slide.components.forEach(function (component, j) {
+                    exportData.slides[i].components[j] = component.toJSON();
+                });
+            });
+            console.log(exportData.picture);
+
+            return exportData;
         },
 
         fileName: function(fname) {
@@ -83,7 +92,8 @@ define(["backbone",
         addComponent: function(type) {
             var slide = this._deck.get('activeSlide');
             if (slide) {
-                var comp = ComponentFactory.instance.createModel(type);
+                var compFactory = new ComponentFactory();
+                var comp = compFactory.instance.createModel(type);
                 slide.add(comp);
             }
         }

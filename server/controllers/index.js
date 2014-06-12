@@ -1,11 +1,6 @@
-/**
- * GET /
- * Home page.
- */
-
-exports.home = function(req, res) {
-  res.render('home', {
-    title: 'Home'
+exports.notfound = function(req, res) {
+  res.render('404', {
+    title: '404'
   });
 };
 
@@ -14,9 +9,9 @@ exports.home = function(req, res) {
  * Home page.
  */
 
-exports.app = function(req, res) {
-  res.render('app', {
-    title: 'App'
+exports.home = function(req, res) {
+  res.render('home', {
+    title: 'Home'
   });
 };
 

@@ -14,10 +14,10 @@ define(["underscore", "./SpatialObject"], function(_, SpatialObject) {
          * @returns {Object}
          */
         initialize: function() {
+            SpatialObject.prototype.initialize.apply(this, arguments);
             _.defaults(this.attributes, defaults);
             if (this.attributes.scale === undefined) {
                 this.attributes.scale = {};
-                _.defaults(this.attributes.scale, defaultScale);
             }
         },
 

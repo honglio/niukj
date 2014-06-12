@@ -41,9 +41,9 @@ define(["jquery", "underscore",
             this._clipboard = this.model.clipboard;
 
             // size setting
-			this._calculateLayout = this._calculateLayout.bind(this);
-            var lazyLayout = _.debounce(this._calculateLayout, 300);
-            $(window).resize(lazyLayout);
+			// this._calculateLayout = this._calculateLayout.bind(this);
+   //          var lazyLayout = _.debounce(this._calculateLayout, 300);
+   //          $(window).resize(lazyLayout);
         },
 
         __matrixToArray: function(matrix) {
@@ -179,17 +179,8 @@ define(["jquery", "underscore",
             var index = options.at;
 			console.log(index);
             // Append it in the correct position in the well
-            var snapshot = new SlideSnapshot({model: slide});
-            if (index === 0) {
-                this.$slides.prepend(snapshot.render().$el);
-            } else {
-                var $slides = $('.slideSnapshot');
-                if (index >= $slides.length) {
-                    this.$slides.append(snapshot.render().$el);
-                } else {
-                    $($slides[index]).before(snapshot.render().$el);
-                }
-            }
+            var snapshot = new SlideSnapshot({model: slide, deck: this._deck});
+            this.$slides.append(snapshot.render().$el);
         },
         /**
          * Move slide snapshot to a new position.

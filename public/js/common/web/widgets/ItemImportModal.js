@@ -5,7 +5,7 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
     var reg = /[a-z]+:/;
 
     var ItemImportModal = CustomView.extend({
-        className: "itemGrabber modal hide",
+        className: "itemGrabber modal fade",
         events: {
             "click .ok": "_okClicked",
             "click div[data-option='browse']": "_browseClicked",
@@ -60,6 +60,12 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
             }
         },
         _urlChanged: function(e) {
+            if(this.$input.val()) {
+                this.$el.find(".ok").removeAttr('disabled');
+            } else {
+                this.$el.find(".ok").attr('disabled', 'disabled');
+            }
+
             if (e.which === 13) { // if keyup is Enter.
                 console.log("urlChanged if");
 				this.src = this.$input.val();

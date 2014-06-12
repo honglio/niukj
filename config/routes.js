@@ -31,12 +31,12 @@ var passportConf = require('./passport');
  */
 
 module.exports = function (app, passport) {
+
   /**
    * Web page routes.
    */
   app.get('/', index.home);
   app.get('/account', passportConf.isAuthenticated, index.account);
-  app.get('/app', passportConf.isAuthenticated, index.app);
   app.get('/login', index.login);
   app.get('/logout', index.logout);
   app.get('/signup', index.signup);
@@ -114,8 +114,9 @@ module.exports = function (app, passport) {
   app.param('id', articles.load);
   app.get('/articles', articles.index);
   app.get('/articles/new', passportConf.isAuthenticated, articles.new);
+  app.get('/articles/my', passportConf.isAuthenticated, articles.my);
   app.post('/articles', passportConf.isAuthenticated, articles.create);
-  app.get('/articles/:id', articles.show);
+  app.get('/articles/:id/get', passportConf.isAuthenticated, articles.getContent);
   app.get('/articles/:id/edit', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.edit);
   app.put('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.update);
   app.delete('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.destroy);
@@ -130,4 +131,7 @@ module.exports = function (app, passport) {
 
   // tag routes
   app.get('/tags/:tag', tags.index);
+
+  // page not found
+  app.get('*', index.notfound);
 }

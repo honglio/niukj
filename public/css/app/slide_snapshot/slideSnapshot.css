@@ -9,7 +9,7 @@
     box-shadow: inset 0 0 3px #000;
 }
 .slideSnapshot .remove-icon {
-    color: #FF7F50;
+    /* color: #FF7F50; */
     display: none;
     position: absolute;
     top: -7px;

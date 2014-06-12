@@ -40,6 +40,7 @@ define(["underscore",
          * @returns {*}
          */
         set: function(key, value, options) {
+            console.log(key);
 			console.log(value);
             if (key === 'activeSlide') {
                 this._activeSlideChanging(value, options);
@@ -56,29 +57,32 @@ define(["underscore",
          */
 
         "import": function (rawObj) {
+            console.log(rawObj);
             var allSlides = this.get('slides');
-            var activeSlide = this.get('activeSlide');
 
+            var activeSlide = this.get('activeSlide');
             if (activeSlide !== undefined && activeSlide !== null) {
                 activeSlide.unselectComponents();
             }
+            console.log(rawObj.slides);
+            allSlides.reset(rawObj.slides);
 
-			allSlides.reset(rawObj.get('slides'));
+            console.log(allSlides);
 
-			console.log(allSlides);
-
-			allSlides.models.forEach(function(model) {
-				this._registerWithSlide(model);
-				if(model.get('active') === true) {
-					activeSlide = model;
-				}
-			}, this);
+            allSlides.models.forEach(function(slide) {
+                this._registerWithSlide(slide);
+                console.log(slide);
+                if(slide.get('active') === "true") {
+                    console.log('true');
+                    activeSlide = slide;
+                }
+            }, this);
 
             this.set('activeSlide', activeSlide);
-            this.set('background', rawObj.get('background'));
-            this.set('fileName', rawObj.get('fileName'));
-			this.set('id', rawObj.id);
-			// TODO : this.set('version', rawObj.version);
+            this.set('background', rawObj.background);
+            this.set('fileName', rawObj.fileName);
+			this.set('id', rawObj._id);
+			this.set('picture', rawObj.picture);
             undoHistory.clear();
 
             // TODO: go through and dispose of all old slides...?

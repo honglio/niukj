@@ -4,7 +4,7 @@ define(function() {
         slide: {
             size: {
                 width: 1024,
-                height: 640
+                height: 666
             }
         }
     };

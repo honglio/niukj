@@ -22,16 +22,35 @@ var setTags = function (tags) {
 /**
  * Article Schema
  */
+var ComponentSchema = new mongoose.Schema({
+  color: {type: String},
+  selected: {type: String},
+  size: {type: String},
+  text: {type: String},
+  type: {type: String},
+  x: {type: String},
+  y: {type: String},
+  imageType: {type: String},
+  src: {type: String}
+});
 
-            // _id: null,
-            // fileName: "",
-            // slides: "",
-            // activeSlide: "",
-            // background: "",
-            // picture: null
+var SlideSchema = new mongoose.Schema({
+  active: {type: String},
+  index: {type: String},
+  selected: {type: String},
+  components: [ComponentSchema]
+});
+
 var ArticleSchema = new mongoose.Schema({
-  title: {type : String, default : '', trim : true},
-  body: {type : String, default : '', trim : true},
+  fileName: {type : String, default : '', trim : true},
+  slides: [SlideSchema],
+  activeSlide: {
+    active: {type: String},
+    index: {type: String},
+    selected: {type: String},
+    components: [ComponentSchema]
+  },
+  background: {type : String, default : ''},
   user: {type : mongoose.Schema.ObjectId, ref : 'Account'},
   comments: [{
     body: { type : String, default : '' },
@@ -39,9 +58,7 @@ var ArticleSchema = new mongoose.Schema({
     createdAt: { type : Date, default : Date.now }
   }],
   tags: {type: [], get: getTags, set: setTags},
-  image: {
-    filename: {type : String, default : ''}
-  },
+  picture: { type : String, default : '' },
   createdAt  : {type : Date, default : Date.now}
 });
 
@@ -49,8 +66,7 @@ var ArticleSchema = new mongoose.Schema({
  * Validations
  */
 
-ArticleSchema.path('title').required(true, 'Article title cannot be blank');
-ArticleSchema.path('body').required(true, 'Article body cannot be blank');
+ArticleSchema.path('fileName').required(true, 'Article fileName cannot be blank');
 
 /**
  * Pre-remove hook
@@ -87,7 +103,7 @@ ArticleSchema.methods = {
    */
 
   uploadAndSave: function (image, cb) {
-    if (!image.name || !image.size) return this.save(cb);
+    if (!image.name || !image.src) return this.save(cb);
 
     console.log(image);
     var oss = OSS.createClient(config.oss);
@@ -97,7 +113,7 @@ ArticleSchema.methods = {
     oss.putObject({
       bucket: config.oss.bucket,
       object: image.name,
-      source: image.path,
+      source: image.src,
       headers: {}
     }, function (err, res) {
       if (err) {
@@ -106,7 +122,7 @@ ArticleSchema.methods = {
       }
       if (res) {
           console.log(res);
-          self.image.filename = image.name;
+          return cb(res);
       }
       self.save(cb);
     });

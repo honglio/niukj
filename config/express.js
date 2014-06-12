@@ -1,10 +1,17 @@
 var express = require('express')
     , mongoose = require('mongoose')
-    , mongoStore = require('connect-mongo')(express)
     , flash = require('express-flash')
     , winston = require('winston')
     , expressValidator = require('express-validator')
     , errorHandler = require('errorhandler')
+    , bodyParser = require('body-parser')
+    , methodOverride = require('method-override')
+    , compression    = require('compression')
+    , favicon        = require('serve-favicon')
+    , cookieParser   = require('cookie-parser')
+    , logger         = require('morgan')
+    , session = require('express-session')
+    , mongoStore = require('connect-mongo')({session: session})
     , csrf = require('lusca').csrf()
     , helpers = require('view-helpers')
     , config = require('./config');
@@ -15,15 +22,15 @@ module.exports = function (app, passport) {
     app.set('view engine', 'jade');
 
     // should be placed before express.static
-    app.use(express.compress({
+    app.use(compression({
         filter: function (req, res) {
           return /json|text|javascript|css/.test(res.getHeader('Content-Type'));
         },
         level: 9
     }));
 
-    app.use(express.favicon())
-    app.use(express.static(config.root + '/public'))
+    app.use(favicon(config.root + '/public/img/favicon.ico'));
+    app.use(express.static(config.root + '/public'));
 
     winston.add(winston.transports.File, {filename: 'log/all-logs.txt'});
 
@@ -35,17 +42,19 @@ module.exports = function (app, passport) {
       }
     };
 
-    app.use(express.logger(log));
+    app.use(logger(log));
 
     // cookieParser should be above session
-    app.use(express.cookieParser());
+    app.use(cookieParser());
     // bodyParser should be above methodOverride
-    app.use(express.bodyParser());
+    // app.use(express.bodyParser());
+    app.use(bodyParser.json({limit: '50mb'}));
+    app.use(bodyParser.urlencoded({limit: '50mb'}));
     app.use(expressValidator());
-    app.use(express.methodOverride());
+    app.use(methodOverride());
 
     // express/mongo session storage
-    app.use(express.session({
+    app.use(session({
         secret: config.sessionSecret,
         store: new mongoStore({
             url: config.db,
@@ -80,7 +89,7 @@ module.exports = function (app, passport) {
     });
 
     // routes should be at the last
-    app.use(app.router);
+    // app.use(app.router); ! deprecated
 
     /**
      * 500 Error Handler.
