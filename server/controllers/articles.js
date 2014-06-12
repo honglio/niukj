@@ -23,30 +23,25 @@ exports.load = function(req, res, next, id){
 
 exports.index = function(req, res){
 
+  req.query.q
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
   var perPage = 8;
   var options = {
     perPage: perPage,
-    page: page
+    page: page,
+    criteria: {fileName: req.query.q}
   };
 
-  /* list only req user's article */
-  // var options = {
-  //   perPage: perPage,
-  //   page: page,
-  //   criteria: {user: req.user}
-  // };
+  console.log(page);
 
   Article.list(options, function(err, articles) {
     if (err) return res.render('500');
-    console.log('article list:' + articles);
-    Article.count().exec(function (err, count) {
-      res.render('article/index', {
-        title: 'Browse Article',
-        articles: articles,
-        page: page + 1,
-        pages: Math.ceil(count / perPage)
-      });
+
+    res.render('article/index', {
+      title: 'Browse Article',
+      articles: articles,
+      page: page + 1,
+      pages: Math.ceil(articles.length / perPage)
     });
   });
 };
@@ -66,16 +61,15 @@ exports.my = function(req, res){
     criteria: {user: req.user}
   };
 
+  console.log(page);
+
   Article.list(options, function(err, articles) {
     if (err) return res.render('500');
-    console.log('article list:' + articles);
-    Article.count().exec(function (err, count) {
-      res.render('article/index', {
-        title: 'My Article',
-        articles: articles,
-        page: page + 1,
-        pages: Math.ceil(count / perPage)
-      });
+    res.render('article/index', {
+      title: 'My Article',
+      articles: articles,
+      page: page + 1,
+      pages: Math.ceil(articles.length / perPage)
     });
   });
 };
@@ -99,7 +93,7 @@ exports.create = function (req, res, next) {
 
   var article = new Article(req.body.article);
   article.user = req.user;
-  console.log(article);
+  // console.log(article);
 
   article.save(function (err) {
     if (err) return next(err);
@@ -125,10 +119,10 @@ exports.edit = function (req, res) {
  */
 
 exports.update = function(req, res, next){
-  console.log(req.body);
+  // console.log(req.body);
   var article = req.article;
   article = extend(article, req.body.article);
-  console.log(article);
+  // console.log(article);
   article.save(function(err) {
     if (err) return next(err);
     return res.send(article._id);

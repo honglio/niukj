@@ -1207,36 +1207,15 @@ form h2 {
   padding-right: 10px;
 }
 
-/*Deck List Page*/
+/*Slide Editor*/
 /*-------------------------*/
 
-.deckList {
-  text-align:center;
-}
-
-.deckList > ul {
-    margin-top: 30px;
-}
-
-.deckList .createBtn {
-    margin-top: 2%;
-    margin-right: 80%;
-}
-
-.deckList .thumbnails > li{
-  width:268px;
-  float: none;
-    vertical-align:middle ;
-    margin-right: 5px;
-    margin-left: 5px;
-}
-
-.deckList .thumbnail .row-fluid li:first-child {
-    margin-left: 60%;
-    margin-right: 20px;
-}
 #slide-editor {
   background: #8D939D;
   margin-top: 35px;
   padding-bottom: 20px;
+}
+
+form[role='search'].navbar-form {
+  margin: 18px 0;
 }

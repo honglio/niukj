@@ -31,8 +31,6 @@ section#top-nav
 
         else if user
           ul.nav.nav-pills.navbar-nav
-            li(class=title=='Browse Article'?'active':undefined)
-              a(href='/articles') Browse Article
             li(class=title=='My Article'?'active':undefined)
               a(href='/articles/my') My Article
             li(class=title=='Create Article'?'active':undefined)
@@ -41,6 +39,11 @@ section#top-nav
               a(href='/api') API Examples
             li(class=title=='Contact'?'active':undefined)
               a(href='/contactForm') Contact
+          form.navbar-form.navbar-left(role='search' method="GET" action="/articles")
+            .form-group
+              input.form-control.search-input(type='text', name='q' ,placeholder='Search Article')
+              button.btn.btn-default(type='submit')
+                i.fa.fa-search
         ul.nav.nav-pills.navbar-nav.navbar-right
           if !user
             li(class=title=='Login'?'active':undefined)
