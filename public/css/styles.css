@@ -668,22 +668,22 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 /*product dot*/
 .product-dot1{
-  margin-left: 125px;
-  margin-top: 110px;
+  margin-left: 110px;
+  margin-top: 50px;
 }
 .product-dot2{
-  margin-left: 515px;
-  margin-top: 150px;
+  margin-left: 445px;
+  margin-top: 35px;
 }
 
 .product-dot3{
-  margin-left: 815px;
-  margin-top: 80px;
+  margin-left: 865px;
+  margin-top: 40px;
 }
 
 .product-dot4{
   margin-left: 206px;
-  margin-top: 185px;
+  margin-top: 135px;
 }
 
 .product-dot5{
@@ -692,13 +692,13 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 
 .product-dot6{
-  margin-left: 625px;
+  margin-left: 400px;
   margin-top: 410px;
 }
 
 .product-dot7{
-  margin-left: 150px;
-  margin-top: 350px;
+  margin-left: 110px;
+  margin-top: 270px;
 }
 
 .product-dot8{
