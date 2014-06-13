@@ -184,6 +184,7 @@ exports.load = function(req, res, next, id){
 
 exports.postUpdateProfile = function(req, res, next) {
   Account.findById(req.user.id, function(err, user) {
+    console.log(req.user);
     if (err) return next(err);
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';

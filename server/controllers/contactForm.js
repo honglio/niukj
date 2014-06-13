@@ -22,17 +22,15 @@ exports.postContact = function(req, res) {
     return res.redirect('/contactForm');
   }
 
-  var from = req.body.email;
+  var email = req.body.email;
   var name = req.body.name;
   var body = req.body.message;
-  var to = 'info@niukj.com';
-  var subject = 'Contact Form | Relax';
 
   var mailOptions = {
-    to: to,
-    from: to,
-    subject: from,
-    text: body
+    to: 'discus@niukj.com',
+    from: 'info@niukj.com',
+    subject: email,
+    text: name + body
   };
 
   smtpTransport.sendMail(mailOptions, function(err) {
@@ -44,3 +42,29 @@ exports.postContact = function(req, res) {
     res.redirect('/contactForm');
   });
 };
+
+exports.subscribe = function (req, res) {
+  req.assert('email', 'Name cannot be blank').isEmail();
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/');
+  }
+
+  var mailOptions = {
+    to: 'subscribe@niukj.com',
+    from: 'info@niukj.com',
+    subject: req.body.email,
+    text: 'subscribe'
+  };
+
+  smtpTransport.sendMail(mailOptions, function(err) {
+    if (err) {
+      req.flash('errors', { msg: err.message });
+      return res.redirect('/');
+    }
+    req.flash('successful', { msg: 'You have been subscribed.' });
+    res.redirect('/');
+  });
+}

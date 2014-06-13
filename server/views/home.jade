@@ -118,9 +118,7 @@ block content
       .row
         .col-md-12.centered.section-title-wrapper
           h3.section-title
-            | Let's Take
-            span.normal a Closer Look
-            | - shared on weidea.net
+            | Let's Take a Closer Look
           p.section-subtitle
             | Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus.
 
@@ -151,97 +149,87 @@ block content
 
         .col-md-3.col-sm-3.pricing-table.centered
           .pricing-head
-            h5 Bronze
+            h5 FREE
             .the-price
               h1
-                | $10
+                | $0
                 span.subscript /mo
-              small 1 month FREE trial
+              small for ever & ever
 
           .pricing-content
             ul
-              li 1 Account
-              li 1 Project
-              li 100K API Access
-              li 100MB Storage
-              li Custom Cloud Services
-              li Performance Management
-              li Weekly Reports
+              li 1 Article
+              li 1000 Views
+              li 10MB Storage
+              li No Email Support
+              li Default Domain
+              li No Reports
 
           .pricing-table-button
-            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='signup') Sign Up
 
         .col-md-3.col-sm-3.pricing-table.centered
           .pricing-head
-            h5 Silver
+            h5 MINI
             .the-price
               h1
-                | $20
+                | $5
                 span.subscript /mo
               small 1 month FREE trial
 
           .pricing-content
             ul
-              li 2 Accounts
-              li 5 Projects
-              li 100K API Access
-              li 200MB Storage
-              li Custom Cloud Services
-              li Performance Management
-              li Weekly Reports
+              li 5 Article
+              li 10000 views
+              li 50MB Storage
+              li 24/7 Email Support
+              li Default Domain
+              li No Reports
 
           .pricing-table-button
-            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='signup') Sign Up
 
         #tour-8.col-md-3.col-sm-3.pricing-table.popular.centered
           .pricing-head
-            h5 Gold
+            h5 SMALL
             .the-price
               h1
-                | $35
+                | $14
                 span.subscript /mo
               small 1 month FREE trial
 
           .pricing-content
             ul
-              li 5 Accountd
-              li 20 Projectd
-              li 300K API Access
-              li 500MB Storage
-              li Custom Cloud Services
-              li Performance Management
+              li 15 Article
+              li 50000 views
+              li 200MB Storage
+              li 24/7 Email Support
+              li Default Domain
               li Weekly Reports
 
           .pricing-table-button
-            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='signup') Sign Up
 
         .col-md-3.col-sm-3.pricing-table.centered
           .pricing-head
-            h5 Platinum
+            h5 MEDIUM
             .the-price
               h1
-                | $55
+                | $36
                 span.subscript /mo
               small 1 month FREE trial
 
           .pricing-content
             ul
-              li 10 Accounts
-              li 35 Project
-              li 500K API Access
-              li 1000MB Storage
-              li Custom Cloud Services
-              li Performance Management
+              li Unlimited Article
+              li Unlimited views
+              li 1GB Storage
+              li 24/7 Email Support
+              li Custom Domain
               li Weekly Reports
 
           .pricing-table-button
-            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='#') Sign Up
-
-        .col-md-12.centered
-          p(style='margin: 20px 0;')
-            | Do you have any other ideas regarding the service plans? We'd love to hear from you! Let's
-            a#tour-9(href='#contactModal', data-toggle='modal') Contact Us
-            | .
+            a.small-btn.btn-default.green-btn.btn-default.uppercase(href='/signup') Sign Up
 
   section#breakline.dark-bg
     .container
@@ -249,101 +237,9 @@ block content
         .col-md-7.col-sm-7
           h3.centered.normal Subscribe and be the first to know all updates and special offers!
         #tour-9.col-md-5.col-sm-5
-          form#subscribe_form(action='#', method='post')
-            input#subscribe_email.subscribe-input(placeholder='Enter your valid email address...', type='text', value='', name='subscribe')
+          form#subscribe_form(action='/subscribe', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            input#subscribe_email.subscribe-input(placeholder='Enter your valid email address...', type='text', value='', name='email')
             input#subscribe_btn.subscribe-submit.yellow-btn.btn-default(type='submit', value='Subscribe')
 
-          .row
-            .subscribe-alert
-              #subscribe_error.alert.alert-error.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-fire.icon-white
-                strong Error!
-                | Please enter your valid email address.
-              #subscribe_success.alert.alert-success.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-thumbs-up.icon-white
-                strong Success!
-                | You've been subscribed.
-              #subscribe_fail.alert.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-bullhorn.icon-white
-                strong Sorry!
-                | An error occured when subscribing your email.
-
           p.subscribe-text.centered * Don't worry to subscribe. We hate spam too!
-
-  #contactModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-          h5.modal-label Contact Us
-
-        .modal-body.contact-form-container
-          form#contact_form(name='contactForm', action='#', method='post')
-            .row
-
-              #name_error.alert.alert-error.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-fire.icon-white
-                strong Error!
-                | Please enter your name.
-              #email_error.alert.alert-error.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-fire.icon-white
-                strong Error!
-                | Please enter your valid email address.
-              #subject_error.alert.alert-error.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-fire.icon-white
-                strong Error!
-                | Please enter your subject.
-              #message_error.alert.alert-error.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-fire.icon-white
-                strong Error!
-                | Please enter your message.
-
-            .row
-              .col-md-6
-                label Name :
-                input#name.contact-input(name='thename', type='text', placeholder='Input your name..')
-              .col-md-6
-                label Email :
-                input#email.contact-input(name='email', type='text', placeholder='Input your email..')
-
-            .row
-              .col-md-12
-                label Subject :
-                input#subject.contact-input(name='subject', type='text', placeholder='Input your subject..')
-
-            .row
-              .col-md-12
-                label Message :
-                textarea#message(name='message', rows='7', placeholder='Your message')
-
-            .row
-              #mail_success.alert.alert-success.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-thumbs-up.icon-white
-                strong Success!
-                | Your message has been sent successfully.
-              #mail_fail.alert.form-error-message
-                button.close(type='button', data-dismiss='alert') ×
-                span.alert-icon
-                  i.fa.fa-bullhorn.icon-white
-                strong Sorry!
-                | An error occured this time sending your message.
-
-            .row
-              #submit.col-md-12
-                input#send_message.send-button.green-btn.btn-default(type='submit', name='submit', value='Send Message')

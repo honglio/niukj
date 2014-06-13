@@ -13,7 +13,7 @@ module.exports = {
       name: "niukj.com",
       auth: {
         user: "info@niukj.com",
-        pass: "12345china"
+        pass: "asdf7890"
       },
       ignoreTLS: false,
       debug: true,
