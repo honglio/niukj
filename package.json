@@ -1,16 +1,16 @@
 {
-    "name": "Relax",
-    "description": "A demo app illustrating a social network",
-    "version": "0.0.1",
+    "name": "Niukj",
+    "description": "Online Slide Editor and Showcase Platform",
+    "version": "0.1.2",
     "private": true,
-    "author": "Hong Liu <hong.liu@live.cn> (http://honglio.com)",
+    "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/honglio/Relax.git"
+        "url": "git@gitlab.com:honglio/niukj.git"
     },
     "engines": {
         "node": "0.10.x",
-        "npm": "1.2.x"
+        "npm": "1.3.x"
     },
     "scripts": {
         "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js",
