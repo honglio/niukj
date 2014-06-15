@@ -355,7 +355,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 
 .social li a i{
-  padding: 5px 0 0 3px;
+  /* padding: 5px 0 0 3px; */
 }
 /* #TOP NAV
 =============================== */
@@ -1219,4 +1219,8 @@ form h2 {
 
 form[role='search'].navbar-form {
   margin: 18px 0;
+}
+
+.logo {
+  margin: 11px;
 }

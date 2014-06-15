@@ -29,7 +29,7 @@ module.exports = function (app, passport) {
         level: 9
     }));
 
-    app.use(favicon(config.root + '/public/img/favicon.ico'));
+    app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
     app.use(express.static(config.root + '/public'));
 
     winston.add(winston.transports.File, {filename: 'log/all-logs.txt'});
