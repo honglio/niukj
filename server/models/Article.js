@@ -23,30 +23,30 @@ var setTags = function (tags) {
  * Article Schema
  */
 var ComponentSchema = new mongoose.Schema({
-  color: {type: String},
+  color:    {type: String},
   selected: {type: String},
-  size: {type: String},
-  text: {type: String},
-  type: {type: String},
-  x: {type: String},
-  y: {type: String},
-  imageType: {type: String},
-  src: {type: String}
+  size:     {type: String},
+  text:     {type: String},
+  type:     {type: String},
+  x:        {type: String},
+  y:        {type: String},
+  imageType:{type: String},
+  src:      {type: String}
 });
 
 var SlideSchema = new mongoose.Schema({
-  active: {type: String},
-  index: {type: String},
+  active:   {type: String},
+  index:    {type: String},
   selected: {type: String},
   components: [ComponentSchema]
 });
 
 var ArticleSchema = new mongoose.Schema({
   fileName: {type : String, default : '', trim : true},
-  slides: [SlideSchema],
+  slides:   [SlideSchema],
   activeSlide: {
     active: {type: String},
-    index: {type: String},
+    index:  {type: String},
     selected: {type: String},
     components: [ComponentSchema]
   },

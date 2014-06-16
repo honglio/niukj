@@ -38,7 +38,7 @@ exports.postContact = function(req, res) {
       req.flash('errors', { msg: err.message });
       return res.redirect('/contactForm');
     }
-    req.flash('success', { msg: 'Email has been sent successfully!' });
+    req.flash('successful', { msg: 'Email has been sent successfully!' });
     res.redirect('/contactForm');
   });
 };

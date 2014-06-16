@@ -22,8 +22,6 @@ exports.load = function(req, res, next, id){
  */
 
 exports.index = function(req, res){
-
-  req.query.q
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
   var perPage = 8;
   var options = {
@@ -36,12 +34,13 @@ exports.index = function(req, res){
 
   Article.list(options, function(err, articles) {
     if (err) return res.render('500');
-
+    console.log(utils.formatDate);
     res.render('article/index', {
-      title: 'Browse Article',
+      title: '课件列表',
       articles: articles,
       page: page + 1,
-      pages: Math.ceil(articles.length / perPage)
+      pages: Math.ceil(articles.length / perPage),
+      formatDate: utils.formatDate
     });
   });
 };
@@ -66,10 +65,11 @@ exports.my = function(req, res){
   Article.list(options, function(err, articles) {
     if (err) return res.render('500');
     res.render('article/index', {
-      title: 'My Article',
+      title: '我的课件',
       articles: articles,
       page: page + 1,
-      pages: Math.ceil(articles.length / perPage)
+      pages: Math.ceil(articles.length / perPage),
+      formatDate: utils.formatDate
     });
   });
 };
@@ -80,7 +80,7 @@ exports.my = function(req, res){
 
 exports.new = function(req, res){
   res.render('article/edit', {
-    title: 'Create Article',
+    title: '创建课件',
     article: new Article({})
   });
 };
@@ -97,7 +97,7 @@ exports.create = function (req, res, next) {
 
   article.save(function (err) {
     if (err) return next(err);
-    req.flash('success', {msg: 'Successfully created article!'});
+    req.flash('successful', {msg: 'Successfully created article!'});
     return res.send(article._id);
   });
 
@@ -109,7 +109,7 @@ exports.create = function (req, res, next) {
 
 exports.edit = function (req, res) {
   res.render('article/edit', {
-    title: 'Edit ' + req.article.fileName,
+    title: '编辑课件' + req.article.fileName,
     oss: config.oss
   });
 };
@@ -151,7 +151,7 @@ exports.show = function(req, res){
 exports.destroy = function(req, res){
   var article = req.article;
   article.remove(function(err){
-    req.flash('info', {msg: 'Deleted successfully'});
+    req.flash('inform', {msg: 'Deleted successfully'});
     res.redirect('/articles');
   });
 };

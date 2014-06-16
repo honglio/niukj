@@ -3,12 +3,12 @@ var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 
 var Status = new mongoose.Schema({
-  name: { type: String },
+  name:      { type: String },
   status:    { type: String }
 });
 
 var ContactSchema = new mongoose.Schema({
-  name: { type: String },
+  name:      { type: String },
   accountId: { type: mongoose.Schema.ObjectId, ref : 'Account'},
   added:     { type: Date },     // When the contact was added
   updated:   { type: Date }      // When the contact last updated
@@ -18,22 +18,22 @@ var AccountSchema = new mongoose.Schema({
   email:     { type: String, unique: true, lowercase: true },
   password:  { type: String },
 
-  resetPasswordToken: { type: String },
+  resetPasswordToken:   { type: String },
   resetPasswordExpires: { type: Date },
 
-  weibo: { type: String },
-  renren: { type: String },
-  qq: { type: String },
-  github: { type: String },
-  linkedin: { type: String },
-  tokens: { type: Array },
+  weibo:     { type: String },
+  renren:    { type: String },
+  qq:        { type: String },
+  github:    { type: String },
+  linkedin:  { type: String },
+  tokens:    { type: Array },
 
   profile: {
-    name: { type: String },
-    gender: { type: String, default: '' },
-    location: { type: String, default: '' },
+    name:    { type: String },
+    gender:  { type: String, default: '' },
+    location:{ type: String, default: '' },
     website: { type: String, default: '' },
-    photoUrl:  { type: String, default: '' },
+    photoUrl:{ type: String, default: '' },
     biography: { type: String, default: '' }
   },
   contacts:  {

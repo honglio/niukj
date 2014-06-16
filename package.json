@@ -45,6 +45,7 @@
         "compression": "latest",
         "serve-favicon": "latest",
         "morgan": "latest",
+        "multer": "latest",
         "underscore": "latest",
         "github-api": "latest",
         "node-linkedin": "latest",

@@ -3,7 +3,7 @@ extends ../layout
 block content
   .container-fluid
     header.page-header
-      h3 User
+      h3= title
     .row
       .col-sm-2
         a.profile-picture(href='#')
@@ -14,28 +14,28 @@ block content
             .profile-name
               strong
                 a(href='/account/' + account.id) #{account.profile.name}
-              &#160;&#160;&#160;
+              | &#160;&#160;&#160;
               span
                 a(href='#') #{account.email}
           li
             .profile-stat
               h3 #{account.contacts.followers.length}
               span
-                a(href='/account/' + account.id + '/followers') followers
+                a(href='/account/' + account.id + '/followers') 粉丝
           li
             .profile-stat
               h3 #{account.contacts.followings.length}
               span
-                a(href='/account/' + account.id + '/followings') following
+                a(href='/account/' + account.id + '/followings') 关注
       .col-sm-3
-        form.form-horizontal(action='/account/' + account.id + '/contact', method='POST')
+        form.form-horizontal(action='/account/' + account.id + '/contact' method='POST' enctype="application/x-www-form-urlencoded")
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
           if !followed
             button.btn.btn-primary(type='submit')
               i.fa.fa-user
-              | Follow
+              |  关注
           else
             button.btn.btn-danger(type="submit" name="_method", value="DELETE")
               i.fa.fa-user
-              | UnFollow
+              |  取消关注

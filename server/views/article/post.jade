@@ -6,15 +6,15 @@ block content
       h1= article.title
     .row
       .col-md-6
-        p=article.body
+        p= article.body
         .meta
           - if (article.user)
             - var name = article.user.profile.name ? article.user.profile.name : article.user.email
-            p Author :&nbsp;
+            p 作者 :&nbsp;
               a(href="/account/"+article.user._id)= name
 
           - if (article.tags)
-            p Tags &nbsp;
+            p 标签 &nbsp;
               - each tag in article.tags.split(',')
                 i.text-muted.fa.fa-tag &nbsp;
                 a.tag(href="/tags/"+tag)= tag
@@ -26,16 +26,16 @@ block content
         - if (!article.isNew && article.image && article.image.filename)
           img(src='http://' + oss.bucket + '.' + oss.host + '/' + article.image.filename)
 
-    form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('Are you sure?')")
+    form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
       input(type='hidden', name='_csrf', value=_csrf)
-      a.btn.btn-default(href='/articles/'+article._id+'/edit', title="edit") Edit
+      a.btn.btn-default(href='/articles/'+article._id+'/edit', title="edit") 编辑
         i.icon-edit
       | &nbsp;&nbsp;
       input(type="hidden", name="_method", value="DELETE")
-      button.btn.btn-danger(type="submit") Delete
+      button.btn.btn-danger(type="submit") 删除
 
     br
-    h3 Comments
+    h3 评论
     - each comment in article.comments
       include ../comment/comment
     include ../comment/form

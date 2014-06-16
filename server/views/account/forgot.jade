@@ -4,13 +4,13 @@ block content
   .row
     .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
       form(role='forgot' method='POST')
-        h2 Forgot Password
+        h2= title
         input(type='hidden', name='_csrf', value=_csrf)
         .form-group
-          p Enter your email address below and we will send you password reset instructions.
+          p 输入您的Email地址，我们将发送确认信到您的邮箱中。
           label.control-label(for='email') Email
           input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
         .form-group
           button.btn.btn-primary(type='submit')
             i.fa.fa-key
-            | Reset Password
+            | 重置密码

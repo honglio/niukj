@@ -1,6 +1,6 @@
 exports.notfound = function(req, res) {
   res.render('404', {
-    title: '404'
+    title: '网页无法访问'
   });
 };
 
@@ -11,7 +11,7 @@ exports.notfound = function(req, res) {
 
 exports.home = function(req, res) {
   res.render('home', {
-    title: 'Home'
+    title: '首页'
   });
 };
 
@@ -22,7 +22,7 @@ exports.home = function(req, res) {
 exports.login = function(req, res) {
   if (req.user) return res.redirect('/');
   res.render('account/login', {
-    title: 'Login'
+    title: '登录'
   });
 };
 
@@ -44,7 +44,7 @@ exports.logout = function(req, res) {
 exports.signup = function(req, res) {
   if (req.user) return res.redirect('/');
   res.render('account/signup', {
-    title: 'Create Account'
+    title: '注册'
   });
 };
 
@@ -58,7 +58,7 @@ exports.forgot = function(req, res) {
     return res.redirect('/');
   }
   res.render('account/forgot', {
-    title: 'Forgot Password'
+    title: '忘记密码'
   });
 };
 
@@ -69,7 +69,7 @@ exports.forgot = function(req, res) {
 
 exports.account = function(req, res) {
   res.render('account/profile', {
-    title: 'Account Management'
+    title: '账户管理'
   });
 };
 
@@ -91,6 +91,6 @@ exports.api = function(req, res) {
 
 exports.contactForm = function(req, res) {
   res.render('contactForm', {
-    title: 'Contact'
+    title: '客户服务'
   });
 };

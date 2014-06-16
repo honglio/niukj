@@ -3,7 +3,7 @@ extends ../layout
 block content
   .container-fluid
     header.page-header
-      h3 User
+      h3 用户
     .row
       .col-sm-2
         a.profile-picture(href='#')
@@ -14,16 +14,16 @@ block content
             .profile-name
               strong
                 a(href='/account/' + account.id) #{account.profile.name}
-              &#160;&#160;&#160;
+              | &#160;&#160;&#160;
               span
                 a(href='#') #{account.email}
           li
-            h4 Followers List
+            h4= title
             .text-right
               form.input-group
-                input.form-control(type='text', placeholder='Filter by Name ')
+                input.form-control(type='text', placeholder='按姓名筛选 ')
                 span.input-group-btn
-                  button.btn.btn-inverse(type='submit') Search
+                  button.btn.btn-inverse(type='submit') 搜索
             hr
             - each follower in account.contacts.followers
               .pull-left

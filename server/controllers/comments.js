@@ -40,7 +40,7 @@ exports.destroy = function (req, res) {
     if (err) {
       req.flash('errors', 'Oops! The comment was not found');
     } else {
-      req.flash('info', 'Removed comment');
+      req.flash('inform', 'Removed comment');
     }
     res.redirect('/articles/' + article.id);
   });

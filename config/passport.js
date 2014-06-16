@@ -60,7 +60,7 @@ passport.use(new RenrenStrategy(config.renren,
           user.profile.picture = user.profile.picture || profile._json.profile_image_url;
           user.profile.website = user.profile.website || profile._json.publicProfileUrl;
           user.save(function(err) {
-            req.flash('info', { msg: 'Renren account has been linked.' });
+            req.flash('inform', { msg: 'Renren account has been linked.' });
             done(err, user);
           });
         });
@@ -104,7 +104,7 @@ passport.use(new WeiboStrategy(config.weibo,
           user.profile.picture = user.profile.picture || profile._json.profile_image_url;
           user.profile.website = user.profile.website || profile._json.publicProfileUrl;
           user.save(function(err) {
-            req.flash('info', { msg: 'Weibo account has been linked.' });
+            req.flash('inform', { msg: 'Weibo account has been linked.' });
             done(err, user);
           });
         });
@@ -144,7 +144,7 @@ passport.use(new GitHubStrategy(config.github, function(req, accessToken, refres
           user.profile.location = user.profile.location || profile._json.location;
           user.profile.website = user.profile.website || profile._json.blog;
           user.save(function(err) {
-            req.flash('info', { msg: 'GitHub account has been linked.' });
+            req.flash('inform', { msg: 'GitHub account has been linked.' });
             done(err, user);
           });
         });
@@ -191,7 +191,7 @@ passport.use(new QQStrategy(config.qq, function(req, accessToken, refreshToken, 
           user.profile.location = user.profile.location || profile._json.location;
           user.profile.website = user.profile.website || profile._json.blog;
           user.save(function(err) {
-            req.flash('info', { msg: 'QQ account has been linked.' });
+            req.flash('inform', { msg: 'QQ account has been linked.' });
             done(err, user);
           });
         });
@@ -238,7 +238,7 @@ passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, re
           user.profile.picture = user.profile.picture || profile._json.pictureUrl;
           user.profile.website = user.profile.website || profile._json.publicProfileUrl;
           user.save(function(err) {
-            req.flash('info', { msg: 'LinkedIn account has been linked.' });
+            req.flash('inform', { msg: 'LinkedIn account has been linked.' });
             done(err, user);
           });
         });

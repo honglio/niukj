@@ -3,7 +3,7 @@ extends ../layout
 block content
   .container-fluid.modul-space-twentyone
     .page-header
-      h2= title
+      h2.centered= title
     #Grid.row
     - if (articles.length)
       - each article in articles
@@ -22,11 +22,11 @@ block content
               h6 #{article.fileName}
 
               .meta
-                span.text-muted= formatDate(article.createdAt)
+                span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
 
               - if (article.user)
                 | &nbsp; - &nbsp;
-                span Author &nbsp;
+                span 作者 &nbsp;
 
                 - var name = article.user.profile.name ? article.user.profile.name : article.user.email
 
@@ -34,7 +34,7 @@ block content
 
               - if (article.tags)
                 | &nbsp; - &nbsp;
-                span Tags &nbsp;
+                span 标签 &nbsp;
                 - each tag in article.tags.split(',')
                   i.text-muted.fa.fa-tag &nbsp;
                   a.tag(href="/tags/"+tag)= tag
@@ -44,5 +44,4 @@ block content
         ul.pagination
           != createPagination(pages, page)
     - else
-      h4.text-muted No articles.&nbsp;
-        a(href="/articles/new") create one
+      h4.text-muted.centered 无课件！&nbsp; 亲，请在上方搜索栏中输入关键词，再搜索试试。

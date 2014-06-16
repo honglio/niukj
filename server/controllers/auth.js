@@ -32,7 +32,7 @@ exports.postLogin = function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) return next(err);
-      req.flash('success', { msg: 'Success! You are logged in.' });
+      req.flash('successful', { msg: 'Success! You are logged in.' });
       // res.redirect(req.session.returnTo || '/');
       res.redirect('/articles');
     });
@@ -98,7 +98,7 @@ exports.getReset = function(req, res) {
         return res.redirect('/forgot');
       }
       res.render('account/reset', {
-        title: 'Password Reset'
+        title: '密码重置'
       });
     });
 };
@@ -152,7 +152,7 @@ exports.postReset = function(req, res, next) {
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        req.flash('success', { msg: 'Success! Your password has been changed.' });
+        req.flash('successful', { msg: 'Success! Your password has been changed.' });
         done(err);
       });
     }
@@ -212,7 +212,7 @@ exports.postForgot = function(req, res, next) {
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        req.flash('info', { msg: 'An e-mail has been sent to ' + user.email + ' with further instructions.' });
+        req.flash('inform', { msg: 'An e-mail has been sent to ' + user.email + ' with further instructions.' });
         done(err, 'done');
       });
     }

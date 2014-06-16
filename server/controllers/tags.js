@@ -19,7 +19,7 @@ exports.index = function (req, res) {
     if (err) return res.render('500');
     Article.count(criteria).exec(function (err, count) {
       res.render('article/index', {
-        title: 'Articles tagged ' + req.param('tag'),
+        title: '标签 ' + req.param('tag'),
         articles: articles,
         page: page + 1,
         pages: Math.ceil(count / perPage)

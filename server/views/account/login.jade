@@ -4,33 +4,33 @@ block content
   .row
     .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
         form(role='signin' method='POST')
-          h2 Sign In
+          h2.centered= title
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
-            label.control-label(for='email') Email
-            input.form-control(type='text', name='email', id='email', placeholder='Email', autofocus=true)
+            label.control-label(for='email') 用户名
+            input.form-control(type='text', name='email', id='email', placeholder='Email地址', autofocus=true)
           .form-group
-            label.control-label(for='password') Password
-            input.form-control(type='password', name='password', id='password', placeholder='Password')
+            label.control-label(for='password') 密码
+            input.form-control(type='password', name='password', id='password', placeholder='6-14位密码')
           .form-group
             button.btn.btn-primary.btn-blue(type='submit')
               i.fa.fa-unlock-alt
-              | Login
-            a.btn.btn-link(href='/forgot') Forgot your password?
+              |  登录
+            a.btn.btn-link(href='/forgot') 忘记密码?
           hr
           a.btn.btn-block.btn-weibo.btn-social(href='/auth/weibo')
             i.fa.fa-weibo
-            | Sign in with Weibo
+            |  用微博账户登录
           a.btn.btn-block.btn-renren.btn-social(href='/auth/renren')
             i.fa.fa-renren
-            | Sign in with Renren
+            |  用人人账户登录
           a.btn.btn-block.btn-qq.btn-social(href='/auth/qq')
             i.fa.fa-qq
-            | Sign in with QQ
+            |  用QQ账户登录
           a.btn.btn-block.btn-github.btn-social(href='/auth/github')
             i.fa.fa-github
-            | Sign in with GitHub
+            |  用GitHub账户登录
           a.btn.btn-block.btn-linkedin.btn-social(href='/auth/linkedin')
             i.fa.fa-linkedin
-            | Sign in with LinkedIn
+            |  用领英账户登录
 

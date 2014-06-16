@@ -42,7 +42,9 @@ jQuery(document).ready(function($) {
 		});
 
 // jQuery PrettyPhoto ------------------------------------------------------ //
-	 $("a[rel^='prettyPhoto']").prettyPhoto();
+	 $("a[rel^='prettyPhoto']").prettyPhoto({social_tools: '',
+	 																				 default_width: 600,
+																					 default_height: 488});
 
 // jQuery ToTop ------------------------------------------------------ //
 	 $(".toTop").hide();

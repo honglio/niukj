@@ -26,13 +26,13 @@ exports.accountbyId = function(req, res, next) {
 
     if(Account.hasFollowing(user, contactId)) {
       res.render('account/profileById', {
-        title: 'Account Management',
+        title: '用户资料',
         account: req.account,
         followed: true
       });
     } else {
       res.render('account/profileById', {
-        title: 'Account Management',
+        title: '用户资料',
         account: req.account,
         followed: false
       });
@@ -51,7 +51,7 @@ exports.followerbyId = function(req, res, next) {
 
   setTimeout(function() {
     res.render('account/follower', {
-      title: 'Account Management',
+      title: '我的粉丝',
       account: req.account
     });
   }, 100);
@@ -68,7 +68,7 @@ exports.followingbyId = function(req, res, next) {
 
   setTimeout(function() {
     res.render('account/following', {
-      title: 'Account Management',
+      title: '我的关注',
       account: req.account
     });
   }, 100);
@@ -100,7 +100,7 @@ exports.removeContact = function(req, res, next) {
           return next(err);
         }
       });
-      req.flash('success', { msg: 'Contact Removed.' });
+      req.flash('successful', { msg: 'Contact Removed.' });
       return res.redirect('/account/' + contactId);
     });
   });
@@ -141,7 +141,7 @@ exports.addContact = function(req, res, next) {
         }
       });
 
-      req.flash('success', { msg: 'Contact Added.' });
+      req.flash('successful', { msg: 'Contact Added.' });
       return res.redirect('/account/' + contactId);
     });
   });
@@ -194,7 +194,7 @@ exports.postUpdateProfile = function(req, res, next) {
 
     user.save(function (err) {
       if (err) return next(err);
-      req.flash('success', { msg: 'Profile information updated.' });
+      req.flash('successful', { msg: 'Profile information updated.' });
       res.redirect('/account');
     });
   });
@@ -224,7 +224,7 @@ exports.postUpdatePassword = function(req, res, next) {
 
     user.save(function(err) {
       if (err) return next(err);
-      req.flash('success', { msg: 'Password has been changed.' });
+      req.flash('successful', { msg: 'Password has been changed.' });
       res.redirect('/account');
     });
   });
@@ -261,7 +261,7 @@ exports.getOauthUnlink = function(req, res, next) {
 
     user.save(function(err) {
       if (err) return next(err);
-      req.flash('info', { msg: provider + ' account has been unlinked.' });
+      req.flash('inform', { msg: provider + ' account has been unlinked.' });
       res.redirect('/account');
     });
   });
