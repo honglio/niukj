@@ -1,11 +1,11 @@
-define(["CustomView",
+define(["jquery", "CustomView",
     "common/web/widgets/DeltaDragControl",
     "common/Math2",
     "css!styles/app/slide_components/Component.css",
     "models/ComponentCommands",
     "common/web/undo_support/UndoHistoryFactory",
     "hbs!templates/Component"
-], function(CustomView, DeltaDragControl, Math2, css,
+], function($, CustomView, DeltaDragControl, Math2, css,
             ComponentCommands, UndoHistoryFactory, ComponentTemplate) {
     "use strict";
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
@@ -18,11 +18,8 @@ define(["CustomView",
 				click: 'clicked',
 				"click .remove-icon": 'removeClicked',
 				"mousedown .remove-icon": 'removePressed',
-				"change input[data-option='x']": 'manualMoveX',
-				"change input[data-option='y']": 'manualMoveY',
 				"deltadrag span[data-delta='scale']": 'scale',
 				"deltadragStart span[data-delta='scale']": 'scaleStart',
-				"click .align": 'center',
 				destroyed: 'remove'
 			};
         },
@@ -46,6 +43,14 @@ define(["CustomView",
                 dx: 0,
                 dy: 0
             };
+            if(!$.isEmptyObject(this.model.get('scale'))) {
+                this._initialScale = this.model.get('scale');
+            } else {
+                this._initialScale = {
+                    x: 1,
+                    y: 1
+                }
+            }
         },
         _selectionChanged: function(model, selected) {
             if (selected) {
@@ -80,12 +85,6 @@ define(["CustomView",
         removePressed: function(e) {
             e.stopPropagation();
         },
-        manualMoveX: function(e) {
-            this.model.setInt("x", e.target.value);
-        },
-        manualMoveY: function(e) {
-            this.model.setInt("y", e.target.value);
-        },
         updateOrigin: function() {
             var offset = this.$el.offset();
             this._origin = {
@@ -97,9 +96,12 @@ define(["CustomView",
             return Math.atan2(point.y - this._origin.y, point.x - this._origin.x);
         },
         scaleStart: function(e, deltas) {
+            console.log('scale Start');
+            e.preventDefault();
+            e.stopPropagation();
             this.dragScale = this.$el.parent().css(window.browserPrefix + "transform");
             this.dragScale = parseFloat(this.dragScale.substring(7, this.dragScale.indexOf(","))) || 1;
-            this._initialScale = this.model.get('scale');
+
             var elOffset = this.$el.offset();
             var elWidth = this.$el.width() * this._initialScale.x;
             var elHeight = this.$el.height() * this._initialScale.y;
@@ -118,19 +120,22 @@ define(["CustomView",
         },
 
         scale: function(e, deltas) {
-            var fixRatioDisabled = true;
+            console.log('scale');
+            e.preventDefault();
+            e.stopPropagation();
+            var fixRatioDisabled = false;
 
             var xSignum = 1;
             var ySignum = 1;
-
+            console.log(this._scaleDim);
             var scaleX = (xSignum * deltas.dx + this._scaleDim.width) / (this._scaleDim.width);
             var scaleY = (ySignum * deltas.dy + this._scaleDim.height) / (this._scaleDim.height);
-
+            console.log(this._initialScale);
             var scale = {
                 x: this._initialScale.x * scaleX,
                 y: this._initialScale.y * (fixRatioDisabled ? scaleY : scaleX)
             };
-
+            console.log(scale);
             scale.width = scale.x * this.origSize.width;
             scale.height = scale.y * this.origSize.height;
             this.model.set('scale', scale);
@@ -176,6 +181,7 @@ define(["CustomView",
         mousedown: function(e) {
             if (e.which === 1) {
                 e.preventDefault();
+                e.stopPropagation();
                 this.model.set('selected', true);
                 this.$el.css("zIndex", zTracker.next());
                 this.dragScale = this.$el.parent().css(window.browserPrefix + "transform");
@@ -264,6 +270,8 @@ define(["CustomView",
                 this.$el.removeClass("dragged");
                 if (this.dragStartLoc && this.dragStartLoc.x !== this.model.get('x') && this.dragStartLoc.y !== this.model.get('y')) {
                     var cmd = new ComponentCommands.Move(this.dragStartLoc, this.model);
+                    console.log(this.model);
+                    this.model.slide.trigger('contentsChanged');
                     undoHistory.push(cmd);
                 }
                 this.dragStartLoc = void 0;
@@ -272,22 +280,6 @@ define(["CustomView",
 
         scaleStop: function() {
             var cmd = new ComponentCommands.Scale(this._initialScale, this.model);
-            undoHistory.push(cmd);
-        },
-
-        center: function(e) {
-            var axis = e.target.getAttribute("data-option");
-            var getAxis = function ( axis, e ) { return axis === 'x' ? e.width() : e.height(); };
-            var slideSize = getAxis( axis, $('.slideContainer') );
-            var textSize = getAxis( axis, $('.selected') );
-
-            var originPos = {
-                x: this.model.get('x'),
-                y: this.model.get('y')
-            };
-
-            this.model.setInt( axis, ( (slideSize/2) - (textSize/2) ) );
-            var cmd = new ComponentCommands.Move(originPos, this.model);
             undoHistory.push(cmd);
         }
     });

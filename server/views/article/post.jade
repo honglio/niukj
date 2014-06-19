@@ -3,10 +3,10 @@ extends ../layout
 block content
   .container-fluid
     .page-header
-      h1= article.title
+      h3= article.fileName
     .row
       .col-md-6
-        p= article.body
+        img(src="#{article.picture}" width="300" height="250")
         .meta
           - if (article.user)
             - var name = article.user.profile.name ? article.user.profile.name : article.user.email
@@ -20,7 +20,7 @@ block content
                 a.tag(href="/tags/"+tag)= tag
                 | &nbsp;&nbsp;
 
-          p.text-muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
+          p.text-muted= formatDate(article.createdAt, "YYYY年MM月DD日")
 
       .col-md-6
         - if (!article.isNew && article.image && article.image.filename)
@@ -33,9 +33,3 @@ block content
       | &nbsp;&nbsp;
       input(type="hidden", name="_method", value="DELETE")
       button.btn.btn-danger(type="submit") 删除
-
-    br
-    h3 评论
-    - each comment in article.comments
-      include ../comment/comment
-    include ../comment/form

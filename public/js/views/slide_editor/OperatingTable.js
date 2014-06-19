@@ -16,6 +16,7 @@ define(["CustomView",
 
         initialize: function() {
             this._deck = this.model.deck();
+            console.log(this._deck);
             this._clipboard = this.model.clipboard;
 
             // this._calculateLayout = this._calculateLayout.bind(this);

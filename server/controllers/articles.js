@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
   , Article = mongoose.model('Article')
   , utils = require('../../lib/utils')
   , extend = require('util')._extend
+  , math2 = require('../../lib/math2')
   , config = require('../../config/config');
 
 /**
@@ -140,8 +141,35 @@ exports.getContent = function(req, res) {
 exports.show = function(req, res){
     res.render('article/post', {
       article: req.article,
-      oss: config.oss
+      oss: config.oss,
+      formatDate: utils.formatDate
     });
+};
+
+/**
+ * Present
+ */
+
+exports.present = function(req, res){
+  var cnt = 0,
+      slides = req.article.slides;
+
+  slides.forEach(function(slide) {
+      var x = slide.x;
+      var y = slide.y;
+
+      if (x == null) {
+          // adjust the distance between slides during display
+          slide.x = cnt * 1100 + 30;
+      }
+      cnt += 1;
+  });
+
+  res.render('article/present', {
+    title: '放映课件' + req.article.fileName,
+    article: req.article,
+    Math2: math2
+  });
 };
 
 /**

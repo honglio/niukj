@@ -12,13 +12,13 @@ block content
               .grid.cs-style-2
                 figure
                   - var pic = article.picture ? article.picture : '/img/generic.png'
-                  img.portlio-list-img(src=pic, alt='')
+                  img.portlio-list-img(src=pic alt='' width="300" height="250")
                   figcaption
                     .image-buttons.hidden-xs
-                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id)
-                        i.fa.fa-camera(data-toggle='tooltip', data-placement='top', title='Look Photo')
-                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/edit')
-                        i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='View Video')
+                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/present')
+                        i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
+                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/manage')
+                        i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='管理课件')
               h6 #{article.fileName}
 
               .meta

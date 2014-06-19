@@ -114,10 +114,12 @@ module.exports = function (app, passport) {
   app.get('/articles/new', passportConf.isAuthenticated, articles.new);
   app.get('/articles/my', passportConf.isAuthenticated, articles.my);
   app.post('/articles', passportConf.isAuthenticated, articles.create);
+  app.get('/articles/:id/manage', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.show);
   app.get('/articles/:id/get', passportConf.isAuthenticated, articles.getContent);
   app.get('/articles/:id/edit', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.edit);
   app.put('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.update);
   app.delete('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.destroy);
+  app.get('/articles/:id/present', passportConf.isAuthenticated, articles.present);
 
   app.post('/articles/:id/viewNum', articles.postViewNum);
 

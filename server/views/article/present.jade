@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  - function round(v) {return Math2.round(v, 2);}
+  .container-fluid(style="min-height: 750px;")
+    .bg(style="width: 100%; height: 100%;")
+      #impress
+        - each slide in article.slides
+          .step(data-x='#{slide.x}', data-y='#{slide.y}')
+            div(class="#{article.background}" style="width:#{article.width}px; height:#{article.height}px;")
+              - each component in slide.components
+                - var top = round(component.y) + 'px';
+                - var left = round(component.x) + 'px';
+                - if (component.scale) {
+                -   var width = round(component.scale.width) + 'px';
+                -   var height = round(component.scale.height) + 'px';
+                - }
+                div(style="top:#{top}; left:#{left}; width:#{width}; height:#{height}; position: absolute; line-height: normal;")
+                  - if (component.type == 'Image')
+                    img(src='#{component.src}')
+                  - if (component.type == 'TextBox')
+                    div(style="font-family:#{component.family}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-align: #{component.align}")= component.text
+
+  .container
+    h3 评论
+    - each comment in article.comments
+      include ../comment/comment
+    include ../comment/form
+
+
+block scripts
+  script(type='text/javascript', src='/js/vendors/impress.js')
+  script.
+    if (!window.presStarted) {
+    startPres(document, window);
+    pres().init();
+    }

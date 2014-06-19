@@ -184,7 +184,7 @@ define(["underscore",
                 // var bgImg = self.$el.css('background-image');
                 // bgImg = bgImg.slice(4, -1);
                 self._repaint();
-            }, 100);
+            }, 10);
 
             return this;
         },
@@ -195,16 +195,15 @@ define(["underscore",
         },
 
         updatePicture: function() {
-            console.log('updatePicture');
-            if(this.isSelected()) {
+            if(this.isSelected() && this.model.get('index') == "0") {
+                console.log('updatePicture');
                 var img = this._toImage(this.$el.find('canvas')[0]);
                 this.options.deck.set('picture', img.src);
             }
-
         },
 
         _toImage: function(oCanvas) {
-            return Slide2Image.saveAsPNG(oCanvas, true, 150, 125);
+            return Slide2Image.saveAsPNG(oCanvas, true, 300, 250);
         }
     });
 });

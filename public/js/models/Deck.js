@@ -86,8 +86,6 @@ define(["underscore",
             undoHistory.clear();
 
             // TODO: go through and dispose of all old slides...?
-
-
         },
 
         /**

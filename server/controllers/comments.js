@@ -22,11 +22,11 @@ exports.create = function (req, res) {
   var article = req.article;
   var user = req.user;
 
-  if (!req.body.body) return res.redirect('/articles/'+ article.id);
+  if (!req.body.body) return res.redirect('/articles/'+ article.id + '/present');
 
   article.addComment(user, req.body, function (err) {
     if (err) return res.render('500');
-    res.redirect('/articles/'+ article.id);
+    res.redirect('/articles/'+ article.id + '/present');
   });
 }
 
@@ -38,10 +38,10 @@ exports.destroy = function (req, res) {
   var article = req.article;
   article.removeComment(req.param('commentId'), function (err) {
     if (err) {
-      req.flash('errors', 'Oops! The comment was not found');
+      req.flash('errors', {msg: 'Oops! The comment was not found'});
     } else {
-      req.flash('inform', 'Removed comment');
+      req.flash('inform', {msg: 'Removed comment'});
     }
-    res.redirect('/articles/' + article.id);
+    res.redirect('/articles/' + article.id + '/present');
   });
 };

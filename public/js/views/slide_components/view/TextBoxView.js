@@ -8,7 +8,7 @@ define(["underscore",
 
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
 
-    var styles = ["size"]; // "weight", "style", "color", "decoration", "align"
+    var styles = ["size"]; //, "weight", "style", "color", "decoration", "align"
 
     return ComponentView.extend({
         className: "component textBox",

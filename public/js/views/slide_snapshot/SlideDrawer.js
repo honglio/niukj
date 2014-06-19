@@ -12,7 +12,7 @@ define(["underscore",
         this.g2d = g2d;
 
         this.repaint = this.repaint.bind(this);
-        this.repaint = _.debounce(this.repaint, 250);
+        this.repaint = _.debounce(this.repaint, 100);
 
         this.model.on("contentsChanged", this.repaint, this);
 
@@ -22,9 +22,11 @@ define(["underscore",
         };
 
         this.scale = {
-            x: this.size.width / config.slide.size.width,
-            y: this.size.height / config.slide.size.height
+            x: this.size.width / config.slide.size.width * 0.66,
+            y: this.size.height / config.slide.size.height * 0.66
         };
+        console.log(this.size.width);
+        console.log(this.size.height);
 
         this._drawers = {};
 

@@ -68,17 +68,17 @@
     top: -25px;
 }
 .component .topLabel .rotate { cursor: w-resize }
-.component .scale {
-    position: absolute;
-    right: -35px;
-    bottom: -25px;
+.component .scale .glyphicon{
+    /* position: absolute; */
+    right: -10px;
+    /* bottom: -5px; */
     cursor: sw-resize;
     font-size: 40px;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 .component input {
     width: 25px;

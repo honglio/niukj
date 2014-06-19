@@ -1,6 +1,6 @@
 define(["underscore", "./SpatialObject"], function(_, SpatialObject) {
     "use strict";
-    var defaults = { x: config.slide.size.width / 4, y: config.slide.size.height / 4 };
+    var defaults = { x: window.config.slide.size.width / 4, y: window.config.slide.size.height / 4 };
 
     /**
      * Base class for all slide elements.

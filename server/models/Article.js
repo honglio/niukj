@@ -38,18 +38,24 @@ var SlideSchema = new mongoose.Schema({
   active:   {type: String},
   index:    {type: String},
   selected: {type: String},
+  x:        {type: String},
+  y:        {type: String},
   components: [ComponentSchema]
 });
 
 var ArticleSchema = new mongoose.Schema({
-  fileName: {type : String, default : '', trim : true},
+  fileName: {type: String, default : '', trim : true},
   slides:   [SlideSchema],
   activeSlide: {
     active: {type: String},
     index:  {type: String},
     selected: {type: String},
+    x:        {type: String},
+    y:        {type: String},
     components: [ComponentSchema]
   },
+  width: { type: String },
+  height: { type: String },
   background: {type : String, default : ''},
   user: {type : mongoose.Schema.ObjectId, ref : 'Account'},
   comments: [{
@@ -72,21 +78,21 @@ ArticleSchema.path('fileName').required(true, 'Article fileName cannot be blank'
  * Pre-remove hook
  */
 
-ArticleSchema.pre('remove', function (next) {
-  var oss = OSS.createClient(config.oss);
-  var filename = this.image.filename;
+// ArticleSchema.pre('remove', function (next) {
+//   var oss = OSS.createClient(config.oss);
+//   var filename = this.picture.filename;
 
-  // if there are files associated with the item, remove from the cloud too
-  oss.deleteObject({
-    bucket: config.oss.bucket,
-    object: filename
-  }, function (err) {
-    console.log(err);
-    if (err) return next(err);
-  });
+//   // if there are files associated with the item, remove from the cloud too
+//   oss.deleteObject({
+//     bucket: config.oss.bucket,
+//     object: filename
+//   }, function (err) {
+//     console.log(err);
+//     if (err) return next(err);
+//   });
 
-  next();
-});
+//   next();
+// });
 
 /**
  * Methods
