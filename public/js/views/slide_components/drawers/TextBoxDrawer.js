@@ -14,9 +14,9 @@ define(["underscore", "./AbstractDrawer"
     TextBoxDrawer.prototype.paint = function(textBox) {
 		console.log(textBox);
 
-        this.g2d.fillStyle = '#' + textBox.get('color');
+        this.g2d.fillStyle = textBox.get('color');
         var lineHeight = textBox.get('size') * 0.35;
-        this.g2d.font = lineHeight + 'px ' + textBox.get('family');
+        this.g2d.font = lineHeight + 'px ' + textBox.get('face');
         var text = this._convertSpaces(textBox.get('text'));
         var lines = this._extractLines(text);
         var txtWidth = this._findWidestWidth(lines);

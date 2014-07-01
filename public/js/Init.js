@@ -36,6 +36,7 @@ define(['router', 'etch_extension', 'bootstrap'], function(router, Etch, Bootstr
       window.browserPrefix = "";
     }
 
+    // Init Etch, the text editor
     Etch.initialize();
     // Backbone App start
     Backbone.history.start();

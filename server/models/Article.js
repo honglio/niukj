@@ -25,7 +25,11 @@ var setTags = function (tags) {
 var ComponentSchema = new mongoose.Schema({
   color:    {type: String},
   selected: {type: String},
+  face:     {type: String},
   size:     {type: String},
+  style:    {type: String},
+  weight:   {type: String},
+  decoration: {type: String},
   text:     {type: String},
   type:     {type: String},
   x:        {type: String},

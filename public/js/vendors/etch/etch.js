@@ -31,35 +31,17 @@ define(['backbone'], function(Backbone) {
         return value;
     }
 
-    function getSelectionBoundaryElement(win, isStart) {
-        var range, sel, container = null;
-        var doc = win.document;
-
-        if (doc.selection) {
-            // IE branch
-            range = doc.selection.createRange();
-            range.collapse(isStart);
-            return range.parentElement();
-        } else if (win.getSelection) {
-            // Other browsers
-            sel = win.getSelection();
-
-            if (sel.rangeCount > 0) {
-                range = sel.getRangeAt(0);
-                container = range[isStart ? "startContainer" : "endContainer"];
-
-                // Check if the container is a text node and return its parent if so
-                if (container.nodeType === 3) {
-                    container = container.parentNode;
-                }
-            }
+    models.Editor = Backbone.Model.extend({
+        constructor: function EtchEditorModel() {
+            Backbone.Model.prototype.constructor.apply(this, arguments);
         }
-        return container;
-    }
-
-    models.Editor = Backbone.Model;
+    });
 
     views.Editor = Backbone.View.extend({
+        constructor: function EtchEditorView() {
+            Backbone.View.prototype.constructor.apply(this, arguments);
+        },
+
         initialize: function() {
             this.$el = $(this.el);
 
@@ -106,21 +88,37 @@ define(['backbone'], function(Backbone) {
             newEditable.on('change:size', this._fontSizeChanged, this);
         },
 
+        /* update Etch*/
         _caretUpdated: function() {
-            var $container = $(getSelectionBoundaryElement(window));
-            console.log($container);
-            var color = $container.attr('color');
-            var face = $container.attr('face');
+            var textBox = this.model.get('editableModel');
+            var color = textBox.get('color') || '#444';
+            var face = textBox.get('face') || '宋体';
+            var size = textBox.get('size') || 48;
+            var weight = textBox.get('weight');
+            var style = textBox.get('style');
+            var decoration = textBox.get('decoration');
 
-            color = color || $container.parents('font').attr('color') || '#222';
-            face = face || $container.parents('font').attr('face') || '宋体';
+            console.log(color);
 
-            if (face) {
-                face = face.split(',')[0];
+            this.$fontFamilyReadout.text(face); // update font face
+            this.$colorChooser.spectrum('set', color); // udpate font color
+            this._fontSizeChanged(null, size); // update font size
+
+            if(weight) {
+                this.$el.find(".etch-bold").addClass('active');
+            } else {
+                this.$el.find(".etch-bold").removeClass('active');
             }
-
-            this.$fontFamilyReadout.text(face);
-            // this.$colorChooser.spectrum('set', color);
+            if(style) {
+                this.$el.find(".etch-italic").addClass('active');
+            } else {
+                this.$el.find(".etch-italic").removeClass('active');
+            }
+            if(decoration) {
+                this.$el.find(".etch-underline").addClass('active');
+            } else {
+                this.$el.find(".etch-underline").removeClass('active');
+            }
         },
 
         changeEditable: function() {
@@ -139,16 +137,14 @@ define(['backbone'], function(Backbone) {
         },
 
         _fontSizeChanged: function(model, value) {
-            if (value === 72) {
-                this.$fontSizeReadout.text('超大');
-            }
-            if (value === 48) {
+            console.log(value);
+            if (value == 72) {
                 this.$fontSizeReadout.text('大');
             }
-            if (value === 36) {
+            if (value == 48) {
                 this.$fontSizeReadout.text('中');
             }
-            if (value === 24) {
+            if (value == 36) {
                 this.$fontSizeReadout.text('小');
             }
         },
@@ -181,42 +177,41 @@ define(['backbone'], function(Backbone) {
 
             $(this.el).show('fast');
 
-            // var $colorChooser = this.$el.find(".color-chooser");
-            // if ($colorChooser.length > 0) {
-            //     var hex = '222';
-            //     $colorChooser.spectrum({
-            //         color: '#' + hex,
-            //         showSelectionPalette: true,
-            //         localStorageKey: 'cloudslide.fontColorChooser',
-            //         showPalette: true,
-            //         showInitial: true,
-            //         showInput: true,
-            //         palette: [],
-            //         clickoutFiresChange: true,
-            //         theme: 'sp-dark',
-            //         move: function(color) {
-            //             $colorChooser.find("div").css("backgroundColor", "#" + hex);
-            //             // Set the color of the actual text
-            //             //view.model.get('editableModel').set('color', hex)
-            //             document.execCommand('foreColor', false, color.toHexString());
-            //         }
-            //     });
+            var $colorChooser = this.$el.find(".color-chooser");
+            if ($colorChooser.length > 0) {
+                var hex = '444';
+                $colorChooser.spectrum({
+                    color: '#' + hex,
+                    showSelectionPalette: true,
+                    showPalette: true,
+                    showInitial: true,
+                    showInput: true,
+                    palette: [],
+                    clickoutFiresChange: true,
+                    theme: 'sp-dark',
+                    move: function(color) {
+                        $colorChooser.find("div").css("backgroundColor", color.toHexString());
+                        // Set the color of the actual text
+                        view.model.get('editableModel').set('color', color.toHexString())
+                        document.execCommand('foreColor', false, color.toHexString());
+                    }
+                });
 
-            //     var prevent = function(e) {
-            //         e.preventDefault();
-            //     };
+                var prevent = function(e) {
+                    e.preventDefault();
+                };
 
-            //     $(".sp-replacer").mousedown(prevent);
-            //     $(".sp-container").mousedown(prevent);
-            //     $colorChooser.mousedown(prevent);
+                $(".sp-replacer").mousedown(prevent);
+                $(".sp-container").mousedown(prevent);
+                $colorChooser.mousedown(prevent);
 
-            //     $colorChooser.find("div").css("backgroundColor", '#' + hex);
-            // }
+                $colorChooser.find("div").css("backgroundColor", '#' + hex);
+            }
 
             var $toggle = this.$el.find('.dropdown-toggle');
             $toggle.dropdown();
             this.$fontSizeReadout = this.$el.find('.fontSizeReadout');
-            // this.$colorChooser = $colorChooser;
+            this.$colorChooser = $colorChooser;
             this.$fontFamilyReadout = this.$el.find('.fontFamilyBtn > .text');
         },
 
@@ -245,38 +240,81 @@ define(['backbone'], function(Backbone) {
 
         setFontFamily: function(e) {
             e.preventDefault();
+
             var value = extractValue(e);
-            document.execCommand('fontName', false, value);
+
+            document.execCommand('fontName', false, value); // set font family on Textbox
+
             value = value.substr(value.indexOf("'") + 1, value.lastIndexOf("'") - 1);
-            this.$el.find(".fontFamilyBtn .text").text(value);
+
+            this.$el.find(".fontFamilyBtn .text").text(value); // set font family in Etch panel
+
+            var textBox = this.model.get('editableModel');
+            textBox.set('face', value); // set font face in model
         },
 
         setFontSize: function(e) {
-            var textBox = this.model.get('editableModel');
             var value = extractValue(e);
-
+            var textBox = this.model.get('editableModel');
             textBox.set('size', (value |= 0)); // value resolver
 
-            // TODO: we need to bind this to the editable model...
-            // whenever that changes.
-            // so that way we have the correct font readouts when someone
-            // uses the scale control
+            $('.textBox.selected.editable').css('font-size', (value |= 0));
+
             this.$el.find(".fontSizeBtn .text").text(value);
         },
 
         toggleBold: function(e) {
             e.preventDefault();
             document.execCommand('bold', false, null);
+
+            var textBox = this.model.get('editableModel');
+
+            // set font in model & update Etch state
+            var weight = textBox.get('weight');
+
+            if(weight) {
+                textBox.set('weight', '');
+                this.$el.find(".etch-bold").removeClass('active');
+            } else {
+                textBox.set('weight', 'bold');
+                this.$el.find(".etch-bold").addClass('active');
+            }
         },
 
         toggleItalic: function(e) {
             e.preventDefault();
             document.execCommand('italic', false, null);
+
+            var textBox = this.model.get('editableModel');
+
+            // set font in model & update Etch state
+            var style = textBox.get('style');
+
+            if(style) {
+                textBox.set('style', '');
+                this.$el.find(".etch-italic").removeClass('active');
+            } else {
+                textBox.set('style', 'italic');
+                this.$el.find(".etch-italic").addClass('active');
+            }
         },
 
         toggleUnderline: function(e) {
             e.preventDefault();
-            document.execCommand('underline', false, null);
+            document.execCommand('underline', true, null);
+
+            var textBox = this.model.get('editableModel');
+
+            // set font in model & update Etch state
+            var decoration = textBox.get('decoration');
+
+            if(decoration) {
+                textBox.set('decoration', '');
+                this.$el.find(".etch-underline").removeClass('active');
+            } else {
+                textBox.set('decoration', 'underline');
+                this.$el.find(".etch-underline").addClass('active');
+            }
         },
 
         toggleHeading: function(e) {
@@ -410,6 +448,11 @@ define(['backbone'], function(Backbone) {
         views: views,
         collections: collections,
 
+        triggerCaret: function() {
+            var editorModel = $('.etch-editor-panel').data('model');
+            editorModel.trigger('caretUpdated');
+        },
+
         // This function is to be used as callback to whatever event
         // you use to initialize editing
         editableInit: function(e, overrideY) {
@@ -423,15 +466,9 @@ define(['backbone'], function(Backbone) {
             var editorModel = $editor.data('model');
             if (!$editor.size()) {
                 $editor = $('<div class="etch-editor-panel">');
-                var editorAttrs = {
-                    editable: $editable,
-                    editableModel: this.model
-                };
+                var editorAttrs = { editable: $editable, editableModel: this.model };
                 document.body.appendChild($editor[0]);
-                $editor.etchInstantiate({
-                    classType: 'Editor',
-                    attrs: editorAttrs
-                });
+                $editor.etchInstantiate({ classType: 'Editor', attrs: editorAttrs });
                 editorModel = $editor.data('model');
 
                 // check if we are on a new editable
@@ -485,7 +522,7 @@ define(['backbone'], function(Backbone) {
             $('body').bind('mousedown.editor', function(e) {
                 // check to see if the click was in an etch tool
                 var target = e.target || e.srcElement;
-                if ($(target).not('.colorpicker *, .etch-editor-panel, .etch-editor-panel *, .etch-image-tools, .etch-image-tools *').size()) {
+                if ($(target).not('.sp-container *, .colorpicker *, .etch-editor-panel, .etch-editor-panel *, .etch-image-tools, .etch-image-tools *').size()) {
                     // remove editor
                     $editor.css("display", "none");
                     //$editor.remove();
@@ -505,7 +542,7 @@ define(['backbone'], function(Backbone) {
             });
 
             this.model.trigger('change:size', this.model, this.model.get('size'), {});
-            editorModel.trigger('caretUpdated');
+            // editorModel.trigger('caretUpdated');
             editorModel.set({
                 position: {
                     x: e.pageX - 15,

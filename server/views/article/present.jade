@@ -19,7 +19,7 @@ block content
                   - if (component.type == 'Image')
                     img(src='#{component.src}')
                   - if (component.type == 'TextBox')
-                    div(style="font-family:#{component.family}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-align: #{component.align}")= component.text
+                    div(style="font-family:#{component.face}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-decoration: #{component.decoration}; text-align: #{component.align}")= component.text
 
   .container
     h3 评论

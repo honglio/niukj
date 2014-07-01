@@ -9,6 +9,7 @@ require.config({
     hbs: '/js/vendors/hbs',
     etch: "/js/vendors/etch/etch",
     etch_extension: 'views/etch_extension',
+    colorpicker: '/js/vendors/spectrum',
     CustomView: '/js/CustomView',
     config: 'config/config',
 
@@ -20,12 +21,25 @@ require.config({
   },
 
   shim: {
-    'Bootstrap': ['jquery'],
-    'Backbone': ['underscore', 'jquery'],
-    'Init': ['backbone']
+    bootstrap: {
+      deps: ['jquery'],
+      exports: 'Bootstrap'
+    },
+    colorpicker: {
+      deps: ['jquery'],
+      exports: 'Colorpicker'
+    },
+    backbone: {
+      deps: ['underscore', 'jquery'],
+      exports: 'Backbone'
+    },
+    Init: {
+      deps: ['backbone'],
+      exports: 'Init'
+    }
   }
 });
 
-require(['Init', 'config'], function(Init) {
+require(['Init', 'config', 'colorpicker'], function(Init) {
   Init.initialize();
 });

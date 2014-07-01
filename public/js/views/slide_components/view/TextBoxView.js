@@ -8,7 +8,7 @@ define(["underscore",
 
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
 
-    var styles = ["size"]; //, "weight", "style", "color", "decoration", "align"
+    var styles = ["family", "size", "weight", "style", "color", "decoration", "align"];
 
     return ComponentView.extend({
         className: "component textBox",
@@ -21,7 +21,8 @@ define(["underscore",
                 dblclick: '_dblclicked',
                 editComplete: '_editCompleted',
                 mousedown: '_mousedown',
-                mouseup: '_mouseup'
+                mouseup: '_mouseup',
+                keydown: '_keydown'
             };
             return _.extend(parentEvents, myEvents);
         },
@@ -29,7 +30,8 @@ define(["underscore",
         initialize: function() {
             ComponentView.prototype.initialize.apply(this, arguments);
 
-			// this._lastDx = 0;
+            // this._lastDx = 0; this is for scale
+
             styles.forEach(function(style) {
                 this.model.on("change:" + style, this._styleChanged, this);
             }, this);
@@ -58,12 +60,24 @@ define(["underscore",
 
         _dblclicked: function(e) {
             this.$el.addClass("editable");
-            this.$el.find('.content').attr('contenteditable', true);
+            this.$textEl.attr('contenteditable', true);
             if (e) {
                 this._initialText = this.$textEl.html(); // for undo
                 etch.editableInit.call(this, e, this.model.get('y') * this.dragScale + 35);
+
+                // Focus editor and select all text.
+                if (!this.editing) {
+                    this.$textEl.get(0).focus();
+                    try {
+                        document.execCommand('selectAll', false, null);
+                        etch.triggerCaret();
+                    } catch (e) {
+                        // firefox failboats on this command
+                        // for some reason.  hence the try/catch
+                        // console.log(e);
+                    }
+                }
             }
-            console.log(this.model);
             this.allowDragging = false;
             this.editing = true;
         },
@@ -83,6 +97,29 @@ define(["underscore",
             }
         },
 
+        _mouseup: function(e) {
+            if (this.editing) {
+                etch.triggerCaret(); // update font attr to editor model
+                //etch.editableInit.call(this, e, this.model.get("y") * this.dragScale + 35);
+            }
+            ComponentView.prototype.mouseup.apply(this, arguments);
+        },
+
+        /**
+         * Event: key has been pressed down. If textbox is in focus, and it was a charachter key pressed, then start
+         * typing in the textbox.
+         *
+         * @param {Event} e
+         */
+        keydown: function(e) {
+            // When user starts typing text in selected textbox, open edit mode immediately.
+            if (this.model.get("selected") && !this.editing) {
+                if (!e.ctrlKey && !e.altKey && !e.metaKey && String.fromCharCode(e.which).match(/[\w]/)) {
+                    this.edit();
+                }
+            }
+        },
+
         _editCompleted: function() {
             var text = this.$textEl.html();
             this.editing = false;
@@ -93,12 +130,20 @@ define(["underscore",
                 undoHistory.push(cmd); // for undo
 
                 this.model.set('text', text);
-                this.$el.find(".content").attr("contenteditable", false);
+                window.getSelection().removeAllRanges();
+                this.$textEl.attr("contenteditable", false);
                 this.$el.removeClass("editable");
                 this.allowDragging = true;
             }
         },
 
+        /**
+         * React on component is being selected. If component have been unselected, hide it's editor, if in editing mode.
+         *
+         * @param {Component} model
+         * @param {boolean} selected
+         * @private
+         */
         _selectionChanged: function(model, selected) {
             ComponentView.prototype._selectionChanged.apply(this, arguments);
             if (!selected && this.editing) {
@@ -106,6 +151,9 @@ define(["underscore",
             }
         },
 
+        /**
+         * Open editor for the textbox.
+         */
         edit: function() {
             this.model.set('selected', true);
             var e = $.Event("click", {
@@ -115,6 +163,14 @@ define(["underscore",
             this.$el.find('.content').selectText();
         },
 
+        /**
+         * React on component style change. Update CSS classes of the element.
+         *
+         * @param {Component} model
+         * @param {string} style
+         * @param {Object} opts
+         * @private
+         */
         _styleChanged: function(model, style, opts) {
             // if not model.changed;
             if (!opts.changes) { return; }
@@ -137,15 +193,45 @@ define(["underscore",
             this.$textEl.html(text);
         },
 
+        _handlePaste: function(elem, e) {
+            e = e.originalEvent;
+            document.execCommand('insertText', false, e.clipboardData.getData('text/plain'));
+            // var sel = window.getSelection();
+            // var range = sel.getRangeAt(0);
+            // var text = document.createTextNode(e.clipboardData.getData('text/plain'));
+            // range.deleteContents();
+            // range.insertNode(text);
+
+            // range.setStartAfter(text);
+            // range.setEndAfter(text);
+
+            // sel.removeAllRanges();
+            // sel.addRange(range);
+
+            e.preventDefault();
+        },
+
         render: function() {
             ComponentView.prototype.render.call(this);
             this.$textEl = this.$el.find('.content');
-            this.$textEl.html(this.model.get('text'));
+            var self = this;
+            this.$textEl.bind('paste', function(e) {
+                self._handlePaste(this, e);
+            });
+            if(this.model.get("decoration")) {
+                this.$textEl.html('<u>' + this.model.get('text') + '</u>');
+            } else {
+                this.$textEl.html(this.model.get('text'));
+            }
             this.$el.css({
-                fontSize: this.model.get('size') + 'pt',
-                color: '#' + this.model.get('color'),
+                fontFamily: this.model.get("face"),
+                fontSize: this.model.get('size') + 'px',
+                fontWeight: this.model.get("weight"),
+                fontStyle: this.model.get("style"),
+                color: this.model.get('color'),
                 top: this.model.get('y') + 'px',
-                left: this.model.get('x') + 'px',
+                left: this.model.get('x') + 'px'
+                // textAlign: this.model.get("align")
             });
             return this.$el;
         }

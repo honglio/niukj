@@ -8,6 +8,11 @@ define(["backbone",
     Clipboard, UndoHistoryFactory, StorageInterface) {
     "use strict";
 
+    function cleanHTMLTag(data) {
+        data = data.replace(/<[^>]+>/g, '');
+        return data;
+    }
+
     return Backbone.Model.extend({
         initialize: function() {
             this._deck = new Deck();
@@ -53,6 +58,8 @@ define(["backbone",
 
             exportData.slides.forEach(function (slide, i) {
                 slide.components.forEach(function (component, j) {
+                    var text = cleanHTMLTag(component.get('text'));
+                    component.set('text', text);
                     exportData.slides[i].components[j] = component.toJSON();
                 });
             });
