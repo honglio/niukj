@@ -14,7 +14,7 @@ block content
                   - var pic = article.picture ? article.picture : '/img/generic.png'
                   img.portlio-list-img(src=pic alt='' width="300" height="250")
                   figcaption
-                    .image-buttons.hidden-xs
+                    .image-buttons
                       a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/present')
                         i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
                       a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/manage')
