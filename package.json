@@ -26,7 +26,7 @@
         "passport-local": "latest",
         "passport-weibo": ">=0.1.0",
         "passport-renren": ">=0.1.1",
-        "passport-tencent": ">=0.0.2",
+        "passport-tqq": ">=0.0.2",
         "passport-linkedin-oauth2": "latest",
         "passport-github": "latest",
         "winston": "latest",
