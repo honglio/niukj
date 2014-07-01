@@ -34,8 +34,10 @@ define(["underscore",
 
         paint: function() {
             console.log(this.bg);
+            this.g2d.save();
             this.g2d.fillStyle = this.bg;
             this.g2d.fillRect(0, 0, this.size.width, this.size.height);
+            this.g2d.restore();
             // paint component
             var components = this.model.get('components');
             var length = components.length;

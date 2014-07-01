@@ -33,9 +33,7 @@ define(["underscore",
          * @private
          */
         _selected: function(e, options) {
-			if (options.active) {
-				this.model.set('active', true, options);
-			}
+			this.model.set('active', true, options);
         },
 
         isSelected: function() {
@@ -158,7 +156,6 @@ define(["underscore",
 
             this.$el.html(SlideSnapshotTemplate(this.model.attributes));
 
-            var self = this;
             this._bgChanged();
 
             if (this.isSelected() === true) {
@@ -166,17 +163,18 @@ define(["underscore",
             }
 
             // draw snapshot
-            var canvas = self.$el.find('canvas');
+            var canvas = this.$el.find('canvas');
             var g2d = canvas[0].getContext("2d");
-            var bg = self.$el.css('background-color');
-            self._slideDrawer = new SlideDrawer(self.model, g2d, bg);
-            self._slideDrawer.paint();
+            var bg = this.$el.css('background-color');
+
+            this._slideDrawer = new SlideDrawer(this.model, g2d, bg);
+            this._slideDrawer.paint();
 
             // update picture
-            if(self.isSelected() && self.model.get('index') == '0') {
+            if(this.isSelected() && this.model.get('index') == '0') {
                 console.log('updatePicture');
-                var img = self._toImage(self.$el.find('canvas')[0]);
-                self.options.deck.set('picture', img.src);
+                var img = this._toImage(this.$el.find('canvas')[0]);
+                this.options.deck.set('picture', img.src);
             }
 
             return this;

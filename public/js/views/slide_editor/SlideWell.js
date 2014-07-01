@@ -30,13 +30,13 @@ define(["jquery", "underscore",
             this.$slides = $('<div class="scrollbar">');
             this.$slides.on('click', '.slideSnapshot', this._clicked);
 
-            this._sortable = new Sortable({
-                container: this.$slides,
-                selector: '> .slideSnapshot',
-                scrollParent: this.$el[0]
-            });
+            // this._sortable = new Sortable({
+            //     // container: this.$slides,
+            //     // selector: '> .slideSnapshot',
+            //     scrollParent: this.$el[0]
+            // });
 
-            this._sortable.on("sortstop", this._sortStopped, this);
+            // this._sortable.on("sortstop", this._sortStopped, this);
 
             this._clipboard = this.model.clipboard;
 
@@ -79,13 +79,13 @@ define(["jquery", "underscore",
 		 * Event: user has clicked one of the slide snapshots.
 		 *
 		 * Clicking a slide forces that one to become the active
-		 * slide.
+		 * slide. trigger SlideSnapshot View's 'select' event.
 		 *
 		 * @param {jQuery.Event} e
 		 * @private
 		 */
 		_clicked: function() {
-			$( this ).trigger("select", { active: true });
+			$( this ).trigger("select");
 		},
 
         /**
