@@ -8,7 +8,7 @@ define(["underscore",
 
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
 
-    var styles = ["family", "size", "weight", "style", "color", "decoration", "align"];
+    var styles = ["face", "size", "weight", "style", "color", "decoration", "align"];
 
     return ComponentView.extend({
         className: "component textBox",
@@ -179,7 +179,6 @@ define(["underscore",
                 var value = model.get(key);
                 if (value) {
                     if (key === "decoration" || key === "align") {
-                        console.log("DECORATION CHANGE");
                         key = "text" + key.substring(0, 1).toUpperCase() + key.substr(1);
                     } else if (key !== "color") {
                         key = "font" + key.substr(0, 1).toUpperCase() + key.substr(1);

@@ -16,18 +16,17 @@ define(["CustomView",
 
         initialize: function() {
             this._deck = this.model.deck();
-            console.log(this._deck);
+            this._activeSlide = this._deck.get('activeSlide');
             this._clipboard = this.model.clipboard;
 
             // this._calculateLayout = this._calculateLayout.bind(this);
             // var lazyLayout = _.debounce(this._calculateLayout, 300);
             // $(window).resize(lazyLayout);
-            this.setModel(this._deck.get('activeSlide'));
+            this.setModel(this._activeSlide);
             // Re-render when active slide changes in the deck
             this._deck.on("change:activeSlide", function(deck, model) {
                 this.setModel(model);
             }, this);
-            this._deck.on("change:background", this._updateBg, this);
         },
 
         render: function() {
@@ -37,8 +36,9 @@ define(["CustomView",
             this.$el.html(this._$slideContainer);
             this._$slideContainer.css(config.slide.size);
 
-            this._$slideContainer.addClass(this._deck.get('background') || 'defaultbg');
-            this._$slideContainer.data('background', this._deck.get('background') || 'defaultbg');
+            var background = this._activeSlide ? this._activeSlide.get('background') : 'defaultbg';
+            this._$slideContainer.addClass(background);
+            this._$slideContainer.data('background', background);
 
             var self = this;
             setTimeout(function() {
@@ -51,7 +51,6 @@ define(["CustomView",
 
         _updateBg: function(model, bg) {
             if (!this._$slideContainer) { return; }
-            console.log(bg);
             this._$slideContainer.removeClass();
             this._$slideContainer.addClass('slideContainer ' + (bg || 'defaultbg'));
             this._$slideContainer.data('background', (bg || 'defaultbg'));
@@ -101,7 +100,6 @@ define(["CustomView",
 
         _clicked: function() {
             this._focus();
-			console.log(this.model);
             this.model.get('components').forEach(function(comp) {
                 if (comp.get('selected')) {
                     comp.set('selected', false);
@@ -134,7 +132,6 @@ define(["CustomView",
 
             var reader = new FileReader();
             var self = this;
-            console.log(ComponentFactory);
             var compFactory = new ComponentFactory();
             reader.onload = function(e) {
                 self.model.add(
@@ -154,29 +151,22 @@ define(["CustomView",
         },
 
         setModel: function(model) {
-            console.log('1')
             var prevModel = this.model;
             if (this.model === model) { return; }
-            console.log('2')
             if (this.model) {
                 this.model.off(null, null, this);
             }
-            console.log('3')
             this.model = model;
-            console.log('4')
             if (this.model) {
-                console.log('6')
+                this._updateBg(this.model, this.model.get('background'));
                 this.model.on("change:components.add", this._componentAdded, this);
                 this.model.on("change:background", this._updateBg, this);
             }
-            console.log('5')
             this._renderContents(prevModel);
-            console.log('7')
             return this;
         },
 
         _renderContents: function(prevModel) {
-            console.log(prevModel);
             if (prevModel) {
                 prevModel.trigger("unrender", true);
             }
@@ -184,7 +174,6 @@ define(["CustomView",
             if (!this._rendered) {
                 return;
             }
-            console.log(ComponentFactory);
             if (this.model) {
                 var components = this.model.get('components');
                 var compFactory = new ComponentFactory();
@@ -199,8 +188,6 @@ define(["CustomView",
         _calculateLayout: function() {
             var width = this.$el.width();
             var height = this.$el.height();
-            // console.log('width:' + width);
-            // console.log('height:' + height);
 
             var slideSize = config.slide.size;
 
@@ -209,7 +196,6 @@ define(["CustomView",
 
             var newHeight = slideSize.height * xScale;
 
-            // console.log('newHeight' + newHeight);
             var scale;
             if (newHeight > height) {
                 scale = yScale;

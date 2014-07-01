@@ -10,7 +10,6 @@ define([], function() {
                 url: '/articles/' + deckId + '/get',
                 method: 'GET',
                 success: function(deck) {
-                    console.log(deck);
                     cb(deck);
                 }
             });
@@ -31,7 +30,6 @@ define([], function() {
         },
 
         create: function(deck, cb) {
-            console.log(deck.article.picture);
             $.ajax({
                 url:'/articles',
                 type: 'POST',
@@ -43,7 +41,6 @@ define([], function() {
         },
 
         update: function(deck, cb) {
-            console.log(deck.article.picture);
             $.ajax({
                 url: '/articles/' + deck.article.id,
                 type: 'PUT',

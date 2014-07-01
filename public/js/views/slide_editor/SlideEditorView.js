@@ -11,7 +11,6 @@ define(["CustomView",
         },
 
         initialize: function() {
-            console.log(this.model.clipboard);
             this._well = new SlideWell({model: this.model});
             this._opTable = new OperatingTable({model: this.model});
         },

@@ -20,12 +20,11 @@ define(["underscore",
     return Backbone.Model.extend({
 
         initialize: function () {
-            console.log("initialize");
             this.set('slides', new SlideCollection());
             var allSlides = this.get('slides');
             allSlides.on("add", this._slideAdded, this);
             allSlides.on("remove", this._slideRemoved, this);
-            this.set('background', 'defaultbg');
+
             this.set('width', slideConfig.size.width);
             this.set('height', slideConfig.size.height);
 
@@ -40,8 +39,6 @@ define(["underscore",
          * @returns {*}
          */
         set: function(key, value, options) {
-            console.log(key);
-			console.log(value);
             if (key === 'activeSlide') {
                 this._activeSlideChanging(value, options);
             }
@@ -57,29 +54,22 @@ define(["underscore",
          */
 
         "import": function (rawObj) {
-            console.log(rawObj);
             var allSlides = this.get('slides');
 
             var activeSlide = this.get('activeSlide');
             if (activeSlide !== undefined && activeSlide !== null) {
                 activeSlide.unselectComponents();
             }
-            console.log(rawObj.slides);
             allSlides.reset(rawObj.slides);
-
-            console.log(allSlides);
 
             allSlides.models.forEach(function(slide) {
                 this._registerWithSlide(slide);
-                console.log(slide);
                 if(slide.get('active') === "true") {
-                    console.log('true');
                     activeSlide = slide;
                 }
             }, this);
 
             this.set('activeSlide', activeSlide);
-            this.set('background', rawObj.background);
             this.set('fileName', rawObj.fileName);
 			this.set('id', rawObj._id);
 			this.set('picture', rawObj.picture);
@@ -123,7 +113,6 @@ define(["underscore",
         _slideRemoved: function (slide, collection, options) {
             options = options || {};
 			// resolve activeSlide before dispose the slide
-			console.log(options);
             if (this.get('activeSlide') === slide) {
                 if (options.index < collection.length) {
                     this.set('activeSlide', collection.at(options.index));
@@ -233,7 +222,6 @@ define(["underscore",
         _doRemove: function(slide, options) {
             var allSlides = this.get('slides');
             allSlides.remove(slide, options);
-            console.log(slide);
             if(slide.dispose) {
                 slide.dispose();
             }
@@ -258,21 +246,17 @@ define(["underscore",
          * @private
          */
         _activeSlideChanging: function(newActive, options) {
-			console.log('_activeSlideChanging');
             var lastActive = this.get('activeSlide');
             if (newActive === lastActive) {
-				console.log('newActive === lastActive');
                 return;
             }
 			if (this.selected) {
-				console.log('this.selected');
 				this.selected.set({
 					active: false,
                     selected: false
 				});
 			}
             if (lastActive) {
-				console.log('lastActive');
                 lastActive.unselectComponents();
                 lastActive.set({
                     active: false, // the active slide
@@ -280,7 +264,6 @@ define(["underscore",
                 }, options);
             }
             if (newActive) {
-				console.log('newActive');
                 newActive.set({
 					active: true,
                     selected: false

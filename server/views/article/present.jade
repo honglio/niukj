@@ -7,7 +7,7 @@ block content
       #impress
         - each slide in article.slides
           .step(data-x='#{slide.x}', data-y='#{slide.y}')
-            div(class="#{article.background}" style="width:#{article.width}px; height:#{article.height}px;")
+            div(class="#{slide.background}" style="width:#{article.width}px; height:#{article.height}px;")
               - each component in slide.components
                 - var top = round(component.y) + 'px';
                 - var left = round(component.x) + 'px';

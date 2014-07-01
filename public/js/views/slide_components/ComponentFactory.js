@@ -69,10 +69,8 @@ define(['models/TextBox',
             } else {
                 type = rawModel.type;
             }
-            console.log(type);
             var Ctor = this._modelCtors[type];
             if (Ctor) {
-                console.log(rawModel);
                 return new Ctor(rawModel);
             }
         },

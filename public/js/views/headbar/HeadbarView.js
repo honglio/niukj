@@ -32,7 +32,6 @@ define(["CustomView",
                 model: this.model,
                 browsable: true
             });
-            console.log(this._imageButton);
         },
 
         // TODO: need to respond to addition/removal of

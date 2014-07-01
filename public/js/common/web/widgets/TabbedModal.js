@@ -82,7 +82,6 @@ define(["backbone", "web/widgets/templates/TabbedModal"
 		// tabProviders should just be a "tabProvider" that can be listened to
 		// and provides tabs.
 		constructor: function TabbedModal(tabCollection) {
-			console.log(tabCollection);
 			this._tabCollection = tabCollection;
 			Backbone.View.prototype.constructor.call(this);
 		}

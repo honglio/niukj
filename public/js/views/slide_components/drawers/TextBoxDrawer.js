@@ -12,8 +12,6 @@ define(["underscore", "./AbstractDrawer"
     _.extend(TextBoxDrawer.prototype, AbstractDrawer.prototype);
 
     TextBoxDrawer.prototype.paint = function(textBox) {
-		console.log(textBox);
-
         this.g2d.fillStyle = textBox.get('color');
         var lineHeight = textBox.get('size') * 0.35;
         this.g2d.font = lineHeight + 'px ' + textBox.get('face');

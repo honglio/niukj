@@ -44,7 +44,8 @@ var SlideSchema = new mongoose.Schema({
   selected: {type: String},
   x:        {type: String},
   y:        {type: String},
-  components: [ComponentSchema]
+  components: [ComponentSchema],
+  background: {type : String}
 });
 
 var ArticleSchema = new mongoose.Schema({
@@ -56,11 +57,11 @@ var ArticleSchema = new mongoose.Schema({
     selected: {type: String},
     x:        {type: String},
     y:        {type: String},
-    components: [ComponentSchema]
+    components: [ComponentSchema],
+    background: {type : String}
   },
   width: { type: String },
   height: { type: String },
-  background: {type : String, default : ''},
   user: {type : mongoose.Schema.ObjectId, ref : 'Account'},
   comments: [{
     body: { type : String, default : '' },

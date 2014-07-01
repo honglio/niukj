@@ -28,11 +28,11 @@ define(["./AvailableBackgrounds",
 		_setBackground: function(e) {
 			var target = (e.srcElement) ? e.srcElement : e.currentTarget;
 			var className = target.dataset['class'] ? target.dataset['class'] : target.className;
-			this._editorModel.deck().set('background', className || 'defaultbg');
+			this._editorModel.activeSlide().set('background', className || 'defaultbg');
 		},
 
 		_restoreBackground: function(e) {
-			var bg = this._editorModel.deck().get('background');
+			var bg = this._editorModel.activeSlide().get('background');
 			var $slideContainer = $('.slideContainer');
 			this._swapBg($slideContainer, bg || 'defaultbg');
 		},

@@ -67,11 +67,9 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
             }
 
             if (e.which === 13) { // if keyup is Enter.
-                console.log("urlChanged if");
 				this.src = this.$input.val();
                 return this._okClicked();
             } else {
-				console.log("urlChanged else");
                 this._loadItem();
             }
         },
@@ -100,7 +98,6 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
         render: function() {
             this.$el.html(ItemImportModalTemplate(this.options));
             this.$el.modal("hide");
-            console.log(this.options.tag);
             this.$preview = this.$el.find(this.options.tag)[0];
 
             var self = this;

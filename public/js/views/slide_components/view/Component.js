@@ -77,7 +77,6 @@ define(["jquery", "CustomView",
         },
         removeClicked: function(e) {
             e.stopPropagation();
-            console.log(this.model);
             var cmd = new ComponentCommands.Remove(this.model.slide, this.model);
             undoHistory.pushdo(cmd);
             this.remove();
@@ -96,7 +95,6 @@ define(["jquery", "CustomView",
             return Math.atan2(point.y - this._origin.y, point.x - this._origin.x);
         },
         scaleStart: function(e, deltas) {
-            console.log('scale Start');
             e.preventDefault();
             e.stopPropagation();
             this.dragScale = this.$el.parent().css(window.browserPrefix + "transform");
@@ -120,29 +118,24 @@ define(["jquery", "CustomView",
         },
 
         scale: function(e, deltas) {
-            console.log('scale');
             e.preventDefault();
             e.stopPropagation();
             var fixRatioDisabled = false;
 
             var xSignum = 1;
             var ySignum = 1;
-            console.log(this._scaleDim);
             var scaleX = (xSignum * deltas.dx + this._scaleDim.width) / (this._scaleDim.width);
             var scaleY = (ySignum * deltas.dy + this._scaleDim.height) / (this._scaleDim.height);
-            console.log(this._initialScale);
             var scale = {
                 x: this._initialScale.x * scaleX,
                 y: this._initialScale.y * (fixRatioDisabled ? scaleY : scaleX)
             };
-            console.log(scale);
             scale.width = scale.x * this.origSize.width;
             scale.height = scale.y * this.origSize.height;
             this.model.set('scale', scale);
         },
 
         _setUpdatedTransform: function() {
-            console.log('_setUpdatedTransform');
             var transformStr = this.buildTransformString();
             var obj = {
                 transform: transformStr
@@ -151,8 +144,6 @@ define(["jquery", "CustomView",
             this.$content.css(obj);
             var scale = this.model.get('scale');
             if (this.origSize) {
-                console.log(scale.width);
-                console.log(this.origSize.width);
                 var newWidth = scale.width || this.origSize.width;
                 var newHeight = scale.height || this.origSize.height;
                 this.$el.css({
@@ -188,17 +179,14 @@ define(["jquery", "CustomView",
                 this.dragScale = parseFloat(this.dragScale.substring(7, this.dragScale.indexOf(","))) || 1;
                 this._dragging = true;
                 this.$el.addClass("dragged");
-                console.log(this.dragScale);
                 this._prevPos = {
                     x: this.model.get('x'),
                     y: this.model.get('y')
                 };
-                console.log(this._prevPos);
                 this._prevMousePos = {
                     x: e.pageX,
                     y: e.pageY
                 };
-                console.log(this._prevMousePos);
             }
         },
         render: function() {
@@ -242,18 +230,13 @@ define(["jquery", "CustomView",
                 var snapToGrid = true;
                 var dx = e.pageX - this._prevMousePos.x;
                 var dy = e.pageY - this._prevMousePos.y;
-                console.log(this._prevPos.x);
-                console.log(this._prevPos.y);
                 var newX = parseInt(this._prevPos.x, 10) + dx / this.dragScale;
                 var newY = parseInt(this._prevPos.y, 10) + dy / this.dragScale;
                 if (snapToGrid) {
-                    console.log('hhhhhhhhhhhh');
                     var gridSize = 20;
                     newX = Math.floor(newX / gridSize) * gridSize;
                     newY = Math.floor(newY / gridSize) * gridSize;
                 }
-                console.log(newX);
-                console.log(newY);
                 this.model.setInt("x", newX);
                 this.model.setInt("y", newY);
                 if (this.dragStartLoc == null) {
@@ -268,9 +251,8 @@ define(["jquery", "CustomView",
             if (this._dragging) {
                 this._dragging = false;
                 this.$el.removeClass("dragged");
-                if (this.dragStartLoc && this.dragStartLoc.x !== this.model.get('x') && this.dragStartLoc.y !== this.model.get('y')) {
+                if (this.dragStartLoc && this.dragStartLoc.x != this.model.get('x') && this.dragStartLoc.y != this.model.get('y')) {
                     var cmd = new ComponentCommands.Move(this.dragStartLoc, this.model);
-                    console.log(this.model);
                     this.model.slide.trigger('contentsChanged');
                     undoHistory.push(cmd);
                 }

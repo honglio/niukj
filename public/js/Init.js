@@ -7,7 +7,6 @@ define(['router', 'etch_extension', 'bootstrap'], function(router, Etch, Bootstr
       for (var i = 0; i < len; i += 1) {
         var key = localStorage.key(i);
         if (key && key.indexOf(".cloudslide") !== -1) {
-          console.log('Removing: ' + key);
           localStorage.removeItem(key);
         }
       }

@@ -126,7 +126,6 @@ define(function() {
          *
          */
         toText: function(file, cb) {
-            console.log(file.type);
             if (file !== null && file !== undefined) {
                 var reader = new FileReader();
                 reader.onload = function(e) {

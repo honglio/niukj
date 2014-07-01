@@ -11,8 +11,7 @@ define(["CustomView"
 		},
 
 		initialize: function() {
-						console.log(this.options.componentType);
-            this.$el.attr('data-compType', this.options.componentType);
+      this.$el.attr('data-compType', this.options.componentType);
 		},
 
 		_clicked: function() {

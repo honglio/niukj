@@ -17,7 +17,6 @@ function(Backbone, Slide) {
          * @private
          */
         _updateIndexes: function() {
-            console.log('update Index');
             this.models.forEach(function(model, idx) {
                 return model.set('index', idx);
             });

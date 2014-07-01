@@ -24,7 +24,6 @@ define(["underscore",
         type: 'slide',
 
         initialize: function() {
-			console.log('Slide initialize');
             SpatialObject.prototype.initialize.apply(this, arguments);
             var components = this.get('components');
             if (!components) {
@@ -47,6 +46,7 @@ define(["underscore",
                 }, this);
                 this.set('components', hydratedComps);
             }
+            this.set('background', this.get('background') || 'defaultbg');
             this.on("unrender", this._unrendered, this);
         },
 
@@ -54,7 +54,6 @@ define(["underscore",
          * React on slide being unrendered.
          */
         _unrendered: function() {
-            console.log(this);
             if(this.get('components')) {
                 this.get('components').forEach(function(component) {
                     component.trigger("unrender", true);

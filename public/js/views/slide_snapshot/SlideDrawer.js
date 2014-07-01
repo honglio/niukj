@@ -3,18 +3,13 @@ define(["underscore",
         "../slide_components/drawers/ImageDrawer"
 ], function(_, TextBoxDrawer, ImageDrawer) {
     "use strict";
-
     /**
      * Slide snapshot drawer. Paints all elements on little slide thumbnail in SlideWell.
      */
-    function SlideDrawer(model, g2d) {
+    function SlideDrawer(model, g2d, bg) {
         this.model = model;
         this.g2d = g2d;
-
-        this.repaint = this.repaint.bind(this);
-        this.repaint = _.debounce(this.repaint, 100);
-
-        this.model.on("contentsChanged", this.repaint, this);
+        this.bg = bg;
 
         this.size = {
             width: this.g2d.canvas.width,
@@ -25,8 +20,6 @@ define(["underscore",
             x: this.size.width / config.slide.size.width * 0.66,
             y: this.size.height / config.slide.size.height * 0.66
         };
-        console.log(this.size.width);
-        console.log(this.size.height);
 
         this._drawers = {};
 
@@ -38,40 +31,33 @@ define(["underscore",
     }
 
     SlideDrawer.prototype = {
-        repaint: function(bg) {
-            this._paint(bg);
-        },
 
-        _paint: function(bg) {
-            this.g2d.clearRect(0, 0, this.size.width, this.size.height);
-
-            this.__paintbg(bg, this.size.width, this.size.height);
-
+        paint: function() {
+            console.log(this.bg);
+            this.g2d.fillStyle = this.bg;
+            this.g2d.fillRect(0, 0, this.size.width, this.size.height);
+            // paint component
             var components = this.model.get('components');
-
-            components.forEach(function(component) {
-                var type = component.get('type');
+            var length = components.length;
+            for (var i = 0; i < length; i += 1) {
+                var type = components[i].get('type');
                 var drawer = this._drawers[type];
                 if (drawer) {
                     this.g2d.save();
-                    drawer.paint(component);
+                    drawer.paint(components[i]);
                     this.g2d.restore();
                 }
-            }, this);
+            }
         },
 
-        __paintbgImg: function(bg) {
-            var oImg = new Image();
-            oImg.src = bg;
-            console.log(oImg);
+        // __paintbgImg: function(bg) {
+        //     var oImg = new Image();
+        //     oImg.src = bg;
+        //     console.log(oImg);
 
-            this.g2d.drawImage(oImg, 0, 0);
-        },
+        //     this.g2d.drawImage(oImg, 0, 0);
+        // },
 
-        __paintbg: function(bg, w, h) {
-            this.g2d.fillStyle = bg;
-            this.g2d.fillRect(0, 0, w, h);
-        },
 
         dispose: function() {
             this.model.off(null, null, this);

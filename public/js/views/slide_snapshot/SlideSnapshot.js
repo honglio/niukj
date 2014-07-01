@@ -20,28 +20,9 @@ define(["underscore",
         },
 
         initialize: function() {
-            // TODO: single slide background
-			// this.model.on("change:background", this._bgChanged, this);
-            // this.model.on("dispose", this.dispose, this);
-
-			this.options.deck.on("change:background", this._bgChanged, this);
-
-			// this._calculateLayout = this._calculateLayout.bind(this);
-   //          var lazyLayout = _.debounce(this._calculateLayout, 300);
-   //          $(window).resize(lazyLayout);
-
-            this.updatePicture = this.updatePicture.bind(this);
-            this._repaint = this._repaint.bind(this);
-
             this.model.on("change:active", this._activeChanged, this);
-            // this.model.on("change:active", this.repaint, this);
-            // this.model.on("change:active", this.updatePicture, this);
-
-            this.model.on("contentsChanged", this._repaint, this);
-            this.model.on("contentsChanged", this.updatePicture, this);
-
-            this.options.deck.on("change:background", this._repaint, this);
-            this.options.deck.on("change:background", this.updatePicture, this);
+            this.model.on("contentsChanged", this.render, this);
+            this.model.on("change:background", this.render, this);
         },
 
         /**
@@ -116,49 +97,58 @@ define(["underscore",
         _activeChanged: function(model, value) {
 			console.log('_activeChanged');
             if (value) {
-				console.log('addClass');
                 this.$el.addClass('active');
             }
             else {
-				console.log('removeClass');
                 this.$el.removeClass('active');
             }
         },
 
         _bgChanged: function() {
-            console.log('BGGGG');
-            var bg = this.options.deck.get('background') || 'defaultbg';
-            this.$el.removeClass();
-            var classStr = 'slideSnapshot ' + bg;
-            console.log(this.model.get('active'));
-            if (this.model.get('active')) {
-                classStr += ' active';
+            var bg = this.model.get('background') || 'defaultbg';
+            // this.$el.removeClass();
+            // var classStr = 'slideSnapshot ' + bg;
+            // this.$el.addClass(classStr);
+            if(bg === 'grad-bg-pink') {
+                this.$el.css('background-color', '#E53D5E');
             }
-            console.log(classStr);
-
-            this.$el.addClass(classStr);
-            // this.$el.css('background-image', bg.styles[1]);
+            if(bg === 'grad-bg-orange') {
+                this.$el.css('background-color', '#EEA523');
+            }
+            if(bg === 'grad-bg-yellow') {
+                this.$el.css('background-color', '#FBC850');
+            }
+            if(bg === 'grad-bg-grass') {
+                this.$el.css('background-color', '#95CA58');
+            }
+            if(bg === 'grad-bg-green') {
+                this.$el.css('background-color', '#23AD5E');
+            }
+            if(bg === 'grad-bg-sky') {
+                this.$el.css('background-color', '#7394CC');
+            }
+            if(bg === 'grad-bg-lavender') {
+                this.$el.css('background-color', '#7E6AAD');
+            }
+            if(bg === 'grad-bg-purple') {
+                this.$el.css('background-color', '#8E336C');
+            }
+            if(bg === 'grad-bg-black') {
+                this.$el.css('background-color', '#000');
+            }
+            if(bg === 'grad-bg-light') {
+                this.$el.css('background-color', '#fff');
+            }
+            if(bg === 'defaultbg') {
+                this.$el.css('background-color', '#ddd');
+            }
         },
 
         _calculateLayout: function() {
             var width = this.$el.width();
             var height = width / 1.6;
-            // console.log('width:' + width);
-            // console.log('height:' + height);
             this.$el.css('height', height);
         },
-
-        // repaint: function() {
-        //     var self = this;
-        //     if(this.isSelected()) {
-        //         this.$el.find('canvas')[0].remove();
-        //         window.html2canvas($('.slideContainer'), {
-        //             onrendered: function(canvas) {
-        //                 self.$el.prepend(canvas);
-        //             }
-        //         });
-        //     }
-        // },
 
         render: function() {
 
@@ -168,38 +158,28 @@ define(["underscore",
 
             this.$el.html(SlideSnapshotTemplate(this.model.attributes));
 
+            var self = this;
             this._bgChanged();
 
-            if (this.model.get('active')) {
+            if (this.isSelected() === true) {
                 this.$el.addClass('active');
             }
 
-            var canvas = this.$el.find('canvas');
+            // draw snapshot
+            var canvas = self.$el.find('canvas');
             var g2d = canvas[0].getContext("2d");
+            var bg = self.$el.css('background-color');
+            self._slideDrawer = new SlideDrawer(self.model, g2d, bg);
+            self._slideDrawer.paint();
 
-            this._slideDrawer = new SlideDrawer(this.model, g2d);
-
-            var self = this;
-            setTimeout(function() {
-                // var bgImg = self.$el.css('background-image');
-                // bgImg = bgImg.slice(4, -1);
-                self._repaint();
-            }, 10);
+            // update picture
+            if(self.isSelected() && self.model.get('index') == '0') {
+                console.log('updatePicture');
+                var img = self._toImage(self.$el.find('canvas')[0]);
+                self.options.deck.set('picture', img.src);
+            }
 
             return this;
-        },
-
-        _repaint: function() {
-            var bgImg = this.$el.css('background-color');
-            this._slideDrawer.repaint(bgImg);
-        },
-
-        updatePicture: function() {
-            if(this.isSelected() && this.model.get('index') == "0") {
-                console.log('updatePicture');
-                var img = this._toImage(this.$el.find('canvas')[0]);
-                this.options.deck.set('picture', img.src);
-            }
         },
 
         _toImage: function(oCanvas) {

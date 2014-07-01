@@ -9,7 +9,10 @@ define(["backbone",
     "use strict";
 
     function cleanHTMLTag(data) {
-        data = data.replace(/<[^>]+>/g, '');
+        if(data) {
+            data = data.replace(/<[^>]+>/g, '');
+        }
+
         return data;
     }
 
@@ -30,7 +33,6 @@ define(["backbone",
             if(id == null) {
                 this.addSlide(0);
             } else {
-                console.log(id);
                 storageInterface.load(id, function(deck) {
                     if (deck) {
                         self.importPresentation(deck);
@@ -63,7 +65,6 @@ define(["backbone",
                     exportData.slides[i].components[j] = component.toJSON();
                 });
             });
-            console.log(exportData.picture);
 
             return exportData;
         },

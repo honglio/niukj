@@ -1,7 +1,6 @@
 define(function(require) {
   var CustomView = Backbone.View.extend({
     dispose: function() {
-      console.log('Disposing View ' + this);
       // check whether the View can be disposed.
       if (this.subViews && this.subViews instanceof Object) {
         for (var i in this.subViews) {

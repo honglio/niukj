@@ -67,7 +67,6 @@ define(["jquery", "underscore",
          * @private
          */
         _focus: function() {
-			console.log('_focus');
             this.model.set('scope', 'slideWell');
         },
 
@@ -86,7 +85,6 @@ define(["jquery", "underscore",
 		 * @private
 		 */
 		_clicked: function() {
-			console.log('_clicked');
 			$( this ).trigger("select", { active: true });
 		},
 
@@ -143,8 +141,6 @@ define(["jquery", "underscore",
         },
 
 		setSlideIndex: function(){
-			console.log('setSlideIndex');
-			console.log(this._deck.get('slides').models.length);
 			this._contextBox.slideIndex(this._deck.get('slides').models.length);
 		},
 
@@ -155,8 +151,6 @@ define(["jquery", "underscore",
          * @private
          */
         _slidesReset: function(newSlides) {
-			console.log('_slidesReset');
-			console.log(newSlides);
             var i = 0;
             var opts = {at: 0};
             newSlides.forEach(function(slide) {
@@ -175,9 +169,7 @@ define(["jquery", "underscore",
          */
         _slideAdded: function(slide, options) {
 			options = options || {};
-			console.log(options);
             var index = options.at;
-			console.log(index);
             // Append it in the correct position in the well
             var snapshot = new SlideSnapshot({model: slide, deck: this._deck});
             this.$slides.append(snapshot.render().$el);
@@ -204,7 +196,6 @@ define(["jquery", "underscore",
             this.$el.html(this.$slides);
 
             this._deck.get('slides').forEach(function(slide) {
-                console.log(this._deck);
                 var snapshot = new SlideSnapshot({model: slide, deck: this._deck});
                 this.$slides.append(snapshot.render().$el);
             }, this);

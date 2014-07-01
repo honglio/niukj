@@ -98,7 +98,6 @@ function(_, EventEmitter) {
 		_released: function(e) {
 			this._dragging = false;
 			if (this._$currentTarget == null) {return;}
-			console.log(this._$currentTarget);
 			this._$currentTarget.removeClass('ui-sortable-helper')
 			this._$currentTarget.css({
 				position: '',

@@ -17,7 +17,6 @@ function(CustomView) {
         },
 
         _addSlide: function() {
-            console.log('_addSlide')
             this.model.addSlide(this.options.wellContextBox.slideIndex());
         }
     });

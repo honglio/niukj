@@ -45,7 +45,6 @@ define(function() {
                     var data = JSON.parse(item);
                     cb(data);
                 } catch (e) {
-                    console.log(e.stack);
                     cb(null, e);
                 }
             }
