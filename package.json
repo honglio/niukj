@@ -28,7 +28,6 @@
         "passport-renren": ">=0.1.1",
         "passport-tqq": ">=0.0.2",
         "passport-linkedin-oauth2": "latest",
-        "passport-github": "latest",
         "winston": "latest",
         "async": "latest",
         "request": "latest",
@@ -47,7 +46,6 @@
         "morgan": "latest",
         "multer": "latest",
         "underscore": "latest",
-        "github-api": "latest",
         "node-linkedin": "latest",
         "view-helpers": "latest",
         "aliyun-oss": "latest"

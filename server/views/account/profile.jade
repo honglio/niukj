@@ -89,11 +89,6 @@ block content
     else
       p: a.btn.btn-default(href='/auth/renren') 关联 Renren 账户
 
-    if user.github
-      p: a.btn.btn-danger(href='/account/unlink/github') 取消 GitHub 关联
-    else
-      p: a.btn.btn-default(href='/auth/github') 关联 GitHub 账户
-
     if user.linkedin
       p: a.btn.btn-danger(href='/account/unlink/linkedin') 取消 LinkedIn 关联
     else

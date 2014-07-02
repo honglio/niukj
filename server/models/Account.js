@@ -24,7 +24,6 @@ var AccountSchema = new mongoose.Schema({
   weibo:     { type: String },
   renren:    { type: String },
   qq:        { type: String },
-  github:    { type: String },
   linkedin:  { type: String },
   tokens:    { type: Array },
 
@@ -33,7 +32,7 @@ var AccountSchema = new mongoose.Schema({
     gender:  { type: String, default: '' },
     location:{ type: String, default: '' },
     website: { type: String, default: '' },
-    photoUrl:{ type: String, default: '' },
+    picture:{ type: Array},
     biography: { type: String, default: '' }
   },
   contacts:  {

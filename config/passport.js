@@ -5,7 +5,6 @@ var _ = require('underscore')
   , LocalStrategy = require('passport-local').Strategy
   , RenrenStrategy = require('passport-renren').Strategy
   , WeiboStrategy = require('passport-weibo').Strategy
-  , GitHubStrategy = require('passport-github').Strategy
   , QQStrategy = require('passport-tqq').Strategy
   , LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
   , config = require('./config');
@@ -46,59 +45,34 @@ passport.use(new LocalStrategy({
 // use Renren strategy
 passport.use(new RenrenStrategy(config.renren,
   function(accesstoken, tokenSecret, profile, done) {
-    User.findOrCreate({ renren: profile.id }, function (err, user) {
-      return done(err, user)
-    })
+    User.findOne({ renren: profile.id }, function(err, existingUser) {
+      if (existingUser) return done(null, existingUser);
+
+      var user = new User();
+      user.renren = profile.id;
+      user.email = user.email || profile.id + '@example.com'
+      user.profile.name = user.profile.name || profile.displayName;
+      user.profile.picture = user.profile.picture || profile.picture;
+      user.save(function(err) {
+        done(err, user);
+      });
+    });
   }
 ));
 
 // use weibo strategy
 passport.use(new WeiboStrategy(config.weibo,
   function(accesstoken, tokenSecret, profile, done) {
-    User.findOrCreate({ weibo: profile.id }, function (err, user) {
-      return done(err, user)
-    })
-  }
-));
-
-// use github strategy
-passport.use(new GitHubStrategy(config.github, function(req, accessToken, refreshToken, profile, done) {
-  if (req.user) {
-    User.findOne({ github: profile.id }, function(err, existingUser) {
-      if (existingUser) {
-        req.flash('errors', { msg: 'There is already a GitHub account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
-        done(err);
-      } else {
-        User.findById(req.user.id, function(err, user) {
-          user.github = profile.id;
-          user.tokens.push({ kind: 'github', accessToken: accessToken });
-          user.profile.name = user.profile.name || profile.displayName;
-          user.profile.picture = user.profile.picture || profile._json.avatar_url;
-          user.profile.location = user.profile.location || profile._json.location;
-          user.profile.website = user.profile.website || profile._json.blog;
-          user.save(function(err) {
-            req.flash('inform', { msg: 'GitHub account has been linked.' });
-            done(err, user);
-          });
-        });
-      }
-    });
-  } else {
-    User.findOne({ github: profile.id }, function(err, existingUser) {
+    User.findOne({ weibo: profile.uid }, function(err, existingUser) {
       if (existingUser) return done(null, existingUser);
       User.findOne({ email: profile._json.email }, function(err, existingEmailUser) {
-        if (existingEmailUser) {
-          req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with GitHub manually from Account Settings.' });
+        if (existingUser) {
           done(err);
         } else {
           var user = new User();
-          user.email = profile._json.email;
-          user.github = profile.id;
-          user.tokens.push({ kind: 'github', accessToken: accessToken });
-          user.profile.name = profile.displayName;
-          user.profile.picture = profile._json.avatar_url;
-          user.profile.location = profile._json.location;
-          user.profile.website = profile._json.blog;
+          user.weibo = profile.uid;
+          user.tokens.push({ kind: 'weibo', accessToken: accessToken });
+          user.profile.name = user.profile.name || profile.displayName;
           user.save(function(err) {
             done(err, user);
           });
@@ -106,13 +80,29 @@ passport.use(new GitHubStrategy(config.github, function(req, accessToken, refres
       });
     });
   }
-}));
+));
 
 // use QQ strategy
 passport.use(new QQStrategy(config.qq,
-  function(req, accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ qq: profile.id }, function (err, user) {
-        return done(err, user)
+  function(accessToken, refreshToken, profile, done) {
+    User.findOne({ qq: profile.id }, function(err, existingUser) {
+      if (existingUser) return done(null, existingUser);
+      User.findOne({ email: profile._json.email }, function(err, existingEmailUser) {
+        if (existingEmailUser) {
+          req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with QQ manually from Account Settings.' });
+          done(err);
+        } else {
+          var user = new User();
+          user.email = profile._json.email;
+          user.qq = profile.id;
+          user.tokens.push({ kind: 'qq', accessToken: accessToken });
+          user.profile.name = user.profile.name || profile.nickname;
+          user.profile.gender = user.profile.gender || profile.gender;
+          user.save(function(err) {
+            done(err, user);
+          });
+        }
+      });
     });
   }
 ));

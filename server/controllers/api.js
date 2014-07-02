@@ -2,7 +2,6 @@ var async = require('async');
 var config = require('../../config/config');
 var querystring = require('querystring');
 var request = require('request');
-var Github = require('github-api');
 var Linkedin = require('node-linkedin')(config.linkedin.clientID, config.linkedin.clientSecret, config.linkedin.callbackURL);
 var _ = require('underscore');
 
@@ -85,21 +84,4 @@ exports.getLinkedin = function(req, res, next) {
       profile: $in
     });
   });
-};
-
-/**
- * GET /api/github
- * GitHub API Example.
- */
-exports.getGithub = function(req, res) {
-  var token = _.findWhere(req.user.tokens, { kind: 'github' });
-  var github = new Github({ token: token.accessToken });
-  var repo = github.getRepo('honglio', 'piano.js');
-  repo.show(function(err, repo) {
-    res.render('api/github', {
-      title: 'GitHub API',
-      repo: repo
-    });
-  });
-
 };

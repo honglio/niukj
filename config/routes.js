@@ -11,6 +11,7 @@ var auth = require('../server/controllers/auth');
 var api = require('../server/controllers/api');
 var contactForm = require('../server/controllers/contactForm');
 var passportConf = require('./passport');
+var crypto = require('crypto');
 
 /*
  * Routes Example
@@ -81,7 +82,6 @@ module.exports = function (app, passport) {
   app.get('/api/weibo', passportConf.isAuthenticated, passportConf.isAuthorized, api.getWeibo);
   app.get('/api/renren', passportConf.isAuthenticated, passportConf.isAuthorized, api.getRenren);
   app.get('/api/qq', passportConf.isAuthenticated, passportConf.isAuthorized, api.getQQ);
-  app.get('/api/github', passportConf.isAuthenticated, passportConf.isAuthorized, api.getGithub);
   app.get('/api/linkedin', passportConf.isAuthenticated, passportConf.isAuthorized, api.getLinkedin);
 
   /**
@@ -95,14 +95,26 @@ module.exports = function (app, passport) {
   app.get('/auth/renren/callback', passport.authenticate('renren', { failureRedirect: '/login' }), function(req, res) {
     res.redirect(req.session.returnTo || '/');
   });
-  app.get('/auth/qq', passport.authenticate('qq', { state: 'random state value', scope: ['get_user_info', 'list_album'] }));
-  app.get('/auth/qq/callback', passport.authenticate('qq', { failureRedirect: '/login' }), function(req, res) {
-    res.redirect(req.session.returnTo || '/');
+
+  // QQ登录认证时 `state` 为必填参数
+  // 系client端的状态值，用于第三方应用防止CSRF攻击，成功授权后回调时会原样带回
+  app.get('/auth/qq', function (req, res, next) {
+    req.session = req.session || {};
+    req.session.authState = crypto.createHash('sha1').update(-(new Date()) + '').digest('hex');
+    passport.authenticate('qq', { state: req.session.authState, scope: ['get_user_info', 'list_album'] })(req, res, next);
   });
-  app.get('/auth/github', passport.authenticate('github'));
-  app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), function(req, res) {
-    res.redirect(req.session.returnTo || '/');
-  });
+  app.get('/auth/qq/callback', function (req, res, next) {
+      // 通过比较认证返回的`state`状态值与服务器端`session`中的`state`状态值
+      // 决定是否继续本次授权
+      if(req.session && req.session.authState && req.session.authState === req.query.state) {
+        passport.authenticate('qq', { failureRedirect: '/login' })(req, res, next);
+      } else {
+        return next(new Error('Auth State Mismatch'));
+      }
+    }, function (req, res) {
+      res.redirect(req.session.returnTo || '/');
+    }
+  );
   app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE' }));
   app.get('/auth/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), function(req, res) {
     res.redirect(req.session.returnTo || '/');
