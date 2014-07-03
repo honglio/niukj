@@ -88,11 +88,11 @@ module.exports = function (app, passport) {
    * OAuth routes for sign-in.
    */
   app.get('/auth/weibo', passport.authenticate('weibo'));
-  app.get('/auth/weibo/callback', passport.authenticate('weibo', { failureRedirect: '/login' }), function(req, res) {
+  app.get('/auth/weibo/callback', function (req, res, next) {passport.authenticate('weibo', { failureRedirect: '/login'})(req, res, next)}, function(req, res) {
     res.redirect(req.session.returnTo || '/');
   });
   app.get('/auth/renren', passport.authenticate('renren'));
-  app.get('/auth/renren/callback', passport.authenticate('renren', { failureRedirect: '/login' }), function(req, res) {
+  app.get('/auth/renren/callback', function (req, res, next) {passport.authenticate('renren', { failureRedirect: '/login'})(req, res, next)}, function(req, res) {
     res.redirect(req.session.returnTo || '/');
   });
 
@@ -115,8 +115,8 @@ module.exports = function (app, passport) {
       res.redirect(req.session.returnTo || '/');
     }
   );
-  app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE' }));
-  app.get('/auth/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), function(req, res) {
+  app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'Some State' }));
+  app.get('/auth/linkedin/callback', function (req, res, next) {passport.authenticate('linkedin', { failureRedirect: '/login'})(req, res, next)}, function(req, res) {
     res.redirect(req.session.returnTo || '/');
   });
 

@@ -43,57 +43,122 @@ passport.use(new LocalStrategy({
 ));
 
 // use Renren strategy
-passport.use(new RenrenStrategy(config.renren,
-  function(accesstoken, tokenSecret, profile, done) {
+passport.use(new RenrenStrategy(config.renren, function(req, accessToken, tokenSecret, profile, done) {
+  if (req.user) {
+    User.findOne({ renren: profile.id }, function(err, existingUser) {
+      if (existingUser) {
+        req.flash('errors', { msg: 'There is already a RenRen account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
+        done(err);
+      } else {
+        User.findById(req.user.id, function(err, user) {
+          user.renren = profile.id;
+          user.tokens.push({ kind: 'renren', accessToken: accessToken });
+          user.profile.name = user.profile.name || profile.displayName;
+          user.profile.picture = user.profile.picture || profile.picture;
+          user.save(function(err) {
+            req.flash('inform', { msg: 'RenRen account has been linked.' });
+            done(err, user);
+          });
+        });
+      }
+    });
+  } else {
     User.findOne({ renren: profile.id }, function(err, existingUser) {
       if (existingUser) return done(null, existingUser);
-
-      var user = new User();
-      user.renren = profile.id;
-      user.email = user.email || profile.id + '@example.com'
-      user.profile.name = user.profile.name || profile.displayName;
-      user.profile.picture = user.profile.picture || profile.picture;
-      user.save(function(err) {
-        done(err, user);
-      });
+      console.log(profile._json);
+      // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
+      //   if (existingEmailUser) {
+      //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Weibo manually from Account Settings.' });
+      //     done(err);
+      //   } else {
+          var user = new User();
+          user.renren = profile.id;
+          user.email = user.email || profile.id + '@example.com';
+          user.tokens.push({ kind: 'renren', accessToken: accessToken });
+          user.profile.name = user.profile.name || profile.displayName;
+          user.profile.picture = user.profile.picture || profile.picture;
+          user.save(function(err) {
+            done(err, user);
+          });
+      //   }
+      // });
     });
   }
-));
+}));
 
 // use weibo strategy
-passport.use(new WeiboStrategy(config.weibo,
-  function(accesstoken, tokenSecret, profile, done) {
-    User.findOne({ weibo: profile.uid }, function(err, existingUser) {
-      if (existingUser) return done(null, existingUser);
-      User.findOne({ email: profile._json.email }, function(err, existingEmailUser) {
-        if (existingUser) {
-          done(err);
-        } else {
-          var user = new User();
-          user.weibo = profile.uid;
+passport.use(new WeiboStrategy(config.weibo, function(req, accessToken, tokenSecret, profile, done) {
+  if (req.user) {
+    User.findOne({ weibo: profile.id }, function(err, existingUser) {
+      if (existingUser) {
+        req.flash('errors', { msg: 'There is already a Weibo account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
+        done(err);
+      } else {
+        User.findById(req.user.id, function(err, user) {
+          user.weibo = profile.id;
           user.tokens.push({ kind: 'weibo', accessToken: accessToken });
+          user.profile.name = user.profile.name || profile.displayName;
+          user.save(function(err) {
+            req.flash('inform', { msg: 'Weibo account has been linked.' });
+            done(err, user);
+          });
+        });
+      }
+    });
+  } else {
+    User.findOne({ weibo: profile.id }, function(err, existingUser) {
+      if (existingUser) return done(null, existingUser);
+      console.log(profile._json);
+      // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
+      //   if (existingEmailUser) {
+      //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Weibo manually from Account Settings.' });
+      //     done(err);
+      //   } else {
+          var user = new User();
+          user.weibo = profile.id;
+          user.tokens.push({ kind: 'weibo', accessToken: accessToken });
+          user.email = user.email || profile.id + '@example.com';
           user.profile.name = user.profile.name || profile.displayName;
           user.save(function(err) {
             done(err, user);
           });
-        }
-      });
+      //   }
+      // });
     });
   }
-));
+}));
 
 // use QQ strategy
-passport.use(new QQStrategy(config.qq,
-  function(accessToken, refreshToken, profile, done) {
+passport.use(new QQStrategy(config.qq, function(req, accessToken, refreshToken, profile, done) {
+  if (req.user) {
+    User.findOne({ qq: profile.id }, function(err, existingUser) {
+      if (existingUser) {
+        req.flash('errors', { msg: 'There is already a QQ account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
+        done(err);
+      } else {
+        User.findById(req.user.id, function(err, user) {
+          user.qq = profile.id;
+          user.tokens.push({ kind: 'qq', accessToken: accessToken });
+          user.profile.name = user.profile.name || profile.nickname;
+          user.profile.gender = user.profile.gender || profile.gender;
+          user.save(function(err) {
+            req.flash('inform', { msg: 'QQ account has been linked.' });
+            done(err, user);
+          });
+        });
+      }
+    });
+  } else {
     User.findOne({ qq: profile.id }, function(err, existingUser) {
       if (existingUser) return done(null, existingUser);
-      User.findOne({ email: profile._json.email }, function(err, existingEmailUser) {
-        if (existingEmailUser) {
-          req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with QQ manually from Account Settings.' });
-          done(err);
-        } else {
+      console.log(profile._json);
+      // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
+      //   if (existingEmailUser) {
+      //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with QQ manually from Account Settings.' });
+      //     done(err);
+      //   } else {
           var user = new User();
-          user.email = profile._json.email;
+          user.email = user.email || profile.id + '@example.com';
           user.qq = profile.id;
           user.tokens.push({ kind: 'qq', accessToken: accessToken });
           user.profile.name = user.profile.name || profile.nickname;
@@ -101,11 +166,11 @@ passport.use(new QQStrategy(config.qq,
           user.save(function(err) {
             done(err, user);
           });
-        }
-      });
+      //   }
+      // });
     });
   }
-));
+}));
 
 // use linkedin strategy
 passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, refreshToken, profile, done) {
@@ -132,15 +197,16 @@ passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, re
   } else {
     User.findOne({ linkedin: profile.id }, function(err, existingUser) {
       if (existingUser) return done(null, existingUser);
-      User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
-        if (existingEmailUser) {
-          req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with LinkedIn manually from Account Settings.' });
-          done(err);
-        } else {
+      console.log(profile._json);
+      // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
+      //   if (existingEmailUser) {
+      //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with LinkedIn manually from Account Settings.' });
+      //     done(err);
+      //   } else {
           var user = new User();
           user.linkedin = profile.id;
           user.tokens.push({ kind: 'linkedin', accessToken: accessToken });
-          user.email = profile._json.emailAddress;
+          user.email = user.email || profile.id + '@example.com';
           user.profile.name = profile.displayName;
           user.profile.location = profile._json.location.name;
           user.profile.picture = profile._json.pictureUrl;
@@ -148,8 +214,8 @@ passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, re
           user.save(function(err) {
             done(err, user);
           });
-        }
-      });
+      //   }
+      // });
     });
   }
 }));

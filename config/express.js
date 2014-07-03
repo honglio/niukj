@@ -51,7 +51,7 @@ module.exports = function (app, passport) {
     // bodyParser should be above methodOverride
     // app.use(express.bodyParser());
     app.use(bodyParser.json({limit: '50mb'}));
-    app.use(bodyParser.urlencoded({limit: '50mb'}));
+    app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
     app.use(expressValidator());
     app.use(methodOverride(function(req, res){
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -64,6 +64,8 @@ module.exports = function (app, passport) {
 
     // express/mongo session storage
     app.use(session({
+        saveUninitialized: true,
+        resave: true,
         secret: config.sessionSecret,
         store: new mongoStore({
             url: config.db,
