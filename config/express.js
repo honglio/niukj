@@ -78,7 +78,7 @@ module.exports = function (app, passport) {
     // connect flash for flash messages - should be declared after sessions
     app.use(flash());
     // should be declared after session and flash
-    app.use(helpers('Relax'));
+    app.use(helpers('Niukj'));
     // adds CSRF attack protect
     var whitelist = ['/url1', '/url2'];
     app.use(function(req, res, next){
