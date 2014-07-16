@@ -33,6 +33,8 @@ section#top-nav
 
         else if user
           ul.nav.nav-pills.navbar-nav
+            li(class=title=='探索课件'?'active':undefined)
+              a(href='/articles/explore') 探索课件
             li(class=title=='我的课件'?'active':undefined)
               a(href='/articles/my') 我的课件
             li(class=title=='创建课件'?'active':undefined)

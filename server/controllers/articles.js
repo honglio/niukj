@@ -19,10 +19,10 @@ exports.load = function(req, res, next, id){
 };
 
 /**
- * List
+ * Search
  */
 
-exports.index = function(req, res){
+exports.search = function(req, res){
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
   var perPage = 8;
   var options = {
@@ -37,7 +37,7 @@ exports.index = function(req, res){
     if (err) return res.render('500');
     console.log(utils.formatDate);
     res.render('article/index', {
-      title: '课件列表',
+      title: '搜索到的课件',
       articles: articles,
       page: page + 1,
       pages: Math.ceil(articles.length / perPage),
@@ -47,7 +47,31 @@ exports.index = function(req, res){
 };
 
 /**
- * List
+ * Explore Slides
+ */
+exports.explore = function(req, res){
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var perPage = 8;
+  var options = {
+    perPage: perPage,
+    page: page,
+    options: {limit: 50}
+  };
+
+  Article.list(options, function(err, articles) {
+    if (err) return res.render('500');
+    res.render('article/index', {
+      title: '探索课件',
+      articles: articles,
+      page: page + 1,
+      pages: Math.ceil(articles.length / perPage),
+      formatDate: utils.formatDate
+    });
+  });
+};
+
+/**
+ * List My Slides
  */
 
 exports.my = function(req, res){
