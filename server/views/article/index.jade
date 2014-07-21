@@ -15,9 +15,9 @@ block content
                   img.portlio-list-img(src=pic alt='' width="300" height="250")
                   figcaption
                     .image-buttons
-                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/present')
+                      a.btn.btn-primary(href='/articles/'+ article._id + '/present')
                         i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
-                      a.btn.btn-primary(data-toggle='modal', href='/articles/'+ article._id + '/manage')
+                      a.btn.btn-primary(href='/articles/'+ article._id + '/manage')
                         i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='管理课件')
               h6 #{article.fileName}
 

@@ -39,15 +39,19 @@ define(["underscore",
             this.g2d.fillRect(0, 0, this.size.width, this.size.height);
             this.g2d.restore();
             // paint component
+            console.log(this.model);
             var components = this.model.get('components');
-            var length = components.length;
-            for (var i = 0; i < length; i += 1) {
-                var type = components[i].get('type');
-                var drawer = this._drawers[type];
-                if (drawer) {
-                    this.g2d.save();
-                    drawer.paint(components[i]);
-                    this.g2d.restore();
+            console.log(components);
+            for (var i in components) {
+                if(components.hasOwnProperty(i)) {
+                    console.log(components[i]);
+                    var type = components[i].get('type');
+                    var drawer = this._drawers[type];
+                    if (drawer) {
+                        this.g2d.save();
+                        drawer.paint(components[i]);
+                        this.g2d.restore();
+                    }
                 }
             }
         },
