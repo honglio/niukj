@@ -1,10 +1,12 @@
 extends ../layout
 
 block content
+  div.alert
   div#content
   div#modals
     form.form-horizontal(role='form', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
+
 
 block scripts
   script(data-main='/js/boot', type='text/javascript',src='/js/vendors/require.js')
