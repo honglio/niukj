@@ -32,7 +32,7 @@ var AccountSchema = new mongoose.Schema({
     gender:  { type: String, default: '' },
     location:{ type: String, default: '' },
     website: { type: String, default: '' },
-    picture:{ type: Array},
+    picture: { type: Array },
     biography: { type: String, default: '' }
   },
   contacts:  {

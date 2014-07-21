@@ -73,12 +73,13 @@ define(["CustomView",
                 article: this.model.exportPresentation(filename),
                 _csrf: csrf
             }
-            // TODO: use saveAs if window.location.href has id.
+
             if(!this.model.deck().get('id')) {
                 this.storageInterface.store(serialized, function(id) {
                     if(id) {
                         self.$el.modal('hide');
                         self.showAlert('成功！', '课件已保存成功', 'alert-success');
+                        self.$('.ok').text('保存');
                         // window.location.replace("/articles/" + id + '/edit');
                     }
                 });
@@ -88,6 +89,7 @@ define(["CustomView",
                         self.$el.modal('hide');
                         self.showAlert('成功！', '课件已保存成功', 'alert-success');
                         // window.location.replace("/articles/" + id + '/edit');
+                        self.$('.ok').text('保存');
                     }
                 });
             }

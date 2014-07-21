@@ -134,8 +134,6 @@ module.exports = function (app, passport) {
   app.delete('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.destroy);
   app.get('/articles/:id/present', passportConf.isAuthenticated, articles.present);
 
-  app.post('/articles/:id/viewNum', articles.postViewNum);
-
   // comment routes
   app.param('commentId', comments.load);
   app.post('/articles/:id/comments', passportConf.isAuthenticated, comments.create);

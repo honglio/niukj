@@ -173,7 +173,7 @@ exports.show = function(req, res){
 /**
  * Present
  */
-
+var lastUser = {};
 exports.present = function(req, res){
   var cnt = 0,
       slides = req.article.slides;
@@ -188,6 +188,16 @@ exports.present = function(req, res){
       }
       cnt += 1;
   });
+
+  if(lastUser[req.user.email] == null) {
+    lastUser[req.user.email] = [];
+  }
+
+  if(lastUser[req.user.email].indexOf(req.article.fileName) === -1) {
+    req.article.hitCounter += 1;
+    req.article.save();
+    lastUser[req.user.email].push(req.article.fileName);
+  }
 
   res.render('article/present', {
     title: '放映课件' + req.article.fileName,
@@ -206,24 +216,4 @@ exports.destroy = function(req, res){
     req.flash('inform', {msg: 'Deleted successfully'});
     res.redirect('/articles');
   });
-};
-
-exports.postViewNum = function(req, res) {
-  var accountId = req.params.id == 'me'
-                    ? req.session.accountId
-                    : req.params.id;
-  var viewNum = req.param('viewNum', null);
-
-  if( null == viewNum ) {
-    res.send(400);
-    return;
-  }
-
-  Account.findById(accountId, function(account) {
-    if ( account ) {
-      account.viewNum += 1;
-      account.save();
-    }
-  });
-  res.send(200);
 };

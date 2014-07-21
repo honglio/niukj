@@ -70,7 +70,8 @@ var ArticleSchema = new mongoose.Schema({
   }],
   tags: {type: [], get: getTags, set: setTags},
   picture: { type : String, default : '' },
-  createdAt  : {type : Date, default : Date.now}
+  createdAt: { type : Date, default : Date.now },
+  hitCounter: { type: Number, default: 0 }
 });
 
 /**

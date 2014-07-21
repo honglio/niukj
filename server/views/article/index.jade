@@ -19,9 +19,12 @@ block content
                         i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
                       a.btn.btn-primary(href='/articles/'+ article._id + '/manage')
                         i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='管理课件')
-              h6 #{article.fileName}
+              h4.centered #{article.fileName}
 
               .meta
+                | &nbsp;
+                span.fa.fa-eye= article.hitCounter
+                |  &nbsp; 创建于&nbsp;
                 span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
 
               - if (article.user)
