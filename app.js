@@ -1,6 +1,14 @@
-var express     = require("express");
-var passport    = require("passport");
-var fs          = require('fs');
+var express       = require("express")
+    , https       = require("https")
+    , http        = require("http")
+    , passport    = require("passport")
+    , fs          = require("fs");
+
+// var options = {
+//   key: fs.readFileSync(__dirname + '/config/agent-key.pem'),
+//   cert: fs.readFileSync(__dirname + '/config/agent-cert.pem')
+// }
+
 var app         = express();
 
 // Import accounts to models

@@ -109,6 +109,9 @@ module.exports = function (app, passport) {
 
     app.use(errorHandler());
 
+    // Nginx support
+    app.enable('trust proxy');
+
     // Connect to mongodb
     var connect = function () {
       var options = { server: { socketOptions: { keepAlive: 1 } } };
