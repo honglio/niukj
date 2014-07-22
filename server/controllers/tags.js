@@ -27,3 +27,29 @@ exports.index = function (req, res) {
     });
   });
 };
+
+exports.create = function (req, res) {
+  var article = req.article;
+
+  if(!req.body.tags) return res.redirect('/articles/' + article.id + '/manage');
+
+  article.addTag(req.body.tags, function (err) {
+    if (err) return res.render('500');
+    res.redirect('/articles/' + article.id + '/manage');
+  });
+}
+
+exports.destroy = function (req, res) {
+  var article = req.article;
+
+  if(!req.body.tags) return res.redirect('/articles/' + article.id + '/manage');
+
+  article.removeTag(req.body.tags, function (err) {
+    if (err) {
+      req.flash('errors', {msg: 'Oops! The tags was not found'});
+    } else {
+      req.flash('inform', {msg: 'Removed tags'});
+    }
+    res.redirect('/articles/' + article.id + '/manage');
+  });
+};

@@ -8,19 +8,25 @@ block content
       .col-md-6
         img(src="#{article.picture}" width="300" height="250")
         .meta
-          - if (article.user)
-            - var name = article.user.profile.name ? article.user.profile.name : article.user.email
-            p 作者 :&nbsp;
-              a(href="/account/"+article.user._id)= name
+          form.form-horizontal(method="POST", action='/articles/' + article._id + '/tags', role="form", enctype="multipart/form-data")
 
-          - if (article.tags)
-            p 标签 &nbsp;
-              - each tag in article.tags.split(',')
-                i.text-muted.fa.fa-tag &nbsp;
-                a.tag(href="/tags/"+tag)= tag
-                | &nbsp;&nbsp;
+            input(type="hidden", name="_csrf", value=_csrf)
 
-          p.text-muted= formatDate(article.createdAt, "YYYY年MM月DD日")
+            //- .form-group
+            //-   label.col-sm-2.control-label(for='desc') 介绍
+            //-   .col-sm-10
+            //-     textarea.form-control#desc(rows="5", name="desc", placeholder='Enter the article description')=article.desc
+
+            .form-group
+              label.col-sm-2.control-label(for='tags') Tags
+              .col-sm-10
+                input.form-control#tags(type='text', name="tags", value=article.getTag(), placeholder='Enter the tags')
+
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-primary(type='submit') Save
+                | &nbsp;
+                a.btn(href='/articles/my', title="cancel") Cancel
 
       .col-md-6
         - if (!article.isNew && article.image && article.image.filename)

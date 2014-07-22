@@ -133,6 +133,7 @@ module.exports = function (app, passport) {
   app.put('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.update);
   app.delete('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.destroy);
   app.get('/articles/:id/present', passportConf.isAuthenticated, articles.present);
+  app.post('/articles/:id/tags', passportConf.isAuthenticated, passportConf.article.isAuthorized, tags.create);
 
   // comment routes
   app.param('commentId', comments.load);

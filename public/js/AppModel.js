@@ -10,10 +10,8 @@ define(["backbone",
 
     function cleanHTMLTag(data) {
         if(data) {
-            data = data.replace(/<[^>]+>/g, '');
+            return data = data.replace(/<[^>]+>/g, '');
         }
-
-        return data;
     }
 
     return Backbone.Model.extend({
@@ -60,9 +58,11 @@ define(["backbone",
 
             exportData.slides.forEach(function (slide, i) {
                 slide.components.forEach(function (component, j) {
-                    var text = cleanHTMLTag(component.get('text'));
-                    component.set('text', text);
-                    exportData.slides[i].components[j] = component.toJSON();
+                    if(component.get) {
+                        var text = cleanHTMLTag(component.get('text'));
+                        component.set('text', text);
+                        exportData.slides[i].components[j] = component.toJSON();
+                    }
                 });
             });
 

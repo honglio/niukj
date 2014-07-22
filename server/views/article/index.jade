@@ -38,7 +38,7 @@ block content
               - if (article.tags)
                 | &nbsp; - &nbsp;
                 span 标签 &nbsp;
-                - each tag in article.tags.split(',')
+                - each tag in article.tags
                   i.text-muted.fa.fa-tag &nbsp;
                   a.tag(href="/tags/"+tag)= tag
                   | &nbsp;&nbsp;

@@ -4,22 +4,6 @@ var mongoose = require('mongoose')
   , utils = require('../../lib/utils');
 
 /**
- * Getters
- */
-
-var getTags = function (tags) {
-  return tags.join(',');
-};
-
-/**
- * Setters
- */
-
-var setTags = function (tags) {
-  return tags.split(',');
-};
-
-/**
  * Article Schema
  */
 var ComponentSchema = new mongoose.Schema({
@@ -68,7 +52,8 @@ var ArticleSchema = new mongoose.Schema({
     user: { type : mongoose.Schema.ObjectId, ref : 'Account' },
     createdAt: { type : Date, default : Date.now }
   }],
-  tags: {type: [], get: getTags, set: setTags},
+  tags: [],
+  desc: {type: String, default: ''},
   picture: { type : String, default : '' },
   createdAt: { type : Date, default : Date.now },
   hitCounter: { type: Number, default: 0 }
@@ -99,6 +84,22 @@ ArticleSchema.path('fileName').required(true, 'Article fileName cannot be blank'
 
 //   next();
 // });
+
+/**
+ * Getters
+ */
+
+var getTags = function (tags) {
+  return tags.join(',');
+};
+
+/**
+ * Setters
+ */
+
+var setTags = function (tags) {
+  return tags.split(',');
+};
 
 /**
  * Methods
@@ -172,7 +173,46 @@ ArticleSchema.methods = {
     if (~index) this.comments.splice(index, 1);
     else return cb('not found');
     this.save(cb);
-  }
+  },
+
+  /**
+   * Add tag
+   *
+   * @param {tag} String
+   * @param {Function} cb
+   * @api private
+   */
+  addTag: function (tag, cb) {
+    var tags = setTags(tag);
+    if(tags.reduce) this.tags = tags;
+    else this.tags.push(tags);
+    this.save(cb);
+  },
+
+  /**
+   * Add tag
+   *
+   * @param {tag} String
+   * @param {Function} cb
+   * @api private
+   */
+  getTag: function () {
+    return getTags(this.tags);
+  },
+
+  /**
+   * Remove tag
+   *
+   * @param {tag} String
+   * @param {Function} cb
+   * @api private
+   */
+  removeTag: function (tag, cb) {
+    var index = this.tags.indexOf(tag);
+    if (~index) this.tags.splice(index, 1);
+    else return cb('not found');
+    this.save(cb);
+  },
 };
 
 /**
