@@ -1,12 +1,12 @@
 define(["website/list/model/Deck",
     "templates"
-], function(DeckModel) {
+], function (DeckModel) {
     "use strict";
 
-    describe('DeckModel', function() {
+    describe('DeckModel', function () {
         var deckModel = new DeckModel();
-        describe('Initialization', function() {
-            it('should default the id to null', function() {
+        describe('Initialization', function () {
+            it('should default the id to null', function () {
                 expect(deckModel.get('_id')).to.equal(null);
             });
             it('urlRoot assignment', function () {

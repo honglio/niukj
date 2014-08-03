@@ -4,9 +4,10 @@ define(["jquery",
     "use strict";
 
     describe('Queue', function () {
-        var num = 3;
-        var a = 0;
-        var b = 0;
+        var num = 3,
+            a = 0,
+            b = 0,
+            queue = new Queue();
 
         function StepCB() {
             return a += 1;
@@ -15,7 +16,6 @@ define(["jquery",
         function CompleteCB() {
             return b += 99;
         }
-        var queue = new Queue();
 
         describe("module", function () {
             it("has trigger method", function () {
@@ -32,7 +32,7 @@ define(["jquery",
                 queue.enqueue(CompleteCB);
             });
             it("allow take", function () {
-                for (var i = num - 1; i >= 0; i-=1) {
+                for (var i = num - 1; i >= 0; i -= 1) {
                     queue.dequeue();
                 }
             });

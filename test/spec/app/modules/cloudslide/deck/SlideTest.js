@@ -1,70 +1,71 @@
-define(["lodash" ,"cloudslide/deck/Slide"],
-function(_, Slide) {
+define(["underscore", "cloudslide/deck/Slide"],
+function (_, Slide) {
     "use strict";
 
-    describe('Slide', function() {
-        var slide = new Slide();
+    function MockComponent() {
+        this.attrs = {
+            x: 0,
+            y: 0
+        };
+    }
+
+    MockComponent.prototype = {
+        on: function () {
+
+        },
+
+        get: function (key) {
+            var result = this.attrs[key];
+            console.log(result);
+            return result;
+        },
+
+        set: function (key, value) {
+            if (_.isObject(key)) {
+                _.extend(this.attrs, key);
+            } else {
+                this.attrs[key] = value;
+            }
+        },
+
+        trigger: function () {
+
+        },
+
+        off: function () {
+
+        }
+    };
+
+    describe('Slide', function () {
+        var slide = new Slide(),
+            comp = new MockComponent();
+
         slide.remark = 'MySlide';
 
-        describe("module load", function() {
-            it("has load method", function() {
+        describe("module load", function () {
+            it("has load method", function () {
                 expect(slide).to.be.a("object");
                 expect(Slide).to.be.a("function");
                 expect(slide.add).to.be.a("function");
             });
         });
 
-        describe("initialize", function() {
-            it("slide", function() {
+        describe("initialize", function () {
+            it("slide", function () {
                 expect(slide.remark).to.deep.equal('MySlide');
             });
         });
 
-        function MockComponent() {
-            this.attrs = {
-                x: 0,
-                y: 0
-            };
-        }
-
-        MockComponent.prototype = {
-            on: function() {
-
-            },
-
-            get: function(key) {
-                var result = this.attrs[key];
-                console.log(result);
-                return result;
-            },
-
-            set: function(key, value) {
-                if (_.isObject(key)) {
-                    _.extend(this.attrs, key);
-                } else {
-                    this.attrs[key] = value;
-                }
-            },
-
-            trigger: function() {
-
-            },
-
-            off: function() {
-
-            }
-        };
-        var comp = new MockComponent();
-
-        describe("add component", function() {
-            it("should trigger 'contentsChanged' event", function() {
-                var contentsChanged = false;
-                var addTriggered = false;
-                slide.on("contentsChanged", function() {
+        describe("add component", function () {
+            it("should trigger 'contentsChanged' event", function () {
+                var contentsChanged = false,
+                    addTriggered = false;
+                slide.on("contentsChanged", function () {
                     contentsChanged = true;
                 });
 
-                slide.on("change:components.add", function() {
+                slide.on("change:components.add", function () {
                     addTriggered = true;
                 });
 
@@ -77,7 +78,7 @@ function(_, Slide) {
                 expect(slide.get("components").length).to.deep.equal(1);
             });
 
-            it("add another component which will have 20px offset", function() {
+            it("add another component which will have 20px offset", function () {
                 slide.add(comp);
                 // Offset from existing component
                 expect(comp.get("x")).to.deep.equal(20);
@@ -86,16 +87,16 @@ function(_, Slide) {
             });
         });
 
-        describe("remove component", function() {
-            it("should trigger 'contentsChanged' event", function() {
-                var contentsChanged = false;
-                var removeTriggered = false;
+        describe("remove component", function () {
+            it("should trigger 'contentsChanged' event", function () {
+                var contentsChanged = false,
+                    removeTriggered = false;
 
-                slide.on("contentsChanged", function() {
+                slide.on("contentsChanged", function () {
                     contentsChanged = true;
                 });
 
-                slide.on("change:components.remove", function() {
+                slide.on("change:components.remove", function () {
                     removeTriggered = true;
                 });
 
@@ -108,19 +109,19 @@ function(_, Slide) {
         });
 
         // TODO
-        describe("dispose", function() {
+        describe("dispose", function () {
 
         });
 
-        describe("unselect components", function() {
+        describe("unselect components", function () {
 
         });
 
-        describe("Change selection", function() {
+        describe("Change selection", function () {
 
         });
 
-        describe("Update contained component change", function() {
+        describe("Update contained component change", function () {
 
         });
     });

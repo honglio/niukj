@@ -90,8 +90,8 @@ define(["common/collections/LinkedList"
             var list2 = new LinkedList();
 
             it("copy each element from list to list2", function () {
-                // console.log("During");
-                list.forEach(function (element, idx, array) {
+                // parameters: element, idx, array
+                list.forEach(function (element) {
                     list2.push(element);
                 });
 

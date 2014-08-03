@@ -4,17 +4,12 @@ define(["jquery",
     "use strict";
 
     describe('Iterator', function () {
-        var num = 5;
-        var array = [1, 2, 3];
-        var obj = {
-            a: 1,
-            b: 2,
-            c: 3,
-        };
-
-        var nIterator = new Iterator(num);
-        var aIterator = new Iterator(array);
-        var oIterator = new Iterator(obj);
+        var num = 5,
+            array = [1, 2, 3],
+            obj = { a: 1, b: 2, c: 3 },
+            nIterator = new Iterator(num),
+            aIterator = new Iterator(array),
+            oIterator = new Iterator(obj);
 
         describe("module", function () {
             it("has trigger method", function () {

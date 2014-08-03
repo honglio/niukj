@@ -5,9 +5,6 @@ require([
     "spec/app/scripts/common/collections/LinkedListTest",
 
     "spec/app/scripts/common/FileUtilsTest",
-    "spec/app/scripts/common/AdapterTest",
-    "spec/app/scripts/common/EventEmitterTest",
-    // "spec/app/scripts/common/ConcurrentTest",
     "spec/app/scripts/common/IteratorTest",
     "spec/app/scripts/common/MapResolverTest",
     "spec/app/scripts/common/Math2Test",
@@ -16,11 +13,9 @@ require([
     // "spec/app/scripts/common/web/interactions/SortableTest",
     "spec/app/scripts/common/web/undo_support/UndoHistoryTest",
 
-    "spec/app/modules/cloudslide/splash/SplashTest",
     "spec/app/modules/cloudslide/deck/DeckTest",
     "spec/app/modules/cloudslide/deck/SlideTest",
     // "spec/app/modules/cloudslide/slide_editor/view/SlideWellTest",
-    "spec/app/modules/website/editor/utils/ServiceRegistryTest",
 
     "spec/app/modules/website/list/view/DecklistTest",
     "spec/app/modules/website/list/view/DeckdetailTest",
@@ -30,9 +25,9 @@ require([
     "spec/app/modules/website/layout/view/HomeTest",
 
     // ***********************************************
-], function($) {
+], function ($) {
     "use strict";
-    $(function() {
+    $(function () {
         mocha.run();
     });
 
