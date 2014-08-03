@@ -232,8 +232,7 @@ define(["jquery", "underscore",
         dispose: function() {
             this._contextBox.dispose();
             this._sortable.dispose();
-			// TODO: snapshot view dispose.
-			Backbone.View.prototype.dispose.call(this);
+			CustomView.dispose.call(this);
         }
     });
 });

@@ -4,7 +4,6 @@ define(["css!styles/app/themes/backgroundClasses.css"
     return {
         title: 'background',
         backgrounds: [
-        // TODO: translate descriptions
             {klass: 'grad-bg-pink', description: 'Pink'},
             {klass: 'grad-bg-orange', description: 'Orange'},
             {klass: 'grad-bg-yellow', description: 'Yellow'},

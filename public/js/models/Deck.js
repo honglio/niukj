@@ -74,8 +74,6 @@ define(["underscore",
 			this.set('id', rawObj._id);
 			this.set('picture', rawObj.picture);
             undoHistory.clear();
-
-            // TODO: go through and dispose of all old slides...?
         },
 
         /**

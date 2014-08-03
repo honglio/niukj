@@ -593,9 +593,7 @@ define(['backbone'], function(Backbone) {
         });
     };
 
-    // TODO: how do we really want to do this?
-    // Allow a template to be provided?
-    // Construct based on some options object?
+    // provided a template
     etch.buttonElFactory = function(button) {
         return $('<a href="#" class="etch-editor-button etch-' + button + '" title="' + button.replace('-', ' ') + '"><span></span></a>');
     };

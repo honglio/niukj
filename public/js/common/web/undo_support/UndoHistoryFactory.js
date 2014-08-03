@@ -9,9 +9,6 @@ function(UndoHistory) {
     }
 
 	return {
-
-		// TODO: this should be gotten from the editor model
-		// and not some global managed instance.
 		managedInstance: function(key, opts) {
 			var instance = managedInstances[key];
 			if (!instance) {

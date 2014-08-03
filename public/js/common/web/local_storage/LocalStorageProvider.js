@@ -29,7 +29,6 @@ define(function() {
         },
 
         rm: function(fname, cb) {
-            // TODO: add this func to deleteDeck
             this.storageImpl.removeItem(prefix + fname);
             if (cb) {
                 cb(true);

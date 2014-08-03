@@ -51,11 +51,6 @@
         "aliyun-oss": "latest"
     },
     "devDependencies": {
-        "supertest": "latest",
-        "should": "latest",
-        "chai": "latest",
-        "mocha": "latest",
-        "nodemon": "latest",
         "grunt": "~0.4.1",
         "grunt-contrib-jshint": "~0.7.0",
         "grunt-contrib-cssmin": "~0.7.0",
