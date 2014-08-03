@@ -23,6 +23,7 @@ define(["underscore",
             this.model.on("change:active", this._activeChanged, this);
             this.model.on("contentsChanged", this.render, this);
             this.model.on("change:background", this.render, this);
+            this.model.on("destroy", this.remove, this);
         },
 
         /**
@@ -32,8 +33,8 @@ define(["underscore",
          * @param {{selected: boolean, active: boolean}} [options] Whether or not element should be selected and active.
          * @private
          */
-        _selected: function(e, options) {
-			this.model.set('active', true, options);
+        _selected: function() {
+			this.model.set('active', true);
         },
 
         isSelected: function() {

@@ -10,19 +10,21 @@
         <div class="col-md-5">
             <div class="clipboard-action-buttons">
                 <div class="btn-group">
-                    <a class="btn btn-default btn-icon icon-left">
+                    <a class="btn btn-default btn-icon icon-left undo">
                         <i class="icon-undo"></i> <strong>撤销</strong>
+                        {{undoName}}
                     </a>
-                    <a class="btn btn-default btn-icon icon-left">
+                    <a class="btn btn-default btn-icon icon-left redo">
                         <i class="icon-repeat"></i> <strong>重复</strong>
+                        {{redoName}}
                     </a>
-                    <a class="btn btn-default btn-icon icon-left">
+                    <a class="btn btn-default btn-icon icon-left copy">
                         <i class="icon-copy"></i> <strong>拷贝</strong>
                     </a>
-                    <a class="btn btn-default btn-icon icon-left">
+                    <a class="btn btn-default btn-icon icon-left paste">
                         <i class="icon-paste"></i> <strong>粘贴</strong>
                     </a>
-                    <a class="btn btn-default btn-icon icon-left">
+                    <a class="btn btn-default btn-icon icon-left cut">
                         <i class="icon-cut"></i> <strong>剪切</strong>
                     </a>
                 </div>

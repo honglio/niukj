@@ -11,11 +11,15 @@ define(["jquery", "underscore",
         className: 'slideWell hidden-phone',
 
         events: {
-            mousedown: '_focus',
+            'mousedown': '_focus',
             destroyed: 'remove'
         },
 
         initialize: function() {
+            this._cut = this._cut.bind(this);
+            this._copy = this._copy.bind(this);
+            this._paste = this._paste.bind(this);
+
             this._deck = this.model.deck();
             this._deck.on("slideAdded", this._slideAdded, this);
             // this._deck.on("slideMoved", this._slideMoved, this);
@@ -29,6 +33,11 @@ define(["jquery", "underscore",
             this._contextBox.render();
             this.$slides = $('<div class="scrollbar">');
             this.$slides.on('click', '.slideSnapshot', this._clicked);
+
+            this.$actBtn = $('.clipboard-action-buttons');
+            this.$actBtn.on('click', '.cut', this._cut);
+            this.$actBtn.on('click', '.copy', this._copy);
+            this.$actBtn.on('click', '.paste', this._paste);
 
             // this._sortable = new Sortable({
             //     // container: this.$slides,
@@ -44,6 +53,10 @@ define(["jquery", "underscore",
 			// this._calculateLayout = this._calculateLayout.bind(this);
    //          var lazyLayout = _.debounce(this._calculateLayout, 300);
    //          $(window).resize(lazyLayout);
+
+            // HeadbarView.on('cut', this._cut, this);
+            // HeadbarView.on('copy', this._copy, this);
+            // HeadbarView.on('paste', this._paste, this);
         },
 
         __matrixToArray: function(matrix) {
@@ -67,11 +80,13 @@ define(["jquery", "underscore",
          * @private
          */
         _focus: function() {
+            console.log(this.$actBtn);
             this.model.set('scope', 'slideWell');
         },
 
 
 		__isFocused: function() {
+            console.log(this.model);
 			return this.model.get('scope') === 'slideWell';
 		},
 
@@ -93,6 +108,7 @@ define(["jquery", "underscore",
          * @private
          */
         _cut: function() {
+            console.log(this.__isFocused);
             if (this.__isFocused()) {
                 var slide = this._deck.get('activeSlide');
                 this._deck.remove(slide);
@@ -106,6 +122,7 @@ define(["jquery", "underscore",
          * @private
          */
         _delete: function() {
+            console.log(this.__isFocused);
             if (this.__isFocused()) {
                 var slide = this._deck.get('activeSlide');
                 this._deck.remove(slide);
@@ -118,6 +135,7 @@ define(["jquery", "underscore",
          * @private
          */
         _copy: function() {
+            console.log(this.__isFocused);
             if (this.__isFocused()) {
                 var slide = this._deck.get('activeSlide');
                 this._clipboard.item = slide;
@@ -132,7 +150,8 @@ define(["jquery", "underscore",
             var item = this._clipboard.item;
             if (item && item.type === 'slide') {
 				var slide = this._deck.get('activeSlide');
-                this._deck.add(item.clone(), slide.get('index'));
+                var index = slide.get('index') ? slide.get('index') : slide.index;
+                this._deck.add(item.clone(), index);
             }
         },
 

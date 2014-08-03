@@ -12,6 +12,11 @@ define(["CustomView",
     return CustomView.extend({
         className: 'page-header',
         events: {
+            'click .undo': 'undo',
+            'click .redo': 'redo',
+            // 'click .copy': 'copy',
+            // 'click .paste': 'paste',
+            // 'click .cut': 'cut',
             destroyed: 'remove'
         },
         initialize: function() {
@@ -34,12 +39,14 @@ define(["CustomView",
             });
         },
 
-        // TODO: need to respond to addition/removal of
-        // create component buttons
         render: function() {
+            // this.$el.html(HeadbarTemplate({
+            //     undoName: this.model._undoHistory.undoName(),
+            //     redoName: this.model._undoHistory.redoName()
+            // }));
             this.$el.html(HeadbarTemplate());
 
-            var $saveBtn = this.$el.find('.save-button')
+            var $saveBtn = this.$el.find('.save-button');
             $saveBtn.append(this._saveButton.render().$el);
 
             var $createCompButtons = this.$el.find('.create-comp-buttons > div');
@@ -50,6 +57,30 @@ define(["CustomView",
 
             return this;
         },
+
+        undo: function() {
+            this.model._undoHistory.undo();
+            // this.initialize();
+            // this.render();
+        },
+
+        redo: function() {
+            this.model._undoHistory.redo();
+            // this.initialize();
+            // this.render();
+        },
+
+        // copy: function() {
+        //     $(this).trigger('copy');
+        // },
+
+        // paste: function() {
+        //     $(this).trigger('paste');
+        // },
+
+        // cut: function() {
+        //     $(this).trigger('cut');
+        // },
 
         dispose: function(){
             this._saveButton.dispose();

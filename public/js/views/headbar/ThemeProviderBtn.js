@@ -8,9 +8,10 @@ function(CustomView) {
         events: {
             destroyed: 'remove'
         },
-        attributes: {'data-toggle': "dropdown",
-                     'data-target': "#dropdown-menu"
-                    },
+        attributes: {
+            'data-toggle': "dropdown",
+            'data-target': "#dropdown-menu"
+        },
 
         render: function() {
             this.$el.html('<i class="icon-gear"></i><strong>背景</strong>');

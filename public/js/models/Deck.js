@@ -90,8 +90,9 @@ define(["underscore",
             options = options || {};
             options.at = _.isNumber(options.at) ? options.at : collection.length;
             this.set('activeSlide', slide, options);
-            this.trigger("slideAdded", slide, options);
             this._registerWithSlide(slide);
+            this.trigger("slideAdded", slide, options);
+            // this.set('activeSlide', slide, options);
         },
         /**
          * React on slide being disposed.
@@ -160,7 +161,7 @@ define(["underscore",
         _registerWithSlide: function(slide) {
             slide.on("change:active", this._slideActivate, this);
             slide.on("change:selected", this._selectionChanged, this);
-            // slide.on("dispose", this._slideDisposed, this);
+            slide.on("destroy", this._slideDisposed, this);
         },
         /**
          * Creates a new slide. The newly created slide is set as the active
@@ -196,9 +197,9 @@ define(["underscore",
                 lastSelectedSlideIndex = allSlides.indexOf(this.selected);
             }
 
-            // console.log(options.at);
+            console.log(options.at);
             options.at = _.isNumber(options.at) ? options.at : (options.preserveIndexes ? slide.get('index') : lastSelectedSlideIndex + 1) || 0;
-            // console.log(options.at);
+            console.log(options.at);
 
             allSlides.add(slide, options);
         },
@@ -247,6 +248,8 @@ define(["underscore",
          */
         _activeSlideChanging: function(newActive, options) {
             var lastActive = this.get('activeSlide');
+            console.log(lastActive);
+            console.log(newActive);
             if (newActive === lastActive) {
                 return;
             }

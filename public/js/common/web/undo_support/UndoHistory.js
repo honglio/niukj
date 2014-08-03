@@ -49,6 +49,7 @@ define([
                     this.actions.head = node;
                     this.actions.length = 1;
                 } else {
+                    console.log(this.cursor);
                     node.prev = this.cursor;
                     this.cursor.next.prev = null;
                     this.cursor.next = node;
@@ -136,11 +137,14 @@ define([
         if (this.undoCount < this.actions.length) {
             if (this.cursor === null || this.cursor === undefined) {
                 this.cursor = this.actions.tail;
+            } else {
+                this.cursor = this.cursor.prev;
             }
             this.cursor.value.undo();
-            this.cursor = this.cursor.prev;
-            this.undoCount += 1;
-            this.emit("updated");
+            if(this.cursor !== this.actions.head) {
+                this.undoCount += 1;
+                this.emit("updated");
+            }
         }
         return this;
     };
@@ -152,15 +156,17 @@ define([
      *
      */
     UndoHistory.prototype.redo = function() {
-        if (this.undoCount > 0) {
+        if (this.undoCount > 0 && this.undoCount < this.actions.length) {
             if (this.cursor === null || this.cursor === undefined) {
                 this.cursor = this.actions.head;
             } else {
                 this.cursor = this.cursor.next;
             }
-            this.cursor.value["do"]();
-            this.undoCount -= 1;
-            this.emit("updated");
+            this.cursor.value.do();
+            if(this.cursor !== this.actions.tail) {
+                this.undoCount -= 1;
+                this.emit("updated");
+            }
         }
         return this;
     };

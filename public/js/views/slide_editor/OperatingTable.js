@@ -15,6 +15,10 @@ define(["CustomView",
         },
 
         initialize: function() {
+            this._cut = this._cut.bind(this);
+            this._copy = this._copy.bind(this);
+            this._paste = this._paste.bind(this);
+
             this._deck = this.model.deck();
             this._activeSlide = this._deck.get('activeSlide');
             this._clipboard = this.model.clipboard;
@@ -22,11 +26,17 @@ define(["CustomView",
             // this._calculateLayout = this._calculateLayout.bind(this);
             // var lazyLayout = _.debounce(this._calculateLayout, 300);
             // $(window).resize(lazyLayout);
+
             this.setModel(this._activeSlide);
             // Re-render when active slide changes in the deck
             this._deck.on("change:activeSlide", function(deck, model) {
                 this.setModel(model);
             }, this);
+
+            this.$actBtn = $('.clipboard-action-buttons');
+            this.$actBtn.on('click', '.cut', this._cut);
+            this.$actBtn.on('click', '.copy', this._copy);
+            this.$actBtn.on('click', '.paste', this._paste);
         },
 
         render: function() {
@@ -99,20 +109,24 @@ define(["CustomView",
         },
 
         _clicked: function() {
-            this._focus();
-            this.model.get('components').forEach(function(comp) {
-                if (comp.get('selected')) {
-                    comp.set('selected', false);
-                }
-            });
-            this.$el.find('.editable').removeClass('editable').attr('contenteditable', false)
-                .trigger("editComplete");
-
-            this._focus();
+            if (this._focus()) {
+                this.model.get('components').forEach(function(comp) {
+                    if (comp.get('selected')) {
+                        comp.set('selected', false);
+                    }
+                });
+                this.$el.find('.editable').removeClass('editable')
+                    .attr('contenteditable', false).trigger("editComplete");
+                this._focus();
+            }
         },
 
         _focus: function() {
-            this.model.set('scope', 'operatingTable');
+            if(this.model) {
+                this.model.set('scope', 'operatingTable');
+                return true;
+            }
+            return false;
         },
 
         _dragover: function(e) {

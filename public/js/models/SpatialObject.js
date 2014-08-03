@@ -31,6 +31,10 @@ define(["backbone",
             this.set(name, value);
         },
 
+        dispose: function() {
+            Backbone.Model.prototype.destroy.apply(this, arguments);
+        },
+
         constructor: function TextBox() {
             Backbone.Model.prototype.constructor.apply(this, arguments);
         }
