@@ -245,4 +245,11 @@ app/bower_components
 ## Log
 #############
 
-log/
+log
+body-parser
+chai
+compression
+aliyun-oss
+async
+bcrypt-nodejs
+node_modules

@@ -1,11 +1,4 @@
 'use strict';
-var LIVERELOAD_PORT = 35729;
-var lrSnippet = require('connect-livereload')({
-    port: LIVERELOAD_PORT
-});
-var mountFolder = function(connect, dir) {
-    return connect.static(require('path').resolve(dir));
-};
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -22,68 +15,64 @@ module.exports = function(grunt) {
 
     // configurable paths
     var yeomanConfig = {
-        app: 'app',
+        app: 'public',
+        server: 'server',
         dist: 'dist',
         test: 'test',
-        hbs: '<%= yeoman.app %>/**/templates/*.hbs',
-        jsall: '<%= yeoman.app %>/**/*.js',
+        hbs: ['<%= yeoman.app %>/templates/**/*.hbs', '<%= yeoman.app %>/js/common/web/widgets/templates/*.hbs'],
+        jsApp: '<%= yeoman.app %>/js/**/*.js',
+        jsServer: ['<%= yeoman.server %>/models/**/*.js', '<%= yeoman.server %>/controllers/**/*.js'],
+        jade: '<%= yeoman.server %>/views/**/*.jade',
+        css: '{.tmp,<%= yeoman.app %>}/css/**/*.css'
     };
 
     grunt.initConfig({
         yeoman: yeomanConfig,
 
+        // ### Config for grunt-contrib-watch
+        // Watch files and livereload in the browser during development
         watch: {
-            options: {
-                nospawn: true
+            handlebars: {
+                files: ['<%= yeoman.hbs %>']
             },
             livereload: {
-                options: {
-                    livereload: LIVERELOAD_PORT
-                },
                 files: [
-                    '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
-                    '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp}'
-                ]
+                    '<%= yeoman.hbs %>',
+                    '<%= yeoman.css %>',
+                    '<%= yeoman.jsApp %>',
+                    '<%= yeoman.app %>/img/**/*.{png,jpg,jpeg,gif,webp}'
+                ],
+                options: {
+                    livereload: true
+                }
             },
-            handlebars: {
-                files: ['<%= yeoman.hbs %>'],
-                tasks: ['handlebars']
+            express: {
+                // Restart any time server js files change
+                files:  ['<%= yeoman.jsServer %>'],
+                tasks:  ['express:dev'],
+                options: {
+                    //Without this option specified express won't be reloaded
+                    nospawn: true
+                }
             }
         },
-        connect: {
+        // ### Config for grunt-express-server
+        // Start our server in development
+        express: {
             options: {
-                port: 9000,
-                // change this to '0.0.0.0' to access the server from outside
-                hostname: '0.0.0.0'
+                script: 'app.js',
+                output: 'Niukj is running'
             },
-            livereload: {
+
+            dev: {
                 options: {
-                    middleware: function(connect) {
-                        return [
-                            lrSnippet,
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'app')
-                        ];
-                    }
+                    //output: 'Express server listening on address:.*$'
                 }
             },
             test: {
                 options: {
-                    middleware: function(connect) {
-                        return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test'),
-                            mountFolder(connect, 'app')
-                        ];
-                    }
+                    node_env: 'testing'
                 }
-            }
-        },
-        open: {
-            server: {
-                path: 'http://localhost:<%= connect.options.port %>'
             }
         },
         clean: {
@@ -130,7 +119,7 @@ module.exports = function(grunt) {
                     log: true,
                     run: false,
                     reporter: 'Spec', // or Nyan
-                    urls: ['http://localhost:<%= connect.options.port %>/index.html']
+                    urls: ['http://localhost:3000/index.html']
                 }
             }
         },
@@ -203,16 +192,13 @@ module.exports = function(grunt) {
     grunt.registerTask('server', function(target) {
         grunt.task.run([
             'clean:server',
-            'connect:livereload',
-            'open',
+            'express:dev',
             'watch'
         ]);
     });
 
     grunt.registerTask('test', [
         'clean:server',
-        'connect:test',
-        'open',
         'mocha'
     ]);
 
