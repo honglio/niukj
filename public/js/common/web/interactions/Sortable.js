@@ -1,5 +1,5 @@
-define(["underscore", "common/EventEmitter"],
-function(_, EventEmitter) {
+define(["underscore", "backbone"],
+function(_, Backbone) {
 	"use strict";
 
 	function Sortable(options) {
@@ -22,7 +22,7 @@ function(_, EventEmitter) {
 			y: 0
 		};
 
-    _.extend(this, new EventEmitter());
+    _.extend(this, Backbone.Events);
 	}
 
 	Sortable.prototype = {
@@ -124,7 +124,7 @@ function(_, EventEmitter) {
 			this._$lastItem = undefined;
 			this._$placeholder = undefined;
 
-			this.emit('sortstop', this._sortableStart, this._sortableEnd);
+			this.trigger('sortstop', this._sortableStart, this._sortableEnd);
 		},
 
 		_moved: function(e) {
