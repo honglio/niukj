@@ -247,6 +247,10 @@ pip-log.txt
 /node_modules/time-grunt
 /node_modules/view-helpers
 /node_modules/winston
+/node_modules/aliyun-oss
+/node_modules/passport
+/node_modules/passport-local
+/node_modules/passport-linkedin-oauth2
 temp
 dist
 .sass-cache
