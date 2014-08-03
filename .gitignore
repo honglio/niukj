@@ -218,16 +218,16 @@ pip-log.txt
 ## Nodejs
 #############
 
-node_modules/grunt*
-node_modules/express*
-node_modules/connect*
-node_modules/jade*
-node_modules/mongo*
-node_modules/node*
-node_modules/request*
-node_modules/underscore*
-node_modules/lusca*
-node_modules/match*
+/node_modules/grunt*
+/node_modules/express*
+/node_modules/connect*
+/node_modules/jade*
+/node_modules/mongo*
+/node_modules/node*
+/node_modules/request*
+/node_modules/underscore*
+/node_modules/lusca*
+/node_modules/match*
 /node_modules/body-parser
 /node_modules/chai
 /node_modules/compression

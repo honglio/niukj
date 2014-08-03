@@ -29,52 +29,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         yeoman: yeomanConfig,
 
-        // ### Config for grunt-contrib-watch
-        // Watch files and livereload in the browser during development
-        watch: {
-            handlebars: {
-                files: ['<%= yeoman.hbs %>']
-            },
-            livereload: {
-                files: [
-                    '<%= yeoman.hbs %>',
-                    '<%= yeoman.css %>',
-                    '<%= yeoman.jsApp %>',
-                    '<%= yeoman.app %>/img/**/*.{png,jpg,jpeg,gif,webp}'
-                ],
-                options: {
-                    livereload: true
-                }
-            },
-            express: {
-                // Restart any time server js files change
-                files:  ['<%= yeoman.jsServer %>'],
-                tasks:  ['express:dev'],
-                options: {
-                    //Without this option specified express won't be reloaded
-                    nospawn: true
-                }
-            }
-        },
-        // ### Config for grunt-express-server
-        // Start our server in development
-        express: {
-            options: {
-                script: 'app.js',
-                output: 'Niukj is running'
-            },
-
-            dev: {
-                options: {
-                    //output: 'Express server listening on address:.*$'
-                }
-            },
-            test: {
-                options: {
-                    node_env: 'testing'
-                }
-            }
-        },
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
             server: '.tmp'
