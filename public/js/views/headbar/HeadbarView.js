@@ -14,9 +14,6 @@ define(["CustomView",
         events: {
             'click .undo': 'undo',
             'click .redo': 'redo',
-            // 'click .copy': 'copy',
-            // 'click .paste': 'paste',
-            // 'click .cut': 'cut',
             destroyed: 'remove'
         },
         initialize: function() {
@@ -40,10 +37,13 @@ define(["CustomView",
         },
 
         render: function() {
+            // Uncomment this, if you want to display name of action
+            /*************************************************/
             // this.$el.html(HeadbarTemplate({
             //     undoName: this.model._undoHistory.undoName(),
             //     redoName: this.model._undoHistory.redoName()
             // }));
+            /*************************************************/
             this.$el.html(HeadbarTemplate());
 
             var $saveBtn = this.$el.find('.save-button');
@@ -60,27 +60,17 @@ define(["CustomView",
 
         undo: function() {
             this.model._undoHistory.undo();
+            // Uncomment this, if you want to display name of action
             // this.initialize();
             // this.render();
         },
 
         redo: function() {
             this.model._undoHistory.redo();
+            // Uncomment this, if you want to display name of action
             // this.initialize();
             // this.render();
         },
-
-        // copy: function() {
-        //     $(this).trigger('copy');
-        // },
-
-        // paste: function() {
-        //     $(this).trigger('paste');
-        // },
-
-        // cut: function() {
-        //     $(this).trigger('cut');
-        // },
 
         dispose: function(){
             this._saveButton.dispose();

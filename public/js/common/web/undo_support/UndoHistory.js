@@ -1,8 +1,7 @@
 define([
     "underscore",
-    "common/EventEmitter",
     "common/collections/LinkedList"
-], function(_, EventEmitter, LinkedList) {
+], function(_, LinkedList) {
     "use strict";
 
     /**
@@ -67,7 +66,6 @@ define([
             this.actions.shift();
             this.actions.push(command);
         }
-        this.emit("updated");
     };
 
     /**
@@ -137,13 +135,13 @@ define([
         if (this.undoCount < this.actions.length) {
             if (this.cursor === null || this.cursor === undefined) {
                 this.cursor = this.actions.tail;
-            } else {
-                this.cursor = this.cursor.prev;
             }
             this.cursor.value.undo();
+            if (this.cursor !== null || this.cursor !== undefined) {
+                this.cursor = this.cursor.prev;
+            }
             if(this.cursor !== this.actions.head) {
                 this.undoCount += 1;
-                this.emit("updated");
             }
         }
         return this;
@@ -159,19 +157,17 @@ define([
         if (this.undoCount > 0 && this.undoCount < this.actions.length) {
             if (this.cursor === null || this.cursor === undefined) {
                 this.cursor = this.actions.head;
-            } else {
-                this.cursor = this.cursor.next;
             }
             this.cursor.value.do();
+            if (this.cursor !== null || this.cursor !== undefined) {
+                this.cursor = this.cursor.next;
+            }
             if(this.cursor !== this.actions.tail) {
                 this.undoCount -= 1;
-                this.emit("updated");
             }
         }
         return this;
     };
-
-	_.extend(UndoHistory.prototype, EventEmitter.prototype);
 
     return UndoHistory;
 });

@@ -39,13 +39,13 @@ define(["jquery", "underscore",
             this.$actBtn.on('click', '.copy', this._copy);
             this.$actBtn.on('click', '.paste', this._paste);
 
-            // this._sortable = new Sortable({
-            //     // container: this.$slides,
-            //     // selector: '> .slideSnapshot',
-            //     scrollParent: this.$el[0]
-            // });
+            this._sortable = new Sortable({
+                container: this.$slides,
+                selector: '> .slideSnapshot',
+                scrollParent: this.$el[0]
+            });
 
-            // this._sortable.on("sortstop", this._sortStopped, this);
+            this._sortable.on("sortstop", this._sortStopped, this);
 
             this._clipboard = this.model.clipboard;
 
