@@ -228,6 +228,25 @@ node_modules/request*
 node_modules/underscore*
 node_modules/lusca*
 node_modules/match*
+/node_modules/body-parser
+/node_modules/chai
+/node_modules/compression
+/node_modules/async
+/node_modules/bcrypt-nodejs
+/node_modules/mocha
+/node_modules/morgan
+/node_modules/multer
+/node_modules/.bin
+/node_modules/cookie-parser
+/node_modules/errorhandler
+/node_modules/method-override
+/node_modules/mime
+/node_modules/serve-favicon
+/node_modules/should
+/node_modules/supertest
+/node_modules/time-grunt
+/node_modules/view-helpers
+/node_modules/winston
 temp
 dist
 .sass-cache
@@ -245,11 +264,4 @@ app/bower_components
 ## Log
 #############
 
-log
-body-parser
-chai
-compression
-aliyun-oss
-async
-bcrypt-nodejs
-node_modules
+log/
