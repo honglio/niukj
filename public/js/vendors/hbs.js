@@ -1,5 +1,5 @@
 /**
- * @license Handlebars hbs 0.4.0 - Alex Sexton, but Handlebars has its own licensing junk
+ * @license Handlebars hbs 0.8.1 - Alex Sexton, but Handlebars has its own licensing junk
  *
  * Available via the MIT or new BSD license.
  * see: http://github.com/jrburke/require-cs for details on the plugin this was based off of
@@ -92,7 +92,7 @@ define([
     fetchText = function (url, callback) {
       var xdm = false;
       // If url is a fully qualified URL, it might be a cross domain request. Check for that.
-    // IF url is a relative url, it cannot be cross domain.
+	  // IF url is a relative url, it cannot be cross domain.
       if (url.indexOf('http') != 0 ){
           xdm = false;
       }else{
@@ -189,7 +189,7 @@ define([
       }
     },
 
-    version: '0.5.0',
+    version: '0.8.1',
 
     load: function (name, parentRequire, load, config) {
       //>>excludeStart('excludeHbs', pragmas.excludeHbs)
@@ -232,7 +232,7 @@ define([
         if ( nodes && nodes.statements ) {
           res = recursiveNodeSearch( nodes.statements, [] );
         }
-        return _(res).unique();
+        return _.unique(res);
       }
 
       // See if the first item is a comment that's json
@@ -309,6 +309,7 @@ define([
                   || param instanceof Handlebars.AST.StringNode
                   || param instanceof Handlebars.AST.IntegerNode
                   || param instanceof Handlebars.AST.BooleanNode
+                  || param instanceof Handlebars.AST.DataNode
                   || param instanceof Handlebars.AST.SexprNode
                 ) {
                   helpersres.push(statement.id.string);
@@ -334,7 +335,6 @@ define([
                       }
                     });
                   }
-
                 }
 
                 parts = composeParts( param.parts );
@@ -347,6 +347,19 @@ define([
                   }
                 }
               });
+              if (typeof statement.hash !== 'undefined' && typeof statement.hash.pairs !== 'undefined') {
+                //Even if it has no regular params, it may be a helper with hash params
+                _(statement.hash.pairs).forEach(function(pair) {
+                  var pairValue = pair[1];
+                  if (pairValue instanceof Handlebars.AST.StringNode
+                    || pairValue instanceof Handlebars.AST.IntegerNode
+                    || pairValue instanceof Handlebars.AST.BooleanNode
+                    //TODO: Add support for subexpressions here?
+                  ) {
+                    helpersres.push(statement.id.string);
+                  }
+                });
+              }
             }
           }
 
