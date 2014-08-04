@@ -4,8 +4,7 @@
     span.alert-icon
       i.fa.fa-fire.icon-white
     | &#160; &#160;
-    for error in messages.errors
-      strong= error.msg
+    strong= messages.errors[messages.errors.length - 1].msg
 
 - if (messages.inform)
   .alert.alert-info.fade.in
@@ -13,8 +12,7 @@
     span.alert-icon
       i.fa.fa-bullhorn.icon-white
     | &#160; &#160;
-    for info in messages.inform
-      strong= info.msg
+    strong= messages.inform[messages.inform.length -1].msg
 
 - if (messages.successful)
   .alert.alert-success.fade.in
@@ -22,5 +20,4 @@
     span.alert-icon
       i.fa.fa-thumbs-up.icon-white
     | &#160; &#160;
-    for success in messages.successful
-      strong= success.msg
+    strong= messages.successful[messages.successful.length -1].msg

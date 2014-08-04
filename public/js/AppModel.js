@@ -49,15 +49,18 @@ define(["backbone",
             if (filename) {
                 this._deck.set('fileName', filename);
             }
-            var exportData = this._deck.toJSON();
-            exportData.activeSlide = exportData.activeSlide.toJSON();
-            // exportData.activeSlide.components.forEach(function (component, i) {
-            //     exportData.activeSlide.components[i] = component.toJSON();
-            // })
-            exportData.slides = exportData.slides.toJSON();
 
-            exportData.slides.forEach(function (slide, i) {
-                slide.components.forEach(function (component, j) {
+            var exportData = this._deck.toJSON();
+            exportData.activeSlide = this._deck.get('activeSlide').toJSON();
+            this._deck.get('activeSlide').get('components').forEach(function (component, i) {
+                var text = cleanHTMLTag(component.get('text'));
+                component.set('text', text);
+                exportData.activeSlide.components[i] = component.toJSON();
+            })
+
+            exportData.slides = this._deck.get('slides').toJSON();
+            this._deck.get('slides').forEach(function (slide, i) {
+                slide.get('components').forEach(function (component, j) {
                     if(component.get) {
                         var text = cleanHTMLTag(component.get('text'));
                         component.set('text', text);
@@ -65,7 +68,6 @@ define(["backbone",
                     }
                 });
             });
-
             return exportData;
         },
 

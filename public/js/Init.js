@@ -1,4 +1,4 @@
-define(['router', 'etch_extension', 'bootstrap'], function(router, Etch, Bootstrap) {
+define(['AppView', 'etch_extension', 'bootstrap', 'config', 'colorpicker'], function(AppView, Etch) {
   var initialize = function() {
     // TODO: we'll have to make a more generic one that hooks into
     // the storage providers...
@@ -37,8 +37,9 @@ define(['router', 'etch_extension', 'bootstrap'], function(router, Etch, Bootstr
 
     // Init Etch, the text editor
     Etch.initialize();
-    // Backbone App start
-    Backbone.history.start();
+
+    // start the App
+    $('#content').append(new AppView().render().$el);
   };
 
   return {

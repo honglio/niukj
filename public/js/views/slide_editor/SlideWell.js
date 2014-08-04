@@ -22,7 +22,7 @@ define(["jquery", "underscore",
 
             this._deck = this.model.deck();
             this._deck.on("slideAdded", this._slideAdded, this);
-            // this._deck.on("slideMoved", this._slideMoved, this);
+            this._deck.on("slideMoved", this._slideMoved, this);
 			this._deck.get('slides').on("reset", this._slidesReset, this);
 
             // update ContextBox'slide index when slide change or reset;

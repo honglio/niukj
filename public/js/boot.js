@@ -39,6 +39,6 @@ require.config({
   }
 });
 
-require(['Init', 'config', 'colorpicker'], function(Init) {
+require(['Init'], function(Init) {
   Init.initialize();
 });
