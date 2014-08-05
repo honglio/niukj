@@ -58,12 +58,12 @@ define(["underscore",
         // },
         // ****************************************************
 
-        _dblclicked: function(e) {
+        _dblclicked: function(event) {
             this.$el.addClass("editable");
             this.$textEl.attr('contenteditable', true);
-            if (e) {
+            if (event) {
                 this._initialText = this.$textEl.html(); // for undo
-                etch.editableInit.call(this, e, this.model.get('y') * this.dragScale + 35);
+                etch.editableInit.call(this, event, this.model.get('y') * this.dragScale + 35);
 
                 // Focus editor and select all text.
                 if (!this.editing) {
@@ -71,10 +71,10 @@ define(["underscore",
                     try {
                         document.execCommand('selectAll', false, null);
                         etch.triggerCaret();
-                    } catch (e) {
+                    } catch (err) {
                         // firefox failboats on this command
                         // for some reason.  hence the try/catch
-                        // console.log(e);
+                        // console.log(err);
                     }
                 }
             }
@@ -88,19 +88,19 @@ define(["underscore",
         //     }
         // },
 
-        _mousedown: function(e) {
+        _mousedown: function(event) {
             if (this.editing) {
-                e.stopPropagation();
-                etch.editableInit.call(this, e, this.model.get('y') * this.dragScale + 35);
+                event.stopPropagation();
+                etch.editableInit.call(this, event, this.model.get('y') * this.dragScale + 35);
             } else {
                 ComponentView.prototype.mousedown.apply(this, arguments);
             }
         },
 
-        _mouseup: function(e) {
+        _mouseup: function(event) {
             if (this.editing) {
                 etch.triggerCaret(); // update font attr to editor model
-                //etch.editableInit.call(this, e, this.model.get("y") * this.dragScale + 35);
+                //etch.editableInit.call(this, event, this.model.get("y") * this.dragScale + 35);
             }
             ComponentView.prototype.mouseup.apply(this, arguments);
         },
@@ -111,10 +111,10 @@ define(["underscore",
          *
          * @param {Event} e
          */
-        keydown: function(e) {
+        keydown: function(event) {
             // When user starts typing text in selected textbox, open edit mode immediately.
             if (this.model.get("selected") && !this.editing) {
-                if (!e.ctrlKey && !e.altKey && !e.metaKey && String.fromCharCode(e.which).match(/[\w]/)) {
+                if (!event.ctrlKey && !event.altKey && !event.metaKey && String.fromCharCode(event.which).match(/[\w]/)) {
                     this.edit();
                 }
             }

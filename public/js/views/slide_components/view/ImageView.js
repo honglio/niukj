@@ -1,5 +1,5 @@
-define(["./Component", "./Mixers"],
-function(ComponentView, Mixers) {
+define(["./Component"],
+function(ComponentView) {
     "use strict";
 
     return ComponentView.extend({

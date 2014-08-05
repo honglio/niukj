@@ -25,13 +25,13 @@ exports.postLogin = function(req, res, next) {
   }
 
   passport.authenticate('local', function(err, user, info) {
-    if (err) return next(err);
+    if (err) { return next(err); }
     if (!user) {
       req.flash('errors', { msg: info.message });
       return res.redirect('/login');
     }
     req.logIn(user, function(err) {
-      if (err) return next(err);
+      if (err) { return next(err); }
       req.flash('successful', { msg: 'Success! You are logged in.' });
       // res.redirect(req.session.returnTo || '/');
       res.redirect('/articles');
@@ -70,9 +70,9 @@ exports.postSignup = function(req, res, next) {
       return res.redirect('/signup');
     }
     user.save(function(err) {
-      if (err) return next(err);
+      if (err) { return next(err); }
       req.logIn(user, function(err) {
-        if (err) return next(err);
+        if (err) { return next(err); }
         res.redirect('/');
       });
     });
@@ -135,7 +135,7 @@ exports.postReset = function(req, res, next) {
           user.resetPasswordExpires = undefined;
 
           user.save(function(err) {
-            if (err) return next(err);
+            if (err) { return next(err); }
             req.logIn(user, function(err) {
               done(err, user);
             });
@@ -157,7 +157,7 @@ exports.postReset = function(req, res, next) {
       });
     }
   ], function(err) {
-    if (err) return next(err);
+    if (err) { return next(err); }
     res.redirect('/');
   });
 };
@@ -217,7 +217,7 @@ exports.postForgot = function(req, res, next) {
       });
     }
   ], function(err) {
-    if (err) return next(err);
+    if (err) { return next(err); }
     res.redirect('/forgot');
   });
 };

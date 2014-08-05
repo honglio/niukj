@@ -5,8 +5,7 @@ define(["CustomView"], function(CustomView) {
         tagName: 'a',
 
         events: {
-            click: '_clicked',
-            destroyed: 'remove'
+            click: '_clicked'
         },
 
         initialize: function() {},
@@ -87,10 +86,6 @@ define(["CustomView"], function(CustomView) {
             this.$el.html('<i class="' + this.options.icon + '"></i>' + ' <strong>' + this.options
                 .name + '</strong>');
             return this;
-        },
-
-        constructor: function() {
-            Backbone.View.prototype.constructor.apply(this, arguments);
         }
     });
 });

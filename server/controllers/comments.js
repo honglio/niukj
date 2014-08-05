@@ -1,4 +1,3 @@
-var mongoose = require('mongoose');
 var utils = require('../../lib/utils');
 
 /**
@@ -8,7 +7,7 @@ var utils = require('../../lib/utils');
 exports.load = function (req, res, next, id) {
   var article = req.article;
   utils.findByParam(article.comments, { id: id }, function (err, comment) {
-    if (err) return next(err);
+    if (err) { return next(err); }
     req.comment = comment;
     next();
   });
@@ -22,13 +21,13 @@ exports.create = function (req, res) {
   var article = req.article;
   var user = req.user;
 
-  if (!req.body.body) return res.redirect('/articles/'+ article.id + '/present');
+  if (!req.body.body) { return res.redirect('/articles/'+ article.id + '/present'); }
 
   article.addComment(user, req.body, function (err) {
-    if (err) return res.render('500');
+    if (err) { return res.render('500'); }
     res.redirect('/articles/'+ article.id + '/present');
   });
-}
+};
 
 /**
  * Delete comment

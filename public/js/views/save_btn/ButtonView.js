@@ -6,8 +6,7 @@ define(["CustomView",
         className: 'btn btn-success',
         tagName: 'a',
         events: {
-            click: 'save',
-            destroyed: 'remove'
+            click: 'save'
         },
 
         initialize: function() {

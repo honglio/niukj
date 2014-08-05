@@ -18,6 +18,8 @@ var express = require('express'),
     config = require('./config'),
     whitelist = ['/url1', '/url2'];
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = function (app, passport) {
     // set backend views path, template engine and default layout
     app.set('views', config.root + '/server/views');
@@ -31,9 +33,15 @@ module.exports = function (app, passport) {
         level: 9
     }));
 
-    app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
+    if(process.env.NODE_ENV === 'development') {
+        app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
+        app.use(express.static(config.root + '/public'));
+    } else {
+        app.use(favicon(config.root + '/built/img/ico/favicon.ico'));
+        app.use(express.static(config.root + '/built'));
+    }
+
     app.use(multer());
-    app.use(express.static(config.root + '/public'));
 
     winston.add(winston.transports.File, {
         filename: 'log/all-logs.txt'

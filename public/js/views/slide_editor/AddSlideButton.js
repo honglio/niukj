@@ -4,8 +4,7 @@ function(CustomView) {
     return CustomView.extend({
         className: 'addBtn btn btn-warning',
         events: {
-            click: '_addSlide',
-            destroyed: 'remove'
+            click: '_addSlide'
         },
 
 		initialize: function() {

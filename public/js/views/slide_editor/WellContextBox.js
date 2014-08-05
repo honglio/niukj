@@ -7,10 +7,6 @@ define(["CustomView",
     return CustomView.extend({
         className: 'wellContextBox',
 
-        events: {
-            destroyed: 'remove'
-        },
-
         initialize: function() {
             this._slideIndex = 0;
 

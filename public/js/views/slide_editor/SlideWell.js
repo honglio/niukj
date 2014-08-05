@@ -3,16 +3,16 @@ define(["jquery", "underscore",
     "../slide_snapshot/SlideSnapshot",
     "./WellContextBox",
     "common/web/interactions/Sortable",
-    "css!styles/app/slide_editor/slideWell.css"
-], function($, _, CustomView, SlideSnapshot, WellContextBox, Sortable, css) {
+    "css!styles/app/slide_editor/slideWell.css",
+    "config"
+], function($, _, CustomView, SlideSnapshot, WellContextBox, Sortable, css, Config) {
     "use strict";
 
     return CustomView.extend({
         className: 'slideWell hidden-phone',
 
         events: {
-            'mousedown': '_focus',
-            destroyed: 'remove'
+            'mousedown': '_focus'
         },
 
         initialize: function() {
@@ -67,7 +67,7 @@ define(["jquery", "underscore",
 
         _calculateLayout: function() {
             var scale = this.__matrixToArray($('.slideContainer').css(window.browserPrefix + 'transform'));
-            var height = config.slide.size.height;
+            var height = Config.slide.size.height;
             if (scale) {
                 height *= scale[3];
             }
@@ -80,13 +80,11 @@ define(["jquery", "underscore",
          * @private
          */
         _focus: function() {
-            console.log(this.$actBtn);
             this.model.set('scope', 'slideWell');
         },
 
 
 		__isFocused: function() {
-            console.log(this.model);
 			return this.model.get('scope') === 'slideWell';
 		},
 
@@ -108,7 +106,6 @@ define(["jquery", "underscore",
          * @private
          */
         _cut: function() {
-            console.log(this.__isFocused);
             if (this.__isFocused()) {
                 var slide = this._deck.get('activeSlide');
                 this._deck.remove(slide);
@@ -122,7 +119,6 @@ define(["jquery", "underscore",
          * @private
          */
         _delete: function() {
-            console.log(this.__isFocused);
             if (this.__isFocused()) {
                 var slide = this._deck.get('activeSlide');
                 this._deck.remove(slide);
@@ -135,7 +131,6 @@ define(["jquery", "underscore",
          * @private
          */
         _copy: function() {
-            console.log(this.__isFocused);
             if (this.__isFocused()) {
                 var slide = this._deck.get('activeSlide');
                 this._clipboard.item = slide;

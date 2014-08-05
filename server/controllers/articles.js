@@ -1,9 +1,9 @@
-var mongoose = require('mongoose')
-  , Article = mongoose.model('Article')
-  , utils = require('../../lib/utils')
-  , extend = require('util')._extend
-  , math2 = require('../../lib/math2')
-  , config = require('../../config/config');
+var mongoose = require('mongoose'),
+    Article = mongoose.model('Article'),
+    utils = require('../../lib/utils'),
+    extend = require('util')._extend,
+    math2 = require('../../lib/math2'),
+    config = require('../../config/config');
 
 /**
  * Load
@@ -11,8 +11,8 @@ var mongoose = require('mongoose')
 
 exports.load = function(req, res, next, id){
   Article.load(id, function (err, article) {
-    if (err) return next(err);
-    if (!article) return next(new Error('not found'));
+    if (err) { return next(err); }
+    if (!article) { return next(new Error('not found')); }
     req.article = article;
     next();
   });
@@ -34,7 +34,7 @@ exports.search = function(req, res){
   console.log(page);
 
   Article.list(options, function(err, articles) {
-    if (err) return res.render('500');
+    if (err) { return res.render('500'); }
     console.log(utils.formatDate);
     res.render('article/index', {
       title: '搜索到的课件',
@@ -59,7 +59,7 @@ exports.explore = function(req, res){
   };
 
   Article.list(options, function(err, articles) {
-    if (err) return res.render('500');
+    if (err) { return res.render('500'); }
     res.render('article/index', {
       title: '探索课件',
       articles: articles,
@@ -88,7 +88,7 @@ exports.my = function(req, res){
   console.log(page);
 
   Article.list(options, function(err, articles) {
-    if (err) return res.render('500');
+    if (err) { return res.render('500'); }
     res.render('article/index', {
       title: '我的课件',
       articles: articles,
@@ -121,7 +121,7 @@ exports.create = function (req, res, next) {
   // console.log(article);
 
   article.save(function (err) {
-    if (err) return next(err);
+    if (err) { return next(err); }
     req.flash('successful', {msg: 'Successfully created article!'});
     return res.send(article._id);
   });
@@ -149,14 +149,14 @@ exports.update = function(req, res, next){
   article = extend(article, req.body.article);
   // console.log(article);
   article.save(function(err) {
-    if (err) return next(err);
+    if (err) { return next(err); }
     return res.send(article._id);
   });
 };
 
 exports.getContent = function(req, res) {
   res.send(req.article);
-}
+};
 
 /**
  * Show
@@ -180,7 +180,7 @@ exports.present = function(req, res){
 
   slides.forEach(function(slide) {
       var x = slide.x;
-      var y = slide.y;
+      // var y = slide.y;
 
       if (x == null) {
           // adjust the distance between slides during display
@@ -213,7 +213,12 @@ exports.present = function(req, res){
 exports.destroy = function(req, res){
   var article = req.article;
   article.remove(function(err){
-    req.flash('inform', {msg: 'Deleted successfully'});
-    res.redirect('/articles');
+    if (err) {
+      req.flash('errors', {msg: 'Delete failed!'});
+      res.redirect('/articles/my');
+    } else {
+      req.flash('inform', {msg: 'Deleted successfully!'});
+      res.redirect('/articles/my');
+    }
   });
 };

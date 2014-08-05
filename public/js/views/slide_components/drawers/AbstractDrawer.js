@@ -6,7 +6,7 @@ define(function() {
     }
 
     AbstractDrawer.prototype.applyTransforms = function(component, bbox) {
-        var scale = component.get('scale');
+        // var scale = component.get('scale');
         this.g2d.translate(bbox.x / 2, bbox.y / 1.5); // draw on current position
 
         // //  draw scale

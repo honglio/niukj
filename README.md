@@ -1,3 +1,10 @@
+# TODO #
+
+
+- Add user tutor.
+- Enable cotrollers/api.js
+- upload image to aliyun-oss
+
 # Contributing #
 
 Here is the basic layout of the source:

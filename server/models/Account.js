@@ -51,13 +51,13 @@ var AccountSchema = new mongoose.Schema({
 AccountSchema.pre('save', function(next) {
   var account = this;
 
-  if (!account.isModified('password')) return next();
+  if (!account.isModified('password')) { return next(); }
 
   bcrypt.genSalt(5, function(err, salt) {
-    if (err) return next(err);
+    if (err) { return next(err); }
 
     bcrypt.hash(account.password, salt, null, function(err, hash) {
-      if (err) return next(err);
+      if (err) { return next(err); }
       account.password = hash;
       next();
     });
@@ -104,20 +104,20 @@ AccountSchema.statics = {
   },
 
   removeFollower: function(account, contactId) {
-    if ( null == account.contacts.followers ) return;
+    if ( null == account.contacts.followers ) { return; }
 
     account.contacts.followers.forEach(function(follower) {
-      if ( follower.accountId == contactId ) {
+      if ( follower.accountId.toString() === contactId ) {
         account.contacts.followers.remove(follower);
       }
     });
   },
 
   removeFollowing: function(account, contactId) {
-    if ( null == account.contacts.followings ) return;
+    if ( null == account.contacts.followings ) { return; }
 
     account.contacts.followings.forEach(function(following) {
-      if ( following.accountId == contactId ) {
+      if ( following.accountId.toString() === contactId ) {
         account.contacts.followings.remove(following);
       }
     });
@@ -125,21 +125,21 @@ AccountSchema.statics = {
 
     // check if has follower
   hasFollower: function(account, contactId) {
-    if ( null == account.contacts.followers ) return false;
+    if ( null == account.contacts.followers ) { return false; }
     var length = account.contacts.followers.length;
-    for (var i=0; i<length; i++) {
-      if ( account.contacts.followers[i].accountId == contactId ) return true;
+    for (var i = 0; i < length; i += 1) {
+      if ( account.contacts.followers[i].accountId.toString() === contactId ) { return true; }
     }
     return false;
   },
 
   // check if has following
   hasFollowing: function(account, contactId) {
-    if ( null == account.contacts.followings ) return false;
+    if ( null == account.contacts.followings ) { return false; }
     // Shouldn't use forEach, because callback will block the process. so function return false always.
     var length = account.contacts.followings.length;
-    for (var i=0; i<length; i++) {
-      if ( account.contacts.followings[i].accountId == contactId ) return true;
+    for (var i = 0; i < length; i += 1) {
+      if ( account.contacts.followings[i].accountId.toString() === contactId ) { return true; }
     }
     return false;
   }
@@ -152,7 +152,7 @@ AccountSchema.methods = {
    */
   comparePassword: function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-      if (err) return cb(err);
+      if (err) { return cb(err); }
       cb(null, isMatch);
     });
   },
@@ -163,7 +163,7 @@ AccountSchema.methods = {
    */
 
   gravatar: function(size) {
-    if (!size) size = 200;
+    if (!size) { size = 200; }
 
     if (!this.email) {
       return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';

@@ -6,10 +6,6 @@ define(["CustomView",
     return CustomView.extend({
         className: 'slideEditor row-fluid',
 
-        events: {
-            destroyed: 'remove'
-        },
-
         initialize: function() {
             this._well = new SlideWell({model: this.model});
             this._opTable = new OperatingTable({model: this.model});
@@ -25,7 +21,7 @@ define(["CustomView",
         dispose: function() {
             this._well.dispose();
             this._opTable.dispose();
-            Backbone.View.prototype.dispose.call(this);
+            CustomView.prototype.dispose.call(this);
         }
     });
 });

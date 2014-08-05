@@ -9,7 +9,5 @@ define(function() {
         }
     };
 
-    window.config = config;
-
     return config;
 });

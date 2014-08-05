@@ -9,8 +9,7 @@ define(["CustomView",
         events: {
             "paste input[name='filename']": '_filenameEnterd',
             "keyup input[name='filename']": '_filenameEnterd',
-            "click .ok": '_okClicked',
-            destroyed: 'remove'
+            "click .ok": '_okClicked'
         },
 
         initialize: function() {
@@ -73,7 +72,7 @@ define(["CustomView",
             var serialized = {
                 article: this.model.exportPresentation(filename),
                 _csrf: csrf
-            }
+            };
 
             if(!this.model.deck().get('id')) {
                 this.storageInterface.store(serialized, function (id) {

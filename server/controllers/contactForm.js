@@ -67,4 +67,4 @@ exports.subscribe = function (req, res) {
     req.flash('successful', { msg: 'You have been subscribed.' });
     res.redirect('/');
   });
-}
+};

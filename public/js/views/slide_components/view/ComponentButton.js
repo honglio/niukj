@@ -6,8 +6,7 @@ define(["CustomView"
 		tagName: 'a',
 
 		events: {
-			click: '_clicked',
-            destroyed: 'remove'
+			click: '_clicked'
 		},
 
 		initialize: function() {

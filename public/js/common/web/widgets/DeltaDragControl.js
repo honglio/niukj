@@ -1,6 +1,6 @@
 define(function() {
     "use strict";
-    var events = ["mousedown", "mousemove", "mouseup"];
+    // events : ["mousedown", "mousemove", "mouseup"];
 
     function DragControl($el, stopProp) {
         this.$el = $el;
@@ -52,7 +52,7 @@ define(function() {
         }
     };
 
-    DragControl.prototype.mouseup = function(e) {
+    DragControl.prototype.mouseup = function() {
         if (this._dragging) {
             this._dragging = false;
             this.$el.trigger("deltadragStop");

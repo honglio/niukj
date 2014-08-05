@@ -1,7 +1,7 @@
-var mongoose = require('mongoose')
-  , config = require('../../config/config')
-  , OSS = require('aliyun-oss')
-  , utils = require('../../lib/utils');
+var mongoose = require('mongoose'),
+    config = require('../../config/config'),
+    OSS = require('aliyun-oss'),
+    utils = require('../../lib/utils');
 
 /**
  * Article Schema
@@ -116,7 +116,7 @@ ArticleSchema.methods = {
    */
 
   uploadAndSave: function (image, cb) {
-    if (!image.name || !image.src) return this.save(cb);
+    if (!image.name || !image.src) { return this.save(cb); }
 
     console.log(image);
     var oss = OSS.createClient(config.oss);
@@ -170,8 +170,11 @@ ArticleSchema.methods = {
 
   removeComment: function (commentId, cb) {
     var index = utils.indexof(this.comments, { id: commentId });
-    if (~index) this.comments.splice(index, 1);
-    else return cb('not found');
+    if (index !== -1) {
+      this.comments.splice(index, 1);
+    } else {
+      return cb('not found');
+    }
     this.save(cb);
   },
 
@@ -184,8 +187,11 @@ ArticleSchema.methods = {
    */
   addTag: function (tag, cb) {
     var tags = setTags(tag);
-    if(tags.reduce) this.tags = tags;
-    else this.tags.push(tags);
+    if(tags.reduce) {
+      this.tags = tags;
+    } else {
+      this.tags.push(tags);
+    }
     this.save(cb);
   },
 
@@ -209,8 +215,11 @@ ArticleSchema.methods = {
    */
   removeTag: function (tag, cb) {
     var index = this.tags.indexOf(tag);
-    if (~index) this.tags.splice(index, 1);
-    else return cb('not found');
+    if (index !== -1) {
+      this.tags.splice(index, 1);
+    } else {
+      return cb('not found');
+    }
     this.save(cb);
   },
 };
@@ -247,13 +256,13 @@ ArticleSchema.statics = {
   list: function (options, cb) {
     var criteria = options.criteria || {};
     var fields = options.fields || null;
-    var options = options.options || {};
+    var opt = options.options || {};
 
-    this.find(criteria, fields, options)
+    this.find(criteria, fields, opt)
       .populate('user', 'profile')
       .sort({'createdAt': -1}) // sort by date
-      .limit(options.perPage)
-      .skip(options.perPage * options.page)
+      .limit(opt.perPage)
+      .skip(opt.perPage * opt.page)
       .exec(cb);
   }
 

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose')
-  , Article = mongoose.model('Article');
+var mongoose = require('mongoose'),
+    Article = mongoose.model('Article');
 
 /**
  * List items tagged with a tag
@@ -16,7 +16,7 @@ exports.index = function (req, res) {
   };
 
   Article.list(options, function(err, articles) {
-    if (err) return res.render('500');
+    if (err) { return res.render('500'); }
     Article.count(criteria).exec(function (err, count) {
       res.render('article/index', {
         title: '标签 ' + req.param('tag'),
@@ -31,18 +31,18 @@ exports.index = function (req, res) {
 exports.create = function (req, res) {
   var article = req.article;
 
-  if(!req.body.tags) return res.redirect('/articles/' + article.id + '/manage');
+  if(!req.body.tags) { return res.redirect('/articles/' + article.id + '/manage'); }
 
   article.addTag(req.body.tags, function (err) {
-    if (err) return res.render('500');
+    if (err) { return res.render('500'); }
     res.redirect('/articles/' + article.id + '/manage');
   });
-}
+};
 
 exports.destroy = function (req, res) {
   var article = req.article;
 
-  if(!req.body.tags) return res.redirect('/articles/' + article.id + '/manage');
+  if(!req.body.tags) { return res.redirect('/articles/' + article.id + '/manage'); }
 
   article.removeTag(req.body.tags, function (err) {
     if (err) {

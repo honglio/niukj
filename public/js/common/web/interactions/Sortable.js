@@ -22,7 +22,7 @@ function(_, Backbone) {
 			y: 0
 		};
 
-    _.extend(this, Backbone.Events);
+    	_.extend(this, Backbone.Events);
 	}
 
 	Sortable.prototype = {
@@ -66,8 +66,7 @@ function(_, Backbone) {
 				var $item = $(this);
 
 				var offset = $item.position();
-				var itemH = $item.outerHeight();
-				var itemW = $item.outerWidth;
+
 				var r = parseInt(offset.top / h, 10);
 				var c = parseInt(offset.left / w, 10);
 
@@ -95,10 +94,10 @@ function(_, Backbone) {
 			return index;
 		},
 
-		_released: function(e) {
+		_released: function() {
 			this._dragging = false;
 			if (this._$currentTarget == null) {return;}
-			this._$currentTarget.removeClass('ui-sortable-helper')
+			this._$currentTarget.removeClass('ui-sortable-helper');
 			this._$currentTarget.css({
 				position: '',
 				top: '',
@@ -117,7 +116,7 @@ function(_, Backbone) {
 				return;
 			}
 
-			if (this._$children == null) {return;}
+			if (this._$children == null) { return; }
 
 			this._sortableEnd = this._$container.find(this._selector).index(this._$currentTarget[0]);
 			this._$currentTarget = undefined;
@@ -139,7 +138,7 @@ function(_, Backbone) {
 						margin: 0,
 						padding: 0
 					});
-					this._$currentTarget.addClass('ui-sortable-helper')
+					this._$currentTarget.addClass('ui-sortable-helper');
 					this._$currentTarget.css({
 						position: 'absolute',
 						'z-index': 1

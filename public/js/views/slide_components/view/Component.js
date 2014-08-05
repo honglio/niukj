@@ -1,11 +1,11 @@
 define(["jquery", "CustomView",
     "common/web/widgets/DeltaDragControl",
     "common/Math2",
-    "css!styles/app/slide_components/Component.css",
     "models/ComponentCommands",
     "common/web/undo_support/UndoHistoryFactory",
-    "hbs!templates/Component"
-], function($, CustomView, DeltaDragControl, Math2, css,
+    "hbs!templates/Component",
+    "css!styles/app/slide_components/Component.css",
+], function($, CustomView, DeltaDragControl, Math2,
             ComponentCommands, UndoHistoryFactory, ComponentTemplate) {
     "use strict";
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
@@ -19,8 +19,7 @@ define(["jquery", "CustomView",
 				"click .remove-icon": 'removeClicked',
 				"mousedown .remove-icon": 'removePressed',
 				"deltadrag span[data-delta='scale']": 'scale',
-				"deltadragStart span[data-delta='scale']": 'scaleStart',
-				destroyed: 'remove'
+				"deltadragStart span[data-delta='scale']": 'scaleStart'
 			};
         },
         initialize: function() {
@@ -49,7 +48,7 @@ define(["jquery", "CustomView",
                 this._initialScale = {
                     x: 1,
                     y: 1
-                }
+                };
             }
         },
         _selectionChanged: function(model, selected) {
@@ -208,15 +207,6 @@ define(["jquery", "CustomView",
         _unrender: function() {
             this.remove();
         },
-        remove: function() {
-            Backbone.View.prototype.remove.call(this);
-            this._deltaDrags.forEach(function(deltaDrag) {
-				deltaDrag.dispose();
-			});
-            this.model.off(null, null, this);
-            $(document).unbind("mouseup", this._mouseup);
-            $(document).unbind("mousemove", this._mousemove);
-        },
         dispose: function() {
             this._deltaDrags.forEach(function(deltaDrag) {
                 deltaDrag.dispose();
@@ -251,7 +241,7 @@ define(["jquery", "CustomView",
             if (this._dragging) {
                 this._dragging = false;
                 this.$el.removeClass("dragged");
-                if (this.dragStartLoc && this.dragStartLoc.x != this.model.get('x') && this.dragStartLoc.y != this.model.get('y')) {
+                if (this.dragStartLoc && this.dragStartLoc.x !== this.model.get('x') && this.dragStartLoc.y !== this.model.get('y')) {
                     var cmd = new ComponentCommands.Move(this.dragStartLoc, this.model);
                     this.model.slide.trigger('contentsChanged');
                     undoHistory.push(cmd);

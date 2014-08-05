@@ -1,7 +1,8 @@
 define(["underscore",
         "../slide_components/drawers/TextBoxDrawer",
-        "../slide_components/drawers/ImageDrawer"
-], function(_, TextBoxDrawer, ImageDrawer) {
+        "../slide_components/drawers/ImageDrawer",
+        "config"
+], function(_, TextBoxDrawer, ImageDrawer, Config) {
     "use strict";
     /**
      * Slide snapshot drawer. Paints all elements on little slide thumbnail in SlideWell.
@@ -17,8 +18,8 @@ define(["underscore",
         };
 
         this.scale = {
-            x: this.size.width / config.slide.size.width * 0.66,
-            y: this.size.height / config.slide.size.height * 0.66
+            x: this.size.width / Config.slide.size.width * 0.66,
+            y: this.size.height / Config.slide.size.height * 0.66
         };
 
         this._drawers = {};
@@ -33,18 +34,14 @@ define(["underscore",
     SlideDrawer.prototype = {
 
         paint: function() {
-            console.log(this.bg);
             this.g2d.save();
             this.g2d.fillStyle = this.bg;
             this.g2d.fillRect(0, 0, this.size.width, this.size.height);
             this.g2d.restore();
             // paint component
-            console.log(this.model);
             var components = this.model.get('components');
-            console.log(components);
             for (var i in components) {
                 if(components.hasOwnProperty(i)) {
-                    console.log(components[i]);
                     var type = components[i].get('type');
                     var drawer = this._drawers[type];
                     if (drawer) {

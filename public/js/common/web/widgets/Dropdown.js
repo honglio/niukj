@@ -1,7 +1,7 @@
 define(["underscore",
         "backbone",
         "css!styles/app/widgets/widgets.css"
-], function(_, Backbone, css) {
+], function(_, Backbone) {
 	"use strict";
 	function Dropdown(model, template) {
 		this.$el = $('<div class="notifications dropdown" id="dropdown-menu">');

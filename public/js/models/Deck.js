@@ -7,9 +7,10 @@ define(["underscore",
     "./SlideCommands",
     "common/web/undo_support/UndoHistoryFactory",
     "./Slide",
-], function (_, Backbone, SlideCollection, SlideCommands, UndoHistoryFactory, Slide) {
+    "config"
+], function (_, Backbone, SlideCollection, SlideCommands, UndoHistoryFactory, Slide, Config) {
     "use strict";
-    var slideConfig = window.config.slide;
+    var slideConfig = Config.slide;
     /**
         This represents a slide deck.  It has a title, a currently active
         slide, a collection of slides, the filename on "disk" and
@@ -144,7 +145,7 @@ define(["underscore",
          * @param {boolean} value
          * @private
          */
-        _selectionChanged: function(slide, value, options) {
+        _selectionChanged: function(slide, value) {
 			if (value) {
 				this.selected = this.get('activeSlide');
 			}
@@ -195,9 +196,7 @@ define(["underscore",
                 lastSelectedSlideIndex = allSlides.indexOf(this.selected);
             }
 
-            console.log(options.at);
             options.at = _.isNumber(options.at) ? options.at : (options.preserveIndexes ? slide.get('index') : lastSelectedSlideIndex + 1) || 0;
-            console.log(options.at);
 
             allSlides.add(slide, options);
         },
@@ -246,8 +245,7 @@ define(["underscore",
          */
         _activeSlideChanging: function(newActive, options) {
             var lastActive = this.get('activeSlide');
-            console.log(lastActive);
-            console.log(newActive);
+
             if (newActive === lastActive) {
                 return;
             }

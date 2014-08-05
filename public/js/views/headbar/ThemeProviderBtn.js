@@ -5,9 +5,6 @@ function(CustomView) {
         className: 'btn btn-primary dropdown-toggle',
         tagName: 'a',
         id: 'themeProvider',
-        events: {
-            destroyed: 'remove'
-        },
         attributes: {
             'data-toggle': "dropdown",
             'data-target': "#dropdown-menu"

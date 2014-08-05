@@ -57,7 +57,6 @@ define(['models/TextBox',
          * @returns {Component}
          */
         createModel: function(rawModel) {
-            console.log(rawModel);
             var type;
             if (typeof rawModel === 'string') {
                 type = rawModel;

@@ -1,8 +1,9 @@
 define(["CustomView",
     "css!styles/app/slide_editor/operatingTable.css",
     "../slide_components/ComponentFactory",
-    "models/Component"
-], function(CustomView, css, ComponentFactory, Component) {
+    "models/Component",
+    "config"
+], function(CustomView, css, ComponentFactory, Component, Config) {
     "use strict";
     return CustomView.extend({
         className: 'operatingTable',
@@ -10,8 +11,7 @@ define(["CustomView",
             click: '_clicked',
             focused: '_focus',
             dragover: '_dragover',
-            drop: '_drop',
-            destroyed: 'remove'
+            drop: '_drop'
         },
 
         initialize: function() {
@@ -44,7 +44,7 @@ define(["CustomView",
             // this.$el.css('width', 1020);
             // this.$el.css('height', 764);
             this.$el.html(this._$slideContainer);
-            this._$slideContainer.css(config.slide.size);
+            this._$slideContainer.css(Config.slide.size);
 
             var background = this._activeSlide ? this._activeSlide.get('background') : 'defaultbg';
             this._$slideContainer.addClass(background);
@@ -203,7 +203,7 @@ define(["CustomView",
             var width = this.$el.width();
             var height = this.$el.height();
 
-            var slideSize = config.slide.size;
+            var slideSize = Config.slide.size;
 
             var xScale = width / slideSize.width;
             var yScale = (height - 20) / slideSize.height;

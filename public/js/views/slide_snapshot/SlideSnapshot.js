@@ -15,15 +15,14 @@ define(["underscore",
             "mouseenter .remove-icon": '_removeSelected',
             "mouseleave .remove-icon": '_removeUnselected',
             "click .remove-icon": '_removeClicked',
-            "mousedown .remove-icon": '_removePressed',
-            destroyed: 'remove'
+            "mousedown .remove-icon": '_removePressed'
         },
 
         initialize: function() {
             this.model.on("change:active", this._activeChanged, this);
             this.model.on("contentsChanged", this.render, this);
             this.model.on("change:background", this.render, this);
-            this.model.on("destroy", this.remove, this);
+            this.model.on("destroy", this.dispose, this);
         },
 
         /**
@@ -74,12 +73,12 @@ define(["underscore",
          *
          * @param {boolean} removeModel
          */
-        remove: function(removeModel) {
+        dispose: function(removeModel) {
             this._slideDrawer.dispose();
             this.$el.data('jsView', null);
             this.model.off(null, null, this);
             this.options.deck.off(null, null, this);
-            Backbone.View.prototype.remove.apply(this, arguments);
+            CustomView.prototype.remove.apply(this, arguments);
 
             if (removeModel) {
                 this.options.deck.remove(this.model);
@@ -94,7 +93,6 @@ define(["underscore",
          * @private
          */
         _activeChanged: function(model, value) {
-			console.log('_activeChanged');
             if (value) {
                 this.$el.addClass('active');
             }
@@ -172,8 +170,7 @@ define(["underscore",
             this._slideDrawer.paint();
 
             // update picture
-            if(this.isSelected() && this.model.get('index') == '0') {
-                console.log('updatePicture');
+            if(this.isSelected() && this.model.get('index') === '0') {
                 var img = this._toImage(this.$el.find('canvas')[0]);
                 this.options.deck.set('picture', img.src);
             }

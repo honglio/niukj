@@ -1,4 +1,4 @@
-define(['AppView', 'etch_extension', 'bootstrap', 'config', 'colorpicker'], function(AppView, Etch) {
+define(['AppView', 'etch_extension', 'bootstrap', 'colorpicker'], function(AppView, Etch) {
   var initialize = function() {
     // TODO: we'll have to make a more generic one that hooks into
     // the storage providers...
@@ -11,7 +11,6 @@ define(['AppView', 'etch_extension', 'bootstrap', 'config', 'colorpicker'], func
         }
       }
     };
-    /*global function end*/
 
     // is there any better 3rd party zTracker
     window.zTracker = {

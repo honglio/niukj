@@ -1,4 +1,4 @@
-define(function(require) {
+define(["underscore", "backbone"], function(_, Backbone) {
   var CustomView = Backbone.View.extend({
     dispose: function() {
       // check whether the View can be disposed.

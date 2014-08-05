@@ -10,7 +10,7 @@ define(["backbone",
 
     function cleanHTMLTag(data) {
         if(data) {
-            return data = data.replace(/<[^>]+>/g, '');
+            return data.replace(/<[^>]+>/g, '');
         }
     }
 
@@ -23,8 +23,10 @@ define(["backbone",
             var storageInterface = new StorageInterface();
 
             var length = Backbone.history.location.href.length;
+
+            var id;
             if(length > 34) {
-                var id = Backbone.history.location.href.substr(length-29, 24);
+                id = Backbone.history.location.href.substr(length-29, 24);
             }
 
             var self = this;
@@ -56,7 +58,7 @@ define(["backbone",
                 var text = cleanHTMLTag(component.get('text'));
                 component.set('text', text);
                 exportData.activeSlide.components[i] = component.toJSON();
-            })
+            });
 
             exportData.slides = this._deck.get('slides').toJSON();
             this._deck.get('slides').forEach(function (slide, i) {

@@ -16,7 +16,6 @@ define(["./ButtonView"
 
     return {
         initialize: function(registry) {
-            console.log('screen_help register');
             registry.register({
                 interfaces: 'cloudslide.ScreenHelpButtonProvider'
             }, service);

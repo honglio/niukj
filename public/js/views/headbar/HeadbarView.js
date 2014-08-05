@@ -13,8 +13,7 @@ define(["CustomView",
         className: 'page-header',
         events: {
             'click .undo': 'undo',
-            'click .redo': 'redo',
-            destroyed: 'remove'
+            'click .redo': 'redo'
         },
         initialize: function() {
             this._saveButton = new SaveButton({model: this.model});

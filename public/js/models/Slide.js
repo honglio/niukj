@@ -187,11 +187,9 @@ define(["underscore",
         /**
          * React on component being changed.
          *
-         * @param {Component} model
-         * @param {*} value
          * @private
          */
-        _componentChanged: function(model, value) {
+        _componentChanged: function() {
             this.trigger("contentsChanged");
         },
 
