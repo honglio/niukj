@@ -2,8 +2,8 @@
 
 
 - Add user tutor.
-- Enable cotrollers/api.js
-- upload image to aliyun-oss
+- Enable cotrollers/api.js ? Not hurry to enable, after large user has asked to.
+- upload image to aliyun-oss ? 走外网，无法防止盗链！走内网太麻烦，影响主机速度。
 
 # Contributing #
 
