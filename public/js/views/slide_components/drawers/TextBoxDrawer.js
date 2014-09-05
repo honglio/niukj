@@ -12,15 +12,19 @@ define(["underscore", "./AbstractDrawer"
     _.extend(TextBoxDrawer.prototype, AbstractDrawer.prototype);
 
     TextBoxDrawer.prototype.paint = function(textBox) {
-        this.g2d.fillStyle = textBox.get('color');
-        var lineHeight = textBox.get('size') * 0.35;
-        this.g2d.font = lineHeight + 'px ' + textBox.get('face');
-        var text = this._convertSpaces(textBox.get('text'));
+        this.g2d.fillStyle = textBox.color ? textBox.color : textBox.get('color');
+        var lineHeight = (textBox.size ? textBox.size : textBox.get('size')) * 0.35;
+        if (textBox.face || textBox.get) {
+            var face = textBox.face ? textBox.face : textBox.get('face');
+            this.g2d.font = lineHeight + 'px ' + face;
+        }
+
+        var text = this._convertSpaces(textBox.text ? textBox.text : textBox.get('text'));
         var lines = this._extractLines(text);
         var txtWidth = this._findWidestWidth(lines);
         var bbox = {
-            x: textBox.get('x') * this.scale.x,
-            y: textBox.get('y') * this.scale.y
+            x: (textBox.x ? textBox.x : textBox.get('x')) * this.scale.x,
+            y: (textBox.y ? textBox.y : textBox.get('y')) * this.scale.y
         };
 
         this.applyTransforms(textBox, bbox);

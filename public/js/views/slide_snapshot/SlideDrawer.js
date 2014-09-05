@@ -42,7 +42,8 @@ define(["underscore",
             var components = this.model.get('components');
             for (var i in components) {
                 if(components.hasOwnProperty(i)) {
-                    var type = components[i].get('type');
+                    var type = components[i].type ? components[i].type : components[i].get('type');
+
                     var drawer = this._drawers[type];
                     if (drawer) {
                         this.g2d.save();

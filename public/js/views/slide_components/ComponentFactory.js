@@ -41,7 +41,7 @@ define(['models/TextBox',
          * @returns {ComponentView}
          */
         createView: function(model) {
-            var type = model.get('type') ? model.get('type') : model.type;
+            var type = model.type ? model.type : model.get('type');
             var Ctor = this._viewCtors[type];
             if (Ctor) {
                 return new Ctor({
