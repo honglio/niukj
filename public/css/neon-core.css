@@ -1,3 +1,39 @@
+/* Alert */
+.alert .close{
+  line-height: 12px;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: #000;
+  text-shadow: none;
+  box-shadow: none;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+
+.alert .close:hover{
+  opacity: .5;
+}
+
+.alert {
+  color: #b38b46;
+  background-color: #ece1a5;
+  border: 1px solid #d19a24;
+  margin-top: 36px;
+  margin-bottom: -36px;
+}
+
+.alert-danger, .alert-error {
+  color: #b94a48;
+  background-color: #f3aeae;
+  border-color: #c23248;
+}
+
+.alert-success {
+  color: #468847;
+  background-color: #9fd177;
+  border-color: #0f8a2c;
+}
 .user-info {
   list-style: none;
   margin: 0;

@@ -1,3 +1,5 @@
+script(type='text/javascript' src="/js/vendors/loading-bar.js")
+
 section#top-nav
   .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
     .navbar-header
@@ -19,13 +21,13 @@ section#top-nav
         if !user && title!='Login' && title!='Create Account'
           ul.nav.nav-pills.navbar-nav.katemi-nav
             li(class=title=='Home'?'active':undefined)
-              a(href='#head-banner') 首页
+              a(href='/#head-banner') 首页
             li
-              a(href='#marketing') 模块介绍
+              a(href='/#marketing') 模块介绍
             li
-              a(href='#featurettes') 新功能
+              a(href='/#featurettes') 新功能
             li
-              a(href='#annotations') 界面详情
+              a(href='/#annotations') 界面详情
             //- li
             //-   a(href='#lower-content') 价格表
             li

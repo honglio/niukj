@@ -313,3 +313,16 @@
   width: 36px;
   height: 36px;
 }
+
+/*Slide Editor*/
+/*-------------------------*/
+
+#slide-editor {
+  background: #8D939D;
+  margin-top: 35px;
+  padding-bottom: 20px;
+}
+
+form[role='search'].navbar-form {
+  margin: 18px 0;
+}

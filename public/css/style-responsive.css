@@ -136,10 +136,6 @@
 		margin-left: 50px;
 	}
 
-	#subscribe_form input[type="text"]{
-		width: 68.3%;
-	}
-
 }
 
 /* Portrait tablet to landscape and desktop */
@@ -171,7 +167,7 @@
 	}
 
 	.navbar-inverse .btn-navbar:hover{
-		background: #2e9a66;
+		background: #428BCA;
 	}
 
 	.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus{
@@ -359,11 +355,6 @@
 		display: block;
 	}
 
-	/* Toggle FAQ */
-	a.toggle-button:before{
-		display: none;
-	}
-
 	/* Pricing Table */
 	.pricing-table{
 		width: 166px;
@@ -371,17 +362,6 @@
 
 	.pricing-table.popular:before{
 		margin-left: 6px;
-	}
-
-	/* #Breakline
-	--------------------*/
-	#subscribe_form input[type="text"]{
-		width: 100%;
-		margin-bottom: 10px;
-	}
-
-	.subscribe-submit{
-		width: 100% !important;
 	}
 }
 
@@ -455,7 +435,7 @@
 	}
 
 	.navbar-inverse .btn-navbar:hover{
-		background: #2e9a66;
+		background: #428BCA;
 	}
 
 	.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus{
@@ -715,11 +695,6 @@
 		margin-bottom: 0
 	}
 
-	/* Toggle Content */
-	.toggle-content{
-		text-align: left;
-	}
-
 	/* #Breakline
 	---------------------*/
 	#breakline h3{
@@ -728,15 +703,6 @@
 
 	#breakline h3:after{
 		display: none;
-	}
-
-	#subscribe_form input[type="text"]{
-		width: 77%;
-		margin-right: 5px;
-	}
-
-	.subscribe-text{
-		margin-bottom: 20px;
 	}
 
 	/* #Footer
@@ -835,22 +801,6 @@
 	.app-dot5 {
 		margin-left: -80px;
 		margin-top: 510px;
-	}
-
-	/* #Breakline
-	---------------------*/
-	#subscribe_form {
-		padding-left: 0;
-		margin-top: 0;
-	}
-
-	#subscribe_form input[type="text"]{
-		width: 100%;
-		margin-bottom: 10px;
-	}
-
-	.subscribe-submit{
-		width: 100% !important;
 	}
 }
 
@@ -1008,17 +958,6 @@
 	/* Team */
 	.team-name{
 		font-size: 14px;
-	}
-
-	/* FAQ */
-	a.toggle-button:before{
-		display: none;
-	}
-
-	/* #Breakline
-	--------------------*/
-	#subscribe_form input[type="text"] {
-		width: 100%;
 	}
 
 }

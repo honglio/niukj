@@ -1,5 +1,14 @@
 extends ../layout
 
+block head
+  link(rel='stylesheet', href="/css/lib/spectrum.css", type='text/css')
+  link(rel='stylesheet', href='/css/lib/etch.css', type='text/css')
+  link(rel='stylesheet', href="/css/web-fonts.css", type='text/css')
+  link(rel='stylesheet', href="/css/app/themes/backgroundClasses.css", type='text/css')
+
+block scripts
+  script(data-main='/main', type='text/javascript', src='/js/vendors/require.js')
+
 block content
   div.alert
   div#content
@@ -8,5 +17,4 @@ block content
       input(type='hidden', name='_csrf', value=_csrf)
 
 
-block scripts
-  script(data-main='/main', type='text/javascript',src='/js/vendors/require.js')
+
