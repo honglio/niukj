@@ -19,7 +19,7 @@ exports.postContact = function(req, res) {
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/contactForm');
+    return res.redirect(req.session.returnTo || '#contact-form');
   }
 
   var email = req.body.email;
@@ -36,10 +36,10 @@ exports.postContact = function(req, res) {
   smtpTransport.sendMail(mailOptions, function(err) {
     if (err) {
       req.flash('errors', { msg: err.message });
-      return res.redirect('/contactForm');
+      return res.redirect(req.session.returnTo || '#contact-form');
     }
     req.flash('successful', { msg: 'Email has been sent successfully!' });
-    res.redirect('/contactForm');
+    res.redirect(req.session.returnTo || '#contact-form');
   });
 };
 

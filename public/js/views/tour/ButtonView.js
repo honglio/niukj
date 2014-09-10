@@ -11,6 +11,7 @@ define(["CustomView"], function(CustomView) {
         initialize: function() {},
 
         _clicked: function() {
+            // Need to change $() to this.$() or trigger a event and call other view.
             $("#slide-editor").onScreenHelp([{
                 caption: "课件页面",
                 selector: ".slideContainer",

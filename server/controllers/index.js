@@ -83,14 +83,3 @@ exports.api = function(req, res) {
     title: 'API Examples'
   });
 };
-
-/**
- * GET /contact
- * Contact form page.
- */
-
-exports.contactForm = function(req, res) {
-  res.render('contactForm', {
-    title: '客户服务'
-  });
-};

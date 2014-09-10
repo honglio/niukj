@@ -39,6 +39,7 @@ define(['AppView', 'etch_extension', 'bootstrap', 'colorpicker'], function(AppVi
 
     // start the App
     $('#content').append(new AppView().render().$el);
+    $('.dropdown-toggle').dropdown();
   };
 
   return {

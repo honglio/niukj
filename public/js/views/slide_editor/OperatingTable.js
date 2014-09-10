@@ -19,6 +19,10 @@ define(["CustomView",
             this._copy = this._copy.bind(this);
             this._paste = this._paste.bind(this);
 
+            this.model.on('actionCut', this._cut, this);
+            this.model.on('actionCopy', this._copy, this);
+            this.model.on('actionPaste', this._paste, this);
+
             this._deck = this.model.deck();
             this._activeSlide = this._deck.get('activeSlide');
             this._clipboard = this.model.clipboard;
@@ -28,15 +32,12 @@ define(["CustomView",
             // $(window).resize(lazyLayout);
 
             this.setModel(this._activeSlide);
-            // Re-render when active slide changes in the deck
-            this._deck.on("change:activeSlide", function(deck, model) {
-                this.setModel(model);
-            }, this);
 
-            this.$actBtn = $('.clipboard-action-buttons');
-            this.$actBtn.on('click', '.cut', this._cut);
-            this.$actBtn.on('click', '.copy', this._copy);
-            this.$actBtn.on('click', '.paste', this._paste);
+            // Re-render when active slide changes in the deck
+            this._deck.on("change:activeSlide", function(deck, slide) {
+                this.setModel(slide);
+                this._renderContents();
+            }, this);
         },
 
         render: function() {
@@ -52,14 +53,13 @@ define(["CustomView",
 
             var self = this;
             setTimeout(function() {
-                self._rendered = true;
                 // self._calculateLayout();
                 self._renderContents();
             }, 100);
             return this;
         },
 
-        _updateBg: function(model, bg) {
+        _updateBg: function(slide, bg) {
             if (!this._$slideContainer) { return; }
             this._$slideContainer.removeClass();
             this._$slideContainer.addClass('slideContainer ' + (bg || 'defaultbg'));
@@ -68,9 +68,9 @@ define(["CustomView",
 
         _cut: function() {
             if (this.model.get('scope') === 'operatingTable') {
-                var comp = this.model.lastSelection;
+                var comp = this.modelActive.lastSelection;
                 if (comp) {
-                    this.model.remove(comp);
+                    this.modelActive.remove(comp);
                     this._clipboard.item = comp.clone();
                     comp.dispose();
                 }
@@ -79,7 +79,7 @@ define(["CustomView",
 
         _copy: function() {
             if (this.model.get('scope') === 'operatingTable') {
-                var comp = this.model.lastSelection;
+                var comp = this.modelActive.lastSelection;
                 if (comp) {
                     this._clipboard.item = comp;
                 }
@@ -94,15 +94,15 @@ define(["CustomView",
                     selected: false,
                     active: false
                 });
-                this.model.add(comp);
+                this.modelActive.add(comp);
             }
         },
 
         _delete: function() {
             if (this.model.get('scope') === 'operatingTable') {
-                var comp = this.model.lastSelection;
+                var comp = this.modelActive.lastSelection;
                 if (comp) {
-                    this.model.remove(comp);
+                    this.modelActive.remove(comp);
                     comp.dispose();
                 }
             }
@@ -110,7 +110,7 @@ define(["CustomView",
 
         _clicked: function() {
             if (this._focus()) {
-                this.model.get('components').forEach(function(comp) {
+                this.modelActive.get('components').forEach(function(comp) {
                     if (comp.get('selected')) {
                         comp.set('selected', false);
                     }
@@ -148,7 +148,7 @@ define(["CustomView",
             var self = this;
             var compFactory = new ComponentFactory();
             reader.onload = function(e) {
-                self.model.add(
+                self.modelActive.add(
                     compFactory.instance.createModel({
                         type: 'Image',
                         src: e.target.result
@@ -158,38 +158,36 @@ define(["CustomView",
             reader.readAsDataURL(f);
         },
 
-        _componentAdded: function(model, comp) {
+        _componentAdded: function(slide, comp) {
             var compFactory = new ComponentFactory();
             var view = compFactory.instance.createView(comp);
             this._$slideContainer.append(view.render());
         },
 
-        setModel: function(model) {
-            var prevModel = this.model;
-            if (this.model === model) { return; }
-            if (this.model) {
-                this.model.off(null, null, this);
+        setModel: function(slide) {
+            if (this.modelActive === slide) { return; }
+            if (this.modelActive) {
+                this.modelActive.off(null, null, this);
             }
-            this.model = model;
-            if (this.model) {
-                this._updateBg(this.model, this.model.get('background'));
-                this.model.on("change:components.add", this._componentAdded, this);
-                this.model.on("change:background", this._updateBg, this);
+
+            this.prevModel = this.modelActive;
+            this.modelActive = slide;
+
+            if (this.modelActive) {
+                this._updateBg(this.modelActive, this.modelActive.get('background'));
+                this.modelActive.on("change:components.add", this._componentAdded, this);
+                this.modelActive.on("change:background", this._updateBg, this);
             }
-            this._renderContents(prevModel);
             return this;
         },
 
-        _renderContents: function(prevModel) {
-            if (prevModel) {
-                prevModel.trigger("unrender", true);
+        _renderContents: function() {
+            if (this.prevModel) {
+                this.prevModel.trigger("unrender", true);
             }
 
-            if (!this._rendered) {
-                return;
-            }
-            if (this.model) {
-                var components = this.model.get('components');
+            if (this.modelActive) {
+                var components = this.modelActive.get('components');
                 var compFactory = new ComponentFactory();
                 var self = this;
                 components.forEach(function(comp) {

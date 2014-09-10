@@ -4,7 +4,9 @@ define(["CustomView",
     "css!styles/app/storage/storageModal.css"
 ], function(CustomView, StorageInterface, StorageModalTemplate, css) {
     "use strict";
-    return CustomView.extend({
+    var previous;
+
+    var StorageModal = CustomView.extend({
         className: "storageModal modal fade",
         events: {
             "paste input[name='filename']": '_filenameEnterd',
@@ -14,7 +16,6 @@ define(["CustomView",
 
         initialize: function() {
             this.storageInterface = new StorageInterface();
-            this.hideAlert();
         },
 
         render: function() {
@@ -43,16 +44,15 @@ define(["CustomView",
         },
 
         showAlert: function(title, text, klass) {
-            $('.alert').removeClass("alert-error alert-warning alert-success alert-info");
-            $('.alert').addClass(klass);
-            $('.alert').empty();
-            $('.alert').html('<button class="close" data-dismiss="alert">×</button><strong>' + title + '</strong> ' + text);
-            $('.alert').show('fast');
-            setTimeout(this.hideAlert, 4000 );
+            this.$alert = this.$('.alert');
+            this.$alert.html('<strong>' + title + '</strong> ' + text);
+            this.$alert.removeClass('hide');
+            this.$alert.addClass(klass);
+            setTimeout(this.hideAlert, 3000);
         },
 
         hideAlert: function() {
-            $('.alert').hide();
+            this.$('.alert').addClass('hide');
         },
 
         _okClicked: function(e) {
@@ -77,22 +77,38 @@ define(["CustomView",
             if(!this.model.deck().get('id')) {
                 this.storageInterface.store(serialized, function (id) {
                     if(id) {
-                        self.$el.modal('hide');
                         self.showAlert('成功！', '课件已保存成功', 'alert-success');
                         self.$('.ok').text('保存');
-                        window.location.replace("/articles/" + id + '/edit');
+                        setTimeout(function(){
+                            self.$el.modal('hide');
+                            window.location.replace("/articles/" + id + '/edit');
+                        }, 4000);
                     }
                 });
             } else {
                 this.storageInterface.saveAs(serialized, function (id) {
                     if(id) {
-                        self.$el.modal('hide');
                         self.showAlert('成功！', '课件已保存成功', 'alert-success');
                         self.$('.ok').text('保存');
-                        window.location.replace("/articles/" + id + '/edit');
+                        setTimeout(function(){
+                            self.$el.modal('hide');
+                            window.location.replace("/articles/" + id + '/edit');
+                        }, 4000);
                     }
                 });
             }
         }
     });
+
+    return {
+        get: function(options) {
+            if (!previous) {
+                previous = new StorageModal(options);
+                previous.render();
+                $('#modals').append(previous.$el);
+            }
+
+            return previous;
+        }
+    };
 });

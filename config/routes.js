@@ -43,12 +43,11 @@ module.exports = function (app, passport) {
     app.get('/signup', index.signup);
     app.get('/forgot', index.forgot);
     app.get('/api', index.api);
-    app.get('/contactForm', index.contactForm);
 
     /**
      * Contact From routes.
      */
-    app.post('/contactForm', contactForm.postContact);
+    app.post('/contact-form', contactForm.postContact);
     app.post('/subscribe', contactForm.subscribe);
 
     /**

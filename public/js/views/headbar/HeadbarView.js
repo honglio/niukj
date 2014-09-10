@@ -13,7 +13,10 @@ define(["CustomView",
         className: 'page-header',
         events: {
             'click .undo': 'undo',
-            'click .redo': 'redo'
+            'click .redo': 'redo',
+            'click .cut': '_cut',
+            'click .copy': '_copy',
+            'click .paste': '_paste'
         },
         initialize: function() {
             this._saveButton = new SaveButton({model: this.model});
@@ -69,6 +72,18 @@ define(["CustomView",
             // Uncomment this, if you want to display name of action
             // this.initialize();
             // this.render();
+        },
+
+        _cut: function() {
+            this.model.trigger('actionCut');
+        },
+
+        _copy: function() {
+            this.model.trigger('actionCopy');
+        },
+
+        _paste: function() {
+            this.model.trigger('actionPaste');
         },
 
         dispose: function(){

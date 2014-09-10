@@ -1,17 +1,15 @@
-define(["CustomView",
-    "../storage/StorageModal"
+define(["CustomView", "../storage/StorageModal"
 ], function(CustomView, StorageModal) {
     "use strict";
     return CustomView.extend({
         className: 'btn btn-success',
         tagName: 'a',
         events: {
-            click: 'save'
+            click: '_clicked'
         },
 
         initialize: function() {
-            this.storageModal = new StorageModal({model: this.model});
-            $('#modals').append(this.storageModal.render().$el);
+            this._modal = StorageModal.get({model: this.model});
         },
 
         render: function() {
@@ -19,8 +17,8 @@ define(["CustomView",
             return this;
         },
 
-        save: function() {
-            this.storageModal.show();
+        _clicked: function() {
+            this._modal.show();
         }
     });
 });

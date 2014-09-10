@@ -34,10 +34,9 @@ define(["jquery", "underscore",
             this.$slides = $('<div class="scrollbar">');
             this.$slides.on('click', '.slideSnapshot', this._clicked);
 
-            this.$actBtn = $('.clipboard-action-buttons');
-            this.$actBtn.on('click', '.cut', this._cut);
-            this.$actBtn.on('click', '.copy', this._copy);
-            this.$actBtn.on('click', '.paste', this._paste);
+            this.model.on('actionCut', this._cut, this);
+            this.model.on('actionCopy', this._copy, this);
+            this.model.on('actionPaste', this._paste, this);
 
             this._sortable = new Sortable({
                 container: this.$slides,
@@ -97,8 +96,9 @@ define(["jquery", "underscore",
 		 * @param {jQuery.Event} e
 		 * @private
 		 */
-		_clicked: function() {
-			$( this ).trigger("select");
+		_clicked: function(e) {
+            e.preventDefault();
+			$(this).trigger("select");
 		},
 
         /**
