@@ -163,11 +163,11 @@ exports.getContent = function(req, res) {
  */
 
 exports.show = function(req, res){
-    res.render('article/post', {
-      article: req.article,
-      oss: config.oss,
-      formatDate: utils.formatDate
-    });
+  res.render('article/post', {
+    article: req.article,
+    oss: config.oss,
+    formatDate: utils.formatDate
+  });
 };
 
 /**
