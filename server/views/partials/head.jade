@@ -1,12 +1,12 @@
 meta(charset='utf-8')
-meta(http-equiv='X-UA-Compatible', content='IE=edge')
-meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+meta(http-equiv='X-UA-Compatible' content='IE=edge')
+meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
 
 meta(name="HandheldFriendly" content="True")
 meta(name="apple-mobile-web-app-capable" content="yes")
-meta(name='description', content='新一代的课件编写与展示平台')
-meta(name='csrf-token', content=_csrf)
-meta(name='author', content='Honglio')
+meta(name='description' content='新一代的课件编写与展示平台')
+meta(name='csrf-token' content=_csrf)
+meta(name='author' content='Honglio')
 title #{title} | 牛课件
 
 //- IE6-8 support of HTML5 elements, RAW html, Do not compile to Jade.
@@ -15,15 +15,35 @@ title #{title} | 牛课件
 <![endif]-->
 
 //- Fav and touch icons
-link(rel='apple-touch-icon-precomposed', sizes='144x144', href='/img/ico/apple-touch-icon-144-precomposed.png')
-link(rel='apple-touch-icon-precomposed', sizes='114x114', href='/img/ico/apple-touch-icon-114-precomposed.png')
-link(rel='apple-touch-icon-precomposed', sizes='72x72', href='/img/ico/apple-touch-icon-72-precomposed.png')
-link(rel='apple-touch-icon-precomposed', href='/img/ico/apple-touch-icon-57-precomposed.png')
-link(rel='shortcut icon', href='/img/ico/favicon.png')
+link(rel='apple-touch-icon-precomposed' sizes='144x144' href='/img/ico/apple-touch-icon-144-precomposed.png')
+link(rel='apple-touch-icon-precomposed' sizes='114x114' href='/img/ico/apple-touch-icon-114-precomposed.png')
+link(rel='apple-touch-icon-precomposed' sizes='72x72' href='/img/ico/apple-touch-icon-72-precomposed.png')
+link(rel='apple-touch-icon-precomposed' href='/img/ico/apple-touch-icon-57-precomposed.png')
+link(rel='shortcut icon' href='/img/ico/favicon.png')
 
-link(rel='stylesheet', href='/css/lib/font-awesome.min.css', type='text/css')
-link(rel='stylesheet', href='/css/lib/bootstrap.min.css', type='text/css')
-link(rel='stylesheet', href='/css/base.css', type='text/css')
+//- Bootstrap CSS CDN
+link(rel='stylesheet' href='http://lib.sinaapp.com/js/bootstrap/latest/css/bootstrap.min.css' type='text/css')
+//- Custom font-icon
+link(rel='stylesheet' href='/css/lib/font-awesome.min.css' type='text/css')
 
-script(type='text/javascript', src='/js/vendors/jquery.js')
-script(type='text/javascript', src='/js/vendors/bootstrap.js')
+//- jQuery CDN
+script(type='text/javascript' src='http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js')
+//- jQuery local fallback
+script(type='text/javascript').
+  if (typeof jQuery === 'undefined') {
+    document.write("<script type='text/javascript' src='/js/vendors/jquery.js'></script>");
+  }
+//- Bootstrap JS CDN
+script(type='text/javascript' src='http://lib.sinaapp.com/js/bootstrap/3.0.0/js/bootstrap.min.js')
+//- Bootstrap JS local fallback
+script(type='text/javascript').
+  if (typeof jQuery.fn.modal === 'undefined') {
+    document.write("<script type='text/javascript' src='/js/vendors/bootstrap.js'></script>");
+  }
+//- Bootstrap CSS local fallback
+script(type='text/javascript').
+  $(function() {
+    if($('body').css('color') !== 'rgb(51, 51, 51)') {
+      $("head").prepend('<link rel="stylesheet" href="/css/lib/bootstrap.min.css">');
+    }
+  });
