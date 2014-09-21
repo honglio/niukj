@@ -75,19 +75,6 @@ define(["underscore",
         },
 
         /**
-         * Returns an object, which represents slide position.
-         * @see SlideCollection._swapTransitionPositions
-         *
-         * @returns {{x: *, y: *}
-         */
-        getPositionData: function() {
-            return {
-                x: this.get('x'),
-                y: this.get('y')
-            };
-        },
-
-        /**
          * Adds a component in a space that has not already
          * been occupied.  Triggers "contentsChanged"
          * and "change:components.add" events.

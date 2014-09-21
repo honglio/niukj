@@ -26,8 +26,6 @@ var SlideSchema = new mongoose.Schema({
   active:   {type: String},
   index:    {type: String},
   selected: {type: String},
-  x:        {type: String},
-  y:        {type: String},
   components: [ComponentSchema],
   background: {type : String}
 });

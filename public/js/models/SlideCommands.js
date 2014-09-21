@@ -67,14 +67,14 @@ define(["./Slide"], function(Slide) {
 
             slides.remove(this.slide, {silent: true});
             slides.add(this.slide, {silent: true, at: this.destination});
-            slides.sortPosition(this.initSlidesOrder);
+            slides.sortPosition();
 
             this.deck.trigger("slideMoved");
         },
         undo: function() {
-            var previous_slides_order = this.deck.get('slides').models.slice(0);
-            this.deck.get('slides').models = this.initSlidesOrder;
-            this.deck.get('slides').sortPosition(previous_slides_order);
+            var slides = this.deck.get('slides');
+            slides.models = this.initSlidesOrder;
+            slides.sortPosition();
 
             this.deck.trigger("slideMoved");
         },
