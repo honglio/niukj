@@ -24,8 +24,8 @@ require('./config/express')(app, passport);
 // Import routes
 require('./config/routes')(app, passport);
 
-app.listen(8000);
-console.log("Relax is listening to port 8000.");
+app.listen(3000);
+console.log("Relax is listening to port 3000.");
 
 // expose app
 exports = module.exports = app;

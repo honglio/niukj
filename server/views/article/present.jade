@@ -1,5 +1,9 @@
 extends ../layout
 
+block head
+  link(rel='stylesheet', href="/css/web-fonts.css", type='text/css')
+  link(rel='stylesheet', href="/css/app/themes/backgroundClasses.css", type='text/css')
+
 block content
   - function round(v) {return Math2.round(v, 2);}
   .container-fluid(style="min-height: 750px;")
