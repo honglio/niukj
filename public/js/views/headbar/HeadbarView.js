@@ -3,11 +3,9 @@ define(["CustomView",
     "./ThemeProviderBtn",
     "../slide_components/view/ComponentButton",
     "../slide_components/view/ComponentImportButton",
-    "../themes/BackgroundProvider",
     "hbs!templates/Headbar"
 ], function(CustomView, SaveButton, ThemeProviderBtn,
-            ComponentButton, ComponentImportButton,
-            BackgroundProvider, HeadbarTemplate) {
+            ComponentButton, ComponentImportButton, HeadbarTemplate) {
 	"use strict";
     return CustomView.extend({
         className: 'page-header',
@@ -55,7 +53,6 @@ define(["CustomView",
             $createCompButtons.append(this._textBoxButton.render().$el);
             $createCompButtons.append(this._imageButton.render().$el);
             $createCompButtons.append(this._ThemeProviderBtn.render().$el);
-            $createCompButtons.append(new BackgroundProvider(this.model).view().render().$el);
 
             return this;
         },
