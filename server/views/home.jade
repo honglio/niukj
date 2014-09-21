@@ -13,14 +13,6 @@ html.js.no-touch
     link(rel='stylesheet', href='/css/lib/hopscotch-0.1.2.min.css', type='text/css', media='screen')
     link(rel='stylesheet', href='/css/prettyPhoto.css', type='text/css', media='screen')
 
-    script(type='text/javascript', src='/js/vendors/jquery.flexslider-min.js')
-    script(type='text/javascript', src='/js/vendors/jquery.prettyPhoto.js')
-    script(type='text/javascript', src='/js/vendors/jquery.scrollTo.js')
-    script(type='text/javascript', src='/js/vendors/jquery.nav.js')
-    script(type='text/javascript', src='/js/vendors/hopscotch-0.1.2.min.js')
-    script(type='text/javascript', src='/js/vendors/katemi.js')
-    //- script(type='text/javascript', src='/js/vendors/katemi-take-tour2.js')
-
   body
     header
       include partials/navigation
@@ -255,7 +247,7 @@ html.js.no-touch
 
     footer
       section#footer
-        .container-fluid
+        .container
           .row
             .col-md-6.col-sm-6
               p.copyright
@@ -277,3 +269,11 @@ html.js.no-touch
                 li
                   a(href='http://user.qzone.qq.com/30338995' target='_blank')
                     i.fa.fa-qq.fa-lg(aria-hidden='true')
+
+    script(type='text/javascript', src='/js/vendors/jquery.flexslider-min.js')
+    script(type='text/javascript', src='/js/vendors/jquery.prettyPhoto.js')
+    script(type='text/javascript', src='/js/vendors/jquery.scrollTo.js')
+    script(type='text/javascript', src='/js/vendors/jquery.nav.js')
+    script(type='text/javascript', src='/js/vendors/hopscotch-0.1.2.min.js')
+    script(type='text/javascript', src='/js/vendors/katemi.js')
+    //- script(type='text/javascript', src='/js/vendors/katemi-take-tour2.js')

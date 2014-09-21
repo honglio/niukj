@@ -48,8 +48,8 @@ section#top-nav
           form.navbar-form.navbar-left(role='search' method="GET" action="/articles")
             .form-group
               input.form-control.search-input(type='text' name='q' placeholder='课件标题...')
-              button.btn.btn-default(type='submit')
-                i.fa.fa-search
+            button.btn.btn-default.span(type='submit')
+              i.fa.fa-search
         ul.nav.nav-pills.navbar-nav.navbar-right
           if !user
             li(class=title=='登录'?'active':undefined)
