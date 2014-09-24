@@ -1,13 +1,16 @@
 [ ![Codeship Status for honglio/niukj](https://codeship.io/projects/5c4fd850-11c8-0132-a74a-029e44e44534/status)](https://codeship.io/projects/33121)
 
-# TODO #
+# 牛课件 #
 
+## 一个在线课件平台 ##
+
+## TODO ##
 
 - Add user tutor.
 - Enable cotrollers/api.js ? Not hurry to enable, after large user has asked to.
 - upload image to aliyun-oss ? 走外网，无法防止盗链！走内网太麻烦，影响主机速度。
 
-# Contributing #
+## Contributing ##
 
 Here is the basic layout of the source:
 
@@ -33,11 +36,11 @@ the resulting build will be location in 'currentDirectory/dist'.
 3. Add the base-64 version of the font to present_dependence/base64/fonts
 4. ttf2woff tool: npm install ttf2woff -g
 
-# User Guide #
+## User Guide ##
 * Component scale keep aspect ratio by default, press 'shift' to break the ratio.
 
 
-# Acknowledgments #
+## Acknowledgments ##
 
 * HTML5 Boilerplate: [http://html5boilerplate.com](http://html5boilerplate.com)
 * Backbone: [http://documentcloud.github.com/backbone/](http://documentcloud.github.com/backbone/)
@@ -47,3 +50,4 @@ the resulting build will be location in 'currentDirectory/dist'.
 * Bootstrap: [http://twitter.github.io/bootstrap/](http://twitter.github.io/bootstrap/)
 * Express: [http://expressjs.com/](http://expressjs.com/)
 * Passport: [http://passportjs.org/](http://passportjs.org/)
+* Impress: [http://github.com/bartaz/impress.js](http://github.com/bartaz/impress.js)
