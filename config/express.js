@@ -43,8 +43,10 @@ module.exports = function (app, passport) {
 
     app.use(multer());
 
+    // Handling Uncaught Exceptions
     winston.add(winston.transports.File, {
-        filename: 'log/all-logs.txt'
+        filename: 'log/all-logs.txt',
+        handleExceptions: true
     });
 
     var log = {
