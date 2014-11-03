@@ -219,7 +219,7 @@ ArticleSchema.methods = {
       return cb('not found');
     }
     this.save(cb);
-  },
+  }
 };
 
 /**
@@ -262,6 +262,10 @@ ArticleSchema.statics = {
       .limit(opt.perPage)
       .skip(opt.perPage * opt.page)
       .exec(cb);
+  },
+
+  updateAndSave: function (id, update, cb) {
+    this.findByIdAndUpdate(id, update, cb);
   }
 
 };

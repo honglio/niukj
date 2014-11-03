@@ -174,4 +174,4 @@ AccountSchema.methods = {
   }
 };
 
-module.exports = mongoose.model('Account', AccountSchema);
+mongoose.model('Account', AccountSchema);

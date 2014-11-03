@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     Article = mongoose.model('Article'),
     utils = require('../../lib/utils'),
-    extend = require('util')._extend,
+    _ = require('underscore'),
     math2 = require('../../lib/math2'),
     config = require('../../config/config');
 
@@ -144,13 +144,21 @@ exports.edit = function (req, res) {
  */
 
 exports.update = function(req, res, next){
-  // console.log(req.body);
-  var article = req.article;
-  article = extend(article, req.body.article);
-  // console.log(article);
-  article.save(function(err) {
+  // req.body.article contain the modified version, but it's only on object without any function.
+  // req.article contain the old version, and it's unchangeble. but it has save and update function.
+  var article = {};
+  _.extend(article, req.body.article);
+  // _.defaults(req.body.article, req.article);
+
+  article.hitCounter = req.article.hitCounter;
+  article.desc = req.article.desc;
+  article.tags = req.article.tags;
+  article.comments = req.article.comments;
+
+  console.log(article);
+  Article.updateAndSave(req.article._id, article, function(err) {
     if (err) { return next(err); }
-    return res.send(article._id);
+    return res.send(req.article._id);
   });
 };
 
