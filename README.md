@@ -2,14 +2,6 @@
 
 # 牛课件 #
 
-## 一个在线课件平台 ##
-
-## TODO ##
-
-- Add user tutor.
-- Enable cotrollers/api.js ? Not hurry to enable, after large user has asked to.
-- upload image to aliyun-oss ? 走外网，无法防止盗链！走内网太麻烦，影响主机速度。
-
 ## Contributing ##
 
 Here is the basic layout of the source:

@@ -2,7 +2,6 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
 ], function(_, CustomView, ItemImportModalTemplate) {
     "use strict";
     var modalCache = {};
-    var reg = /[a-z]+:/;
 
     var ItemImportModal = CustomView.extend({
         className: "itemGrabber modal fade",
@@ -34,7 +33,7 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
         },
         _fileChosen: function(e) {
             var file = e.target.files[0]; // selected file
-
+            console.log(file);
             if (!file.type.match('image.*')) {
                 return;
             }
@@ -43,13 +42,15 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
             var self = this;
 			// run after file chosen
             reader.onload = function(e) {
+                console.log(e.target.result);
                 self.$input.val(e.target.result); // reader's return value after read.
+                console.log(self.$input.val());
                 return self._urlChanged({ // just return any return value of urlChanged func
                     which: -1 // keyup is -1
                 });
             };
-			// run after file selected, because e.target block thread
-            return reader.readAsDataURL(file);
+
+            return reader.readAsDataURL(file); // This run after file selected, because e.target block thread
         },
         _browseClicked: function() {
             this.$el.find('input[type="file"]').click();
@@ -70,20 +71,21 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
 				this.src = this.$input.val();
                 return this._okClicked();
             } else {
-                this._loadItem();
+                this._loadItem(e);
             }
         },
 		/*
 		 * set $preview's src by input value
 		 */
-        _loadItem: function() {
+        _loadItem: function(e) {
             var val = this.$input.val();
-
+            console.log(val);
+            var reg = /[a-z]+:/;
             var r = reg.exec(val);
             if (r == null || r.index !== 0) {
                 val = 'http://' + val;
             }
-
+            console.log(val);
             this.$preview.src = val;
             this.src = this.$preview.src;
         },
