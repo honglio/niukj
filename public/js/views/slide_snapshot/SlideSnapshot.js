@@ -12,8 +12,6 @@ define(["underscore",
         className: 'slideSnapshot',
         events: {
             select: '_selected',
-            "mouseenter .remove-icon": '_removeSelected',
-            "mouseleave .remove-icon": '_removeUnselected',
             "click .remove-icon": '_removeClicked',
             "mousedown .remove-icon": '_removePressed'
         },
@@ -22,7 +20,6 @@ define(["underscore",
             this.model.on("change:active", this._activeChanged, this);
             this.model.on("contentsChanged", this.render, this);
             this.model.on("change:background", this.render, this);
-            this.model.on("destroy", this.dispose, this);
         },
 
         /**
@@ -48,7 +45,7 @@ define(["underscore",
          */
         _removeClicked: function(e) {
             e.stopPropagation();
-            this.remove(true);
+            this.dispose(this.model);
         },
 
         /**
@@ -61,28 +58,21 @@ define(["underscore",
             e.stopPropagation();
         },
 
-        _removeSelected: function(e) {
-
-        },
-
-        _removeUnselected: function(e) {
-
-        },
         /**
-         * Remove slide from the presentation.
+         * Remove slide from the deck.
          *
          * @param {boolean} removeModel
          */
         dispose: function(removeModel) {
-            this._slideDrawer.dispose();
-            this.$el.data('jsView', null);
-            this.model.off(null, null, this);
-            this.options.deck.off(null, null, this);
-            CustomView.prototype.remove.apply(this, arguments);
-
             if (removeModel) {
                 this.options.deck.remove(this.model);
             }
+
+            this._slideDrawer.dispose();
+
+            this.model.off(null, null, this);
+            this.options.deck.off(null, null, this);
+            CustomView.prototype.remove.apply(this, arguments);
         },
 
         /**
