@@ -1,7 +1,11 @@
 .wellContextBox {
 	z-index: 2;
 	border: 1px solid #FF7F50;
-	margin: 10%;
+	margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 120px;
+  height: 78px;
 }
 
 .wellContextBox .addBtn {
