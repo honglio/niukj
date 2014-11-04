@@ -31,7 +31,7 @@ var crypto = require('crypto');
  * Generatecodes  GET     /restaurants/:id/generate?n=<number>
  */
 
-module.exports = function (app, passport) {
+module.exports = function(app, passport) {
 
     /**
      * Web page routes.
@@ -87,25 +87,25 @@ module.exports = function (app, passport) {
      * OAuth routes for sign-in.
      */
     app.get('/auth/weibo', passport.authenticate('weibo'));
-    app.get('/auth/weibo/callback', function (req, res, next) {
+    app.get('/auth/weibo/callback', function(req, res, next) {
         passport.authenticate('weibo', {
             failureRedirect: '/login'
         })(req, res, next);
-    }, function (req, res) {
+    }, function(req, res) {
         res.redirect(req.session.returnTo || '/');
     });
     app.get('/auth/renren', passport.authenticate('renren'));
-    app.get('/auth/renren/callback', function (req, res, next) {
+    app.get('/auth/renren/callback', function(req, res, next) {
         passport.authenticate('renren', {
             failureRedirect: '/login'
         })(req, res, next);
-    }, function (req, res) {
+    }, function(req, res) {
         res.redirect(req.session.returnTo || '/');
     });
 
     // QQ登录认证时 `state` 为必填参数
     // 系client端的状态值，用于第三方应用防止CSRF攻击，成功授权后回调时会原样带回
-    app.get('/auth/qq', function (req, res, next) {
+    app.get('/auth/qq', function(req, res, next) {
         req.session = req.session || {};
         req.session.authState = crypto.createHash('sha1').update(-(new Date()) + '').digest('hex');
         passport.authenticate('qq', {
@@ -113,7 +113,7 @@ module.exports = function (app, passport) {
             scope: ['get_user_info', 'list_album']
         })(req, res, next);
     });
-    app.get('/auth/qq/callback', function (req, res, next) {
+    app.get('/auth/qq/callback', function(req, res, next) {
         // 通过比较认证返回的`state`状态值与服务器端`session`中的`state`状态值
         // 决定是否继续本次授权
         if (req.session && req.session.authState && req.session.authState === req.query.state) {
@@ -123,17 +123,17 @@ module.exports = function (app, passport) {
         } else {
             return next(new Error('Auth State Mismatch'));
         }
-    }, function (req, res) {
+    }, function(req, res) {
         res.redirect(req.session.returnTo || '/');
     });
     app.get('/auth/linkedin', passport.authenticate('linkedin', {
         state: 'Some State'
     }));
-    app.get('/auth/linkedin/callback', function (req, res, next) {
+    app.get('/auth/linkedin/callback', function(req, res, next) {
         passport.authenticate('linkedin', {
             failureRedirect: '/login'
         })(req, res, next);
-    }, function (req, res) {
+    }, function(req, res) {
         res.redirect(req.session.returnTo || '/');
     });
 

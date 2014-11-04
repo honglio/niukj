@@ -1,35 +1,35 @@
 define(function() {
-	"use strict";
+    "use strict";
 
-	function ArrayIterator(val) {
-		this._val = val;
-		this._crsr = 0;
-	}
+    function ArrayIterator(val) {
+        this._val = val;
+        this._crsr = 0;
+    }
 
-	ArrayIterator.prototype = {
-		next: function() {
-			return this._val[this._crsr += 1];
-		},
+    ArrayIterator.prototype = {
+        next: function() {
+            return this._val[this._crsr += 1];
+        },
 
-		hasNext: function() {
-			return this._crsr < this._val.length - 1;
-		}
-	};
+        hasNext: function() {
+            return this._crsr < this._val.length - 1;
+        }
+    };
 
-	function ObjectIterator(val) {
-		this._object = val;
-		this._iter = new ArrayIterator(Object.keys(val));
-	}
+    function ObjectIterator(val) {
+        this._object = val;
+        this._iter = new ArrayIterator(Object.keys(val));
+    }
 
-	ObjectIterator.prototype = {
-		next: function() {
-			return this._object[this._iter.next()];
-		},
+    ObjectIterator.prototype = {
+        next: function() {
+            return this._object[this._iter.next()];
+        },
 
-		hasNext: function() {
-			return this._iter.hasNext();
-		}
-	};
+        hasNext: function() {
+            return this._iter.hasNext();
+        }
+    };
 
     function IteratorFactory(val) {
         if (Array.isArray(val) || val instanceof Array) {
@@ -41,5 +41,5 @@ define(function() {
         }
     }
 
-	return IteratorFactory;
+    return IteratorFactory;
 });

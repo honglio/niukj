@@ -1,12 +1,12 @@
 define(['models/TextBox',
-        'models/Image',
-        './view/TextBoxView',
-        './view/ImageView',
-        './drawers/TextBoxDrawer',
-        './drawers/ImageDrawer'
+    'models/Image',
+    './view/TextBoxView',
+    './view/ImageView',
+    './drawers/TextBoxDrawer',
+    './drawers/ImageDrawer'
 ], function(TextBox, Image,
-            TextBoxView, ImageView,
-            TextBoxDrawer, ImageDrawer) {
+    TextBoxView, ImageView,
+    TextBoxDrawer, ImageDrawer) {
     "use strict";
 
     function ComponentFactory() {

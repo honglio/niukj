@@ -5,8 +5,8 @@ define(["CustomView",
     "../slide_components/view/ComponentImportButton",
     "hbs!templates/Headbar"
 ], function(CustomView, SaveButton, ThemeProviderBtn,
-            ComponentButton, ComponentImportButton, HeadbarTemplate) {
-	"use strict";
+    ComponentButton, ComponentImportButton, HeadbarTemplate) {
+    "use strict";
     return CustomView.extend({
         className: 'page-header',
         events: {
@@ -17,8 +17,12 @@ define(["CustomView",
             'click .paste': '_paste'
         },
         initialize: function() {
-            this._saveButton = new SaveButton({model: this.model});
-            this._ThemeProviderBtn = new ThemeProviderBtn({model: this.model});
+            this._saveButton = new SaveButton({
+                model: this.model
+            });
+            this._ThemeProviderBtn = new ThemeProviderBtn({
+                model: this.model
+            });
             this._textBoxButton = new ComponentButton({
                 componentType: 'TextBox',
                 icon: 'icon-text-width',
@@ -83,7 +87,7 @@ define(["CustomView",
             this.model.trigger('actionPaste');
         },
 
-        dispose: function(){
+        dispose: function() {
             this._saveButton.dispose();
             this._ThemeProviderBtn.dispose();
             this._textBoxButton.dispose();

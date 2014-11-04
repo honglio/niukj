@@ -19,15 +19,15 @@ require([
 
     "spec/app/modules/website/list/view/DecklistTest",
     "spec/app/modules/website/list/view/DeckdetailTest",
-	"spec/app/modules/website/list/view/DecklistitemTest",
+    "spec/app/modules/website/list/view/DecklistitemTest",
     "spec/app/modules/website/list/model/DeckTest",
     "spec/app/modules/website/list/collection/DeckTest",
     "spec/app/modules/website/layout/view/HomeTest",
 
     // ***********************************************
-], function ($) {
+], function($) {
     "use strict";
-    $(function () {
+    $(function() {
         mocha.run();
     });
 

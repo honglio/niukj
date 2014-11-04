@@ -6,21 +6,21 @@ define(["jquery", "CustomView",
     "hbs!templates/Component",
     "css!styles/app/slide_components/Component.css",
 ], function($, CustomView, DeltaDragControl, Math2,
-            ComponentCommands, UndoHistoryFactory, ComponentTemplate) {
+    ComponentCommands, UndoHistoryFactory, ComponentTemplate) {
     "use strict";
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
     return CustomView.extend({
         transforms: [],
         className: "component",
         events: function() {
-			return {
-				mousedown: 'mousedown',
-				click: 'clicked',
-				"click .remove-icon": 'removeClicked',
-				"mousedown .remove-icon": 'removePressed',
-				"deltadrag span[data-delta='scale']": 'scale',
-				"deltadragStart span[data-delta='scale']": 'scaleStart'
-			};
+            return {
+                mousedown: 'mousedown',
+                click: 'clicked',
+                "click .remove-icon": 'removeClicked',
+                "mousedown .remove-icon": 'removePressed',
+                "deltadrag span[data-delta='scale']": 'scale',
+                "deltadragStart span[data-delta='scale']": 'scaleStart'
+            };
         },
         initialize: function() {
             this._dragging = false;
@@ -42,7 +42,7 @@ define(["jquery", "CustomView",
                 dx: 0,
                 dy: 0
             };
-            if(!$.isEmptyObject(this.model.get('scale'))) {
+            if (!$.isEmptyObject(this.model.get('scale'))) {
                 this._initialScale = this.model.get('scale');
             } else {
                 this._initialScale = {

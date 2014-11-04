@@ -12,23 +12,27 @@ var _ = require('underscore');
  */
 
 exports.getWeibo = function(req, res, next) {
-  var token = _.findWhere(req.user.tokens, { kind: 'weibo' });
-  async.parallel({
-    getMe: function(done) {
-      token(done);
-    },
-    getMyFriends: function(done) {
-      token(done);
-    }
-  },
-  function(err, results) {
-    if (err) { return next(err); }
-    res.render('api/weibo', {
-      title: 'Weibo API',
-      me: results.getMe,
-      friends: results.getMyFriends
+    var token = _.findWhere(req.user.tokens, {
+        kind: 'weibo'
     });
-  });
+    async.parallel({
+            getMe: function(done) {
+                token(done);
+            },
+            getMyFriends: function(done) {
+                token(done);
+            }
+        },
+        function(err, results) {
+            if (err) {
+                return next(err);
+            }
+            res.render('api/weibo', {
+                title: 'Weibo API',
+                me: results.getMe,
+                friends: results.getMyFriends
+            });
+        });
 };
 
 /**
@@ -37,20 +41,28 @@ exports.getWeibo = function(req, res, next) {
  */
 
 exports.getRenren = function(req, res, next) {
-  var token = _.findWhere(req.user.tokens, { kind: 'renren' });
-  var R = new Renren({
-    consumer_key: config.renren.consumerKey,
-    consumer_secret: config.renren.consumerSecret,
-    access_token: token.accessToken,
-    access_token_secret: token.tokenSecret
-  });
-  R.get('search/tweets', { q: 'hackathon since:2013-01-01', geocode: '40.71448,-74.00598,5mi', count: 50 }, function(err, reply) {
-    if (err) { return next(err); }
-    res.render('api/renren', {
-      title: 'Renren API',
-      tweets: reply.statuses
+    var token = _.findWhere(req.user.tokens, {
+        kind: 'renren'
     });
-  });
+    var R = new Renren({
+        consumer_key: config.renren.consumerKey,
+        consumer_secret: config.renren.consumerSecret,
+        access_token: token.accessToken,
+        access_token_secret: token.tokenSecret
+    });
+    R.get('search/tweets', {
+        q: 'hackathon since:2013-01-01',
+        geocode: '40.71448,-74.00598,5mi',
+        count: 50
+    }, function(err, reply) {
+        if (err) {
+            return next(err);
+        }
+        res.render('api/renren', {
+            title: 'Renren API',
+            tweets: reply.statuses
+        });
+    });
 };
 
 /**
@@ -59,16 +71,21 @@ exports.getRenren = function(req, res, next) {
  */
 
 exports.getQQ = function(req, res, next) {
-  var query = querystring.stringify({ 'api-key': config.qq.key, 'list-name': 'young-adult' });
-  var url = 'http://api.qq.com/svc/books/v2/lists?' + query;
-  request.get(url, function(error, request, body) {
-    if (request.statusCode === 403) { return next(Error('Missing or Invalid QQ API Key')); }
-    var bestsellers = JSON.parse(body);
-    res.render('api/qq', {
-      title: 'QQ API',
-      books: bestsellers.results
+    var query = querystring.stringify({
+        'api-key': config.qq.key,
+        'list-name': 'young-adult'
     });
-  });
+    var url = 'http://api.qq.com/svc/books/v2/lists?' + query;
+    request.get(url, function(error, request, body) {
+        if (request.statusCode === 403) {
+            return next(Error('Missing or Invalid QQ API Key'));
+        }
+        var bestsellers = JSON.parse(body);
+        res.render('api/qq', {
+            title: 'QQ API',
+            books: bestsellers.results
+        });
+    });
 };
 
 /**
@@ -77,14 +94,18 @@ exports.getQQ = function(req, res, next) {
  */
 
 exports.getLinkedin = function(req, res, next) {
-  var token = _.findWhere(req.user.tokens, { kind: 'linkedin' });
-  var linkedin = Linkedin.init(token.accessToken);
-
-  linkedin.people.me(function(err, $in) {
-    if (err) { return next(err); }
-    res.render('api/linkedin', {
-      title: 'LinkedIn API',
-      profile: $in
+    var token = _.findWhere(req.user.tokens, {
+        kind: 'linkedin'
     });
-  });
+    var linkedin = Linkedin.init(token.accessToken);
+
+    linkedin.people.me(function(err, $in) {
+        if (err) {
+            return next(err);
+        }
+        res.render('api/linkedin', {
+            title: 'LinkedIn API',
+            profile: $in
+        });
+    });
 };

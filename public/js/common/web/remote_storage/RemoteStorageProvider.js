@@ -17,21 +17,23 @@ define(function() {
 
         delete: function(deck, cb) {
             $.ajax({
-                url: '/articles/' + deck.id,
-                type: 'DELETE',
-                data: {article: deck}
-            })
-            .done(function(result) {
-                cb(result);
-            })
-            .fail(function(err) {
-                cb(err);
-            });
+                    url: '/articles/' + deck.id,
+                    type: 'DELETE',
+                    data: {
+                        article: deck
+                    }
+                })
+                .done(function(result) {
+                    cb(result);
+                })
+                .fail(function(err) {
+                    cb(err);
+                });
         },
 
         create: function(deck, cb) {
             $.ajax({
-                url:'/articles',
+                url: '/articles',
                 type: 'POST',
                 data: deck,
                 success: function(result) {

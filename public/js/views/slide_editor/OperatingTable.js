@@ -60,7 +60,9 @@ define(["CustomView",
         },
 
         _updateBg: function(slide, bg) {
-            if (!this._$slideContainer) { return; }
+            if (!this._$slideContainer) {
+                return;
+            }
             this._$slideContainer.removeClass();
             this._$slideContainer.addClass('slideContainer ' + (bg || 'defaultbg'));
             this._$slideContainer.data('background', (bg || 'defaultbg'));
@@ -122,7 +124,7 @@ define(["CustomView",
         },
 
         _focus: function() {
-            if(this.model) {
+            if (this.model) {
                 this.model.set('scope', 'operatingTable');
                 return true;
             }
@@ -165,7 +167,9 @@ define(["CustomView",
         },
 
         setModel: function(slide) {
-            if (this.modelActive === slide) { return; }
+            if (this.modelActive === slide) {
+                return;
+            }
             if (this.modelActive) {
                 this.modelActive.off(null, null, this);
             }

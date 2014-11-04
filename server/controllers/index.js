@@ -1,7 +1,7 @@
 exports.notfound = function(req, res) {
-  res.render('404', {
-    title: '网页无法访问'
-  });
+    res.render('404', {
+        title: '网页无法访问'
+    });
 };
 
 /**
@@ -10,9 +10,9 @@ exports.notfound = function(req, res) {
  */
 
 exports.home = function(req, res) {
-  res.render('home', {
-    title: '首页'
-  });
+    res.render('home', {
+        title: '首页'
+    });
 };
 
 /**
@@ -20,10 +20,12 @@ exports.home = function(req, res) {
  * Login page.
  */
 exports.login = function(req, res) {
-  if (req.user) { return res.redirect('/'); }
-  res.render('account/login', {
-    title: '登录'
-  });
+    if (req.user) {
+        return res.redirect('/');
+    }
+    res.render('account/login', {
+        title: '登录'
+    });
 };
 
 /**
@@ -32,8 +34,8 @@ exports.login = function(req, res) {
  */
 
 exports.logout = function(req, res) {
-  req.logout();
-  res.redirect('/');
+    req.logout();
+    res.redirect('/');
 };
 
 /**
@@ -42,10 +44,12 @@ exports.logout = function(req, res) {
  */
 
 exports.signup = function(req, res) {
-  if (req.user) { return res.redirect('/'); }
-  res.render('account/signup', {
-    title: '注册'
-  });
+    if (req.user) {
+        return res.redirect('/');
+    }
+    res.render('account/signup', {
+        title: '注册'
+    });
 };
 
 /**
@@ -54,12 +58,12 @@ exports.signup = function(req, res) {
  */
 
 exports.forgot = function(req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
-  res.render('account/forgot', {
-    title: '忘记密码'
-  });
+    if (req.isAuthenticated()) {
+        return res.redirect('/');
+    }
+    res.render('account/forgot', {
+        title: '忘记密码'
+    });
 };
 
 /**
@@ -68,9 +72,9 @@ exports.forgot = function(req, res) {
  */
 
 exports.account = function(req, res) {
-  res.render('account/profile', {
-    title: '账户管理'
-  });
+    res.render('account/profile', {
+        title: '账户管理'
+    });
 };
 
 /**
@@ -79,7 +83,7 @@ exports.account = function(req, res) {
  */
 
 exports.api = function(req, res) {
-  res.render('api/index', {
-    title: 'API Examples'
-  });
+    res.render('api/index', {
+        title: 'API Examples'
+    });
 };

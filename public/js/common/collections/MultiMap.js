@@ -1,76 +1,77 @@
 define(function() {
-	"use strict";
-	function MultiMap() {
-		this._map = {};
-	}
+    "use strict";
 
-	MultiMap.prototype = {
-		put: function(key, val) {
-			var entries = this._map[key];
-			if (entries == null) {
-				entries = [];
-				this._map[key] = entries;
-			}
+    function MultiMap() {
+        this._map = {};
+    }
 
-			entries.push(val);
+    MultiMap.prototype = {
+        put: function(key, val) {
+            var entries = this._map[key];
+            if (entries == null) {
+                entries = [];
+                this._map[key] = entries;
+            }
 
-			return this;
-		},
+            entries.push(val);
 
-		putAll: function(key, vals) {
-			var entries = this._map[key];
-			if (entries == null) {
-				// We don't just do entries = vals
-				// because someone may be modifyng vals elsewhere.
-				entries = [];
-			}
+            return this;
+        },
 
-			this._map[key] = entries.concat(vals);
+        putAll: function(key, vals) {
+            var entries = this._map[key];
+            if (entries == null) {
+                // We don't just do entries = vals
+                // because someone may be modifyng vals elsewhere.
+                entries = [];
+            }
 
-			return this;
-		},
+            this._map[key] = entries.concat(vals);
 
-		get: function(key) {
-			var result = this._map[key];
-			return result || [];
-		},
+            return this;
+        },
 
-		// We don't overload remove
-		// since we allow null & undefined entries to be added.
-		remove: function(key, val) {
-			var entries = this._map[key];
-			var idx = entries.indexOf(val);
+        get: function(key) {
+            var result = this._map[key];
+            return result || [];
+        },
 
-			if (idx >= 0) {
-				if (entries.length <= 1) {
-					this.removeAll(key);
-					return [];
-				} else {
-					entries.splice(idx, 1);
-					return entries;
-				}
-			}
-		},
+        // We don't overload remove
+        // since we allow null & undefined entries to be added.
+        remove: function(key, val) {
+            var entries = this._map[key];
+            var idx = entries.indexOf(val);
 
-		removeAll: function(key) {
-			delete this._map[key];
-			return this;
-		},
+            if (idx >= 0) {
+                if (entries.length <= 1) {
+                    this.removeAll(key);
+                    return [];
+                } else {
+                    entries.splice(idx, 1);
+                    return entries;
+                }
+            }
+        },
 
-		putIfAbsent: function(key, val) {
-			var entries = this._map[key];
-			if (entries == null) {
-				entries = [];
-				this._map[key] = entries;
-			}
+        removeAll: function(key) {
+            delete this._map[key];
+            return this;
+        },
 
-			if (entries.indexOf(val) < 0) {
-				entries.push(val);
-			}
+        putIfAbsent: function(key, val) {
+            var entries = this._map[key];
+            if (entries == null) {
+                entries = [];
+                this._map[key] = entries;
+            }
 
-			return this;
-		}
-	};
+            if (entries.indexOf(val) < 0) {
+                entries.push(val);
+            }
 
-	return MultiMap;
+            return this;
+        }
+    };
+
+    return MultiMap;
 });

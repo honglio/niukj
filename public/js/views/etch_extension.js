@@ -7,7 +7,7 @@ define([
     "hbs!templates/etch_extension/align",
     "hbs!templates/etch_extension/defaultButton",
     "css!styles/app/etch_extension/EtchOverrides.css"
-], function (_, etch, FontSizeSelectionTemplate, FontFamilySelectionTemplate,
+], function(_, etch, FontSizeSelectionTemplate, FontFamilySelectionTemplate,
     ColorChooserTemplate, AlignTemplate, DefaultButtonTemplate) {
     "use strict";
     _.extend(etch.config.buttonClasses, {
@@ -25,7 +25,7 @@ define([
         'unordered-list'
     ];
 
-    etch.buttonElFactory = function (button) {
+    etch.buttonElFactory = function(button) {
         var viewData = {
             button: button,
             title: button.replace('-', ' '),
@@ -37,27 +37,27 @@ define([
         }
 
         switch (button) {
-        case 'font-size':
-            return FontSizeSelectionTemplate(viewData);
-        case 'font-family':
-            return FontFamilySelectionTemplate(viewData);
-        case 'color':
-            return ColorChooserTemplate(viewData);
-        default:
-            if (button.indexOf('justify') !== -1) {
-                viewData.icon = button.substring(button.indexOf('-') + 1, button.length);
-                return AlignTemplate(viewData);
-            } else {
-                return DefaultButtonTemplate(viewData);
-            }
+            case 'font-size':
+                return FontSizeSelectionTemplate(viewData);
+            case 'font-family':
+                return FontFamilySelectionTemplate(viewData);
+            case 'color':
+                return ColorChooserTemplate(viewData);
+            default:
+                if (button.indexOf('justify') !== -1) {
+                    viewData.icon = button.substring(button.indexOf('-') + 1, button.length);
+                    return AlignTemplate(viewData);
+                } else {
+                    return DefaultButtonTemplate(viewData);
+                }
         }
     };
 
-    etch.groupElFactory = function () {
+    etch.groupElFactory = function() {
         return $('<div class="btn-group">');
     };
 
     return {
-        initialize: function () {}
+        initialize: function() {}
     };
 });

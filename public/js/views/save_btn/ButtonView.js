@@ -1,5 +1,4 @@
-define(["CustomView", "../storage/StorageModal"
-], function(CustomView, StorageModal) {
+define(["CustomView", "../storage/StorageModal"], function(CustomView, StorageModal) {
     "use strict";
     return CustomView.extend({
         className: 'btn btn-success',
@@ -9,7 +8,9 @@ define(["CustomView", "../storage/StorageModal"
         },
 
         initialize: function() {
-            this._modal = StorageModal.get({model: this.model});
+            this._modal = StorageModal.get({
+                model: this.model
+            });
         },
 
         render: function() {

@@ -1,5 +1,4 @@
-define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
-], function(_, CustomView, ItemImportModalTemplate) {
+define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], function(_, CustomView, ItemImportModalTemplate) {
     "use strict";
     var modalCache = {};
 
@@ -21,7 +20,7 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
             this.$el.modal('show');
         },
         _okClicked: function(e) {
-			if(e.preventDefault){
+            if (e.preventDefault) {
                 e.preventDefault();
             } else {
                 e.returnValue = false;
@@ -40,7 +39,7 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
             var reader = new FileReader();
 
             var self = this;
-			// run after file chosen
+            // run after file chosen
             reader.onload = function(e) {
                 console.log(e.target.result);
                 self.$input.val(e.target.result); // reader's return value after read.
@@ -61,22 +60,22 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal",
             }
         },
         _urlChanged: function(e) {
-            if(this.$input.val()) {
+            if (this.$input.val()) {
                 this.$el.find(".ok").removeAttr('disabled');
             } else {
                 this.$el.find(".ok").attr('disabled', 'disabled');
             }
 
             if (e.which === 13) { // if keyup is Enter.
-				this.src = this.$input.val();
+                this.src = this.$input.val();
                 return this._okClicked();
             } else {
                 this._loadItem(e);
             }
         },
-		/*
-		 * set $preview's src by input value
-		 */
+        /*
+         * set $preview's src by input value
+         */
         _loadItem: function(e) {
             var val = this.$input.val();
             console.log(val);

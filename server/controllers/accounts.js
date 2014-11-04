@@ -3,19 +3,24 @@ var Account = mongoose.model('Account');
 var _ = require('underscore');
 
 function findByString(searchStr, callback) {
-  var searchRegex = new RegExp(searchStr, 'i');
-  Account.find({
-    $or: [
-      { 'name':  { $regex: searchRegex } },
-      { email:   { $regex: searchRegex } }
-    ]
-  }, callback);
-}
-/***************************************************
-   *
-   * Account
-   *
-   ***************************************************/
+        var searchRegex = new RegExp(searchStr, 'i');
+        Account.find({
+            $or: [{
+                'name': {
+                    $regex: searchRegex
+                }
+            }, {
+                email: {
+                    $regex: searchRegex
+                }
+            }]
+        }, callback);
+    }
+    /***************************************************
+     *
+     * Account
+     *
+     ***************************************************/
 
 /**
  * GET /account
@@ -24,164 +29,198 @@ function findByString(searchStr, callback) {
 
 exports.accountbyId = function(req, res, next) {
 
-  var contactId = req.param('uid', null);
+    var contactId = req.param('uid', null);
 
-  Account.findById(req.user.id, function(err, user) {
-    if (err) { return next(err); }
-    if ( !user ) { return; }
+    Account.findById(req.user.id, function(err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return;
+        }
 
-    if(Account.hasFollowing(user, contactId)) {
-      res.render('account/profileById', {
-        title: '用户资料',
-        account: req.account,
-        followed: true
-      });
-    } else {
-      res.render('account/profileById', {
-        title: '用户资料',
-        account: req.account,
-        followed: false
-      });
-    }
-  });
+        if (Account.hasFollowing(user, contactId)) {
+            res.render('account/profileById', {
+                title: '用户资料',
+                account: req.account,
+                followed: true
+            });
+        } else {
+            res.render('account/profileById', {
+                title: '用户资料',
+                account: req.account,
+                followed: false
+            });
+        }
+    });
 };
 
 exports.followerbyId = function(req, res, next) {
 
-  req.account.contacts.followers.forEach(function(follower, i) {
-    Account.load(follower.accountId, function(err, contact) {
-      if (err) { return next(err); }
-      req.account.contacts.followers[i] = contact;
+    req.account.contacts.followers.forEach(function(follower, i) {
+        Account.load(follower.accountId, function(err, contact) {
+            if (err) {
+                return next(err);
+            }
+            req.account.contacts.followers[i] = contact;
+        });
     });
-  });
 
-  setTimeout(function() {
-    res.render('account/follower', {
-      title: '我的粉丝',
-      account: req.account
-    });
-  }, 100);
+    setTimeout(function() {
+        res.render('account/follower', {
+            title: '我的粉丝',
+            account: req.account
+        });
+    }, 100);
 };
 
 exports.followingbyId = function(req, res, next) {
 
-  req.account.contacts.followings.forEach(function(following, i) {
-    Account.load(following.accountId, function(err, contact) {
-      if (err) { return next(err); }
-      req.account.contacts.followings[i] = contact;
+    req.account.contacts.followings.forEach(function(following, i) {
+        Account.load(following.accountId, function(err, contact) {
+            if (err) {
+                return next(err);
+            }
+            req.account.contacts.followings[i] = contact;
+        });
     });
-  });
 
-  setTimeout(function() {
-    res.render('account/following', {
-      title: '我的关注',
-      account: req.account
-    });
-  }, 100);
+    setTimeout(function() {
+        res.render('account/following', {
+            title: '我的关注',
+            account: req.account
+        });
+    }, 100);
 };
 
 exports.removeContact = function(req, res, next) {
-  var contactId = req.param('uid', null);
+    var contactId = req.param('uid', null);
 
-  Account.findById(req.user.id, function(err, user) {
-    if (err) { return next(err); }
-    if ( !user ) { return; }
-    Account.findById(contactId, function(err, contact) {
-      if (err) { return next(err); }
-      if ( !contact ) { return; }
-
-      console.log('Remove Contact:');
-      Account.removeFollowing(user, contactId);
-      // Kill the reverse link
-      Account.removeFollower(contact, req.user.id);
-
-      user.save(function (err) {
+    Account.findById(req.user.id, function(err, user) {
         if (err) {
-          console.log('Error saving account: ' + err);
-          return next(err);
+            return next(err);
         }
-      });
-      contact.save(function (err) {
-        if (err) {
-          console.log('Error saving account: ' + err);
-          return next(err);
+        if (!user) {
+            return;
         }
-      });
-      req.flash('successful', { msg: 'Contact Removed.' });
-      return res.redirect('/account/' + contactId);
+        Account.findById(contactId, function(err, contact) {
+            if (err) {
+                return next(err);
+            }
+            if (!contact) {
+                return;
+            }
+
+            console.log('Remove Contact:');
+            Account.removeFollowing(user, contactId);
+            // Kill the reverse link
+            Account.removeFollower(contact, req.user.id);
+
+            user.save(function(err) {
+                if (err) {
+                    console.log('Error saving account: ' + err);
+                    return next(err);
+                }
+            });
+            contact.save(function(err) {
+                if (err) {
+                    console.log('Error saving account: ' + err);
+                    return next(err);
+                }
+            });
+            req.flash('successful', {
+                msg: 'Contact Removed.'
+            });
+            return res.redirect('/account/' + contactId);
+        });
     });
-  });
 };
 
 
 exports.addContact = function(req, res, next) {
-  var contactId = req.param('uid', null);
+    var contactId = req.param('uid', null);
 
-  // Missing contactId, don't bother going any further, or
-  // contactId is the same as accountId, you can't add yourself as contact.
-  if ( null == contactId || contactId === req.user.id ) {
-    req.flash('errors', { msg: 'Can not add yourself as contact.' });
-    return res.redirect('/account/' + contactId);
-  }
+    // Missing contactId, don't bother going any further, or
+    // contactId is the same as accountId, you can't add yourself as contact.
+    if (null == contactId || contactId === req.user.id) {
+        req.flash('errors', {
+            msg: 'Can not add yourself as contact.'
+        });
+        return res.redirect('/account/' + contactId);
+    }
 
-  Account.findById(req.user.id, function(err, user) {
-    if (err) { return next(err); }
-    if ( !user ) { return; }
-    Account.findById(contactId, function(err, contact) {
-      if (err) { return next(err); }
-      if ( !contact ) { return; }
-      console.log('Add Contact:');
-
-      Account.addFollowing(user, contact);
-      Account.addFollower(contact, user);
-
-      user.save(function (err) {
+    Account.findById(req.user.id, function(err, user) {
         if (err) {
-          console.log('Error saving account: ' + err);
-          return next(err);
+            return next(err);
         }
-      });
-      contact.save(function (err) {
-        if (err) {
-          console.log('Error saving account: ' + err);
-          return next(err);
+        if (!user) {
+            return;
         }
-      });
+        Account.findById(contactId, function(err, contact) {
+            if (err) {
+                return next(err);
+            }
+            if (!contact) {
+                return;
+            }
+            console.log('Add Contact:');
 
-      req.flash('successful', { msg: 'Contact Added.' });
-      return res.redirect('/account/' + contactId);
+            Account.addFollowing(user, contact);
+            Account.addFollower(contact, user);
+
+            user.save(function(err) {
+                if (err) {
+                    console.log('Error saving account: ' + err);
+                    return next(err);
+                }
+            });
+            contact.save(function(err) {
+                if (err) {
+                    console.log('Error saving account: ' + err);
+                    return next(err);
+                }
+            });
+
+            req.flash('successful', {
+                msg: 'Contact Added.'
+            });
+            return res.redirect('/account/' + contactId);
+        });
     });
-  });
 };
 
 exports.findContact = function(req, res) {
-  var searchStr = req.param('searchStr', null);
+    var searchStr = req.param('searchStr', null);
 
-  if ( null == searchStr) {
-    res.send(400);
-    return;
-  }
-
-  findByString(searchStr, function onSearchDone(err, accounts) {
-    if (err || accounts.length === 0) {
-      res.send(404);
-    } else {
-      res.send(accounts);
+    if (null == searchStr) {
+        res.send(400);
+        return;
     }
-  });
+
+    findByString(searchStr, function onSearchDone(err, accounts) {
+        if (err || accounts.length === 0) {
+            res.send(404);
+        } else {
+            res.send(accounts);
+        }
+    });
 };
 
 /**
  * Load
  */
 
-exports.load = function(req, res, next, id){
-  Account.load(id, function (err, account) {
-    if (err) { return next(err); }
-    if (!account) { return next(new Error('not found')); }
-    req.account = account;
-    next();
-  });
+exports.load = function(req, res, next, id) {
+    Account.load(id, function(err, account) {
+        if (err) {
+            return next(err);
+        }
+        if (!account) {
+            return next(new Error('not found'));
+        }
+        req.account = account;
+        next();
+    });
 };
 
 /**
@@ -190,21 +229,27 @@ exports.load = function(req, res, next, id){
  */
 
 exports.postUpdateProfile = function(req, res, next) {
-  Account.findById(req.user.id, function(err, user) {
-    // console.log(req.user);
-    if (err) { return next(err); }
-    user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
-    user.profile.location = req.body.location || '';
-    user.profile.website = req.body.website || '';
+    Account.findById(req.user.id, function(err, user) {
+        // console.log(req.user);
+        if (err) {
+            return next(err);
+        }
+        user.email = req.body.email || '';
+        user.profile.name = req.body.name || '';
+        user.profile.gender = req.body.gender || '';
+        user.profile.location = req.body.location || '';
+        user.profile.website = req.body.website || '';
 
-    user.save(function (err) {
-      if (err) { return next(err); }
-      req.flash('successful', { msg: 'Profile information updated.' });
-      res.redirect('/account');
+        user.save(function(err) {
+            if (err) {
+                return next(err);
+            }
+            req.flash('successful', {
+                msg: 'Profile information updated.'
+            });
+            res.redirect('/account');
+        });
     });
-  });
 };
 
 /**
@@ -214,27 +259,33 @@ exports.postUpdateProfile = function(req, res, next) {
  */
 
 exports.postUpdatePassword = function(req, res, next) {
-  req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+    req.assert('password', 'Password must be at least 4 characters long').len(4);
+    req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
-  var errors = req.validationErrors();
+    var errors = req.validationErrors();
 
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/account');
-  }
+    if (errors) {
+        req.flash('errors', errors);
+        return res.redirect('/account');
+    }
 
-  Account.findById(req.user.id, function(err, user) {
-    if (err) { return next(err); }
+    Account.findById(req.user.id, function(err, user) {
+        if (err) {
+            return next(err);
+        }
 
-    user.password = req.body.password;
+        user.password = req.body.password;
 
-    user.save(function(err) {
-      if (err) { return next(err); }
-      req.flash('successful', { msg: 'Password has been changed.' });
-      res.redirect('/account');
+        user.save(function(err) {
+            if (err) {
+                return next(err);
+            }
+            req.flash('successful', {
+                msg: 'Password has been changed.'
+            });
+            res.redirect('/account');
+        });
     });
-  });
 };
 
 /**
@@ -244,11 +295,15 @@ exports.postUpdatePassword = function(req, res, next) {
  */
 
 exports.postDeleteAccount = function(req, res, next) {
-  Account.remove({ _id: req.user.id }, function(err) {
-    if (err) { return next(err); }
-    req.logout();
-    res.redirect('/');
-  });
+    Account.remove({
+        _id: req.user.id
+    }, function(err) {
+        if (err) {
+            return next(err);
+        }
+        req.logout();
+        res.redirect('/');
+    });
 };
 
 /**
@@ -259,17 +314,25 @@ exports.postDeleteAccount = function(req, res, next) {
  */
 
 exports.getOauthUnlink = function(req, res, next) {
-  var provider = req.params.provider;
-  Account.findById(req.user.id, function(err, user) {
-    if (err) { return next(err); }
+    var provider = req.params.provider;
+    Account.findById(req.user.id, function(err, user) {
+        if (err) {
+            return next(err);
+        }
 
-    user[provider] = undefined;
-    user.tokens = _.reject(user.tokens, function(token) { return token.kind === provider; });
+        user[provider] = undefined;
+        user.tokens = _.reject(user.tokens, function(token) {
+            return token.kind === provider;
+        });
 
-    user.save(function(err) {
-      if (err) { return next(err); }
-      req.flash('inform', { msg: provider + ' account has been unlinked.' });
-      res.redirect('/account');
+        user.save(function(err) {
+            if (err) {
+                return next(err);
+            }
+            req.flash('inform', {
+                msg: provider + ' account has been unlinked.'
+            });
+            res.redirect('/account');
+        });
     });
-  });
 };

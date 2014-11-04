@@ -173,8 +173,10 @@ define(["underscore",
          */
         _styleChanged: function(model, style, opts) {
             // if not model.changed;
-            if (!opts.changes) { return; }
-            for (var i = 0; i < opts.changes.length; i+=1) {
+            if (!opts.changes) {
+                return;
+            }
+            for (var i = 0; i < opts.changes.length; i += 1) {
                 var key = opts.changes[i];
                 var value = model.get(key);
                 if (value) {
@@ -217,7 +219,7 @@ define(["underscore",
             this.$textEl.bind('paste', function(e) {
                 self._handlePaste(this, e);
             });
-            if(this.model.get("decoration")) {
+            if (this.model.get("decoration")) {
                 this.$textEl.html('<u>' + this.model.get('text') + '</u>');
             } else {
                 this.$textEl.html(this.model.get('text'));
@@ -230,7 +232,7 @@ define(["underscore",
                 color: this.model.get('color'),
                 top: this.model.get('y') + 'px',
                 left: this.model.get('x') + 'px'
-                // textAlign: this.model.get("align")
+                    // textAlign: this.model.get("align")
             });
             return this.$el;
         }

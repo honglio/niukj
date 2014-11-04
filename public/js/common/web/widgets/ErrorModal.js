@@ -1,7 +1,7 @@
 define(function() {
-	"use strict";
-	return {
-		// show: function(err) {
-		// }
-	};
+    "use strict";
+    return {
+        // show: function(err) {
+        // }
+    };
 });

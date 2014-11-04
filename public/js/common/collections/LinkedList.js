@@ -7,10 +7,10 @@ define(function() {
     "use strict";
 
     function LinkedList() {
-        this.head = this.tail = null;
-        this.length = 0;
-    }
-    // Creates a new node and add it onto the end of the list.
+            this.head = this.tail = null;
+            this.length = 0;
+        }
+        // Creates a new node and add it onto the end of the list.
     LinkedList.prototype.push = function(value) {
         var newNode = {
             prev: null,
@@ -88,7 +88,7 @@ define(function() {
             idx = 0,
             _results = [];
         while (cursor !== null) {
-            cb(cursor.value, idx+=1, this);
+            cb(cursor.value, idx += 1, this);
             _results.push(cursor = cursor.next);
         }
         return _results;

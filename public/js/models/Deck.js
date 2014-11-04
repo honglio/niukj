@@ -8,7 +8,7 @@ define(["underscore",
     "common/web/undo_support/UndoHistoryFactory",
     "./Slide",
     "config"
-], function (_, Backbone, SlideCollection, SlideCommands, UndoHistoryFactory, Slide, Config) {
+], function(_, Backbone, SlideCollection, SlideCommands, UndoHistoryFactory, Slide, Config) {
     "use strict";
     var slideConfig = Config.slide;
     /**
@@ -20,7 +20,7 @@ define(["underscore",
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
     return Backbone.Model.extend({
 
-        initialize: function () {
+        initialize: function() {
             this.set('slides', new SlideCollection());
             var allSlides = this.get('slides');
             allSlides.on("add", this._slideAdded, this);
@@ -54,7 +54,7 @@ define(["underscore",
          * @return the newly-set slides
          */
 
-        "import": function (rawObj) {
+        "import": function(rawObj) {
             var allSlides = this.get('slides');
 
             var activeSlide = this.get('activeSlide');
@@ -65,15 +65,15 @@ define(["underscore",
 
             allSlides.models.forEach(function(slide) {
                 this._registerWithSlide(slide);
-                if(slide.get('active') === "true") {
+                if (slide.get('active') === "true") {
                     activeSlide = slide;
                 }
             }, this);
 
             this.set('activeSlide', activeSlide);
             this.set('fileName', rawObj.fileName);
-			this.set('id', rawObj._id);
-			this.set('picture', rawObj.picture);
+            this.set('id', rawObj._id);
+            this.set('picture', rawObj.picture);
             undoHistory.clear();
         },
 
@@ -85,7 +85,7 @@ define(["underscore",
          * @param {{at: number}} [options]
          * @private
          */
-        _slideAdded: function (slide, collection, options) {
+        _slideAdded: function(slide, collection, options) {
             options = options || {};
             options.at = _.isNumber(options.at) ? options.at : collection.length;
             this.set('activeSlide', slide, options);
@@ -99,7 +99,7 @@ define(["underscore",
          * @param {Slide} slide
          * @private
          */
-        _slideDisposed: function (slide) {
+        _slideDisposed: function(slide) {
             slide.off(null, null, this);
         },
         /**
@@ -110,9 +110,9 @@ define(["underscore",
          * @param {{index: number}} [options]
          * @private
          */
-        _slideRemoved: function (slide, collection, options) {
+        _slideRemoved: function(slide, collection, options) {
             options = options || {};
-			// resolve activeSlide before dispose the slide
+            // resolve activeSlide before dispose the slide
             if (this.get('activeSlide') === slide) {
                 if (options.index < collection.length) {
                     this.set('activeSlide', collection.at(options.index));
@@ -146,9 +146,9 @@ define(["underscore",
          * @private
          */
         _selectionChanged: function(slide, value) {
-			if (value) {
-				this.selected = this.get('activeSlide');
-			}
+            if (value) {
+                this.selected = this.get('activeSlide');
+            }
         },
 
         /**
@@ -170,11 +170,11 @@ define(["underscore",
          * otherwise, it will be added as the last index in the deck.
          * if the index is unnessessery large, reduce the index to rational value.
          */
-        create: function (index) {
+        create: function(index) {
             undoHistory.pushdo(new SlideCommands.Add(this, null, index));
         },
 
-        add: function (slide, index) {
+        add: function(slide, index) {
             undoHistory.pushdo(new SlideCommands.Add(this, slide, index));
         },
 
@@ -206,7 +206,7 @@ define(["underscore",
          * @param {model.Slide} [slide] the slide to remove.
          *
          */
-        remove: function (slide) {
+        remove: function(slide) {
             undoHistory.pushdo(new SlideCommands.Remove(this, slide));
         },
         /**
@@ -220,7 +220,7 @@ define(["underscore",
         _doRemove: function(slide, options) {
             var allSlides = this.get('slides');
             allSlides.remove(slide, options);
-            if(slide.dispose) {
+            if (slide.dispose) {
                 slide.dispose();
             }
         },
@@ -231,7 +231,9 @@ define(["underscore",
          * @param {number} destination
          */
         moveSlide: function(sourceIndex, destIndex) {
-            if (sourceIndex === destIndex) { return; }
+            if (sourceIndex === destIndex) {
+                return;
+            }
             var slides = this.get('slides');
             var slide = slides.at(sourceIndex);
             undoHistory.pushdo(new SlideCommands.Move(this, slide, destIndex));
@@ -249,12 +251,12 @@ define(["underscore",
             if (newActive === lastActive) {
                 return;
             }
-			if (this.selected) {
-				this.selected.set({
-					active: false,
+            if (this.selected) {
+                this.selected.set({
+                    active: false,
                     selected: false
-				});
-			}
+                });
+            }
             if (lastActive) {
                 lastActive.unselectComponents();
                 lastActive.set({
@@ -264,7 +266,7 @@ define(["underscore",
             }
             if (newActive) {
                 newActive.set({
-					active: true,
+                    active: true,
                     selected: false
                 }, options);
             }

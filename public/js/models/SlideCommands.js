@@ -20,7 +20,10 @@ define(["./Slide"], function(Slide) {
         name: 'Add Slide',
 
         "do": function() {
-            this.deck._doAdd(this.slide, {preserveIndexes: false, at: this.index});
+            this.deck._doAdd(this.slide, {
+                preserveIndexes: false,
+                at: this.index
+            });
         },
 
         undo: function() {
@@ -44,7 +47,9 @@ define(["./Slide"], function(Slide) {
         },
 
         undo: function() {
-            this.deck._doAdd(this.slide, {preserveIndexes: true});
+            this.deck._doAdd(this.slide, {
+                preserveIndexes: true
+            });
         }
     };
 
@@ -65,8 +70,13 @@ define(["./Slide"], function(Slide) {
             var slides = this.deck.get('slides');
             this.initSlidesOrder = slides.models.slice(0);
 
-            slides.remove(this.slide, {silent: true});
-            slides.add(this.slide, {silent: true, at: this.destination});
+            slides.remove(this.slide, {
+                silent: true
+            });
+            slides.add(this.slide, {
+                silent: true,
+                at: this.destination
+            });
             slides.sortPosition();
 
             this.deck.trigger("slideMoved");

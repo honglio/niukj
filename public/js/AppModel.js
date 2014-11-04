@@ -9,7 +9,7 @@ define(["backbone",
     "use strict";
 
     function cleanHTMLTag(data) {
-        if(data) {
+        if (data) {
             return data.replace(/<[^>]+>/g, '');
         }
     }
@@ -25,12 +25,12 @@ define(["backbone",
             var length = Backbone.history.location.href.length;
 
             var id;
-            if(length > 34) {
-                id = Backbone.history.location.href.substr(length-29, 24);
+            if (length > 34) {
+                id = Backbone.history.location.href.substr(length - 29, 24);
             }
 
             var self = this;
-            if(id == null) {
+            if (id == null) {
                 this.addSlide(0);
             } else {
                 storageInterface.load(id, function(deck) {
@@ -54,16 +54,16 @@ define(["backbone",
 
             var exportData = this._deck.toJSON();
             exportData.activeSlide = this._deck.get('activeSlide').toJSON();
-            this._deck.get('activeSlide').get('components').forEach(function (component, i) {
+            this._deck.get('activeSlide').get('components').forEach(function(component, i) {
                 var text = cleanHTMLTag(component.get('text'));
                 component.set('text', text);
                 exportData.activeSlide.components[i] = component.toJSON();
             });
 
             exportData.slides = this._deck.get('slides').toJSON();
-            this._deck.get('slides').forEach(function (slide, i) {
-                slide.get('components').forEach(function (component, j) {
-                    if(component.get) {
+            this._deck.get('slides').forEach(function(slide, i) {
+                slide.get('components').forEach(function(component, j) {
+                    if (component.get) {
                         var text = cleanHTMLTag(component.get('text'));
                         component.set('text', text);
                         exportData.slides[i].components[j] = component.toJSON();
@@ -75,10 +75,10 @@ define(["backbone",
 
         fileName: function(fname) {
             if (fname === null || fname === undefined) {
-				return this._deck.get('fileName');
+                return this._deck.get('fileName');
             } else {
                 this._deck.set('fileName', fname);
-			}
+            }
         },
 
         deck: function() {

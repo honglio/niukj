@@ -12,7 +12,9 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
     session = require('express-session'),
-    mongoStore = require('connect-mongo')({session: session}),
+    mongoStore = require('connect-mongo')({
+        session: session
+    }),
     csrf = require('lusca').csrf(),
     helpers = require('view-helpers'),
     config = require('./config'),
@@ -20,20 +22,20 @@ var express = require('express'),
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-module.exports = function (app, passport) {
+module.exports = function(app, passport) {
     // set backend views path, template engine and default layout
     app.set('views', config.root + '/server/views');
     app.set('view engine', 'jade');
 
     // should be placed before express.static
     app.use(compression({
-        filter: function (req, res) {
+        filter: function(req, res) {
             return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
         },
         level: 9
     }));
 
-    if(process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
         app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
         app.use(express.static(config.root + '/public'));
     } else {
@@ -51,7 +53,7 @@ module.exports = function (app, passport) {
 
     var log = {
         stream: {
-            write: function (message) {
+            write: function(message) {
                 winston.info(message);
             }
         }
@@ -71,7 +73,7 @@ module.exports = function (app, passport) {
         extended: true
     }));
     app.use(expressValidator());
-    app.use(methodOverride(function (req) {
+    app.use(methodOverride(function(req) {
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
             // look in urlencoded POST bodies and delete it
             var method = req.body._method;
@@ -98,23 +100,27 @@ module.exports = function (app, passport) {
     // should be declared after session and flash
     app.use(helpers('Niukj'));
     // adds CSRF attack protect
-    app.use(function (req, res, next) {
+    app.use(function(req, res, next) {
         if (whitelist.indexOf(req.path) !== -1) {
             next();
         } else {
             csrf(req, res, next);
         }
     });
-    app.use(function (req, res, next) {
+    app.use(function(req, res, next) {
         res.locals.user = req.user;
         next();
     });
     // Keep track of previous URL to redirect back to
     // original destination after a successful login.
-    app.use(function (req, res, next) {
-        if (req.method !== 'GET') { return next(); }
+    app.use(function(req, res, next) {
+        if (req.method !== 'GET') {
+            return next();
+        }
         var path = req.path.split('/')[1];
-        if ((/(auth|login|logout|signup)$/i).test(path)) { return next(); }
+        if ((/(auth|login|logout|signup)$/i).test(path)) {
+            return next();
+        }
         req.session.returnTo = req.path;
         next();
     });
@@ -134,7 +140,7 @@ module.exports = function (app, passport) {
 };
 
 // Connect to mongodb
-var connect = function () {
+var connect = function() {
     var options = {
         server: {
             socketOptions: {
@@ -146,10 +152,10 @@ var connect = function () {
 };
 connect();
 // Error handler
-mongoose.connection.on('error', function (err) {
+mongoose.connection.on('error', function(err) {
     console.log(err);
 });
 // Reconnect when closed
-mongoose.connection.on('disconnected', function () {
+mongoose.connection.on('disconnected', function() {
     connect();
 });

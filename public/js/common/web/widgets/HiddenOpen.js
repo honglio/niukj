@@ -1,5 +1,4 @@
-define(["backbone"
-], function(Backbone) {
+define(["backbone"], function(Backbone) {
     "use strict";
     return Backbone.View.extend({
         className: 'hide',

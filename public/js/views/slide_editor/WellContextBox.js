@@ -30,8 +30,10 @@ define(["CustomView",
         },
 
         render: function() {
-			this.$el.html(new AddSlideButton({model: this.model,
-                                                wellContextBox: this}).render().$el);
+            this.$el.html(new AddSlideButton({
+                model: this.model,
+                wellContextBox: this
+            }).render().$el);
         }
     });
 });

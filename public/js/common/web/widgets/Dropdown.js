@@ -1,67 +1,68 @@
 define(["underscore",
-        "backbone",
-        "jquery",
-        "css!styles/app/widgets/widgets.css"
+    "backbone",
+    "jquery",
+    "css!styles/app/widgets/widgets.css"
 ], function(_, Backbone, $) {
-	"use strict";
-	function Dropdown(model, template) {
-		this.$el = $('<ul class="dropdown-menu" role="menu">');
-		this._template = template;
+    "use strict";
 
-		var self = this;
-		this.$el.on("destroy", function() {
-			self.dispose();
-		});
+    function Dropdown(model, template) {
+        this.$el = $('<ul class="dropdown-menu" role="menu">');
+        this._template = template;
 
-		this._model = model;
-		if (model.on) {
-			model.on("change", this._render, this);
-		}
+        var self = this;
+        this.$el.on("destroy", function() {
+            self.dispose();
+        });
 
-		this._over = this._over.bind(this);
-		this._selected = this._selected.bind(this);
-		this._out = this._out.bind(this);
+        this._model = model;
+        if (model.on) {
+            model.on("change", this._render, this);
+        }
 
-		this.$el.on("mouseover", 'li > a', this._over);
-		this.$el.on("click", 'li > a', this._selected);
-		this.$el.on("mouseout", this._out);
-	}
+        this._over = this._over.bind(this);
+        this._selected = this._selected.bind(this);
+        this._out = this._out.bind(this);
 
-	Dropdown.prototype = {
-		render: function() {
-			var data;
-			if (this._model.attributes) {
-				data = this._model.attributes;
-			} else {
-				data = this._model;
-			}
+        this.$el.on("mouseover", 'li > a', this._over);
+        this.$el.on("click", 'li > a', this._selected);
+        this.$el.on("mouseout", this._out);
+    }
 
-			this.$el.html(this._template(data));
+    Dropdown.prototype = {
+        render: function() {
+            var data;
+            if (this._model.attributes) {
+                data = this._model.attributes;
+            } else {
+                data = this._model;
+            }
 
-			return this;
-		},
+            this.$el.html(this._template(data));
 
-		_over: function(e) {
-			this.trigger("over", e);
-		},
+            return this;
+        },
 
-		_out: function(e) {
-			this.trigger("out", e);
-		},
+        _over: function(e) {
+            this.trigger("over", e);
+        },
 
-		_selected: function(e) {
-			this.trigger("selected", e);
-		},
+        _out: function(e) {
+            this.trigger("out", e);
+        },
 
-		dispose: function() {
-			if (this._model.off) {
-				this._model.off(null, null, this);
-			}
-			this.off();
-		}
-	};
+        _selected: function(e) {
+            this.trigger("selected", e);
+        },
 
-	_.extend(Dropdown.prototype, Backbone.Events);
+        dispose: function() {
+            if (this._model.off) {
+                this._model.off(null, null, this);
+            }
+            this.off();
+        }
+    };
 
-	return Dropdown;
+    _.extend(Dropdown.prototype, Backbone.Events);
+
+    return Dropdown;
 });

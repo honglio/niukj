@@ -2,12 +2,12 @@ define(["jquery",
     "website/list/model/Deck",
     "website/list/collection/Deck",
     "templates"
-], function ($, DeckView, DeckCollection) {
+], function($, DeckView, DeckCollection) {
     "use strict";
-    describe("DeckCollection", function () {
+    describe("DeckCollection", function() {
         var decks = new DeckCollection();
-        describe("Collection's Interaction with REST API", function () {
-            beforeEach(function () {
+        describe("Collection's Interaction with REST API", function() {
+            beforeEach(function() {
                 this.ajax_stub = sinon.stub($, "ajax").yieldsTo("success", [{
                     _id: 111111,
                     fileName: "Mock Summary 1",
@@ -18,10 +18,10 @@ define(["jquery",
                     slides: "<p><b>SMALL ASS</b></p>"
                 }]);
             });
-            afterEach(function () {
+            afterEach(function() {
                 this.ajax_stub.restore();
             });
-            it("should load using the API", function () {
+            it("should load using the API", function() {
                 decks.fetch();
                 expect(decks.length).to.equal(2);
                 expect(decks.at(0).get('fileName')).to.equal("Mock Summary 1");
@@ -30,4 +30,3 @@ define(["jquery",
         });
     });
 });
-

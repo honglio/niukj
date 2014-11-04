@@ -1,5 +1,5 @@
 define(["backbone",
-        "common/Math2"
+    "common/Math2"
 ], function(Backbone, Math2) {
     "use strict";
     return Backbone.Model.extend({

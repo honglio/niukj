@@ -86,14 +86,14 @@ define(function() {
          */
         type: function(extension) {
             switch (extension) {
-            case "MP4": // .mp4 = H.264 + AAC
-                return "video/mp4";
-            case "WEBM": // .webm = VP8 + Vorbis
-                return "video/webm";
-            case "OGG": // .ogg = Theora + Vorbis
-                return "video/ogg";
-            default:
-                return "";
+                case "MP4": // .mp4 = H.264 + AAC
+                    return "video/mp4";
+                case "WEBM": // .webm = VP8 + Vorbis
+                    return "video/webm";
+                case "OGG": // .ogg = Theora + Vorbis
+                    return "video/ogg";
+                default:
+                    return "";
             }
         },
 
@@ -107,7 +107,9 @@ define(function() {
          *
          */
         createDownloadAttrs: function(mimeType, value, name) {
-            var blob = new Blob([value], {type: mimeType});
+            var blob = new Blob([value], {
+                type: mimeType
+            });
             var href = window.URL.createObjectURL(blob);
             var attrs = {
                 href: href,

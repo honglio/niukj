@@ -1,11 +1,11 @@
 define(["underscore",
-	"backbone",
+    "backbone",
     "./SpatialObject",
     "../views/slide_components/ComponentFactory",
     "common/Math2",
-	"./ComponentCommands",
+    "./ComponentCommands",
     "common/web/undo_support/UndoHistoryFactory"
-],  function(_, Backbone, SpatialObject, ComponentFactory, Math2, ComponentCommands, UndoHistoryFactory) {
+], function(_, Backbone, SpatialObject, ComponentFactory, Math2, ComponentCommands, UndoHistoryFactory) {
     "use strict";
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
 
@@ -54,7 +54,7 @@ define(["underscore",
          * React on slide being unrendered.
          */
         _unrendered: function() {
-            if(this.get('components')) {
+            if (this.get('components')) {
                 this.get('components').forEach(function(component) {
                     component.trigger("unrender", true);
                 });

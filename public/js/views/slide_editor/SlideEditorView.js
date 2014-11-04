@@ -7,8 +7,12 @@ define(["CustomView",
         className: 'slideEditor row-fluid',
 
         initialize: function() {
-            this._well = new SlideWell({model: this.model});
-            this._opTable = new OperatingTable({model: this.model});
+            this._well = new SlideWell({
+                model: this.model
+            });
+            this._opTable = new OperatingTable({
+                model: this.model
+            });
         },
 
         render: function() {

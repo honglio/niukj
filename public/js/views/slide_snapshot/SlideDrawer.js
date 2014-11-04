@@ -1,7 +1,7 @@
 define(["underscore",
-        "../slide_components/drawers/TextBoxDrawer",
-        "../slide_components/drawers/ImageDrawer",
-        "config"
+    "../slide_components/drawers/TextBoxDrawer",
+    "../slide_components/drawers/ImageDrawer",
+    "config"
 ], function(_, TextBoxDrawer, ImageDrawer, Config) {
     "use strict";
     /**
@@ -41,7 +41,7 @@ define(["underscore",
             // paint component
             var components = this.model.get('components');
             for (var i in components) {
-                if(components.hasOwnProperty(i)) {
+                if (components.hasOwnProperty(i)) {
                     var type = components[i].type ? components[i].type : components[i].get('type');
 
                     var drawer = this._drawers[type];

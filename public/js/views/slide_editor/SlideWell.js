@@ -23,13 +23,15 @@ define(["jquery", "underscore",
             this._deck = this.model.deck();
             this._deck.on("slideAdded", this._slideAdded, this);
             this._deck.on("slideMoved", this._slideMoved, this);
-			this._deck.get('slides').on("reset", this._slidesReset, this);
+            this._deck.get('slides').on("reset", this._slidesReset, this);
 
             // update ContextBox'slide index when slide change or reset;
-			this._deck.get('slides').on("reset", this.setSlideIndex, this);
-			this._deck.get('slides').on("change", this.setSlideIndex, this);
+            this._deck.get('slides').on("reset", this.setSlideIndex, this);
+            this._deck.get('slides').on("change", this.setSlideIndex, this);
 
-            this._contextBox = new WellContextBox({model: this.model});
+            this._contextBox = new WellContextBox({
+                model: this.model
+            });
             this._contextBox.render();
             this.$slides = $('<div class="scrollbar">');
             this.$slides.on('click', '.slideSnapshot', this._clicked);
@@ -49,9 +51,9 @@ define(["jquery", "underscore",
             this._clipboard = this.model.clipboard;
 
             // size setting
-			// this._calculateLayout = this._calculateLayout.bind(this);
-   //          var lazyLayout = _.debounce(this._calculateLayout, 300);
-   //          $(window).resize(lazyLayout);
+            // this._calculateLayout = this._calculateLayout.bind(this);
+            //          var lazyLayout = _.debounce(this._calculateLayout, 300);
+            //          $(window).resize(lazyLayout);
 
             // HeadbarView.on('cut', this._cut, this);
             // HeadbarView.on('copy', this._copy, this);
@@ -83,23 +85,23 @@ define(["jquery", "underscore",
         },
 
 
-		__isFocused: function() {
-			return this.model.get('scope') === 'slideWell';
-		},
+        __isFocused: function() {
+            return this.model.get('scope') === 'slideWell';
+        },
 
-		/**
-		 * Event: user has clicked one of the slide snapshots.
-		 *
-		 * Clicking a slide forces that one to become the active
-		 * slide. trigger SlideSnapshot View's 'select' event.
-		 *
-		 * @param {jQuery.Event} e
-		 * @private
-		 */
-		_clicked: function(e) {
+        /**
+         * Event: user has clicked one of the slide snapshots.
+         *
+         * Clicking a slide forces that one to become the active
+         * slide. trigger SlideSnapshot View's 'select' event.
+         *
+         * @param {jQuery.Event} e
+         * @private
+         */
+        _clicked: function(e) {
             e.preventDefault();
-			$(this).trigger("select");
-		},
+            $(this).trigger("select");
+        },
 
         /**
          * React on Cut shortcut, the next item will set active
@@ -144,7 +146,7 @@ define(["jquery", "underscore",
         _paste: function() {
             var item = this._clipboard.item;
             if (item && item.type === 'slide') {
-				var slide = this._deck.get('activeSlide');
+                var slide = this._deck.get('activeSlide');
                 var index = slide.get('index') ? slide.get('index') : slide.index;
                 this._deck.add(item.clone(), index);
             }
@@ -154,9 +156,9 @@ define(["jquery", "underscore",
             this._deck.moveSlide(startIndex, endIndex);
         },
 
-		setSlideIndex: function(){
-			this._contextBox.slideIndex(this._deck.get('slides').models.length);
-		},
+        setSlideIndex: function() {
+            this._contextBox.slideIndex(this._deck.get('slides').models.length);
+        },
 
         /**
          * Refresh slide snapshots on slides reset.
@@ -166,7 +168,9 @@ define(["jquery", "underscore",
          */
         _slidesReset: function(newSlides) {
             var i = 0;
-            var opts = {at: 0};
+            var opts = {
+                at: 0
+            };
             newSlides.forEach(function(slide) {
                 opts.at = i;
                 this._slideAdded(slide, opts);
@@ -182,10 +186,13 @@ define(["jquery", "underscore",
          * @private
          */
         _slideAdded: function(slide, options) {
-			options = options || {};
+            options = options || {};
             var index = options.at;
             // Append it in the correct position in the well
-            var snapshot = new SlideSnapshot({model: slide, deck: this._deck});
+            var snapshot = new SlideSnapshot({
+                model: slide,
+                deck: this._deck
+            });
             this.$slides.append(snapshot.render().$el);
         },
         /**
@@ -196,7 +203,9 @@ define(["jquery", "underscore",
          * @private
          */
         _slideMoved: function(slide, destination) {
-            if (this._initiatedMove) {return;}
+            if (this._initiatedMove) {
+                return;
+            }
             // How expensive is this for very large decks?
             this.$slides.empty();
             this._slidesReset(this._deck.get('slides').models);
@@ -210,7 +219,10 @@ define(["jquery", "underscore",
             this.$el.html(this.$slides);
 
             this._deck.get('slides').forEach(function(slide) {
-                var snapshot = new SlideSnapshot({model: slide, deck: this._deck});
+                var snapshot = new SlideSnapshot({
+                    model: slide,
+                    deck: this._deck
+                });
                 this.$slides.append(snapshot.render().$el);
             }, this);
 
@@ -227,7 +239,7 @@ define(["jquery", "underscore",
         dispose: function() {
             this._contextBox.dispose();
             this._sortable.dispose();
-			CustomView.dispose.call(this);
+            CustomView.dispose.call(this);
         }
     });
 });

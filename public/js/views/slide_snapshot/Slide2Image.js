@@ -18,7 +18,7 @@ define([], function() {
         }
 
         var strDownloadMime = "image/octet-stream";
-        var bHasDataURL = !! (oCanvas.toDataURL);
+        var bHasDataURL = !!(oCanvas.toDataURL);
 
         // sends the generated file to the client
         var saveFile = function(strData) {

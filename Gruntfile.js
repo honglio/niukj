@@ -7,7 +7,7 @@
 // 'test/spec/**/*.js'
 // templateFramework: 'handlebars'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // show elapsed time at the end
     require('time-grunt')(grunt);
     // load all grunt tasks
@@ -45,7 +45,39 @@ module.exports = function (grunt) {
                     '*.js'
                 ],
                 options: {
-                    config: '.jsbeautifyrc',
+                    html: {
+                        braceStyle: "collapse",
+                        indentChar: " ",
+                        indentScripts: "keep",
+                        indentSize: 4,
+                        maxPreserveNewlines: 10,
+                        preserveNewlines: true,
+                        unformatted: ["a", "sub", "sup", "b", "i", "u"],
+                        wrapLineLength: 0
+                    },
+                    css: {
+                        indentChar: " ",
+                        indentSize: 4
+                    },
+                    js: {
+                        braceStyle: "collapse",
+                        breakChainedMethods: false,
+                        e4x: false,
+                        evalCode: false,
+                        indentChar: " ",
+                        indentLevel: 0,
+                        indentSize: 4,
+                        indentWithTabs: false,
+                        jslintHappy: false,
+                        keepArrayIndentation: false,
+                        keepFunctionIndentation: false,
+                        maxPreserveNewlines: 10,
+                        preserveNewlines: true,
+                        spaceBeforeConditional: true,
+                        spaceInParen: false,
+                        unescapeStrings: false,
+                        wrapLineLength: 0
+                    },
                     mode: 'VERIFY_AND_WRITE'
                 }
             },
@@ -60,22 +92,40 @@ module.exports = function (grunt) {
                     '*.js'
                 ],
                 options: {
-                    config: '.jsbeautifyrc',
+                    html: {
+                        braceStyle: "collapse",
+                        indentChar: " ",
+                        indentScripts: "keep",
+                        indentSize: 4,
+                        maxPreserveNewlines: 10,
+                        preserveNewlines: true,
+                        unformatted: ["a", "sub", "sup", "b", "i", "u"],
+                        wrapLineLength: 0
+                    },
+                    css: {
+                        indentChar: " ",
+                        indentSize: 4
+                    },
+                    js: {
+                        braceStyle: "collapse",
+                        breakChainedMethods: false,
+                        e4x: false,
+                        evalCode: false,
+                        indentChar: " ",
+                        indentLevel: 0,
+                        indentSize: 4,
+                        indentWithTabs: false,
+                        jslintHappy: false,
+                        keepArrayIndentation: false,
+                        keepFunctionIndentation: false,
+                        maxPreserveNewlines: 10,
+                        preserveNewlines: true,
+                        spaceBeforeConditional: true,
+                        spaceInParen: false,
+                        unescapeStrings: false,
+                        wrapLineLength: 0
+                    },
                     mode: 'VERIFY_ONLY'
-                }
-            }
-        },
-        jscs: {
-            test: {
-                options: {
-                    config: '.jscsrc'
-                },
-                files: {
-                    src: [
-                        '*.js',
-                        'lib/**/*.js',
-                        'config/**/*.js'
-                    ]
                 }
             }
         },
@@ -177,7 +227,7 @@ module.exports = function (grunt) {
                     pragmasOnSave: {
                         //removes Handlebars.Parser code (used to compile template strings) set
                         //it to `false` if you need to parse template strings even after build
-                        excludeHbsParser : true,
+                        excludeHbsParser: true,
                         // kills the entire plugin set once it's built.
                         excludeHbs: true,
                         // removes i18n precompiler, handlebars and json2
@@ -185,11 +235,11 @@ module.exports = function (grunt) {
                     },
 
                     // default plugin settings, listing here just as a reference
-                    hbs : {
-                        templateExtension : 'hbs',
+                    hbs: {
+                        templateExtension: 'hbs',
                         // if disableI18n is `true` it won't load locales and the i18n helper
                         // won't work as well.
-                        disableI18n : false
+                        disableI18n: false
                     },
 
                     // Define the modules to compile.
@@ -225,14 +275,11 @@ module.exports = function (grunt) {
 
                         {
                             name: "js/CustomView"
-                        },
-                        {
+                        }, {
                             name: "js/AppView"
-                        },
-                        {
+                        }, {
                             name: "js/AppModel"
-                        },
-                        {
+                        }, {
                             name: "js/views/etch_extension"
                         },
                         // When compiling the FAQ module, don't include the modules
@@ -249,176 +296,119 @@ module.exports = function (grunt) {
                             // exclude: [
                             //     "CustomView"
                             // ]
-                        },
-                        {
+                        }, {
                             name: "js/views/headbar/ThemeProviderBtn",
-                        },
-                        {
+                        }, {
                             name: "js/views/save_btn/ButtonView",
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/drawers/AbstractDrawer"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/drawers/ImageDrawer"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/drawers/TextBoxDrawer"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/view/Component"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/view/ComponentButton"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/view/ComponentImportButton"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/view/ImageView"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/view/TextBoxView"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_components/ComponentFactory"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_editor/AddSlideButton"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_editor/OperatingTable"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_editor/SlideEditorView"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_editor/SlideWell"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_editor/WellContextBox"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_snapshot/Slide2Image"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_snapshot/SlideDrawer"
-                        },
-                        {
+                        }, {
                             name: "js/views/slide_snapshot/SlideSnapshot"
-                        },
-                        {
+                        }, {
                             name: "js/views/storage/StorageInterface"
-                        },
-                        {
+                        }, {
                             name: "js/views/storage/StorageModal"
-                        },
-                        {
+                        }, {
                             name: "js/views/themes/AvailableBackgrounds"
-                        },
-                        {
+                        }, {
                             name: "js/views/themes/BackgroundProvider"
-                        },
-                        {
+                        }, {
                             name: "js/models/Component"
-                        },
-                        {
+                        }, {
                             name: "js/models/ComponentCommands"
-                        },
-                        {
+                        }, {
                             name: "js/models/Deck"
-                        },
-                        {
+                        }, {
                             name: "js/models/Image"
-                        },
-                        {
+                        }, {
                             name: "js/models/Slide"
-                        },
-                        {
+                        }, {
                             name: "js/models/SlideCollection"
-                        },
-                        {
+                        }, {
                             name: "js/models/SlideCommands"
-                        },
-                        {
+                        }, {
                             name: "js/models/SpatialObject"
-                        },
-                        {
+                        }, {
                             name: "js/models/TextBox"
-                        },
-                        {
+                        }, {
                             name: "js/config/config"
-                        },
-                        {
+                        }, {
                             name: "js/vendors/css"
-                        },
-                        {
+                        }, {
                             name: "js/vendors/hbs"
-                        },
-                        {
+                        }, {
                             name: "js/vendors/etch/etch"
-                        },
-                        {
+                        }, {
                             name: "js/vendors/hbs/handlebars"
-                        },
-                        {
+                        }, {
                             name: "js/vendors/hbs/handlebars.runtime"
-                        },
-                        {
+                        }, {
                             name: "js/vendors/hbs/i18nprecompile"
-                        },
-                        {
+                        }, {
                             name: "js/vendors/hbs/json2"
-                        },
-                        {
+                        }, {
                             name: "js/common/FileUtils"
-                        },
-                        {
+                        }, {
                             name: "js/common/Iterator"
-                        },
-                        {
+                        }, {
                             name: "js/common/MapResolver"
-                        },
-                        {
+                        }, {
                             name: "js/common/Math2"
-                        },
-                        {
+                        }, {
                             name: "js/common/Queue"
-                        },
-                        {
+                        }, {
                             name: "js/common/collections/LinkedList"
-                        },
-                        {
+                        }, {
                             name: "js/common/collections/MultiMap"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/interactions/Clipboard"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/interactions/Sortable"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/remote_storage/RemoteStorageProvider"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/undo_support/UndoHistory"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/undo_support/UndoHistoryFactory"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/widgets/DeltaDragControl"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/widgets/Dropdown"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/widgets/ErrorModal"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/widgets/HiddenOpen"
-                        },
-                        {
+                        }, {
                             name: "js/common/web/widgets/ItemImportModal"
                         }
                     ]
@@ -477,7 +467,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test-lint', [
         'clean:dev',
-        'jscs:test',
         'jsbeautifier:test',
         'jshint',
         // 'csslint:lax'

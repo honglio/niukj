@@ -36,7 +36,7 @@ define(["CustomView",
 
         _filenameEnterd: function() {
             this.$input = this.$el.find("input[name='filename']");
-            if(this.$input.val()) {
+            if (this.$input.val()) {
                 this.$el.find(".ok").removeAttr('disabled');
             } else {
                 this.$el.find(".ok").attr('disabled', 'disabled');
@@ -56,7 +56,7 @@ define(["CustomView",
         },
 
         _okClicked: function(e) {
-            if(e.preventDefault){
+            if (e.preventDefault) {
                 e.preventDefault();
             } else {
                 e.returnValue = false;
@@ -74,23 +74,23 @@ define(["CustomView",
                 _csrf: csrf
             };
 
-            if(!this.model.deck().get('id')) {
-                this.storageInterface.store(serialized, function (id) {
-                    if(id) {
+            if (!this.model.deck().get('id')) {
+                this.storageInterface.store(serialized, function(id) {
+                    if (id) {
                         self.showAlert('成功！', '课件已保存成功', 'alert-success');
                         self.$('.ok').text('保存');
-                        setTimeout(function(){
+                        setTimeout(function() {
                             self.$el.modal('hide');
                             window.location.replace("/articles/" + id + '/edit');
                         }, 4000);
                     }
                 });
             } else {
-                this.storageInterface.saveAs(serialized, function (id) {
-                    if(id) {
+                this.storageInterface.saveAs(serialized, function(id) {
+                    if (id) {
                         self.showAlert('成功！', '课件已保存成功', 'alert-success');
                         self.$('.ok').text('保存');
-                        setTimeout(function(){
+                        setTimeout(function() {
                             self.$el.modal('hide');
                             window.location.replace("/articles/" + id + '/edit');
                         }, 4000);

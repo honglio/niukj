@@ -42,7 +42,7 @@ define(function() {
         this.component = component;
     };
     Add.prototype = {
-        "do" : function() {
+        "do": function() {
             this.slide.set('active', true);
             this.slide.__doAdd(this.component);
         },
