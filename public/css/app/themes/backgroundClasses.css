@@ -32,16 +32,17 @@
     background-color: rgb(238, 238, 238);
 }
 .nobg {
-    background:url(img/nobg.png) no-repeat center;
+    background: url(img/nobg.png) no-repeat center;
     /*background-size*/
-    -webkit-background-size:30px 30px;
-    -moz-background-size:30px 30px;
-    -o-background-size:30px 30px;
-    background-size:30px 30px;
+    
+    -webkit-background-size: 30px 30px;
+    -moz-background-size: 30px 30px;
+    -o-background-size: 30px 30px;
+    background-size: 30px 30px;
 }
 .thumbnail > a {
-    height:40px;
-    width:40px;
+    height: 40px;
+    width: 40px;
 }
 #impress .step {
     overflow: hidden;

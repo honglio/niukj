@@ -4,12 +4,14 @@
 }
 .slideSnapshot:hover {
     /*box-shadow*/
+    
     -webkit-box-shadow: inset 0 0 3px #000;
     -moz-box-shadow: inset 0 0 3px #000;
     box-shadow: inset 0 0 3px #000;
 }
 .slideSnapshot .remove-icon {
     /* color: #FF7F50; */
+    
     display: none;
     position: absolute;
     top: -7px;
@@ -20,6 +22,7 @@
 }
 .slideSnapshot .badge {
     /*transform*/
+    
     -webkit-transform: scale(0.9);
     -moz-transform: scale(0.9);
     -o-transform: scale(0.9);
@@ -31,13 +34,14 @@
 }
 .slideSnapshot.active {
     /*box-shadow*/
+    
     -webkit-box-shadow: inset 0 0 0 1px white, 0 0 6px 0 rgba(0, 0, 0, 0.15);
-    -moz-box-shadow:inset 0 0 0 1px white, 0 0 6px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: inset 0 0 0 1px white, 0 0 6px 0 rgba(0, 0, 0, 0.15);
     box-shadow: inset 0 0 0 1px white, 0 0 6px 0 rgba(0, 0, 0, 0.15);
     border: 1px solid #FF7F50;
 }
 .slideSnapshot.active:hover {
-	-webkit-box-shadow: inset 0 0 3px #FF7F50;
+    -webkit-box-shadow: inset 0 0 3px #FF7F50;
     -moz-box-shadow: inset 0 0 3px #FF7F50;
     box-shadow: inset 0 0 3px #FF7F50;
 }

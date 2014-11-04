@@ -42,7 +42,10 @@ module.exports = function(grunt) {
                     'test/spec/**/*.js',
                     'lib/**/*.js',
                     'config/**/*.js',
-                    '*.js'
+                    '*.js',
+                    '<%= yeoman.css %>',
+                    '!<%= yeoman.app %>/css/lib/**/*.css',
+                    '<%= yeoman.hbs %>'
                 ],
                 options: {
                     html: {
@@ -89,7 +92,10 @@ module.exports = function(grunt) {
                     'test/spec/**/*.js',
                     'lib/**/*.js',
                     'config/**/*.js',
-                    '*.js'
+                    '*.js',
+                    '<%= yeoman.css %>',
+                    '!<%= yeoman.app %>/css/lib/**/*.css',
+                    '<%= yeoman.hbs %>'
                 ],
                 options: {
                     html: {

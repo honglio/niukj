@@ -2,15 +2,19 @@
     position: absolute;
     line-height: normal;
     /*padding: 2px;*/
+    
     cursor: pointer;
     margin: 0;
     min-width: 120px;
     min-height: 50px;
 }
-.component:hover .remove-icon { display: inline }
+.component:hover .remove-icon {
+    display: inline
+}
 .component .remove-icon {
     /* font-size: 20px; */
     /* color: #FF7F50; */
+    
     display: none;
     position: absolute;
     top: -7px;
@@ -29,7 +33,9 @@
 .component .content {
     white-space: nowrap;
 }
-.component .content:not(.svg) { display: inline-block }
+.component .content:not(.svg) {
+    display: inline-block
+}
 .component .content-scale {
     -webkit-transform-origin: 0 0;
     -moz-transform-origin: 0 0;
@@ -37,7 +43,9 @@
     -ms-transform-origin: 0 0;
     transform-origin: 0 0;
 }
-.component .content-scale:not(.svg) { display: inline-block }
+.component .content-scale:not(.svg) {
+    display: inline-block
+}
 .component .label {
     visibility: hidden;
     background: none;
@@ -67,11 +75,15 @@
     left: 45%;
     top: -25px;
 }
-.component .topLabel .rotate { cursor: w-resize }
-.component .scale .glyphicon{
+.component .topLabel .rotate {
+    cursor: w-resize
+}
+.component .scale .glyphicon {
     /* position: absolute; */
+    
     right: -10px;
     /* bottom: -5px; */
+    
     cursor: sw-resize;
     font-size: 40px;
     -webkit-transform: rotate(90deg);
@@ -84,11 +96,17 @@
     width: 25px;
     height: 25px;
     line-height: 12px;
-	visibility: hidden;
+    visibility: hidden;
 }
-.component.selected { border: 1px solid #666 }
-.component.selected .label { visibility: visible }
-.component.selected input { visibility: visible }
+.component.selected {
+    border: 1px solid #666
+}
+.component.selected .label {
+    visibility: visible
+}
+.component.selected input {
+    visibility: visible
+}
 .component.editable {
     cursor: auto;
     border: 1px solid rgb(33, 123, 219);
