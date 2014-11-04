@@ -33,6 +33,52 @@ module.exports = function (grunt) {
             release: ['.tmp', '<%= yeoman.release %>/*'],
             dev: '.tmp'
         },
+        jsbeautifier: {
+            fix: {
+                src: [
+                    '<%= yeoman.jsServer %>',
+                    '<%= yeoman.jsClient %>',
+                    '!<%= yeoman.app %>/js/vendors/**/*.js',
+                    'test/spec/**/*.js',
+                    'lib/**/*.js',
+                    'config/**/*.js',
+                    '*.js'
+                ],
+                options: {
+                    config: '.jsbeautifyrc',
+                    mode: 'VERIFY_AND_WRITE'
+                }
+            },
+            test: {
+                src: [
+                    '<%= yeoman.jsServer %>',
+                    '<%= yeoman.jsClient %>',
+                    '!<%= yeoman.app %>/js/vendors/**/*.js',
+                    'test/spec/**/*.js',
+                    'lib/**/*.js',
+                    'config/**/*.js',
+                    '*.js'
+                ],
+                options: {
+                    config: '.jsbeautifyrc',
+                    mode: 'VERIFY_ONLY'
+                }
+            }
+        },
+        jscs: {
+            test: {
+                options: {
+                    config: '.jscsrc'
+                },
+                files: {
+                    src: [
+                        '*.js',
+                        'lib/**/*.js',
+                        'config/**/*.js'
+                    ]
+                }
+            }
+        },
         jshint: {
             server: {
                 options: {
@@ -429,11 +475,17 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('test', [
+    grunt.registerTask('test-lint', [
         'clean:dev',
+        'jscs:test',
+        'jsbeautifier:test',
         'jshint',
         // 'csslint:lax'
         // 'mocha'
+    ]);
+
+    grunt.registerTask('fix-lint', [
+        'jsbeautifier:fix'
     ]);
 
     grunt.registerTask('build', [
@@ -446,7 +498,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'test',
+        'test-lint',
         'build'
     ]);
 };
