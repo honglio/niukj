@@ -4,13 +4,14 @@
 
 ## Contributing ##
 
-Here is the basic layout of the source:
+Read the wiki first!
 
-* Presentation Model: cloudslide/deck
-* Editor UI Layer: cloudslide/slide_editor
-* Presentation Rendering: cloudslide/presentation_generator
+### Source Structure ###
 
-templates for UI components are contained in cloudslide/COMPONENT_NAME/templates in order to package related markup and backing UI (not model) code into modules. In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Indentation should be set to four spaces. If you are adding a new problem, consider adding an entry on the problems list in the readme where applicable. Please lint and test your code with any means available - currently JavaScript has tests and linting via Mocha and JSHint.
+* Presentation Model: public/js/models
+* Editor UI Layer: public/js/views
+* Presentation Rendering: server/views/article
+* templates for UI components: in public/js/templates 
 
 ### Building ###
 
@@ -20,7 +21,7 @@ To running locally, you'll need Grunt v0.4.0 or later.
 2. Install development dependencies: 'npm install'
 3. Build pages from template: 'grunt'
 
-the resulting build will be location in 'currentDirectory/dist'.
+the resulting build will be location in 'currentDirectory/built'.
 
 ### Add custom fonts: ###
 1. Reference them in web-fonts.css
@@ -29,17 +30,4 @@ the resulting build will be location in 'currentDirectory/dist'.
 4. ttf2woff tool: npm install ttf2woff -g
 
 ## User Guide ##
-* Component scale keep aspect ratio by default, press 'shift' to break the ratio.
-
-
-## Acknowledgments ##
-
-* HTML5 Boilerplate: [http://html5boilerplate.com](http://html5boilerplate.com)
-* Backbone: [http://documentcloud.github.com/backbone/](http://documentcloud.github.com/backbone/)
-* Require: [http://requirejs.org/](http://requirejs.org/)
-* Handlebars: [http://handlebarsjs.com/](http://handlebarsjs.com/)
-* Mocha: [http://visionmedia.github.io/mocha/](http://visionmedia.github.io/mocha/)
-* Bootstrap: [http://twitter.github.io/bootstrap/](http://twitter.github.io/bootstrap/)
-* Express: [http://expressjs.com/](http://expressjs.com/)
-* Passport: [http://passportjs.org/](http://passportjs.org/)
-* Impress: [http://github.com/bartaz/impress.js](http://github.com/bartaz/impress.js)
+* null

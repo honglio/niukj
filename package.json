@@ -1,7 +1,7 @@
 {
     "name": "niukj",
-    "description": "An Impress.js Presentation Authoring Platform",
-    "version": "0.2.0",
+    "description": "An Online Presentation Platform - writing/presenting/storing/searching",
+    "version": "1.0.0",
     "private": true,
     "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
     "repository": {
