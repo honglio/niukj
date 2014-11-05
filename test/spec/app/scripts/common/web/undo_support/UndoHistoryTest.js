@@ -1,6 +1,6 @@
 define(["common/web/undo_support/UndoHistory"],
     function(UndoHistory) {
-        "use strict";
+
         describe('UndoHistory', function() {
             var undoHistory = new UndoHistory(20),
                 list = [],

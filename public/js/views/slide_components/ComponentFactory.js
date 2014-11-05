@@ -7,7 +7,7 @@ define(['models/TextBox',
 ], function(TextBox, Image,
     TextBoxView, ImageView,
     TextBoxDrawer, ImageDrawer) {
-    "use strict";
+
 
     function ComponentFactory() {
         if (ComponentFactory.prototype.instance) {

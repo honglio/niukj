@@ -1,7 +1,7 @@
 define(["jquery",
     "common/Queue"
 ], function($, Queue) {
-    "use strict";
+
 
     describe('Queue', function() {
         var num = 3,

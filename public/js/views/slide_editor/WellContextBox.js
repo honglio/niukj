@@ -2,7 +2,7 @@ define(["CustomView",
     "./AddSlideButton",
     "css!styles/app/slide_editor/wellContextBox.css"
 ], function(CustomView, AddSlideButton, css) {
-    "use strict";
+
 
     return CustomView.extend({
         className: 'wellContextBox',

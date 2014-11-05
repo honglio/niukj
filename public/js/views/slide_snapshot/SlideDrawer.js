@@ -3,7 +3,7 @@ define(["underscore",
     "../slide_components/drawers/ImageDrawer",
     "config"
 ], function(_, TextBoxDrawer, ImageDrawer, Config) {
-    "use strict";
+
     /**
      * Slide snapshot drawer. Paints all elements on little slide thumbnail in SlideWell.
      */

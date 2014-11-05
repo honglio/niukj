@@ -1,5 +1,5 @@
 define(["common/collections/MultiMap"], function(MultiMap) {
-    "use strict";
+
 
     describe('MultiMap, pair = key/value', function() {
         var map = new MultiMap();

@@ -1,7 +1,7 @@
 define(["jquery",
     "common/FileUtils"
 ], function($, FileUtils) {
-    "use strict";
+
 
     describe('FileUtils', function() {
 

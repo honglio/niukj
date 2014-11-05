@@ -1,6 +1,6 @@
 define(["CustomView", "../themes/BackgroundProvider", "css!styles/app/headbar/themeProviderBtn.css"],
     function(CustomView, BackgroundProvider) {
-        "use strict";
+
         return CustomView.extend({
             className: 'btn btn-primary dropdown',
             id: 'themeProvider',

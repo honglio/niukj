@@ -6,7 +6,7 @@ define(["underscore",
     "hbs!templates/SlideSnapshot",
     "css!styles/app/slide_snapshot/slideSnapshot.css"
 ], function(_, $, CustomView, SlideDrawer, Slide2Image, SlideSnapshotTemplate, css) {
-    "use strict";
+
 
     return CustomView.extend({
         className: 'slideSnapshot',

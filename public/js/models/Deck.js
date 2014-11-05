@@ -9,7 +9,7 @@ define(["underscore",
     "./Slide",
     "config"
 ], function(_, Backbone, SlideCollection, SlideCommands, UndoHistoryFactory, Slide, Config) {
-    "use strict";
+
     var slideConfig = Config.slide;
     /**
         This represents a slide deck.  It has a title, a currently active

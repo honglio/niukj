@@ -4,7 +4,7 @@ define([
     "website/list/collection/Deck",
     "templates",
 ], function(DeckListItemView, DeckModel, DeckCollection) {
-    "use strict";
+
 
     describe('Decklistitem', function() {
         var decks = new DeckCollection([{

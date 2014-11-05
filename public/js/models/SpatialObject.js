@@ -1,7 +1,7 @@
 define(["backbone",
     "common/Math2"
 ], function(Backbone, Math2) {
-    "use strict";
+
     return Backbone.Model.extend({
         initialize: function() {
             Backbone.Model.prototype.initialize.apply(this, arguments);

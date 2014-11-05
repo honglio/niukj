@@ -3,7 +3,7 @@ define(["underscore",
     "jquery",
     "css!styles/app/widgets/widgets.css"
 ], function(_, Backbone, $) {
-    "use strict";
+
 
     function Dropdown(model, template) {
         this.$el = $('<ul class="dropdown-menu" role="menu">');

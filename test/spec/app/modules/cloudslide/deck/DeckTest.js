@@ -2,7 +2,7 @@ define(["jquery",
     "cloudslide/deck/Deck",
     "cloudslide/deck/Slide",
 ], function($, Deck, Slide) {
-    "use strict";
+
 
     describe('Deck', function() {
         // var slideWell = new SlideWell();

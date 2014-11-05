@@ -1,5 +1,5 @@
 define(["underscore", "./AbstractDrawer"], function(_, AbstractDrawer) {
-    "use strict";
+
 
     function ImageModelDrawer(g2d) {
         AbstractDrawer.apply(this, arguments);

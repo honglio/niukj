@@ -3,7 +3,7 @@ define(["CustomView",
     "hbs!templates/StorageModal",
     "css!styles/app/storage/storageModal.css"
 ], function(CustomView, StorageInterface, StorageModalTemplate, css) {
-    "use strict";
+
     var previous;
 
     var StorageModal = CustomView.extend({

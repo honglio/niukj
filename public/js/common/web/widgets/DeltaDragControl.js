@@ -1,5 +1,5 @@
 define(function() {
-    "use strict";
+
     // events : ["mousedown", "mousemove", "mouseup"];
 
     function DragControl($el, stopProp) {

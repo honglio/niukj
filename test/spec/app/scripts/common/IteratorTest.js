@@ -1,7 +1,7 @@
 define(["jquery",
     "common/Iterator"
 ], function($, Iterator) {
-    "use strict";
+
 
     describe('Iterator', function() {
         var num = 5,

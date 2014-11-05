@@ -1,7 +1,7 @@
 define(["website/list/model/Deck",
     "templates"
 ], function(DeckModel) {
-    "use strict";
+
 
     describe('DeckModel', function() {
         var deckModel = new DeckModel();

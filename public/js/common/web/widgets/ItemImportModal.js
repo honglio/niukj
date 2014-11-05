@@ -1,5 +1,5 @@
 define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], function(_, CustomView, ItemImportModalTemplate) {
-    "use strict";
+
     var modalCache = {};
 
     var ItemImportModal = CustomView.extend({

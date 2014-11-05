@@ -7,7 +7,7 @@ define(["jquery", "CustomView",
     "css!styles/app/slide_components/Component.css",
 ], function($, CustomView, DeltaDragControl, Math2,
     ComponentCommands, UndoHistoryFactory, ComponentTemplate) {
-    "use strict";
+
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
     return CustomView.extend({
         transforms: [],

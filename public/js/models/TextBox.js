@@ -1,6 +1,6 @@
 define(["./Component"],
     function(Component) {
-        "use strict";
+
         return Component.extend({
             initialize: function() {
                 Component.prototype.initialize.apply(this, arguments);

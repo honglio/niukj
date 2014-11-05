@@ -1,5 +1,5 @@
 define(["CustomView"], function(CustomView) {
-    "use strict";
+
     return CustomView.extend({
         className: 'btn btn-primary btn-icon icon-left hidden-print',
         tagName: 'a',

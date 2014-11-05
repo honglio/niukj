@@ -1,5 +1,5 @@
 define(["./Slide"], function(Slide) {
-    "use strict";
+
 
     /**
      * @class SlideCommands.Paste

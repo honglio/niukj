@@ -2,7 +2,7 @@
 A basic queue abstraction.
 */
 define(function() {
-    "use strict";
+
 
     function Queue() {
         this.head = null;

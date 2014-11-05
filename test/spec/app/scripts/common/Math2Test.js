@@ -1,7 +1,7 @@
 define(["jquery",
     "common/Math2"
 ], function($, Math2) {
-    "use strict";
+
 
     describe('Math2', function() {
         describe("module", function() {

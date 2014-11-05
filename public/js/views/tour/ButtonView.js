@@ -1,5 +1,5 @@
 define(["CustomView"], function(CustomView) {
-    "use strict";
+
     return CustomView.extend({
         className: 'btn hidden-phone',
         tagName: 'a',

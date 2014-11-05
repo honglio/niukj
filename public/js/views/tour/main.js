@@ -1,5 +1,5 @@
 define(["./ButtonView"], function(Button) {
-    "use strict";
+
     var service = {
         createButtons: function() {
             var buttons = [];

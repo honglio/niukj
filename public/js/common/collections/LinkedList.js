@@ -4,7 +4,7 @@ define(function() {
      * @class common.collections.LinkedList
      *
      */
-    "use strict";
+
 
     function LinkedList() {
             this.head = this.tail = null;

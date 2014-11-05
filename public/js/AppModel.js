@@ -6,7 +6,7 @@ define(["backbone",
     "./views/storage/StorageInterface"
 ], function(Backbone, Deck, ComponentFactory,
     Clipboard, UndoHistoryFactory, StorageInterface) {
-    "use strict";
+
 
     function cleanHTMLTag(data) {
         if (data) {

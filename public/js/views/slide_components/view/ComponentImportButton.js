@@ -1,6 +1,6 @@
 define(["./ComponentButton", "common/web/widgets/ItemImportModal"],
     function(ComponentButton, ItemImportModal) {
-        "use strict";
+
 
         return ComponentButton.extend({
             initialize: function() {

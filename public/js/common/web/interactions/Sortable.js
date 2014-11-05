@@ -1,6 +1,6 @@
 define(["underscore", "backbone"],
     function(_, Backbone) {
-        "use strict";
+
 
         function Sortable(options) {
             this._$container = $(options.container);

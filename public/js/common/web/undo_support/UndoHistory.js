@@ -2,7 +2,7 @@ define([
     "underscore",
     "common/collections/LinkedList"
 ], function(_, LinkedList) {
-    "use strict";
+
 
     /**
      * Maintains a list of commands in an undo history.

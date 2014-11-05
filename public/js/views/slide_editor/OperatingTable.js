@@ -4,7 +4,7 @@ define(["CustomView",
     "models/Component",
     "config"
 ], function(CustomView, css, ComponentFactory, Component, Config) {
-    "use strict";
+
     return CustomView.extend({
         className: 'operatingTable',
         events: {

@@ -1,5 +1,5 @@
 define(function() {
-    "use strict";
+
     /**
      * Base command class for simple attribute changing actions.
      *

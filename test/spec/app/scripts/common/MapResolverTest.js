@@ -1,7 +1,7 @@
 define(["jquery",
     "common/MapResolver"
 ], function($, MapResolver) {
-    "use strict";
+
 
     describe('MapResolver', function() {
         var aMap = {

@@ -20,7 +20,6 @@
 noarg:true, noempty:true, undef:true, strict:true, browser:true */
 
 function startPres(document, window) {
-    "use strict";
     if (window.presStarted) {
         return;
     }
@@ -172,7 +171,7 @@ function startPres(document, window) {
         var ua = navigator.userAgent.toLowerCase();
         var impressSupported = true;
         /*
-// browser should support CSS 3D transtorms 
+// browser should support CSS 3D transtorms
 (pfx("perspective") !== null) &&
 
 // and `classList` and `dataset` APIs
@@ -264,7 +263,7 @@ function startPres(document, window) {
             // root presentation elements
             var canvas,
 				root = byId(rootId);
-				
+
             if (previousInit) {
                 canvas = root.children[0];
             } else {
@@ -276,7 +275,7 @@ function startPres(document, window) {
             // STEP EVENTS
             //
             // There are currently two step events triggered by impress.js
-            // `impress:stepenter` is triggered when the step is shown on the 
+            // `impress:stepenter` is triggered when the step is shown on the
             // screen (the transition from the previous one is finished) and
             // `impress:stepleave` is triggered when the step is left (the
             // transition to next step just starts).
@@ -589,7 +588,7 @@ function startPres(document, window) {
                 //
                 // I really wanted to make it in more elegant way. The `transitionend` event seemed to be the best way
                 // to do it, but the fact that I'm using transitions on two separate elements and that the `transitionend`
-                // event is only triggered when there was a transition (change in the values) caused some bugs and 
+                // event is only triggered when there was a transition (change in the values) caused some bugs and
                 // made the code really complicated, cause I had to handle all the conditions separately. And it still
                 // needed a `setTimeout` fallback for the situations when there is no transition at all.
                 // So I decided that I'd rather make the code simpler than use shiny new `transitionend`.
@@ -670,7 +669,7 @@ function startPres(document, window) {
 
                 window.addEventListener("hashchange", function() {
                     // When the step is entered hash in the location is updated
-                    // (just few lines above from here), so the hash change is 
+                    // (just few lines above from here), so the hash change is
                     // triggered and we would call `goto` again on the same element.
                     //
                     // To avoid this we store last entered hash and compare.
@@ -679,7 +678,7 @@ function startPres(document, window) {
                     }
                 }, false);
 
-                // START 
+                // START
                 // by selecting step defined in url or first step of the presentation
                 goto(getElementFromHash() || steps[0], 0);
             }, false);
@@ -729,7 +728,7 @@ function startPres(document, window) {
         document.addEventListener("impress:init", function(event) {
             // Getting API from event data.
             // So you don't event need to know what is the id of the root element
-            // or anything. `impress:init` event data gives you everything you 
+            // or anything. `impress:init` event data gives you everything you
             // need to control the presentation that was just initialized.
             var api = event.detail.api;
 
@@ -851,7 +850,6 @@ function startPres(document, window) {
 
 if (typeof define === "function" && define.amd) {
     define(function() {
-        "use strict";
         return startPres;
     });
 }

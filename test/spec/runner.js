@@ -26,7 +26,7 @@ require([
 
     // ***********************************************
 ], function($) {
-    "use strict";
+
     $(function() {
         mocha.run();
     });

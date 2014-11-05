@@ -9,7 +9,7 @@ define([
     "css!styles/app/etch_extension/EtchOverrides.css"
 ], function(_, etch, FontSizeSelectionTemplate, FontFamilySelectionTemplate,
     ColorChooserTemplate, AlignTemplate, DefaultButtonTemplate) {
-    "use strict";
+
     _.extend(etch.config.buttonClasses, {
         default: [
             '<group>', 'bold', 'italic', 'underline', '</group>',

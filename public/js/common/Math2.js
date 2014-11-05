@@ -1,5 +1,5 @@
 define(function() {
-    "use strict";
+
     /**
      * Provides mathematical functions that one would expect to be in
      * Math

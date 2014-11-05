@@ -3,7 +3,7 @@ define(["jquery",
     "website/list/collection/Deck",
     "templates"
 ], function($, DeckView, DeckCollection) {
-    "use strict";
+
     describe("DeckCollection", function() {
         var decks = new DeckCollection();
         describe("Collection's Interaction with REST API", function() {

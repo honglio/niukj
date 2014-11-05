@@ -2,7 +2,7 @@ define(["common/web/local_storage/LocalStorageProvider",
         "common/web/remote_storage/RemoteStorageProvider"
     ],
     function(LocalStorageProvider, RemoteStorageProvider) {
-        "use strict";
+
 
         function StorageInterface() {
             // change to LocalStorageProbider when you want.

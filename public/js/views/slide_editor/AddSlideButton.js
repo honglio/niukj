@@ -1,6 +1,6 @@
 define(["CustomView"],
     function(CustomView) {
-        "use strict";
+
         return CustomView.extend({
             className: 'addBtn btn btn-warning',
             events: {

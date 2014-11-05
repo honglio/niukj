@@ -1,5 +1,5 @@
 define(function() {
-    "use strict";
+
 
     function Clipboard() {
         this.item = {};

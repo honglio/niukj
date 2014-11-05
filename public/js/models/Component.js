@@ -1,5 +1,5 @@
 define(["underscore", "./SpatialObject", "config"], function(_, SpatialObject, Config) {
-    "use strict";
+
     var defaults = {
         x: Config.slide.size.width / 4,
         y: Config.slide.size.height / 4

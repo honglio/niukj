@@ -1,5 +1,5 @@
 define(["common/collections/LinkedList"], function(LinkedList) {
-    "use strict";
+
 
     describe('LinkedList', function() {
         var list = new LinkedList();

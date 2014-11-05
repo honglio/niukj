@@ -1,5 +1,5 @@
 define(["underscore", "./AbstractDrawer"], function(_, AbstractDrawer) {
-    "use strict";
+
     var newlineReg = /<br>/;
     var spaceReg = /&nbsp;/g;
     var tagReg = /<[^>]+>|<\/[^>]+>/g;

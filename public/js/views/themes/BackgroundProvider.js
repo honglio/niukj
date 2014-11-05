@@ -2,7 +2,7 @@ define(["./AvailableBackgrounds",
     "common/web/widgets/Dropdown",
     "hbs!templates/BackgroundChooser"
 ], function(Backgrounds, View, BackgroundChooser) {
-    "use strict";
+
 
     function BackgroundProvider(editorModel) {
         this._view = new View(Backgrounds, BackgroundChooser);

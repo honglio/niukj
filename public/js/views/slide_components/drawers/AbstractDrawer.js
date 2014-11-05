@@ -1,5 +1,5 @@
 define(function() {
-    "use strict";
+
 
     function AbstractDrawer(g2d) {
         this.g2d = g2d;

@@ -6,7 +6,7 @@ define(["jquery", "underscore",
     "css!styles/app/slide_editor/slideWell.css",
     "config"
 ], function($, _, CustomView, SlideSnapshot, WellContextBox, Sortable, css, Config) {
-    "use strict";
+
 
     return CustomView.extend({
         className: 'slideWell hidden-phone',

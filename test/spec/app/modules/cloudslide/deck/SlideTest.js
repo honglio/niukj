@@ -1,6 +1,6 @@
 define(["underscore", "cloudslide/deck/Slide"],
     function(_, Slide) {
-        "use strict";
+
 
         function MockComponent() {
             this.attrs = {

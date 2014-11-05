@@ -3,7 +3,7 @@
  * in a map.
  */
 define(function() {
-    "use strict";
+
     var MapResolver = {
         /**
          * @param {object | array} [map] The map on which to resolve

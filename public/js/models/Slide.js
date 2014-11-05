@@ -6,7 +6,7 @@ define(["underscore",
     "./ComponentCommands",
     "common/web/undo_support/UndoHistoryFactory"
 ], function(_, Backbone, SpatialObject, ComponentFactory, Math2, ComponentCommands, UndoHistoryFactory) {
-    "use strict";
+
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
 
     /**

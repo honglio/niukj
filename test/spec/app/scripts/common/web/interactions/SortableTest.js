@@ -1,7 +1,7 @@
 define(["jquery",
     "common/web/interactions/Sortable"
 ], function($, Sortable) {
-    "use strict";
+
 
     describe('Sortable', function() {
         var sortable = new Sortable({

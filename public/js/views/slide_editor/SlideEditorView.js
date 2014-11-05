@@ -2,7 +2,7 @@ define(["CustomView",
     "./SlideWell",
     "./OperatingTable"
 ], function(CustomView, SlideWell, OperatingTable) {
-    "use strict";
+
     return CustomView.extend({
         className: 'slideEditor row-fluid',
 

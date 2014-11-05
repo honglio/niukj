@@ -1,6 +1,6 @@
 define(["backbone", "./Slide"],
     function(Backbone, Slide) {
-        "use strict";
+
         /**
          * @class SlideCollection
          * @augments Backbone.Collection

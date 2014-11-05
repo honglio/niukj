@@ -6,7 +6,7 @@ define(["CustomView",
     "hbs!templates/Headbar"
 ], function(CustomView, SaveButton, ThemeProviderBtn,
     ComponentButton, ComponentImportButton, HeadbarTemplate) {
-    "use strict";
+
     return CustomView.extend({
         className: 'page-header',
         events: {

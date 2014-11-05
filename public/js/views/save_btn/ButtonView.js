@@ -1,5 +1,5 @@
 define(["CustomView", "../storage/StorageModal"], function(CustomView, StorageModal) {
-    "use strict";
+
     return CustomView.extend({
         className: 'btn btn-success',
         tagName: 'a',

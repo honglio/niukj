@@ -1,5 +1,5 @@
 define(["css!styles/app/themes/backgroundClasses.css"], function() {
-    "use strict";
+
     return {
         title: 'background',
         backgrounds: [{

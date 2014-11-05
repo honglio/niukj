@@ -1,6 +1,6 @@
 define(["./UndoHistory"],
     function(UndoHistory) {
-        "use strict";
+
         var managedInstances = {};
 
         function create(opts) {

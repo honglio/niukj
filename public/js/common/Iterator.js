@@ -1,5 +1,5 @@
 define(function() {
-    "use strict";
+
 
     function ArrayIterator(val) {
         this._val = val;

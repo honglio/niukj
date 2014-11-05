@@ -4,7 +4,7 @@ define(function() {
      * @class common.FileUtils
      *
      */
-    "use strict";
+
     var FileUtils = {
         /**
          * Returns the base name of the path

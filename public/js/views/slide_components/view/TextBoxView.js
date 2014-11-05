@@ -4,7 +4,7 @@ define(["underscore",
     "models/ComponentCommands",
     "common/web/undo_support/UndoHistoryFactory"
 ], function(_, ComponentView, etch, ComponentCommands, UndoHistoryFactory) {
-    "use strict";
+
 
     var undoHistory = UndoHistoryFactory.managedInstance('editor');
 

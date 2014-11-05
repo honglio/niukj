@@ -7,7 +7,7 @@ define(["jquery",
 "cloudslide/slide_editor/main",
 "cloudslide/well_add_button/main",
 ], function($, Deck, Slide, SlideWell, ServiceRegistry, EditorModel, slideEditor, wellAddButton) {
-"use strict";
+
 
 describe('SlideWell', function() {
         var registry = new ServiceRegistry(),

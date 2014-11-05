@@ -3,7 +3,7 @@ define(["CustomView",
     "./views/headbar/HeadbarView",
     "./views/slide_editor/SlideEditorView"
 ], function(CustomView, AppModel, HeadbarView, SlideEditorView) {
-    "use strict";
+
     return CustomView.extend({
         className: 'container-fluid',
         id: 'slide-editor',

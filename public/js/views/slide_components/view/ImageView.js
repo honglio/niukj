@@ -1,6 +1,6 @@
 define(["./Component"],
     function(ComponentView) {
-        "use strict";
+
 
         return ComponentView.extend({
             className: "component imageView",
