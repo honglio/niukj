@@ -189,13 +189,13 @@ module.exports = function(grunt) {
             }
         },
         mocha: {
-            // index: ['test/index.html'],
+            index: ['test/index.html'],
             all: {
                 options: {
                     log: true,
                     run: false,
                     reporter: 'Spec', // or Nyan
-                    urls: ['http://localhost:3000/index.html']
+                    // urls: ['http://localhost:3000/index.html']
                 }
             }
         },
@@ -476,7 +476,10 @@ module.exports = function(grunt) {
         'jsbeautifier:test',
         'jshint',
         // 'csslint:lax'
-        // 'mocha'
+    ]);
+
+    grunt.registerTask('test-dev', [
+        'mocha'
     ]);
 
     grunt.registerTask('fix-lint', [

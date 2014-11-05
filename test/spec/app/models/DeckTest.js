@@ -1,6 +1,6 @@
 define(["jquery",
-    "cloudslide/deck/Deck",
-    "cloudslide/deck/Slide",
+    "models/Deck",
+    "models/Slide",
 ], function($, Deck, Slide) {
 
 

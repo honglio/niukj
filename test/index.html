@@ -8,16 +8,31 @@
 </head>
 <body>
     <div id="mocha"></div>
-    <script>window.isOptimized = true;
-            window.slideConfig = {
-                size: {
-                    width: 1024,
-                    height: 768
-                }
-            };
+    <script>
+        // is there any better 3rd party zTracker
+        window.zTracker = {
+            z: 0,
+            next: function() {
+                return this.z += 1;
+            }
+        };
+
+        // why we need to detect browser type? try use feature detect.
+        var agent = window.navigator.userAgent;
+        if (agent.indexOf('WebKit') >= 0) {
+            window.browserPrefix = "-webkit-";
+        } else if (agent.indexOf('Presto') >= 0) {
+            window.browserPrefix = "-o-";
+        } else if (agent.indexOf('Gecko') >= 0) {
+            window.browserPrefix = "-moz-";
+        } else if (agent.indexOf('Trident') >= 0) {
+            window.browserPrefix = "-ms-";
+        } else {
+            window.browserPrefix = "";
+        }
     </script>
     <script src="lib/mocha/mocha.js"></script>
-    <script>mocha.setup({ ui: 'bdd', ignoreLeaks: true, globals: ['_', '$', 'jQuery*', 'Backbone', 'JST', 'browserPrefix'] });</script>
+    <script>mocha.setup({ ui: 'bdd', ignoreLeaks: true, globals: ['_', '$', 'jquery*', 'Backbone', 'zTracker', 'browserPrefix'] });</script>
     <!-- assertion framework -->
     <script src="lib/chai.js"></script>
     <script>expect = chai.expect;</script>
@@ -25,6 +40,6 @@
     <!-- dbtest framework -->
     <script src="lib/sinon.js"></script>
     <!-- Load application -->
-    <script data-main="./config" src="../scripts/libs/require.js"></script>
+    <script data-main="./config" src="../public/js/vendors/require.js"></script>
 </body>
 </html>

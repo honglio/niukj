@@ -1,35 +1,30 @@
 require.config({
-    deps: ['runner'],
     // baseUrl: 'spec/',
     // urlArgs: 'v=' + (new Date()).getTime(),
     paths: {
-        runner                                      : './spec/runner',
-        testConfig                                  : './config',
-
         // vendor file
         // new RegExp(' Gecko/').test(navigator.userAgent) ? '../js/vendors/zepto' : '../js/vendors/jquery',
-        jquery                                      : '../js/vendors/jquery',
-        underscore                                  : '../js/vendors/underscore',
-        backbone                                    : '../js/vendors/backbone',
-        bootstrap                                   : '../js/vendors/bootstrap',
-        css                                         : '../js/vendors/css',
-        hbs                                         : '../js/vendors/hbs',
-        etch                                        : '../js/vendors/etch/etch',
-        etch_extension                              : '../js/views/etch_extension',
-        colorpicker                                 : '../js/vendors/spectrum',
+        jquery                                      : '../public/js/vendors/jquery',
+        underscore                                  : '../public/js/vendors/underscore',
+        backbone                                    : '../public/js/vendors/backbone',
+        bootstrap                                   : '../public/js/vendors/bootstrap',
+        css                                         : '../public/js/vendors/css',
+        hbs                                         : '../public/js/vendors/hbs',
+        etch                                        : '../public/js/vendors/etch/etch',
+        etch_extension                              : '../public/js/views/etch_extension',
+        colorpicker                                 : '../public/js/vendors/spectrum',
 
         // custom file
-        CustomView                                  : '../js/CustomView',
+        CustomView                                  : '../public/js/CustomView',
 
         // directory map
-        templates                                   : '../templates',
-        models                                      : '../js/models',
-        common                                      : '../js/common',
-        views                                       : '../js/views',
-        styles                                      : '../css'
+        templates                                   : '../public/templates',
+        models                                      : '../public/js/models',
+        common                                      : '../public/js/common',
+        views                                       : '../public/js/views',
+        styles                                      : '../public/css'
     },
     shim: {
-        runner: ['testConfig'],
         bootstrap: {
             deps    : ['jquery'],
             exports : 'Bootstrap'
@@ -43,4 +38,26 @@ require.config({
 			exports : 'Backbone'
 		}
     }
+});
+
+require([
+    "jquery",
+    "spec/app/common/collections/MultiMapTest",
+    "spec/app/common/collections/LinkedListTest",
+    "spec/app/common/FileUtilsTest",
+    "spec/app/common/IteratorTest",
+    "spec/app/common/MapResolverTest",
+    "spec/app/common/Math2Test",
+    "spec/app/common/QueueTest",
+
+    // "spec/app/common/web/interactions/SortableTest",
+    "spec/app/common/web/undo_support/UndoHistoryTest",
+
+    // "spec/app/models/DeckTest",
+    // "spec/app/models/SlideTest",
+    // "spec/app/models/SlideWellTest", should write as functional test
+], function($) {
+    $(function() {
+        mocha.run();
+    });
 });

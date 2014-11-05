@@ -1,4 +1,4 @@
-define(["underscore", "cloudslide/deck/Slide"],
+define(["underscore", "models/Slide"],
     function(_, Slide) {
 
 
