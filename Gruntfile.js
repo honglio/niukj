@@ -138,7 +138,8 @@ module.exports = function(grunt) {
         jshint: {
             server: {
                 options: {
-                    jshintrc: 'server.jshintrc'
+                    jshintrc: 'server.jshintrc',
+                    reporter: require('jshint-stylish')
                 },
                 files: {
                     src: [
@@ -148,7 +149,8 @@ module.exports = function(grunt) {
             },
             client: {
                 options: {
-                    jshintrc: 'client.jshintrc'
+                    jshintrc: 'client.jshintrc',
+                    reporter: require('jshint-stylish')
                 },
                 files: {
                     src: [
@@ -159,7 +161,8 @@ module.exports = function(grunt) {
             },
             shared: {
                 options: {
-                    jshintrc: 'shared.jshintrc'
+                    jshintrc: 'shared.jshintrc',
+                    reporter: require('jshint-stylish')
                 },
                 files: {
                     src: [
