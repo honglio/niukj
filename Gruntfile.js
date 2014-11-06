@@ -478,12 +478,17 @@ module.exports = function(grunt) {
         // 'csslint:lax'
     ]);
 
-    grunt.registerTask('test-dev', [
+    grunt.registerTask('test-unit', [
         'mocha'
     ]);
 
     grunt.registerTask('fix-lint', [
         'jsbeautifier:fix'
+    ]);
+
+    grunt.registerTask('test-dev', [
+        'test-lint',
+        'test-unit'
     ]);
 
     grunt.registerTask('build', [
@@ -496,7 +501,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'test-lint',
+        'test-dev',
         'build'
     ]);
 };

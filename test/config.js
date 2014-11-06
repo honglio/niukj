@@ -51,7 +51,6 @@ require([
     "spec/app/common/QueueTest",
 
     // "spec/app/common/web/interactions/SortableTest",
-    "spec/app/common/web/undo_support/UndoHistoryTest",
 
     // "spec/app/models/DeckTest",
     // "spec/app/models/SlideTest",
