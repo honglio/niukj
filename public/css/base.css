@@ -166,6 +166,15 @@ hr.content-hr {
 .navbar-inverse .nav > li > a:focus {
     color: #428BCA;
 }
+.navbar-nav img {
+    width: 30px;
+    height: 30px;
+    margin: -15px 15px -15px;
+}
+.navbar-brand {
+    padding-left: 50px;
+    margin-left: 15px;
+}
 .navbar .nav.nav-pills {
     margin-top: 15px;
 }

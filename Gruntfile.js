@@ -191,6 +191,33 @@ module.exports = function(grunt) {
                 src: ['<%= yeoman.css %>']
             }
         },
+        uncss: {
+            dist: {
+                options: {
+                    // Take our Autoprefixed stylesheet main.css &
+                    // any other stylesheet dependencies we have..
+                    htmlroot: 'public',
+                    csspath: '../../public/css/',
+                    stylesheets: [
+                        'base.css',
+                        'styles.css',
+                        'style-responsive.css',
+                        'lib/animate.min.css',
+                        'lib/flexslider.css',
+                        'lib/hopscotch-0.1.2.min.css',
+                        'prettyPhoto.css',
+                        // 'lib/bootstrap.css'
+                    ],
+                    urls: ['http://localhost:3000/'],
+                    // Ignore css selectors for async content with complete selector or regexp
+                    // Only needed if using Bootstrap
+                    ignore: [/dropdown-menu/, /\.collapsing/, /\.collapse/]
+                },
+                files: {
+                    '<%= yeoman.release %>/styles/main.css': ['server/views/home.jade', 'server/views/layout.jade']
+                }
+            }
+        },
         mocha: {
             index: ['test/index.html'],
             all: {
@@ -496,10 +523,11 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', [
         'clean:release',
-        'requirejs',
-        'uglify',
-        'imagemin',
-        'htmlmin',
+        'uncss',
+        // 'requirejs',
+        // 'uglify',
+        // 'imagemin',
+        // 'htmlmin',
         // 'cssmin',
     ]);
 
