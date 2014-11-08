@@ -3,14 +3,14 @@
 @media (min-width: 1200px) {
     /* General
 	--------------------*/
-
+    
     span.rollover {
         width: 510px;
     }
     /* Head Banner
 	--------------------*/
     /* Product Teaser */
-
+    
     .product-teaser span.play-button {
         width: 570px;
         height: 427px;
@@ -18,16 +18,15 @@
     .product-teaser .right-desc {
         margin-top: 120px;
     }
-
     /* Content
 	--------------------*/
-
+    
     .section-subtitle {
         width: 55%;
     }
     /* #Featurettes
 	--------------------*/
-
+    
     .featurettes-inner-section img {
         margin: 20px 0 0px;
     }
@@ -39,7 +38,7 @@
     /* #Annotations
 	--------------------*/
     /*product dot*/
-
+    
     .product-dot1 {
         margin-left: 110px;
         margin-top: 50px;
@@ -75,10 +74,9 @@
     ul.annotations-features li {
         margin-bottom: 35px;
     }
-
     /* #Breakline
 	--------------------*/
-
+    
     #breakline h3:after {
         margin-top: 0;
         margin-left: 50px;
@@ -88,13 +86,13 @@
 
 @media (min-width: 768px) and (max-width: 979px) {
     /* General */
-
+    
     span.rollover {
         width: 308px;
     }
     /* #Top Nav
 	--------------------*/
-
+    
     #top-nav {
         padding: 0;
     }
@@ -132,12 +130,12 @@
     }
     /* #Head Banner
 	---------------------*/
-
+    
     #head-banner {
         margin-top: 55px;
     }
     /*Produt Teaser */
-
+    
     .product-teaser span.play-button {
         width: 352px;
         height: 264px;
@@ -159,22 +157,21 @@
         margin-bottom: 10px;
         margin-top: 20px;
     }
-
     /* #Featurettes
 	----------------------*/
-
+    
     .row-fluid.featurettes-inner-section [class*="span"] {
         width: 100%;
         margin-left: 0;
     }
     /* featurettes flexslider */
-
+    
     .featurettes-inner-section img {
         margin: 0 auto;
     }
     /* #Annotations
 	----------------------*/
-
+    
     .annotation-link {
         width: 15px;
         height: 15px;
@@ -183,7 +180,7 @@
         padding: 15px 20px;
     }
     /* Product Dots */
-
+    
     .product-dot1 {
         margin-left: 98px;
         margin-top: 38px;
@@ -216,18 +213,15 @@
         margin-left: 363px;
         margin-top: 467px;
     }
-
 }
 /* Landscape phone to portrait tablet */
 
-@media (max-width: 767px) {
-
-}
+@media (max-width: 767px) {}
 /* Landscape iphone5 and down */
 
 @media (max-width: 568px) {
     /* General */
-
+    
     h1 {
         font-size: 38.5px;
     }
@@ -262,7 +256,7 @@
     }
     /* #Top Nav
 	--------------------*/
-
+    
     #top-nav {
         padding: 0 20px;
     }
@@ -300,7 +294,7 @@
     }
     /* #Head Banner
 	---------------------*/
-
+    
     #head-banner {
         margin-top: 55px;
         text-align: center;
@@ -311,7 +305,7 @@
         margin-left: 20px;
     }
     /*Product Teaser */
-
+    
     .product-teaser {
         margin-top: 0;
     }
@@ -330,10 +324,9 @@
         margin-left: -50px;
         margin-top: 25px;
     }
-
     /* #Marketing
 	---------------------*/
-
+    
     #marketing {
         text-align: center;
         margin-top: 0 !important;
@@ -343,7 +336,7 @@
     }
     /* #Featurettes
 	---------------------*/
-
+    
     #featurettes {
         text-align: center;
     }
@@ -358,7 +351,7 @@
     }
     /* #Annotations
 	---------------------*/
-
+    
     #annotations {
         text-align: center;
     }
@@ -374,13 +367,13 @@
     }
     /* #Annotations
 	----------------------*/
-
+    
     .annotation-link {
         width: 15px;
         height: 15px;
     }
     /* Product Dots */
-
+    
     .product-dot1 {
         margin-left: -190px;
         margin-top: 65px;
@@ -413,10 +406,9 @@
         margin-left: -10px;
         margin-top: 330px;
     }
-
     /* #Breakline
 	---------------------*/
-
+    
     #breakline h3 {
         padding: 0;
     }
@@ -425,7 +417,7 @@
     }
     /* #Footer
 	---------------------*/
-
+    
     #footer {
         text-align: center;
     }
@@ -437,15 +429,14 @@
 
 @media (max-width: 480px) {
     /* General */
-
+    
     span.rollover {
         width: 440px;
     }
-
     /* #Annotations
 	---------------------*/
     /* Product Dots */
-
+    
     .product-dot1 {
         margin-left: -160px;
         margin-top: 50px;
@@ -483,14 +474,14 @@
 
 @media (max-width: 320px) {
     /* General */
-
+    
     span.rollover {
         width: 280px;
         height: 244px;
     }
     /* #Head Banner
 	---------------------*/
-
+    
     .head-cta .col-xs-6 {
         width: 100%;
         margin: 10px 0;
@@ -499,32 +490,31 @@
         float: none !important;
     }
     /* Product Teaser */
-
+    
     .product-teaser span.play-button {
         margin-top: -50px;
     }
-
     /* Content
 	--------------------*/
-
+    
     .section-subtitle {
         width: 100%;
         font-size: smaller;
     }
     /* Marketing */
-
+    
     .marketing-content {
         margin-bottom: 40px;
     }
     /* #Featurettes
 	----------------------*/
-
+    
     .featurettes-inner-section .col-xs-6 {
         width: 100%;
         margin-left: 0;
     }
     /* featurettes flexslider */
-
+    
     .featurettes-inner-section img {
         margin: 0 auto;
     }
@@ -533,12 +523,12 @@
     }
     /* #Annotations
 	---------------------*/
-
+    
     .right-annotation .checklist {
         margin: 0 20px;
     }
     /* Product Dots */
-
+    
     .product-dot1 {
         margin-left: -100px;
         margin-top: 30px;

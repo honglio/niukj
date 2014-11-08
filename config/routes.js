@@ -65,7 +65,9 @@ module.exports = function(app, passport) {
     app.param('uid', accounts.load);
     app.post('/contacts/find/:str', passportConf.isAuthenticated, accounts.findContact);
     app.post('/account/profile', passportConf.isAuthenticated, accounts.postUpdateProfile);
+    app.get('/account/password', passportConf.isAuthenticated, accounts.getUpdatePassword);
     app.post('/account/password', passportConf.isAuthenticated, accounts.postUpdatePassword);
+    app.get('/account/manage', passportConf.isAuthenticated, accounts.getManage);
     app.post('/account/delete', passportConf.isAuthenticated, accounts.postDeleteAccount);
     app.get('/account/unlink/:provider', passportConf.isAuthenticated, accounts.getOauthUnlink);
 
@@ -139,8 +141,8 @@ module.exports = function(app, passport) {
 
     // article routes
     app.param('id', articles.load);
-    app.get('/articles', articles.search);
-    app.get('/articles/explore', articles.explore);
+    app.get('/articles', passportConf.isAuthenticated, articles.search);
+    app.get('/articles/explore', passportConf.isAuthenticated, articles.explore);
     app.get('/articles/new', passportConf.isAuthenticated, articles.new);
     app.get('/articles/my', passportConf.isAuthenticated, articles.my);
     app.post('/articles', passportConf.isAuthenticated, articles.create);
@@ -149,7 +151,7 @@ module.exports = function(app, passport) {
     app.get('/articles/:id/edit', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.edit);
     app.put('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.update);
     app.delete('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.destroy);
-    app.get('/articles/:id/present', passportConf.isAuthenticated, articles.present);
+    app.get('/articles/:id/present', articles.present);
     app.post('/articles/:id/tags', passportConf.isAuthenticated, passportConf.article.isAuthorized, tags.create);
 
     // comment routes

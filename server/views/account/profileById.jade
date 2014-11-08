@@ -1,33 +1,47 @@
 extends ../layout
 
 block content
-  .container-fluid
-    .page-header
-      h3= title
-    .row
-      .col-sm-2
+  .container
+
+    h3.text-center= title
+    hr
+    section.row
+      .col-sm-2.col-sm-offset-2
         a.profile-picture(href='#')
           img.img-responsive.img-circle(src='#{account.gravatar()}')
-      .col-sm-7
+      .col-sm-4
         ul.profile-info-sections
           li
-            .profile-name
-              strong
-                a(href='/account/' + account.id) #{account.profile.name}
-              | &#160;&#160;&#160;
-              span
-                a(href='#') #{account.email}
+            .profile-stat
+              h6
+                i.fa.fa-user
+                | &nbsp; 用户名：
+                span=  account.profile.name || '未填'
           li
             .profile-stat
-              h3 #{account.contacts.followers.length}
-              span
-                a(href='/account/' + account.id + '/followers') 粉丝
+              p
+                i.fa.fa-envelope
+                | &nbsp; 电子邮件：
+                span= account.email || '未填'
           li
             .profile-stat
-              h3 #{account.contacts.followings.length}
-              span
-                a(href='/account/' + account.id + '/followings') 关注
-      .col-sm-3
+              p
+                i.fa.fa-map-marker
+                | &nbsp; 地址：
+                span= account.profile.location || '未填'
+          li
+            .profile-stat
+              p
+                i.fa.fa-briefcase
+                | &nbsp; 网站：
+                span= account.profile.website || '未填'
+          li
+            .profile-stat
+              p
+                i.fa.fa-male
+                | &nbsp; 性别：
+                span= account.profile.gender || '未填'
+
         form.form-horizontal(action='/account/' + account.id + '/contact' method='POST' enctype="application/x-www-form-urlencoded")
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
@@ -39,3 +53,20 @@ block content
             button.btn.btn-danger(type="submit" name="_method", value="DELETE")
               i.fa.fa-user
               |  取消关注
+
+      .col-sm-4
+        ul.follow-info
+          li
+            .profile-stat
+              h3 #{account.contacts.followers.length}
+              span
+                a(href='/account/' + account.id + '/followers') 粉丝
+          li
+            .profile-stat
+              h3 #{account.contacts.followings.length}
+              span
+                a(href='/account/' + account.id + '/followings') 关注
+
+
+
+

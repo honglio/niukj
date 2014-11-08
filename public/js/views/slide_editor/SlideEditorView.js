@@ -1,6 +1,7 @@
 define(["CustomView",
     "./SlideWell",
-    "./OperatingTable"
+    "./OperatingTable",
+    "css!styles/app/slide_editor/slideEditor.css"
 ], function(CustomView, SlideWell, OperatingTable) {
 
     return CustomView.extend({

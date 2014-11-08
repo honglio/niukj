@@ -1,4 +1,4 @@
-form(method='POST', action='/articles/#{article._id}/comments', role='form')
+form.comment(method='POST', action='/articles/#{article._id}/comments', role='form')
   input(type='hidden', name='_csrf', value=_csrf)
   .form-group
     textarea.form-control(type='text', rows='6', name='body', placeholder='在这里评论。。。')

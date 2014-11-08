@@ -68,7 +68,7 @@ exports.followerbyId = function(req, res, next) {
 
     setTimeout(function() {
         res.render('account/follower', {
-            title: '我的粉丝',
+            title: '全部粉丝',
             account: req.account
         });
     }, 100);
@@ -87,7 +87,7 @@ exports.followingbyId = function(req, res, next) {
 
     setTimeout(function() {
         res.render('account/following', {
-            title: '我的关注',
+            title: '全部关注',
             account: req.account
         });
     }, 100);
@@ -253,6 +253,17 @@ exports.postUpdateProfile = function(req, res, next) {
 };
 
 /**
+ * GET /account/password
+ * Send Update password page.
+ */
+
+exports.getUpdatePassword = function(req, res) {
+    res.render('account/reset', {
+        title: '密码修改'
+    });
+};
+
+/**
  * POST /account/password
  * Update current password.
  * @param password
@@ -260,7 +271,7 @@ exports.postUpdateProfile = function(req, res, next) {
 
 exports.postUpdatePassword = function(req, res, next) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
-    req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+    req.assert('confirm', 'Passwords do not match').equals(req.body.password);
 
     var errors = req.validationErrors();
 
@@ -285,6 +296,17 @@ exports.postUpdatePassword = function(req, res, next) {
             });
             res.redirect('/account');
         });
+    });
+};
+
+/**
+ * GET /account/manage
+ * Send manage account page.
+ */
+
+exports.getManage = function(req, res) {
+    res.render('account/manage', {
+        title: '账户管理'
     });
 };
 

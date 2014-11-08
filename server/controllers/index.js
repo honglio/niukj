@@ -73,7 +73,7 @@ exports.forgot = function(req, res) {
 
 exports.account = function(req, res) {
     res.render('account/profile', {
-        title: '账户管理'
+        title: '账户信息'
     });
 };
 

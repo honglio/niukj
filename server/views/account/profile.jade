@@ -1,95 +1,58 @@
 extends ../layout
 
 block content
-  .container-fluid
-    .page-header
-      h3= title
+  .container
+    h3.text-center= title
+    hr
+    section.row
+      .col-sm-10.col-md-10
+        form.form-horizontal(action='/account/profile', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-sm-2.control-label(for='email') Email
+            .col-sm-4
+              input.form-control(type='email', name='email', id='email', value='#{user.email}')
+          .form-group
+            label.col-sm-2.control-label(for='name') 昵称
+            .col-sm-4
+              input.form-control(type='text', name='name', id='name', value='#{user.profile.name}')
+          .form-group
+            label.col-sm-2.control-label(for='gender') 性别
+            .col-sm-4
+              label.radio
+                input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
+                span 男
+              label.radio
+                input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
+                span 女
+          .form-group
+            label.col-sm-2.control-label(for='location') 居住地
+            .col-sm-4
+              input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
+          .form-group
+            label.col-sm-2.control-label(for='website') 个人网站
+            .col-sm-4
+              input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
+          .form-group
+            label.col-sm-2.control-label(for='gravatar') 个人头像
+            .col-sm-4
+              img(src="#{user.gravatar()}", class='profile', width='100', height='100')
+          .form-group
+            .col-sm-offset-2.col-sm-4
+              button.btn.btn.btn-primary(type='submit')
+                i.fa.fa-magnet
+                |  上传更新
 
-    form.form-horizontal(action='/account/profile', method='POST')
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label.col-sm-2.control-label(for='email') Email
-        .col-sm-4
-          input.form-control(type='email', name='email', id='email', value='#{user.email}')
-      .form-group
-        label.col-sm-2.control-label(for='name') 昵称
-        .col-sm-4
-          input.form-control(type='text', name='name', id='name', value='#{user.profile.name}')
-      .form-group
-        label.col-sm-2.control-label(for='gender') 性别
-        .col-sm-4
-          label.radio
-            input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
-            span 男
-          label.radio
-            input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
-            span 女
-      .form-group
-        label.col-sm-2.control-label(for='location') 居住地
-        .col-sm-4
-          input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
-      .form-group
-        label.col-sm-2.control-label(for='website') 个人网站
-        .col-sm-4
-          input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
-      .form-group
-        label.col-sm-2.control-label(for='gravatar') 个人头像
-        .col-sm-4
-          img(src="#{user.gravatar()}", class='profile', width='100', height='100')
-      .form-group
-        .col-sm-offset-2.col-sm-4
-          button.btn.btn.btn-primary(type='submit')
-            i.fa.fa-magnet
-            |  上传更新
 
-    .page-header
-      h3 修改密码
-
-    form.form-horizontal(action='/account/password', method='POST')
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label.col-sm-3.control-label(for='password') 新密码
-        .col-sm-4
-          input.form-control(type='password', name='password', id='password')
-      .form-group
-        label.col-sm-3.control-label(for='confirmPassword') 确认新密码
-        .col-sm-4
-          input.form-control(type='password', name='confirmPassword', id='confirmPassword')
-      .form-group
-        .col-sm-offset-3.col-sm-4
-          button.btn.btn.btn-primary(type='submit')
-            i.fa.fa-keyboard-o
-            |  修改密码
-
-    .page-header
-      h3 删除账户
-
-    p 您在删除自己的账户, 账户一旦删除，将不可恢复。账户中的所有数据将丢失！
-    form(action='/account/delete', method='POST')
-      input(type='hidden', name='_csrf', value=_csrf)
-      button.btn.btn-danger(type='submit')
-        i.fa.fa-trash-o
-        |  删除我的账户
-
-    .page-header
-      h3 关联的账户
-
-    if user.qq
-      p: a.btn.btn-danger(href='/account/unlink/qq') 取消 QQ 关联
-    else
-      p: a.btn.btn-default(href='/auth/qq') 关联 QQ 账户
-
-    if user.weibo
-      p: a.btn.btn-danger(href='/account/unlink/weibo') 取消 Weibo 关联
-    else
-      p: a.btn.btn-default(href='/auth/weibo') 关联 Weibo 账户
-
-    if user.renren
-      p: a.btn.btn-danger(href='/account/unlink/renren') 取消 Renren 关联
-    else
-      p: a.btn.btn-default(href='/auth/renren') 关联 Renren 账户
-
-    if user.linkedin
-      p: a.btn.btn-danger(href='/account/unlink/linkedin') 取消 LinkedIn 关联
-    else
-      p: a.btn.btn-default(href='/auth/linkedin') 关联 LinkedIn 账户
+      .col-sm-2.col-md-2
+        ul.profile-info-sections
+          li
+            .profile-stat
+              h3 #{user.contacts.followers.length}
+              span
+                a(href='/account/' + user.id + '/followers') 粉丝
+          li
+            .profile-stat
+              h3 #{user.contacts.followings.length}
+              span
+                a(href='/account/' + user.id + '/followings') 关注

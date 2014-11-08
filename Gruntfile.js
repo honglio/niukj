@@ -199,22 +199,27 @@ module.exports = function(grunt) {
                     htmlroot: 'public',
                     csspath: '../../public/css/',
                     stylesheets: [
-                        'base.css',
-                        'styles.css',
-                        'style-responsive.css',
-                        'lib/animate.min.css',
-                        'lib/flexslider.css',
-                        'lib/hopscotch-0.1.2.min.css',
-                        'prettyPhoto.css',
+                        // 'base.css',
+                        // 'styles.css',
+                        // 'style-responsive.css',
+                        // 'lib/animate.min.css',
+                        // 'lib/flexslider.css',
+                        // 'lib/hopscotch-0.1.2.min.css',
+                        // 'prettyPhoto.css',
                         // 'lib/bootstrap.css'
                     ],
-                    urls: ['http://localhost:3000/'],
+                    urls: [
+                        // 'http://localhost:3000/',
+                    ],
                     // Ignore css selectors for async content with complete selector or regexp
                     // Only needed if using Bootstrap
                     ignore: [/dropdown-menu/, /\.collapsing/, /\.collapse/]
                 },
                 files: {
-                    '<%= yeoman.release %>/styles/main.css': ['server/views/home.jade', 'server/views/layout.jade']
+                    '<%= yeoman.release %>/styles/main.css': [
+                        // 'server/views/home.jade',
+                        'server/views/layout.jade'
+                    ]
                 }
             }
         },
