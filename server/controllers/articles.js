@@ -109,12 +109,14 @@ exports.my = function(req, res) {
         if (err) {
             return res.render('500');
         }
-        res.render('article/index', {
-            title: '我的课件',
-            articles: articles,
-            page: page + 1,
-            pages: Math.ceil(articles.length / perPage),
-            formatDate: utils.formatDate
+        Article.count().exec(function (err, count) {
+            res.render('article/index', {
+                title: '我的课件',
+                articles: articles,
+                page: page + 1,
+                pages: Math.ceil(count / perPage),
+                formatDate: utils.formatDate
+            });
         });
     });
 };
