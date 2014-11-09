@@ -83,6 +83,7 @@ module.exports = function(app, passport) {
     app.get('/api/weibo', passportConf.isAuthenticated, passportConf.isAuthorized, api.getWeibo);
     app.get('/api/renren', passportConf.isAuthenticated, passportConf.isAuthorized, api.getRenren);
     app.get('/api/qq', passportConf.isAuthenticated, passportConf.isAuthorized, api.getQQ);
+    app.get('/api/github', passportConf.isAuthenticated, passportConf.isAuthorized, api.getGithub);
     app.get('/api/linkedin', passportConf.isAuthenticated, passportConf.isAuthorized, api.getLinkedin);
 
     /**

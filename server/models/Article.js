@@ -139,7 +139,7 @@ var ArticleSchema = new mongoose.Schema({
  * Validations
  */
 
-ArticleSchema.path('fileName').required(true, 'Article fileName cannot be blank');
+ArticleSchema.path('fileName').required(true, 'Article title cannot be blank');
 
 /**
  * Pre-remove hook
