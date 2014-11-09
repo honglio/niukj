@@ -25,22 +25,26 @@
   -   return Math.floor(seconds) + " 秒";
   - }
   .comment
-    .comment-thumb
-        a(href='#')
-          img.img-circle(src='#{comment.user.gravatar()}', height='40')
-      .comment-content
-        .comment-author
-          a(href='/account/'+comment.user._id)= name
-          .comment-info
+    .row
+      .col-sm-12
+        .comment-thumb.pull-left
+          a(href='#')
+            img.img-circle(src='#{comment.user.gravatar()}', height='40')
+        .comment-content(style="margin:0 50px;")
+          .comment-author
+            a(href='/account/'+comment.user._id)= name
+            | &nbsp;
             span.time= timeSince(comment.createdAt)
             |  以前
-        .comment-text
-          = comment.body
+          blockquote.comment-text
+            = comment.body
 
-    p.text-muted
-      form.form-inline(role='form', method='POST', action='/articles/' + article._id + '/comments/' + comment._id, onsubmit='return confirm("你确定吗?")')
-        input(type='hidden', name='_csrf', value=_csrf)
-        span.text-muted= formatDate(comment.createdAt)
-        &#160;&#160;&#160;
-        input(type='hidden', name='_method', value='DELETE')
-        button.btn.btn-danger.error(type='submit') Delete
+        p.text-muted
+          form.form-inline(role='form', method='POST', action='/articles/' + article._id + '/comments/' + comment._id, onsubmit='return confirm("你确定吗?")')
+            input(type='hidden', name='_csrf', value=_csrf)
+            span.text-muted= formatDate(comment.createdAt)
+            &#160;&#160;&#160;
+            input(type='hidden', name='_method', value='DELETE')
+            button.btn.btn-danger.error(type='submit') Delete
+
+  br
