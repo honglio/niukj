@@ -44,12 +44,14 @@ exports.search = function(req, res) {
             return res.render('500');
         }
         console.log(utils.formatDate);
-        res.render('article/index', {
-            title: '搜索到的课件',
-            articles: articles,
-            page: page + 1,
-            pages: Math.ceil(articles.length / perPage),
-            formatDate: utils.formatDate
+        Article.count().exec(function (err, count) {
+            res.render('article/index', {
+                title: '搜索到的课件',
+                articles: articles,
+                page: page + 1,
+                pages: Math.ceil(count / perPage),
+                formatDate: utils.formatDate
+            });
         });
     });
 };
@@ -72,12 +74,14 @@ exports.explore = function(req, res) {
         if (err) {
             return res.render('500');
         }
-        res.render('article/index', {
-            title: '探索课件',
-            articles: articles,
-            page: page + 1,
-            pages: Math.ceil(articles.length / perPage),
-            formatDate: utils.formatDate
+        Article.count().exec(function (err, count) {
+            res.render('article/index', {
+                title: '探索课件',
+                articles: articles,
+                page: page + 1,
+                pages: Math.ceil(count / perPage),
+                formatDate: utils.formatDate
+            });
         });
     });
 };

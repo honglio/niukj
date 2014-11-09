@@ -4,47 +4,48 @@ block content
   .container-fluid.modul-space-twentyone
     .page-header
       h2.text-center= title
-    #Grid.row
     - if (articles.length)
-      - each article in articles
-        .col-xs-12.col-sm-6.col-md-3.mix.category_1.mix_all
-          .portlio-list(data-cat='1', style='display: inline-block; opacity: 1;')
-              .grid.cs-style-2
-                figure
-                  - var pic = article.picture ? article.picture : '/img/generic.png'
-                  img.portlio-list-img(src=pic alt='' width="300" height="250")
-                  figcaption
-                    .image-buttons
-                      a.btn.btn-primary(href='/articles/'+ article._id + '/present')
-                        i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
-                      a.btn.btn-primary(href='/articles/'+ article._id + '/manage')
-                        i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='管理课件')
-              h4.centered #{article.fileName}
+      #Grid.row
+        - each article in articles
+          .col-xs-12.col-sm-6.col-md-3.mix.category_1.mix_all
+            .portlio-list(data-cat='1', style='display: inline-block; opacity: 1;')
+                .grid.cs-style-2
+                  figure
+                    - var pic = article.picture ? article.picture : '/img/generic.png'
+                    img.portlio-list-img(src=pic alt='' width="300" height="250")
+                    figcaption
+                      .image-buttons
+                        a.btn.btn-primary(href='/articles/'+ article._id + '/present')
+                          i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
+                        a.btn.btn-primary(href='/articles/'+ article._id + '/manage')
+                          i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='管理课件')
+                h4.text-center #{article.fileName}
 
-              .meta
-                | &nbsp;
-                span.fa.fa-eye= article.hitCounter
-                |  &nbsp; 创建于&nbsp;
-                span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
+                .meta
+                  | &nbsp;
+                  span.fa.fa-eye= article.hitCounter
+                  |  &nbsp; 创建于&nbsp;
+                  span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
 
-              - if (article.user)
-                | &nbsp; - &nbsp;
-                span 作者 &nbsp;
+                - if (article.user)
+                  | &nbsp; - &nbsp;
+                  span 作者 &nbsp;
 
-                - var name = article.user.profile.name ? article.user.profile.name : article.user.email
+                  - var name = article.user.profile.name ? article.user.profile.name : article.user.email
 
-                a(href="/account/"+article.user._id)= name
+                  a(href="/account/"+article.user._id)= name
 
-              - if (article.tags)
-                | &nbsp; - &nbsp;
-                span 标签 &nbsp;
-                - each tag in article.tags
-                  i.text-muted.fa.fa-tag &nbsp;
-                  a.tag(href="/tags/"+tag)= tag
-                  | &nbsp;&nbsp;
+                - if (article.tags)
+                  | &nbsp; - &nbsp;
+                  span 标签 &nbsp;
+                  - each tag in article.tags
+                    i.text-muted.fa.fa-tag &nbsp;
+                    a.tag(href="/tags/"+tag)= tag
+                    | &nbsp;&nbsp;
 
       - if (pages > 1)
-        ul.pagination
-          != createPagination(pages, page)
+        .row.text-center
+          ul.pagination
+            != createPagination(pages, page)
     - else
       h4.text-muted.centered 无课件！&nbsp; 亲，请在上方搜索栏中输入关键词，再搜索试试。

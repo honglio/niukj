@@ -345,8 +345,8 @@ ArticleSchema.statics = {
             .sort({
                 'createdAt': -1
             }) // sort by date
-            .limit(opt.perPage)
-            .skip(opt.perPage * opt.page)
+            .limit(options.perPage)
+            .skip(options.perPage * options.page)
             .exec(cb);
     },
 

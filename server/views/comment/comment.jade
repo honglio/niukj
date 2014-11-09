@@ -27,7 +27,7 @@
   .comment
     .comment-thumb
         a(href='#')
-          img.img-circle(src='#{comment.user.gravatar()}')
+          img.img-circle(src='#{comment.user.gravatar()}', height='40')
       .comment-content
         .comment-author
           a(href='/account/'+comment.user._id)= name
