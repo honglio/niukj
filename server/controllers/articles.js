@@ -44,7 +44,7 @@ exports.search = function(req, res) {
             return res.render('500');
         }
         console.log(utils.formatDate);
-        Article.count().exec(function (err, count) {
+        Article.count().exec(function(err, count) {
             res.render('article/index', {
                 title: '搜索到的课件',
                 articles: articles,
@@ -74,7 +74,7 @@ exports.explore = function(req, res) {
         if (err) {
             return res.render('500');
         }
-        Article.count().exec(function (err, count) {
+        Article.count().exec(function(err, count) {
             res.render('article/index', {
                 title: '探索课件',
                 articles: articles,
@@ -109,7 +109,7 @@ exports.my = function(req, res) {
         if (err) {
             return res.render('500');
         }
-        Article.count().exec(function (err, count) {
+        Article.count().exec(function(err, count) {
             res.render('article/index', {
                 title: '我的课件',
                 articles: articles,

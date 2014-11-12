@@ -527,7 +527,7 @@ module.exports = function(grunt) {
     ]);
 
     // grunt.registerTask('test', [
-        // test-bdd
+    // test-bdd
     // ]);
 
     grunt.registerTask('build', [
