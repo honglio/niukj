@@ -526,6 +526,10 @@ module.exports = function(grunt) {
         'test-unit'
     ]);
 
+    // grunt.registerTask('test', [
+        // test-bdd
+    // ]);
+
     grunt.registerTask('build', [
         'clean:release',
         'uncss',

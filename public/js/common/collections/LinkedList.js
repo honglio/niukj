@@ -37,8 +37,8 @@ define(function() {
     };
     // Removes the last node from the end of the list and return its value.
     LinkedList.prototype.pop = function() {
-        if (this.tail == null) {
-            return;
+        if (this.tail == null) { // List is empty;
+            return null;
         }
         var value = this.tail.value;
         if (this.tail === this.head) {
@@ -52,8 +52,8 @@ define(function() {
     };
     // Removes the first element from the list and return its value.
     LinkedList.prototype.shift = function() {
-        if (this.head == null) {
-            return;
+        if (this.head == null) { // List is empty
+            return null;
         }
         var value = this.head.value;
         if (this.tail === this.head) {
