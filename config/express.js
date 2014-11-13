@@ -23,10 +23,6 @@ var express = require('express'),
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = function(app, passport) {
-    // set backend views path, template engine and default layout
-    app.set('views', config.root + '/server/views');
-    app.set('view engine', 'jade');
-
     // should be placed before express.static
     app.use(compression({
         filter: function(req, res) {
@@ -34,15 +30,17 @@ module.exports = function(app, passport) {
         },
         level: 9
     }));
-
+    // set backend views path, template engine and default layout
     if (process.env.NODE_ENV === 'development') {
-        app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
+        app.set('view engine', 'jade');
+        app.set('views', config.root + '/server/views');
         app.use(express.static(config.root + '/public'));
     } else {
-        app.use(favicon(config.root + '/built/img/ico/favicon.ico'));
+        app.set('view engine', 'html');
+        app.set('views', config.root + '/built/server/views');
         app.use(express.static(config.root + '/built'));
     }
-
+    app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
     app.use(multer());
 
     // Handling Uncaught Exceptions

@@ -209,16 +209,16 @@ module.exports = function(grunt) {
                         // 'lib/bootstrap.css'
                     ],
                     urls: [
-                        // 'http://localhost:3000/',
+                        'http://localhost:3000/',
                     ],
                     // Ignore css selectors for async content with complete selector or regexp
                     // Only needed if using Bootstrap
                     ignore: [/dropdown-menu/, /\.collapsing/, /\.collapse/]
                 },
                 files: {
-                    '<%= yeoman.release %>/styles/main.css': [
-                        // 'server/views/home.jade',
-                        'server/views/layout.jade'
+                    '.tmp/styles/main.css': [
+                        'server/views/home.jade',
+                        // 'server/views/layout.jade'
                     ]
                 }
             }
@@ -459,7 +459,15 @@ module.exports = function(grunt) {
         uglify: {
             prod: {
                 files: {
-                    '<%= yeoman.release %>/main.js': '<%= yeoman.release %>/main.js'
+                    '<%= yeoman.release %>/js/main.js': '<%= yeoman.release %>/main.js',
+                    '<%= yeoman.release %>/js/vendor.js': [
+                        '<%= yeoman.app %>/js/vendors/jquery.flexslider-min.js',
+                        '<%= yeoman.app %>/js/vendors/jquery.prettyPhoto.js',
+                        '<%= yeoman.app %>/js/vendors/jquery.scrollTo.js',
+                        '<%= yeoman.app %>/js/vendors/jquery.nav.js',
+                        '<%= yeoman.app %>/js/vendors/hopscotch-0.1.2.min.js',
+                        '<%= yeoman.app %>/js/vendors/katemi.js'
+                    ]
                 }
             }
         },
@@ -476,9 +484,20 @@ module.exports = function(grunt) {
         cssmin: {
             release: {
                 files: {
-                    '<%= yeoman.release %>/styles/main.css': [
-                        '.tmp/styles/{,**/}*.css',
-                        '<%= yeoman.app %>/styles/{,*/}*.css'
+                    '<%= yeoman.release %>/css/main.css': [
+                        // '.tmp/styles/main.css'
+                        '<%= yeoman.app %>/css/base.css',
+                        '<%= yeoman.app %>/css/styles.css',
+                        '<%= yeoman.app %>/css/style-responsive.css',
+                        '<%= yeoman.app %>/css/lib/animate.min.css',
+                        '<%= yeoman.app %>/css/lib/flexslider.css',
+                        '<%= yeoman.app %>/css/lib/hopscotch-0.1.2.min.css',
+                        '<%= yeoman.app %>/css/prettyPhoto.css'
+                    ],
+                    '<%= yeoman.release %>/css/core.css': [
+                        '<%= yeoman.app %>/css/base2.css',
+                        '<%= yeoman.app %>/css/style2.css',
+                        '<%= yeoman.app %>/css/core.css'
                     ]
                 }
             }
@@ -486,25 +505,76 @@ module.exports = function(grunt) {
         htmlmin: {
             release: {
                 options: {
-                    /*removeCommentsFromCDATA: true,
-                    // https://github.com/yeoman/grunt-usemin/issues/44
-                    //collapseWhitespace      : true,
                     collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    conservativeCollapse: true,
                     removeAttributeQuotes: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
+                    removeCommentsFromCDATA: true,
                     removeEmptyAttributes: true,
-                    removeOptionalTags: true*/
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    useShortDoctype: true
                 },
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.app %>',
-                    src: '*.html',
+                    src: '{,*/}*.html',
                     dest: '<%= yeoman.release %>'
                 }]
             }
+        },
+        // Renames files for browser caching purposes
+        rev: {
+            dist: {
+                files: {
+                    src: [
+                        '<%= yeoman.release %>/js/{,**/}*.js',
+                        '<%= yeoman.release %>/css/{,**/}*.css',
+                        '<%= yeoman.release %>/img/{,**/}*.*',
+                        '<%= yeoman.release %>/css/fonts/{,**/}*.*',
+                        '<%= yeoman.release %>/*.{ico,png}'
+                    ]
+                }
+            }
+        },
+        // Copies remaining files to places other tasks can use
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.server %>/views',
+                    dest: '<%= yeoman.release %>/server/views',
+                    src: '{,*/}*.jade'
+                }]
+            },
+            // styles: {
+            //     expand: true,
+            //     dot: true,
+            //     cwd: '<%= config.app %>/css',
+            //     dest: '.tmp/css/',
+            //     src: '{,*/}*.css'
+            // }
+        },
+        // Performs rewrites based on rev and the useminPrepare configuration
+        usemin: {
+            options: {
+                assetsDirs: [
+                    '<%= yeoman.release %>',
+                    '<%= yeoman.release %>/images',
+                    '<%= yeoman.release %>/css'
+                ]
+            },
+            html: [
+                '<%= yeoman.release %>/server/views/partials/head.jade',
+                '<%= yeoman.release %>/server/views/layout.jade',
+                '<%= yeoman.release %>/server/views/home.jade'
+            ],
+            css: ['<%= yeoman.release %>/css/{,*/}*.css']
         }
     });
+
+
 
     grunt.registerTask('test-lint', [
         'clean:dev',
@@ -532,12 +602,15 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', [
         'clean:release',
-        'uncss',
-        // 'requirejs',
-        // 'uglify',
-        // 'imagemin',
-        // 'htmlmin',
-        // 'cssmin',
+        // 'uncss',
+        'requirejs',
+        'uglify',
+        'imagemin',
+        'cssmin',
+        'copy',
+        'rev',
+        'usemin',
+        // 'htmlmin'
     ]);
 
     grunt.registerTask('default', [
