@@ -467,8 +467,7 @@ module.exports = function(grunt) {
                         '<%= yeoman.app %>/js/vendors/jquery.nav.js',
                         '<%= yeoman.app %>/js/vendors/hopscotch-0.1.2.min.js',
                         '<%= yeoman.app %>/js/vendors/katemi.js'
-                    ],
-                    '<%= yeoman.release %>/js/loadingBar.js': '<%= yeoman.release %>/js/loadingBar.js'
+                    ]
                 }
             }
         },
@@ -536,12 +535,21 @@ module.exports = function(grunt) {
                 files: {
                     src: [
                         '<%= yeoman.release %>/js/{,**/}*.js',
-                        '<%= yeoman.release %>/css/{,**/}*.css',
+                        '!<%= yeoman.release %>/js/vendors/require.js',
+                        '!<%= yeoman.release %>/js/vendors/impress.js',
+                        '<%= yeoman.release %>/css/{,*/}*.css',
+                        '!<%= yeoman.release %>/css/app/{,*/}*.css',
                         // '<%= yeoman.release %>/img/{,**/}*.*',
-                        '<%= yeoman.release %>/css/fonts/{,**/}*.*',
+                        // '<%= yeoman.release %>/css/fonts/{,*/}*.*',
                         // '<%= yeoman.release %>/*.{ico,png}'
                     ]
                 }
+            }
+        },
+        useminPrepare: {
+            html: '<%= yeoman.server %>/views/{,*/}*.jade',
+            options: {
+                dest: '<%= yeoman.release %>/server/views'
             }
         },
         // Copies remaining files to places other tasks can use
@@ -583,14 +591,14 @@ module.exports = function(grunt) {
         usemin: {
             options: {
                 assetsDirs: [
-                    // '<%= yeoman.release %>',
-                    // '<%= yeoman.release %>/img',
-                    // '<%= yeoman.release %>/css',
-                    '<%= yeoman.release %>/**/'
+                    '<%= yeoman.release %>',
+                    '<%= yeoman.release %>/img',
+                    '<%= yeoman.release %>/css',
+                    // '<%= yeoman.release %>/**/'
                 ]
             },
-            html: ['<%= yeoman.release %>/server/views/**/*.jade'],
-            css: ['<%= yeoman.release %>/css/{,**/}*.css']
+            html: ['<%= yeoman.release %>/server/views/{,*/}*.jade'],
+            css: ['<%= yeoman.release %>/css/{,*/}*.css']
         },
         jadeUsemin: {
             main: {
@@ -644,6 +652,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
         'clean:release',
         // 'uncss',
+        // 'useminPrepare',
         'requirejs',
         'uglify',
         'imagemin',
