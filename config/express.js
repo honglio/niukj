@@ -30,13 +30,13 @@ module.exports = function(app, passport) {
         },
         level: 9
     }));
+
+    app.set('view engine', 'jade');
     // set backend views path, template engine and default layout
     if (process.env.NODE_ENV === 'development') {
-        app.set('view engine', 'jade');
         app.set('views', config.root + '/server/views');
         app.use(express.static(config.root + '/public'));
     } else {
-        app.set('view engine', 'html');
         app.set('views', config.root + '/built/server/views');
         app.use(express.static(config.root + '/built'));
     }
