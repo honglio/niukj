@@ -467,7 +467,9 @@ module.exports = function(grunt) {
                         '<%= yeoman.app %>/js/vendors/jquery.nav.js',
                         '<%= yeoman.app %>/js/vendors/hopscotch-0.1.2.min.js',
                         '<%= yeoman.app %>/js/vendors/katemi.js'
-                    ]
+                    ],
+                    '<%= yeoman.release %>/js/vendors/require.js': '<%= yeoman.release %>/js/vendors/require.js',
+                    '<%= yeoman.release %>/js/vendors/impress.js': '<%= yeoman.release %>/js/vendors/impress.js',
                 }
             }
         },
@@ -482,12 +484,12 @@ module.exports = function(grunt) {
             }
         },
         cssmin: {
-            // minify: {
-            //     expand: true,
-            //     cwd: '<%= yeoman.app %>/css',
-            //     src: '{,**/}*.css',
-            //     dest: '<%= yeoman.release %>/css'
-            // }
+            minify: {
+                expand: true,
+                cwd: '<%= yeoman.app %>/css',
+                src: '{,**/}*.css',
+                dest: '<%= yeoman.release %>/css'
+            },
             release: {
                 files: {
                     '<%= yeoman.release %>/css/main.css': [
@@ -656,7 +658,8 @@ module.exports = function(grunt) {
         'requirejs',
         'uglify',
         'imagemin',
-        'cssmin',
+        'cssmin:minify',
+        'cssmin:release',
         // 'jade',
         'copy',
         'rev',
