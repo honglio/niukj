@@ -21,15 +21,23 @@ p {
     font-weight: 300;
     line-height: 1.5em;
 }
+/* Line Height */
+
 h1,
 h2,
 h3,
 h4,
 h5,
-h5 {
-    line-height: 1.5em;
-    font-weight: 500;
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    line-height: 1.32222;
 }
+
 h1 {
     font-size: 48px;
 }
@@ -83,7 +91,7 @@ a::-moz-selection {
     text-shadow: none;
 }
 section {
-    padding: 20px 0;
+    padding: 19px 0;
 }
 .title {
     font-weight: 500;
