@@ -460,14 +460,15 @@ module.exports = function(grunt) {
             prod: {
                 files: {
                     '<%= yeoman.release %>/main.js': '<%= yeoman.release %>/main.js',
-                    // '<%= yeoman.release %>/js/vendor.js': [
-                    //     '<%= yeoman.app %>/js/vendors/jquery.flexslider-min.js',
-                    //     '<%= yeoman.app %>/js/vendors/jquery.prettyPhoto.js',
-                    //     '<%= yeoman.app %>/js/vendors/jquery.scrollTo.js',
-                    //     '<%= yeoman.app %>/js/vendors/jquery.nav.js',
-                    //     '<%= yeoman.app %>/js/vendors/hopscotch-0.1.2.min.js',
-                    //     '<%= yeoman.app %>/js/vendors/katemi.js'
-                    // ]
+                    '<%= yeoman.release %>/js/vendor.js': [
+                        '<%= yeoman.app %>/js/vendors/jquery.flexslider-min.js',
+                        '<%= yeoman.app %>/js/vendors/jquery.prettyPhoto.js',
+                        '<%= yeoman.app %>/js/vendors/jquery.scrollTo.js',
+                        '<%= yeoman.app %>/js/vendors/jquery.nav.js',
+                        '<%= yeoman.app %>/js/vendors/hopscotch-0.1.2.min.js',
+                        '<%= yeoman.app %>/js/vendors/katemi.js'
+                    ],
+                    '<%= yeoman.release %>/js/loadingBar.js': '<%= yeoman.release %>/js/loadingBar.js'
                 }
             }
         },
@@ -482,11 +483,30 @@ module.exports = function(grunt) {
             }
         },
         cssmin: {
-            minify: {
-                expand: true,
-                cwd: '<%= yeoman.app %>/css',
-                src: '{,**/}*.css',
-                dest: '<%= yeoman.release %>/css'
+            // minify: {
+            //     expand: true,
+            //     cwd: '<%= yeoman.app %>/css',
+            //     src: '{,**/}*.css',
+            //     dest: '<%= yeoman.release %>/css'
+            // }
+            release: {
+                files: {
+                    '<%= yeoman.release %>/css/main.css': [
+                        // '.tmp/styles/main.css'
+                        '<%= yeoman.app %>/css/base.css',
+                        '<%= yeoman.app %>/css/styles.css',
+                        '<%= yeoman.app %>/css/style-responsive.css',
+                        '<%= yeoman.app %>/css/lib/animate.min.css',
+                        '<%= yeoman.app %>/css/lib/flexslider.css',
+                        '<%= yeoman.app %>/css/lib/hopscotch-0.1.2.min.css',
+                        '<%= yeoman.app %>/css/prettyPhoto.css'
+                    ],
+                    '<%= yeoman.release %>/css/core.css': [
+                        '<%= yeoman.app %>/css/base2.css',
+                        '<%= yeoman.app %>/css/style2.css',
+                        '<%= yeoman.app %>/css/core.css'
+                    ]
+                }
             }
         },
         htmlmin: {
@@ -517,9 +537,9 @@ module.exports = function(grunt) {
                     src: [
                         '<%= yeoman.release %>/js/{,**/}*.js',
                         '<%= yeoman.release %>/css/{,**/}*.css',
-                        '<%= yeoman.release %>/img/{,**/}*.*',
+                        // '<%= yeoman.release %>/img/{,**/}*.*',
                         '<%= yeoman.release %>/css/fonts/{,**/}*.*',
-                        '<%= yeoman.release %>/*.{ico,png}'
+                        // '<%= yeoman.release %>/*.{ico,png}'
                     ]
                 }
             }
@@ -563,17 +583,35 @@ module.exports = function(grunt) {
         usemin: {
             options: {
                 assetsDirs: [
-                    '<%= yeoman.release %>',
-                    '<%= yeoman.release %>/images',
-                    '<%= yeoman.release %>/css'
+                    // '<%= yeoman.release %>',
+                    // '<%= yeoman.release %>/img',
+                    // '<%= yeoman.release %>/css',
+                    '<%= yeoman.release %>/**/'
                 ]
             },
-            html: [
-                '<%= yeoman.release %>/server/views/partials/head.jade',
-                '<%= yeoman.release %>/server/views/layout.jade',
-                '<%= yeoman.release %>/server/views/home.jade'
-            ],
+            html: ['<%= yeoman.release %>/server/views/**/*.jade'],
             css: ['<%= yeoman.release %>/css/{,**/}*.css']
+        },
+        jadeUsemin: {
+            main: {
+                options: {
+                    // tasks: { //optional if you want to use defaults
+                    //     js: ['concat', 'uglify', 'filerev'],
+                    //     css: ['concat', 'autoprefixer', 'cssmin']
+                    // },
+                    dirTasks: 'rev', //optional
+                    prefix: '', //optional
+                    targetPrefix: '', //optional
+                    // replacePath: { //optional
+                    //     '#{env}': 'dist'
+                    // }
+                },
+                files: [{
+                    src: ['<%= yeoman.release %>/server/views/home.jade'],
+                    dest: '<%= yeoman.release %>/server/views/home.jade'
+                }]
+            }
+
         }
     });
 
@@ -614,6 +652,7 @@ module.exports = function(grunt) {
         'copy',
         'rev',
         'usemin',
+        // 'jadeUsemin',
         // 'htmlmin'
     ]);
 

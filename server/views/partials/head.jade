@@ -24,7 +24,7 @@ link(rel='shortcut icon' href='/img/ico/favicon.png')
 //- Bootstrap CSS CDN
 link(rel='stylesheet' href='http://lib.sinaapp.com/js/bootstrap/3.0.0/css/bootstrap.min.css' type='text/css')
 //- Custom font-icon
-link(rel='stylesheet' href='/css/lib/font-awesome.min.css' type='text/css')
+link(rel='stylesheet' href='http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css' type='text/css')
 
 //- jQuery CDN
 script(type='text/javascript' src='http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js')
@@ -43,5 +43,13 @@ script(type='text/javascript').
   $(function() {
     if($('body').css('color') !== 'rgb(51, 51, 51)') {
       $("head").prepend('<link rel="stylesheet" href="/css/lib/bootstrap.min.css">')
+    }
+  });
+//- Font awesome local fallback
+script(type='text/javascript').
+  $(function() {
+    var $span = $('<span class="fa" style="display:none"></span>').appendTo('body');
+    if ($span.css('fontFamily') !== 'FontAwesome' ) {
+      $('head').append("<link rel='stylesheet' href='/css/lib/font-awesome.min.css'>")
     }
   });
