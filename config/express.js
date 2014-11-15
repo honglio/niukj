@@ -36,11 +36,13 @@ module.exports = function(app, passport) {
     if (process.env.NODE_ENV === 'development') {
         app.set('views', config.root + '/server/views');
         app.use(express.static(config.root + '/public'));
+        app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
     } else {
         app.set('views', config.root + '/built/server/views');
         app.use(express.static(config.root + '/built'));
+        app.use(favicon(config.root + '/built/img/ico/favicon.ico'));
     }
-    app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
+
     app.use(multer());
 
     // Handling Uncaught Exceptions
