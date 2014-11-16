@@ -37,19 +37,22 @@ exports.search = function(req, res) {
         }
     };
 
-    console.log(page);
-
     Article.list(options, function(err, articles) {
         if (err) {
             return res.render('500');
         }
         console.log(utils.formatDate);
         Article.count().exec(function(err, count) {
+            if (count > perPage && articles.length < perPage) {
+                var amount = articles.length + perPage * page;
+            } else {
+                var amount = count;
+            }
             res.render('article/index', {
                 title: '搜索到的课件',
                 articles: articles,
                 page: page + 1,
-                pages: Math.ceil(count / perPage),
+                pages: Math.ceil(amount / perPage),
                 formatDate: utils.formatDate
             });
         });
@@ -70,16 +73,26 @@ exports.explore = function(req, res) {
         }
     };
 
+
     Article.list(options, function(err, articles) {
         if (err) {
             return res.render('500');
         }
         Article.count().exec(function(err, count) {
+            // console.log(options.page);
+            // console.log(count);
+            // console.log(articles.length);
+            if (count > perPage && articles.length < perPage) {
+                var amount = articles.length + perPage * page;
+            } else {
+                var amount = count;
+            }
+
             res.render('article/index', {
                 title: '探索课件',
                 articles: articles,
                 page: page + 1,
-                pages: Math.ceil(count / perPage),
+                pages: Math.ceil(amount / perPage),
                 formatDate: utils.formatDate
             });
         });
@@ -108,11 +121,16 @@ exports.my = function(req, res) {
             return res.render('500');
         }
         Article.count().exec(function(err, count) {
+            if (count > perPage && articles.length < perPage) {
+                var amount = articles.length + perPage * page;
+            } else {
+                var amount = count;
+            }
             res.render('article/index', {
                 title: '我的课件',
                 articles: articles,
                 page: page + 1,
-                pages: Math.ceil(count / perPage),
+                pages: Math.ceil(amount / perPage),
                 formatDate: utils.formatDate
             });
         });
