@@ -4,7 +4,7 @@
     "box-sizing": false,
     "compatible-vendor-prefixes": false,
     "display-property-grouping": true,
-    "duplicate-background-images": "warning",
+    "duplicate-background-images": false,
     "duplicate-properties": true,
     "empty-rules": true,
     "errors": true,
@@ -13,12 +13,12 @@
     "font-faces": false,
     "font-sizes": false,
     "gradients": false,
-    "ids": "warning",
+    "ids": false,
     "import": "warning",
-    "important": "warning",
+    "important": false,
     "known-properties": false,
     "outline-none": false,
-    "overqualified-elements": "warning",
+    "overqualified-elements": false,
     "qualified-headings": false,
     "regex-selectors": false,
     "rules-count": false,
@@ -30,5 +30,5 @@
     "universal-selector": false,
     "unqualified-attributes": false,
     "vendor-prefix": true,
-    "zero-units": "warning"
+    "zero-units": false
 }

@@ -28,7 +28,7 @@
 	--------------------*/
     
     .featurettes-inner-section img {
-        margin: 20px 0 0px;
+        margin: 20px 0 0;
     }
     .featurettes-inner-section .checklist li {
         margin-bottom: 1.3em;
@@ -248,7 +248,7 @@
         margin: 0 auto;
     }
     .checklist {
-        text-align: left !important;
+        text-align: left;
     }
     span.rollover {
         width: 528px;
@@ -347,7 +347,6 @@
         width: 50%;
         margin-left: 0;
         display: inline-block;
-        float: left;
     }
     /* #Annotations
 	---------------------*/

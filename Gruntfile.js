@@ -179,17 +179,15 @@ module.exports = function(grunt) {
             options: {
                 csslintrc: '.csslintrc'
             },
-            strict: {
-                options: {
-                    import: 2
-                },
-                src: ['<%= yeoman.css %>']
-            },
             lax: {
                 options: {
-                    import: false
+                    formatters: 'compact'
                 },
-                src: ['<%= yeoman.css %>']
+                src: [
+                    '<%= yeoman.css %>',
+                    '!<%= yeoman.app %>/css/lib/*.css',
+                    '!<%= yeoman.app %>/css/themes/*.css'
+                ]
             }
         },
         less: {
@@ -662,7 +660,7 @@ module.exports = function(grunt) {
         'clean:dev',
         'jsbeautifier:test',
         'jshint',
-        // 'csslint:lax'
+        'csslint:lax'
     ]);
 
     grunt.registerTask('test-unit', [
