@@ -57,10 +57,7 @@ section#top-nav
           else
             li.dropdown(class=title=='账户管理'?'active':undefined)
               a.dropdown-toggle(data-target="#" data-toggle='dropdown' role="button")
-                if user.profile.picture
-                  img(src='#{user.profile.picture}')
-                else
-                  img(src='#{user.gravatar(60)}')
+                img(src='#{user.profile.picture || user.gravatar()}')
                 | #{user.profile.name || user.email || user.id}&nbsp;
                 span.caret
               ul.dropdown-menu(role="menu")

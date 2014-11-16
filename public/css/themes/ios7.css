@@ -478,7 +478,6 @@ span {
     float: right;
 }
 .dataTables_filter input {
-    .form-control;
     display: inline-block;
     width: inherit;
     height: 30px;
@@ -616,12 +615,10 @@ span {
 label {
     font-weight: normal;
 }
-/*Params: text-color; border-color; background-color*/
-
 .has-error {
-    .form-control-validation(#d9534f;
-    #d9534f;
-    #d9534f);
+    color: #d9534f;
+    border-color: #d9534f;
+    background-color: #d9534f;
 }
 .radio,
 .checkbox {

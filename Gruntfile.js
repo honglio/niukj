@@ -185,8 +185,7 @@ module.exports = function(grunt) {
                 },
                 src: [
                     '<%= yeoman.css %>',
-                    '!<%= yeoman.app %>/css/lib/*.css',
-                    '!<%= yeoman.app %>/css/themes/*.css'
+                    '!<%= yeoman.app %>/css/lib/*.css'
                 ]
             }
         },
@@ -227,6 +226,20 @@ module.exports = function(grunt) {
                         // 'server/views/layout.jade'
                     ]
                 }
+            }
+        },
+        // Add vendor prefixed styles
+        autoprefixer: {
+            options: {
+                browsers: ['> 5%', 'last 2 versions', 'Firefox > 20', 'ios 7', 'ie 9', 'ie 8']
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/css/',
+                    src: '{,*/}*.css',
+                    dest: '.tmp/css/'
+                }]
             }
         },
         mocha: {
@@ -492,7 +505,7 @@ module.exports = function(grunt) {
         cssmin: {
             minify: {
                 expand: true,
-                cwd: '<%= yeoman.app %>/css',
+                cwd: '.tmp/css',
                 src: '{,**/}*.css',
                 dest: '<%= yeoman.release %>/css'
             },
@@ -500,18 +513,18 @@ module.exports = function(grunt) {
                 files: {
                     '<%= yeoman.release %>/css/main.css': [
                         // '.tmp/styles/main.css'
-                        '<%= yeoman.app %>/css/base.css',
-                        '<%= yeoman.app %>/css/styles.css',
-                        '<%= yeoman.app %>/css/style-responsive.css',
-                        '<%= yeoman.app %>/css/lib/animate.min.css',
-                        '<%= yeoman.app %>/css/lib/flexslider.css',
-                        '<%= yeoman.app %>/css/lib/hopscotch-0.1.2.min.css',
-                        '<%= yeoman.app %>/css/prettyPhoto.css'
+                        '.tmp/css/base.css',
+                        '.tmp/css/styles.css',
+                        '.tmp/css/style-responsive.css',
+                        '.tmp/css/lib/animate.min.css',
+                        '.tmp/css/lib/flexslider.css',
+                        '.tmp/css/lib/hopscotch-0.1.2.min.css',
+                        '.tmp/css/prettyPhoto.css'
                     ],
                     '<%= yeoman.release %>/css/core.css': [
-                        '<%= yeoman.app %>/css/base2.css',
-                        '<%= yeoman.app %>/css/style2.css',
-                        '<%= yeoman.app %>/css/core.css'
+                        '.tmp/css/base2.css',
+                        '.tmp/css/style2.css',
+                        '.tmp/css/core.css'
                     ]
                 }
             }
@@ -571,13 +584,13 @@ module.exports = function(grunt) {
                     src: '{,*/}*.jade'
                 }]
             },
-            // styles: {
-            //     expand: true,
-            //     dot: true,
-            //     cwd: '<%= config.app %>/css',
-            //     dest: '.tmp/css/',
-            //     src: '{,*/}*.css'
-            // }
+            styles: {
+                expand: true,
+                dot: true,
+                cwd: '<%= yeoman.app %>/css',
+                dest: '.tmp/css/',
+                src: '{,**/}*.css'
+            }
         },
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
@@ -687,10 +700,12 @@ module.exports = function(grunt) {
         'requirejs',
         'uglify',
         'imagemin',
+        'copy:styles',
+        'autoprefixer',
         // 'less',
         'cssmin:minify',
         'cssmin:release',
-        'copy',
+        'copy:dist',
         'rev',
         'usemin',
         // 'htmlmin'

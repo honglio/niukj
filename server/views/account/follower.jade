@@ -5,7 +5,7 @@ block content
     section.row
       .col-md-12
         a.profile-picture.pull-left.pull-none-xsm(href='#')
-          img.img-responsive.img-circle(src='#{account.gravatar()}' width='70')
+          img.img-responsive.img-circle(src='#{account.profile.picture || account.gravatar()}' width='70')
         .profile-name(style="margin:0 100px;padding-top:25px;")
           strong
             if account
@@ -28,7 +28,7 @@ block content
       if follower
         .member-entry
           .member-img(href='#')
-              img.img-rounded(src='#{follower.gravatar()}', alt='', width='60')
+              img.img-rounded(src='#{follower.profile.picture || follower.gravatar()}', alt='', width='60')
           .member-details
             h4
                 a(href='/account/' + follower.id) #{follower.profile.name || '未填'}
