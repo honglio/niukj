@@ -5,7 +5,7 @@ define(["CustomView",
 ], function(CustomView, AppModel, HeadbarView, SlideEditorView) {
 
     return CustomView.extend({
-        className: 'container-fluid',
+        className: 'container',
         id: 'slide-editor',
         events: {
             destroyed: 'remove'
