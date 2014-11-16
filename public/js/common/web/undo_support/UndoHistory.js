@@ -57,7 +57,7 @@ define([
      *
      */
     UndoHistory.prototype.undo = function() {
-        if(this.count > 0) {
+        if (this.count > 0) {
             this.actions.last().undo();
             this.actions.unshift(this.actions.last());
             this.actions.pop();
@@ -73,7 +73,7 @@ define([
      *
      */
     UndoHistory.prototype.redo = function() {
-        if(this.count <= (this.actions.length - 2)) {
+        if (this.count <= (this.actions.length - 2)) {
             this.actions.first().do();
             this.actions.push(this.actions.first());
             this.actions.shift();

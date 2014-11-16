@@ -61,11 +61,11 @@ define(["CustomView",
 
             if (this.model._undoHistory.count <= 0) {
                 var $undoBtn = this.$el.find('.undo');
-                $undoBtn.attr('disabled','disabled');
+                $undoBtn.attr('disabled', 'disabled');
             }
-            if (this.model._undoHistory.count > (this.model._undoHistory.actions.length -2)) {
+            if (this.model._undoHistory.count > (this.model._undoHistory.actions.length - 2)) {
                 var $redoBtn = this.$el.find('.redo');
-                $redoBtn.attr('disabled','disabled');
+                $redoBtn.attr('disabled', 'disabled');
             }
 
             return this;

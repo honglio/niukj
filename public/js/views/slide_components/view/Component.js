@@ -241,7 +241,7 @@ define(["jquery", "CustomView",
             if (this._dragging) {
                 this._dragging = false;
                 this.$el.removeClass("dragged");
-                if (this.dragStartLoc && ( this.dragStartLoc.x !== this.model.get('x') || this.dragStartLoc.y !== this.model.get('y'))) {
+                if (this.dragStartLoc && (this.dragStartLoc.x !== this.model.get('x') || this.dragStartLoc.y !== this.model.get('y'))) {
                     var cmd = new ComponentCommands.Move(this.dragStartLoc, this.model);
                     this.model.slide.trigger('contentsChanged');
                     undoHistory.pushdo(cmd);
