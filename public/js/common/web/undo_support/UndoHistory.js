@@ -35,11 +35,6 @@ define([
      */
     UndoHistory.prototype.push = function(command) {
         this.actions.push(command);
-
-        if (this.actions.length >= this.size) {
-            this.actions.shift();
-            this.actions.push(command);
-        }
     };
 
     /**

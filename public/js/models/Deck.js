@@ -176,7 +176,8 @@ define(["underscore",
         },
 
         add: function(slide, index) {
-            undoHistory.pushdo(new SlideCommands.Add(this, slide, index));
+            var cmd = new SlideCommands.Add(this, slide, index);
+            cmd.do();
         },
 
         /**
@@ -208,7 +209,8 @@ define(["underscore",
          *
          */
         remove: function(slide) {
-            undoHistory.pushdo(new SlideCommands.Remove(this, slide));
+            var cmd = new SlideCommands.Remove(this, slide);
+            cmd.do();
         },
         /**
          * Callback for slide removal command.
