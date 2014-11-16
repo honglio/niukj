@@ -28,7 +28,7 @@
         "passport-renren": ">=0.1.1",
         "passport-tqq": ">=0.0.2",
         "passport-linkedin-oauth2": "latest",
-        "winston": "latest",
+        "winston": "^0.8.3",
         "async": "latest",
         "request": "latest",
         "lusca": "latest",

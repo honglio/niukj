@@ -103,8 +103,6 @@ exports.my = function(req, res) {
         }
     };
 
-    console.log(page);
-
     Article.list(options, function(err, articles) {
         if (err) {
             return res.render('500');
@@ -181,7 +179,6 @@ exports.update = function(req, res, next) {
     article.tags = req.article.tags;
     article.comments = req.article.comments;
 
-    console.log(article);
     Article.updateAndSave(req.article._id, article, function(err) {
         if (err) {
             return next(err);

@@ -19,6 +19,20 @@ module.exports = {
         debug: true,
         maxConnections: 5 // Default is 5
     },
+    logmail: {
+        service: "WanWang",
+        host: "smtp.mxhichina.com",
+        port: 25,
+        secureConnection: false,
+        name: "niukj.com",
+        auth: {
+            user: "winston@niukj.com",
+            pass: "YFLasdfama3"
+        },
+        ignoreTLS: false,
+        debug: true,
+        maxConnections: 5 // Default is 5
+    },
     oss: {
         accessKeyId: '3wXgudE0HBMAsuvb',
         accessKeySecret: '8Fl01JVf9L60DDWxighJq8dl4PeAPj',

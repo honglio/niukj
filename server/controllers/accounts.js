@@ -36,7 +36,7 @@ exports.accountbyId = function(req, res, next) {
             return next(err);
         }
         if (!user) {
-            return;
+            return next(new Error('not found'));
         }
 
         if (Account.hasFollowing(user, contactId)) {
@@ -56,7 +56,6 @@ exports.accountbyId = function(req, res, next) {
 };
 
 exports.followerbyId = function(req, res, next) {
-
     req.account.contacts.followers.forEach(function(follower, i) {
         Account.load(follower.accountId, function(err, contact) {
             if (err) {
@@ -101,14 +100,14 @@ exports.removeContact = function(req, res, next) {
             return next(err);
         }
         if (!user) {
-            return;
+            return next(new Error('not found'));
         }
         Account.findById(contactId, function(err, contact) {
             if (err) {
                 return next(err);
             }
             if (!contact) {
-                return;
+                return next(new Error('not found'));
             }
 
             console.log('Remove Contact:');
@@ -154,14 +153,14 @@ exports.addContact = function(req, res, next) {
             return next(err);
         }
         if (!user) {
-            return;
+            return next(new Error('not found'));
         }
         Account.findById(contactId, function(err, contact) {
             if (err) {
                 return next(err);
             }
             if (!contact) {
-                return;
+                return next(new Error('not found'));
             }
             console.log('Add Contact:');
 

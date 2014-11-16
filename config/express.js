@@ -11,16 +11,101 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
+    nodemailer = require("nodemailer"),
     session = require('express-session'),
     mongoStore = require('connect-mongo')({
         session: session
     }),
     csrf = require('lusca').csrf(),
+    exec = require('child_process').exec,
+    join = require('path').join,
+    util = require('util'),
     helpers = require('view-helpers'),
     config = require('./config'),
-    whitelist = ['/url1', '/url2'];
+    smtpTransport = nodemailer.createTransport('SMTP', config.logmail),
+    whitelist = ['/url1', '/url2'],
+    logDir = join(config.root, '/logs/');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+/**
+ * timestamp formatter
+ * @returns {string}
+ */
+
+function timestamp() {
+  return new Date()
+    .toISOString()
+    .replace(/T/, ' ')
+    .replace(/\./, ',')
+    .replace(/Z/, '');
+}
+
+// make logs dir
+exec('mkdir ' + logDir);
+// winston configuration
+winston.remove(winston.transports.Console);
+winston.setLevels(winston.config.npm.levels);
+winston.addColors(winston.config.npm.colors);
+
+/**
+ * default loggers
+ */
+winston.add(winston.transports.Console, {
+  name: 'console-default',
+  level: 'debug',
+  colorize: true,
+  timestamp: timestamp,
+  handleExceptions: true // Handling Uncaught Exceptions
+});
+winston.add(winston.transports.File, {
+  name: 'file-default',
+  filename: join(logDir, 'server.log'),
+  level: 'debug',
+  timestamp: timestamp
+});
+
+/**
+ * MailLogger
+ * @type {MailLogger}
+ */
+function MailLogger(options) {
+  if (!(this instanceof MailLogger)) {
+    return new MailLogger(options);
+  }
+  options = options || {};
+  this.name = 'mail';
+  this.level = options.level || 'info';
+}
+util.inherits(MailLogger, winston.Transport);
+MailLogger.prototype.log = function(level, msg, meta, done) {
+  smtpTransport.sendMail({
+    from: 'winston@niukj.com',
+    to: 'dev@niukj.com',
+    subject: 'Niukj: ' + level.toUpperCase(),
+    tags: 'logging,' + level,
+    text: msg + '\n' + util.inspect(meta)
+  }, done);
+};
+MailLogger.prototype.logException = function(msg, meta, done) {
+  this.log('error', msg, meta, done);
+};
+
+/**
+ * Error loggers
+ */
+ winston.add(winston.transports.File, {
+  name: 'file-error',
+  filename: join(logDir, 'error.log'),
+  level: 'warn',
+  handleExceptions: true,
+  timestamp: timestamp
+});
+winston.add(MailLogger, {
+  level: 'error',
+  timestamp: timestamp,
+  handleExceptions: true
+});
 
 module.exports = function(app, passport) {
     // should be placed before express.static
@@ -34,32 +119,34 @@ module.exports = function(app, passport) {
     app.set('view engine', 'jade');
     // set backend views path, template engine and default layout
     if (process.env.NODE_ENV === 'development') {
-        app.set('views', config.root + '/server/views');
-        app.use(express.static(config.root + '/public'));
-        app.use(favicon(config.root + '/public/img/ico/favicon.ico'));
+        app.set('views', join(config.root, '/server/views'));
+        app.use(express.static(join(config.root, '/public')));
+        app.use(favicon(join(config.root, '/public/img/ico/favicon.ico')));
     } else {
-        app.set('views', config.root + '/built/server/views');
-        app.use(express.static(config.root + '/built'));
-        app.use(favicon(config.root + '/built/img/ico/favicon.ico'));
+        app.set('views', join(config.root, '/built/server/views'));
+        app.use(express.static(join(config.root, '/built')));
+        app.use(favicon(join(config.root, '/built/img/ico/favicon.ico')));
     }
 
     app.use(multer());
 
-    // Handling Uncaught Exceptions
-    winston.add(winston.transports.File, {
-        filename: 'log/all-logs.txt',
-        handleExceptions: true
-    });
-
     var log = {
         stream: {
             write: function(message) {
-                winston.info(message);
+                if(message.indexOf(400) !== -1 || message.indexOf(404) !== -1 ||
+                    message.indexOf(405) !== -1) {
+                    winston.warn(message);
+                } else if(message.indexOf(500) !== -1 || message.indexOf(503) !== -1 ||
+                    message.indexOf(504) !== -1 || message.indexOf(501) !== -1) {
+                    winston.error(message);
+                } else {
+                    winston.info(message);
+                }
             }
         }
     };
 
-    app.use(logger(log));
+    app.use(logger('combined', log));
 
     // cookieParser should be above session
     app.use(cookieParser());
@@ -131,10 +218,12 @@ module.exports = function(app, passport) {
     /**
      * 500 Error Handler.
      * As of Express 4.0 it must be placed at the end, after all routes.
+     * This middleware is only intended to be used in a development environment,
+     * as the full error stack traces will be sent back to the client when an error occurs.
      */
-
-    app.use(errorHandler());
-
+    if (process.env.NODE_ENV === 'development') {
+        app.use(errorHandler());
+    }
     // Nginx support
     app.enable('trust proxy');
 };
