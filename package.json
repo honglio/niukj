@@ -1,7 +1,7 @@
 {
     "name": "niukj",
     "description": "An Online Presentation Platform - writing/presenting/storing/searching",
-    "version": "1.2.0",
+    "version": "1.4.0",
     "private": true,
     "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
     "repository": {
