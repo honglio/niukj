@@ -14,6 +14,7 @@ define([
      */
     function UndoHistory(size) {
         this.size = size;
+        this.count = 0;
         this.actions = new LinkedList();
     }
 
@@ -23,6 +24,7 @@ define([
      * @method clear
      */
     UndoHistory.prototype.clear = function() {
+        this.count = 0;
         this.actions = new LinkedList();
     };
 
@@ -49,6 +51,7 @@ define([
     UndoHistory.prototype.pushdo = function(command) {
         var result = command.do();
         this.push(command);
+        this.count += 1;
         return result;
     };
 
@@ -59,8 +62,12 @@ define([
      *
      */
     UndoHistory.prototype.undo = function() {
-        this.actions.last().undo();
-        this.actions.pop();
+        if(this.count > 0) {
+            this.actions.last().undo();
+            this.actions.unshift(this.actions.last());
+            this.actions.pop();
+            this.count -= 1;
+        }
         return this;
     };
 
@@ -71,8 +78,12 @@ define([
      *
      */
     UndoHistory.prototype.redo = function() {
-        this.actions.last().do();
-        this.actions.push(this.actions.last());
+        if(this.count <= (this.actions.length - 2)) {
+            this.actions.first().do();
+            this.actions.push(this.actions.first());
+            this.actions.shift();
+            this.count += 1;
+        }
         return this;
     };
 

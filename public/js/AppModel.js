@@ -1,10 +1,11 @@
 define(["backbone",
     "models/Deck",
+    "models/ComponentCommands",
     "./views/slide_components/ComponentFactory",
     "common/web/interactions/Clipboard",
     "common/web/undo_support/UndoHistoryFactory",
     "./views/storage/StorageInterface"
-], function(Backbone, Deck, ComponentFactory,
+], function(Backbone, Deck, ComponentCommands, ComponentFactory,
     Clipboard, UndoHistoryFactory, StorageInterface) {
 
 
@@ -106,7 +107,8 @@ define(["backbone",
             if (slide) {
                 var compFactory = new ComponentFactory();
                 var comp = compFactory.instance.createModel(type);
-                slide.add(comp);
+                var cmd = new ComponentCommands.Add(slide, comp);
+                this._undoHistory.pushdo(cmd);
             }
         }
     });

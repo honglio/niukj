@@ -171,7 +171,8 @@ define(["underscore",
          * if the index is unnessessery large, reduce the index to rational value.
          */
         create: function(index) {
-            undoHistory.pushdo(new SlideCommands.Add(this, null, index));
+            var cmd = new SlideCommands.Add(this, null, index);
+            cmd.do();
         },
 
         add: function(slide, index) {

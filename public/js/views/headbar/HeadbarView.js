@@ -14,7 +14,8 @@ define(["CustomView",
             'click .redo': 'redo',
             'click .cut': '_cut',
             'click .copy': '_copy',
-            'click .paste': '_paste'
+            'click .paste': '_paste',
+            'click [data-comptype="TextBox"]': '_textbox'
         },
         initialize: function() {
             this._saveButton = new SaveButton({
@@ -58,21 +59,33 @@ define(["CustomView",
             $createCompButtons.append(this._imageButton.render().$el);
             $createCompButtons.append(this._ThemeProviderBtn.render().$el);
 
+            if (this.model._undoHistory.count <= 0) {
+                var $undoBtn = this.$el.find('.undo');
+                $undoBtn.attr('disabled','disabled');
+            }
+            if (this.model._undoHistory.count > (this.model._undoHistory.actions.length -2)) {
+                var $redoBtn = this.$el.find('.redo');
+                $redoBtn.attr('disabled','disabled');
+            }
+
             return this;
+        },
+
+        _textbox: function() {
+            this.initialize();
+            this.render();
         },
 
         undo: function() {
             this.model._undoHistory.undo();
-            // Uncomment this, if you want to display name of action
-            // this.initialize();
-            // this.render();
+            this.initialize();
+            this.render();
         },
 
         redo: function() {
             this.model._undoHistory.redo();
-            // Uncomment this, if you want to display name of action
-            // this.initialize();
-            // this.render();
+            this.initialize();
+            this.render();
         },
 
         _cut: function() {
