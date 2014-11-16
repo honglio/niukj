@@ -34,11 +34,11 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
  */
 
 function timestamp() {
-  return new Date()
-    .toISOString()
-    .replace(/T/, ' ')
-    .replace(/\./, ',')
-    .replace(/Z/, '');
+    return new Date()
+        .toISOString()
+        .replace(/T/, ' ')
+        .replace(/\./, ',')
+        .replace(/Z/, '');
 }
 
 // make logs dir
@@ -52,17 +52,17 @@ winston.addColors(winston.config.npm.colors);
  * default loggers
  */
 winston.add(winston.transports.Console, {
-  name: 'console-default',
-  level: 'debug',
-  colorize: true,
-  timestamp: timestamp,
-  handleExceptions: true // Handling Uncaught Exceptions
+    name: 'console-default',
+    level: 'debug',
+    colorize: true,
+    timestamp: timestamp,
+    handleExceptions: true // Handling Uncaught Exceptions
 });
 winston.add(winston.transports.File, {
-  name: 'file-default',
-  filename: join(logDir, 'server.log'),
-  level: 'debug',
-  timestamp: timestamp
+    name: 'file-default',
+    filename: join(logDir, 'server.log'),
+    level: 'debug',
+    timestamp: timestamp
 });
 
 /**
@@ -70,41 +70,41 @@ winston.add(winston.transports.File, {
  * @type {MailLogger}
  */
 function MailLogger(options) {
-  if (!(this instanceof MailLogger)) {
-    return new MailLogger(options);
-  }
-  options = options || {};
-  this.name = 'mail';
-  this.level = options.level || 'info';
+    if (!(this instanceof MailLogger)) {
+        return new MailLogger(options);
+    }
+    options = options || {};
+    this.name = 'mail';
+    this.level = options.level || 'info';
 }
 util.inherits(MailLogger, winston.Transport);
 MailLogger.prototype.log = function(level, msg, meta, done) {
-  smtpTransport.sendMail({
-    from: 'winston@niukj.com',
-    to: 'dev@niukj.com',
-    subject: 'Niukj: ' + level.toUpperCase(),
-    tags: 'logging,' + level,
-    text: msg + '\n' + util.inspect(meta)
-  }, done);
+    smtpTransport.sendMail({
+        from: 'winston@niukj.com',
+        to: 'dev@niukj.com',
+        subject: 'Niukj: ' + level.toUpperCase(),
+        tags: 'logging,' + level,
+        text: msg + '\n' + util.inspect(meta)
+    }, done);
 };
 MailLogger.prototype.logException = function(msg, meta, done) {
-  this.log('error', msg, meta, done);
+    this.log('error', msg, meta, done);
 };
 
 /**
  * Error loggers
  */
- winston.add(winston.transports.File, {
-  name: 'file-error',
-  filename: join(logDir, 'error.log'),
-  level: 'warn',
-  handleExceptions: true,
-  timestamp: timestamp
+winston.add(winston.transports.File, {
+    name: 'file-error',
+    filename: join(logDir, 'error.log'),
+    level: 'warn',
+    handleExceptions: true,
+    timestamp: timestamp
 });
 winston.add(MailLogger, {
-  level: 'error',
-  timestamp: timestamp,
-  handleExceptions: true
+    level: 'error',
+    timestamp: timestamp,
+    handleExceptions: true
 });
 
 module.exports = function(app, passport) {
@@ -133,10 +133,10 @@ module.exports = function(app, passport) {
     var log = {
         stream: {
             write: function(message) {
-                if(message.indexOf(400) !== -1 || message.indexOf(404) !== -1 ||
+                if (message.indexOf(400) !== -1 || message.indexOf(404) !== -1 ||
                     message.indexOf(405) !== -1) {
                     winston.warn(message);
-                } else if(message.indexOf(500) !== -1 || message.indexOf(503) !== -1 ||
+                } else if (message.indexOf(500) !== -1 || message.indexOf(503) !== -1 ||
                     message.indexOf(504) !== -1 || message.indexOf(501) !== -1) {
                     winston.error(message);
                 } else {
