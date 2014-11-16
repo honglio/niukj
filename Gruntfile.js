@@ -1,5 +1,4 @@
-'use strict';
-
+var request = require('request');
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -15,16 +14,18 @@ module.exports = function(grunt) {
 
     // configurable paths
     var yeomanConfig = {
-        app: 'public',
-        server: 'server',
-        release: 'built',
-        test: 'test',
-        hbs: ['<%= yeoman.app %>/templates/**/*.hbs', '<%= yeoman.app %>/js/common/web/widgets/templates/*.hbs'],
-        jsClient: '<%= yeoman.app %>/js/**/*.js',
-        jsServer: ['<%= yeoman.server %>/models/**/*.js', '<%= yeoman.server %>/controllers/**/*.js'],
-        jade: '<%= yeoman.server %>/views/**/*.jade',
-        css: '{.tmp,<%= yeoman.app %>}/css/**/*.css'
-    };
+            app: 'public',
+            server: 'server',
+            release: 'built',
+            test: 'test',
+            hbs: ['<%= yeoman.app %>/templates/**/*.hbs', '<%= yeoman.app %>/js/common/web/widgets/templates/*.hbs'],
+            jsClient: '<%= yeoman.app %>/js/**/*.js',
+            jsServer: ['<%= yeoman.server %>/models/**/*.js', '<%= yeoman.server %>/controllers/**/*.js'],
+            jade: '<%= yeoman.server %>/views/**/*.jade',
+            css: '{.tmp,<%= yeoman.app %>}/css/**/*.css'
+        },
+        reloadPort = 35729,
+        files;
 
     grunt.initConfig({
         yeoman: yeomanConfig,
@@ -189,6 +190,13 @@ module.exports = function(grunt) {
                     import: false
                 },
                 src: ['<%= yeoman.css %>']
+            }
+        },
+        less: {
+            dist: {
+                files: {
+                    '<%= yeoman.release %>/css/lib/bootstrap.css': '<%= yeoman.app %>/less/bs-base.less'
+                }
             }
         },
         uncss: {
@@ -573,22 +581,6 @@ module.exports = function(grunt) {
             //     src: '{,*/}*.css'
             // }
         },
-        jade: {
-            compile: {
-                options: {
-                    data: {},
-                    client: false,
-                    pretty: true
-                },
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.server %>/views',
-                    src: ['*.jade', '!404.jade', '!layout.jade'],
-                    dest: '<%= yeoman.release %>/server/views',
-                    ext: '.html'
-                }]
-            }
-        },
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
             options: {
@@ -602,30 +594,68 @@ module.exports = function(grunt) {
             html: ['<%= yeoman.release %>/server/views/{,*/}*.jade'],
             css: ['<%= yeoman.release %>/css/{,*/}*.css']
         },
-        jadeUsemin: {
-            main: {
+        concurrent: {
+            dev: {
+                tasks: ['watch'],
                 options: {
-                    // tasks: { //optional if you want to use defaults
-                    //     js: ['concat', 'uglify', 'filerev'],
-                    //     css: ['concat', 'autoprefixer', 'cssmin']
-                    // },
-                    dirTasks: 'rev', //optional
-                    prefix: '', //optional
-                    targetPrefix: '', //optional
-                    // replacePath: { //optional
-                    //     '#{env}': 'dist'
-                    // }
-                },
-                files: [{
-                    src: ['<%= yeoman.release %>/server/views/home.jade'],
-                    dest: '<%= yeoman.release %>/server/views/home.jade'
-                }]
+                    logConcurrentOutput: true
+                }
             }
-
+        },
+        watch: {
+            options: {
+                nospawn: true,
+                livereload: reloadPort
+            },
+            js: {
+                files: [
+                    'app.js',
+                    '<%= yeoman.app %>/**/*.js',
+                    '<%= yeoman.server %>/**/*.js',
+                    'lib/*.js',
+                    'config/*.js'
+                ],
+                tasks: ['jshint', 'delayed-livereload']
+            },
+            css: {
+                files: [
+                    '<%= yeoman.app %>/less/**/*.less'
+                ],
+                tasks: ['less'],
+                options: {
+                    livereload: reloadPort
+                }
+            },
+            views: {
+                files: [
+                    '<%= yeoman.server %>/views/*.jade',
+                    '<%= yeoman.server %>/views/**/*.jade'
+                ],
+                // tasks: ['nodemon'],
+                options: {
+                    livereload: reloadPort
+                }
+            }
         }
     });
 
+    grunt.config.requires('watch.js.files');
+    files = grunt.config('watch.js.files');
+    files = grunt.file.expand(files);
 
+    grunt.registerTask('delayed-livereload', 'Live reload after the node server has restarted.', function() {
+        var done = this.async();
+        setTimeout(function() {
+            request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','), function(err, res) {
+                var reloaded = !err && res.statusCode === 200;
+                if (reloaded)
+                    grunt.log.ok('Delayed live reload successful.');
+                else
+                    grunt.log.error('Unable to make a delayed live reload.');
+                done(reloaded);
+            });
+        }, 500);
+    });
 
     grunt.registerTask('test-lint', [
         'clean:dev',
@@ -658,15 +688,19 @@ module.exports = function(grunt) {
         'requirejs',
         'uglify',
         'imagemin',
+        // 'less',
         'cssmin:minify',
         'cssmin:release',
-        // 'jade',
         'copy',
         'rev',
         'usemin',
-        // 'jadeUsemin',
         // 'htmlmin'
     ]);
+
+    // grunt.registerTask('server', [
+    //     'clean:dev',
+    //     // 'concurrent:dev'
+    // ]);
 
     grunt.registerTask('default', [
         'test-dev',
