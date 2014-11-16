@@ -36,17 +36,18 @@ exports.search = function(req, res) {
             fileName: req.query.q
         }
     };
+    var amount;
 
     Article.list(options, function(err, articles) {
         if (err) {
             return res.render('500');
         }
-        console.log(utils.formatDate);
+        // console.log(utils.formatDate);
         Article.count().exec(function(err, count) {
             if (count > perPage && articles.length < perPage) {
-                var amount = articles.length + perPage * page;
+                amount = articles.length + perPage * page;
             } else {
-                var amount = count;
+                amount = count;
             }
             res.render('article/index', {
                 title: '搜索到的课件',
@@ -72,7 +73,7 @@ exports.explore = function(req, res) {
             limit: 50
         }
     };
-
+    var amount;
 
     Article.list(options, function(err, articles) {
         if (err) {
@@ -83,9 +84,9 @@ exports.explore = function(req, res) {
             // console.log(count);
             // console.log(articles.length);
             if (count > perPage && articles.length < perPage) {
-                var amount = articles.length + perPage * page;
+                amount = articles.length + perPage * page;
             } else {
-                var amount = count;
+                amount = count;
             }
 
             res.render('article/index', {
@@ -107,7 +108,6 @@ exports.my = function(req, res) {
 
     var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
     var perPage = 8;
-
     var options = {
         perPage: perPage,
         page: page,
@@ -115,6 +115,7 @@ exports.my = function(req, res) {
             user: req.user
         }
     };
+    var amount;
 
     Article.list(options, function(err, articles) {
         if (err) {
@@ -122,9 +123,9 @@ exports.my = function(req, res) {
         }
         Article.count().exec(function(err, count) {
             if (count > perPage && articles.length < perPage) {
-                var amount = articles.length + perPage * page;
+                amount = articles.length + perPage * page;
             } else {
-                var amount = count;
+                amount = count;
             }
             res.render('article/index', {
                 title: '我的课件',
