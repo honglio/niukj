@@ -241,18 +241,13 @@ define(["jquery", "CustomView",
             if (this._dragging) {
                 this._dragging = false;
                 this.$el.removeClass("dragged");
-                if (this.dragStartLoc && this.dragStartLoc.x !== this.model.get('x') && this.dragStartLoc.y !== this.model.get('y')) {
+                if (this.dragStartLoc && ( this.dragStartLoc.x !== this.model.get('x') || this.dragStartLoc.y !== this.model.get('y'))) {
                     var cmd = new ComponentCommands.Move(this.dragStartLoc, this.model);
                     this.model.slide.trigger('contentsChanged');
-                    undoHistory.push(cmd);
+                    undoHistory.pushdo(cmd);
                 }
                 this.dragStartLoc = void 0;
             }
-        },
-
-        scaleStop: function() {
-            var cmd = new ComponentCommands.Scale(this._initialScale, this.model);
-            undoHistory.push(cmd);
         }
     });
 });

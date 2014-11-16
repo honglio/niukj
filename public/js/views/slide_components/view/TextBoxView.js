@@ -127,7 +127,7 @@ define(["underscore",
                 return this.remove();
             } else {
                 var cmd = ComponentCommands.Text(this._initialText, this.model);
-                undoHistory.push(cmd); // for undo
+                undoHistory.pushdo(cmd); // for undo
 
                 this.model.set('text', text);
                 window.getSelection().removeAllRanges();

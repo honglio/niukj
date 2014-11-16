@@ -109,12 +109,6 @@ define(function() {
         Add: Add,
         Remove: Remove,
         Move: Move,
-        Scale: function(initial, component) {
-            return new BaseCommand(initial, component, 'scale', 'Scale');
-        },
-        TextScale: function(initial, component) {
-            return new BaseCommand(initial, component, 'size', 'Scale');
-        },
         Text: function(initial, component) {
             return new BaseCommand(initial, component, 'text', 'Text');
         }
