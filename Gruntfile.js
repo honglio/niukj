@@ -644,6 +644,18 @@ module.exports = function(grunt) {
                     livereload: reloadPort
                 }
             }
+        },
+        csscomb: {
+            options: {
+                config: '.csscomb.json'
+            },
+            dynamic_mappings: {
+                expand: true,
+                cwd: 'public/css/',
+                src: ['*.css', '!*.resorted.css'],
+                dest: 'public/dest/css/',
+                ext: '.resorted.css'
+            }
         }
     });
 
@@ -670,8 +682,8 @@ module.exports = function(grunt) {
         'clean:dev',
         'jsbeautifier:test',
         // 'jshint',
-        // 'csslint:lax'
-        'jscs'
+        'csslint:lax'
+        // 'jscs'
     ]);
 
     grunt.registerTask('test-unit', [
@@ -685,6 +697,10 @@ module.exports = function(grunt) {
     grunt.registerTask('test-dev', [
         'test-lint',
         'test-unit'
+    ]);
+
+    grunt.registerTask('fix-css', [
+        'csscomb'
     ]);
 
     // grunt.registerTask('test', [

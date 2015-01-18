@@ -1,0 +1,127 @@
+/************************************************************************************************************************/
+/* CSS Effects */
+/************************************************************************************************************************/
+/* Presets Style */
+
+body {
+    padding: 0;
+    font-family: sans-serif;
+    font-weight: 300;
+    background: #ffffff;
+
+    text-rendering: optimizeLegibility;
+}
+ol,
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5em;
+}
+/* Line Height */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    line-height: 1.32222;
+}
+h1 {
+    font-size: 48px;
+}
+h2 {
+    font-size: 36px;
+}
+h3 {
+    font-size: 30px;
+}
+h4 {
+    font-size: 24px;
+}
+h5 {
+    font-size: 18px;
+}
+h6 {
+    font-size: 14px;
+}
+a {
+    color: #428bca;
+    -webkit-transition: 0.25s;
+       -moz-transition: 0.25s;
+         -o-transition: 0.25s;
+            transition: 0.25s;
+}
+a:hover {
+    text-decoration: none;
+}
+p::selection,
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection,
+li::selection,
+a::selection {
+    text-shadow: none;
+    background: #428bca;
+}
+p::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+h3::-moz-selection,
+h4::-moz-selection,
+h5::-moz-selection,
+h6::selection,
+li::selection,
+a::-moz-selection {
+    text-shadow: none;
+    background: #428bca;
+}
+section {
+    padding: 19px 0;
+}
+.title {
+    font-weight: 500;
+}
+.centered {
+    text-align: center !important;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.bolder {
+    font-weight: bold;
+}
+.normal {
+    font-weight: normal;
+}
+.lighter {
+    font-weight: 200;
+}
+.center-image {
+    display: block;
+    margin: 0 auto;
+}
+hr.title-line {
+    display: block;
+    width: 50%;
+    margin: -38px auto 40px;
+}
+hr.content-hr {
+    margin-bottom: 0;
+    border: 0;
+    border-top: 1px solid #428bca;
+}
