@@ -136,6 +136,13 @@ module.exports = function(grunt) {
                 }
             }
         },
+        jscs: {
+            src: '<%= yeoman.jsClient %>',
+            options: {
+                config: ".jscsrc",
+                requireCurlyBraces: ["if"]
+            }
+        },
         jshint: {
             server: {
                 options: {
@@ -144,7 +151,11 @@ module.exports = function(grunt) {
                 },
                 files: {
                     src: [
-                        '<%= yeoman.jsServer %>'
+                        '<%= yeoman.jsServer %>',
+                        'test/spec/**/*.js',
+                        'lib/**/*.js',
+                        'config/**/*.js',
+                        '*.js'
                     ]
                 }
             },
@@ -157,20 +168,6 @@ module.exports = function(grunt) {
                     src: [
                         '<%= yeoman.jsClient %>',
                         '!<%= yeoman.app %>/js/vendors/**/*.js'
-                    ]
-                }
-            },
-            shared: {
-                options: {
-                    jshintrc: 'shared.jshintrc',
-                    reporter: require('jshint-stylish')
-                },
-                files: {
-                    src: [
-                        'test/spec/**/*.js',
-                        'lib/**/*.js',
-                        'config/**/*.js',
-                        '*.js'
                     ]
                 }
             }
@@ -672,8 +669,9 @@ module.exports = function(grunt) {
     grunt.registerTask('test-lint', [
         'clean:dev',
         'jsbeautifier:test',
-        'jshint',
-        'csslint:lax'
+        // 'jshint',
+        // 'csslint:lax'
+        'jscs'
     ]);
 
     grunt.registerTask('test-unit', [

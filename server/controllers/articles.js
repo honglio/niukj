@@ -257,7 +257,7 @@ exports.present = function(req, res) {
         title: '放映课件' + req.article.fileName,
         article: req.article,
         Math2: math2,
-        timeSince: function (date) {
+        timeSince: function(date) {
             var seconds = Math.floor((new Date() - date) / 1000);
             var interval = Math.floor(seconds / 31536000);
             if (interval > 1) {

@@ -97,7 +97,7 @@ form[role='search'].navbar-form {
 .user-info:after {
     content: " ";
     /* 1 */
-
+    
     display: table;
     /* 2 */
 }
@@ -241,7 +241,6 @@ form[role='search'].navbar-form {
         margin-top: 30px;
     }
 }
-
 /* member-entry */
 /*************************/
 
@@ -268,7 +267,7 @@ form[role='search'].navbar-form {
 .member-entry:after {
     content: " ";
     /* 1 */
-
+    
     display: table;
     /* 2 */
 }
