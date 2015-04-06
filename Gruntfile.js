@@ -34,6 +34,13 @@ module.exports = function(grunt) {
             release: ['.tmp', '<%= yeoman.release %>/*'],
             dev: '.tmp'
         },
+        jscs: {
+            src: ['<%= yeoman.jsServer %>', '<%= yeoman.jsClient %>'],
+            options: {
+                config: ".jscsrc",
+                requireCurlyBraces: [ "if" ]
+            }
+        },
         jsbeautifier: {
             fix: {
                 src: [
@@ -136,13 +143,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        jscs: {
-            src: '<%= yeoman.jsClient %>',
-            options: {
-                config: ".jscsrc",
-                requireCurlyBraces: ["if"]
-            }
-        },
         jshint: {
             server: {
                 options: {
@@ -184,6 +184,18 @@ module.exports = function(grunt) {
                     '<%= yeoman.css %>',
                     '!<%= yeoman.app %>/css/lib/*.css'
                 ]
+            }
+        },
+        csscomb: {
+            options: {
+                config: '.csscomb.json'
+            },
+            dynamic_mappings: {
+                expand: true,
+                cwd: 'public/css/',
+                src: ['*.css', '!*.resorted.css'],
+                dest: 'public/css/dest',
+                ext: '.resorted.css'
             }
         },
         less: {
@@ -250,7 +262,17 @@ module.exports = function(grunt) {
                 }
             }
         },
-
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'spec',
+                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    quiet: false, // Optionally suppress output to standard out (defaults to false)
+                    clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+                },
+                src: ['test/server/**/*.js']
+            }
+        },
         requirejs: {
             compile: {
                 options: {
@@ -496,7 +518,10 @@ module.exports = function(grunt) {
                     cwd: '<%= yeoman.app %>/img',
                     src: '{,**/}*.{png,jpg,jpeg,gif,ico}',
                     dest: '<%= yeoman.release %>/img'
-                }]
+                }],
+                options: {
+                    optimizationLevel: 7
+                }
             }
         },
         cssmin: {
@@ -565,7 +590,7 @@ module.exports = function(grunt) {
             }
         },
         useminPrepare: {
-            html: '<%= yeoman.server %>/views/{,*/}*.jade',
+            html: '<%= yeoman.server %>/views/{,**/}*.jade',
             options: {
                 dest: '<%= yeoman.release %>/server/views'
             }
@@ -596,11 +621,15 @@ module.exports = function(grunt) {
                     '<%= yeoman.release %>',
                     '<%= yeoman.release %>/img',
                     '<%= yeoman.release %>/css',
-                    // '<%= yeoman.release %>/**/'
-                ]
+                    '<%= yeoman.release %>/js'
+                ],
+                patterns: {
+                    jade: require('usemin-patterns').jade
+                }
             },
-            html: ['<%= yeoman.release %>/server/views/{,*/}*.jade'],
-            css: ['<%= yeoman.release %>/css/{,*/}*.css']
+            jade: ['<%= yeoman.release %>/server/views/{,**/}*.jade'],
+            css: ['<%= yeoman.release %>/css/{,**/}*.css']
+            // js: ['<%= yeoman.release %>/js/{,**/}*.js'],
         },
         concurrent: {
             dev: {
@@ -644,18 +673,6 @@ module.exports = function(grunt) {
                     livereload: reloadPort
                 }
             }
-        },
-        csscomb: {
-            options: {
-                config: '.csscomb.json'
-            },
-            dynamic_mappings: {
-                expand: true,
-                cwd: 'public/css/',
-                src: ['*.css', '!*.resorted.css'],
-                dest: 'public/dest/css/',
-                ext: '.resorted.css'
-            }
         }
     });
 
@@ -679,7 +696,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('test-lint', [
-        'clean:dev',
         'jsbeautifier:test',
         // 'jshint',
         'csslint:lax'
@@ -687,25 +703,21 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test-unit', [
-        'mocha'
+        'mocha',
+        'mochaTest'
     ]);
 
-    grunt.registerTask('fix-lint', [
-        'jsbeautifier:fix'
-    ]);
-
-    grunt.registerTask('test-dev', [
+    grunt.registerTask('test', [
+        'fix-lint',
         'test-lint',
         'test-unit'
     ]);
 
-    grunt.registerTask('fix-css', [
+    grunt.registerTask('fix-lint', [
+        'clean:dev',
+        'jsbeautifier:fix',
         'csscomb'
     ]);
-
-    // grunt.registerTask('test', [
-    // test-bdd
-    // ]);
 
     grunt.registerTask('build', [
         'clean:release',

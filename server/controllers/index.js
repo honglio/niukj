@@ -20,7 +20,7 @@ exports.home = function(req, res) {
  * Login page.
  */
 exports.login = function(req, res) {
-    if (req.user) {
+    if (req.isAuthenticated()) {
         return res.redirect('/');
     }
     res.render('account/login', {
@@ -44,7 +44,7 @@ exports.logout = function(req, res) {
  */
 
 exports.signup = function(req, res) {
-    if (req.user) {
+    if (req.isAuthenticated()) {
         return res.redirect('/');
     }
     res.render('account/signup', {
