@@ -16,6 +16,7 @@ var express = require('express'),
     mongoStore = require('connect-mongo')({
         session: session
     }),
+    // redisStore = require( 'connect-redis' )( session ),
     csrf = require('lusca').csrf(),
     exec = require('child_process').exec,
     join = require('path').join,
@@ -179,6 +180,13 @@ module.exports = function(app, passport) {
             auto_reconnect: true
         })
     }));
+    // express/redis session storage
+    // app.use( session( {
+    //     saveUninitialized: false,
+    //     resave: false,
+    //     secret: config.sessionSecret,
+    //     store: new redisStore( config.redis )
+    // } ) );
     // use passport session
     app.use(passport.initialize());
     app.use(passport.session());

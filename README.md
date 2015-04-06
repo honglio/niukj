@@ -4,7 +4,7 @@
 
 ## Contributing ##
 
-Read the wiki first!
+Extended details on the project can be found in the [wiki](https://github.com/honglio/niukj/wiki).
 
 ### Source Structure ###
 
