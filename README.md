@@ -2,9 +2,9 @@
 
 # 牛课件 #
 
-## Contributing ##
+## Getting started ##
 
-Extended details on the project can be found in the [wiki](https://github.com/honglio/niukj/wiki).
+Details of contributing on this project can be found in the [wiki](https://github.com/honglio/niukj/wiki).
 
 ### Source Structure ###
 
@@ -29,5 +29,38 @@ the resulting build will be location in 'currentDirectory/built'.
 3. Add the base-64 version of the font to present_dependence/base64/fonts
 4. ttf2woff tool: npm install ttf2woff -g
 
-## User Guide ##
-* null
+## Developers Guide ##
+
+### Install requirements
+
+* Git (GitHub client preferred)
+* [Vagrant (v1.4.3 or higher)](http://www.vagrantup.com/downloads.html)
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
+### Quick Start
+
+Clone the repository:
+
+```shell
+$ git clone https://github.com/honglio/FangCheng.git
+```
+
+Start the Vagrant virtual machine:
+
+```shell
+$ vagrant up
+```
+
+SSH into the Vagrant virtual machine:
+
+```shell
+$ vagrant ssh
+```
+
+Start the application inside the vagrant machine:
+
+```shell
+$ make
+```
+
+Now you can open `http://localhost:3000` in your browser.
