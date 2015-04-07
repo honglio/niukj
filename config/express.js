@@ -1,5 +1,5 @@
-var express = require('express'),
-    mongoose = require('mongoose'),
+var _ = require( 'underscore' ),
+    express = require('express'),
     flash = require('express-flash'),
     winston = require('winston'),
     expressValidator = require('express-validator'),
@@ -18,16 +18,14 @@ var express = require('express'),
     }),
     // redisStore = require( 'connect-redis' )( session ),
     csrf = require('lusca').csrf(),
+    // csrf = require( 'lusca' ).csrf({header:'x-xsrf-token'}),
     exec = require('child_process').exec,
     join = require('path').join,
     util = require('util'),
     helpers = require('view-helpers'),
     config = require('./config'),
     smtpTransport = nodemailer.createTransport('SMTP', config.logmail),
-    whitelist = ['/url1', '/url2'],
     logDir = join(config.root, '/logs/');
-
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 /**
  * timestamp formatter
@@ -83,7 +81,7 @@ MailLogger.prototype.log = function(level, msg, meta, done) {
     smtpTransport.sendMail({
         from: 'winston@niukj.com',
         to: 'dev@niukj.com',
-        subject: 'Niukj: ' + level.toUpperCase(),
+        subject: 'Niukj: ' + config.env + ' Server Error ' + level.toUpperCase(),
         tags: 'logging,' + level,
         text: msg + '\n' + util.inspect(meta)
     }, done);
@@ -102,64 +100,95 @@ winston.add(winston.transports.File, {
     handleExceptions: true,
     timestamp: timestamp
 });
-winston.add(MailLogger, {
-    level: 'error',
-    timestamp: timestamp,
-    handleExceptions: true
-});
+
+if ( config.logmail ) {
+    winston.add(MailLogger, {
+        level: 'error',
+        timestamp: timestamp,
+        handleExceptions: true
+    });
+}
 
 module.exports = function(app, passport) {
-    // should be placed before express.static
-    app.use(compression({
-        filter: function(req, res) {
-            return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
-        },
-        level: 9
-    }));
+    // set the template engine to .jade files
+    app.set( 'view engine', 'jade' );
 
-    app.set('view engine', 'jade');
-    // set backend views path, template engine and default layout
-    if (process.env.NODE_ENV === 'development') {
+    // should be placed before express.static
+    // To ensure that all assets and data are compressed (utilize bandwidth)
+    // Levels are specified in a range of 0 to 9, where-as 0 is
+    // no compression and 9 is best compression, but slowest
+    app.use( compression( {
+        // filter: function(req, res) {
+        //     return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+        // },
+        level: 9
+    } ) );
+
+    // set backend views path and default layout
+    if ( config.env === 'develop' ) {
         app.set('views', join(config.root, '/server/views'));
         app.use(express.static(join(config.root, '/public')));
         app.use(favicon(join(config.root, '/public/img/ico/favicon.ico')));
     } else {
         app.set('views', join(config.root, '/built/server/views'));
-        app.use(express.static(join(config.root, '/built')));
+        app.use(express.static(join(config.root, '/built'), {
+            maxAge: 30 * 1000
+        }));
         app.use(favicon(join(config.root, '/built/img/ico/favicon.ico')));
     }
 
-    app.use(multer());
+    app.use(multer({
+        dest: join( config.root, '/uploads/' )
+    }));
 
     var log = {
         stream: {
             write: function(message) {
-                if (message.indexOf(400) !== -1 || message.indexOf(404) !== -1 ||
-                    message.indexOf(405) !== -1) {
+                if (message.indexOf(' 400 ') !== -1 || message.indexOf(' 404 ') !== -1 ||
+                    message.indexOf(' 405 ') !== -1) {
                     winston.warn(message);
-                } else if (message.indexOf(500) !== -1 || message.indexOf(503) !== -1 ||
-                    message.indexOf(504) !== -1 || message.indexOf(501) !== -1) {
+                } else if (message.indexOf(' 500 ') !== -1 || message.indexOf(' 503 ') !== -1 ||
+                    message.indexOf(' 504 ') !== -1 || message.indexOf(' 501 ') !== -1) {
                     winston.error(message);
                 } else {
                     winston.info(message);
                 }
             }
-        }
+        },
+        // skip: function (req, res) { return res.statusCode < 400; }
     };
 
-    app.use(logger('combined', log));
+    // Add custom variables to log
+    logger.token( 'userId', function getSession( req ) {
+        var userId;
+        if ( req.session !== undefined && !_.isEmpty( req.session.passport ) ) {
+            userId = req.session.passport.user.id;
+        }
+        return 'userId: ' + userId;
+    } );
+    logger.token( 'returnTo', function getSession( req ) {
+        var returnTo = req.session === undefined ? '' : req.session.returnTo;
+        return 'returnTo: ' + returnTo;
+    } );
+
+    // combined log format
+    app.use( logger( ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" ":userId" ":returnTo"', log ) );
 
     // cookieParser should be above session
     app.use(cookieParser());
-    // bodyParser should be above methodOverride
-    // app.use(express.bodyParser());
+
+    // Request body parsing middleware should be above methodOverride
     app.use(bodyParser.json({
         limit: '50mb'
     }));
+    app.use( bodyParser.raw( {
+        limit: '50mb'
+    } ) );
     app.use(bodyParser.urlencoded({
         limit: '50mb',
         extended: true
     }));
+
     app.use(expressValidator());
     app.use(methodOverride(function(req) {
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -187,6 +216,7 @@ module.exports = function(app, passport) {
     //     secret: config.sessionSecret,
     //     store: new redisStore( config.redis )
     // } ) );
+
     // use passport session
     app.use(passport.initialize());
     app.use(passport.session());
@@ -196,7 +226,7 @@ module.exports = function(app, passport) {
     app.use(helpers('Niukj'));
     // adds CSRF attack protect
     app.use(function(req, res, next) {
-        if (whitelist.indexOf(req.path) !== -1) {
+        if (config.whitelist.indexOf(req.path) !== -1) {
             next();
         } else {
             csrf(req, res, next);
@@ -206,6 +236,11 @@ module.exports = function(app, passport) {
         res.locals.user = req.user;
         next();
     });
+    // set angular csrf token
+    // app.use( function( req, res, next ) {
+    //     res.cookie( '_csrf', res.locals ? res.locals[ '_csrf' ] : '' );
+    //     next();
+    // } );
     // Keep track of previous URL to redirect back to
     // original destination after a successful login.
     app.use(function(req, res, next) {
@@ -223,36 +258,27 @@ module.exports = function(app, passport) {
     // routes should be at the last
     // app.use(app.router); ! deprecated
 
+    // detect and redirect all desktop access to root path.
+    // if ( config.env !== 'develop' ) {
+    //     app.use( function( req, res, next ) {
+    //         var ua = req.header( 'user-agent' );
+    //         if ( !( /mobile/i.test( ua ) ) && req.path !== '/' ) {
+    //             req.session.returnTo = req.path;
+    //             return res.redirect( 302, '/' );
+    //         }
+    //         next();
+    //     } );
+    // }
+
     /**
      * 500 Error Handler.
      * As of Express 4.0 it must be placed at the end, after all routes.
      * This middleware is only intended to be used in a development environment,
      * as the full error stack traces will be sent back to the client when an error occurs.
      */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'develop') {
         app.use(errorHandler());
     }
     // Nginx support
     app.enable('trust proxy');
 };
-
-// Connect to mongodb
-var connect = function() {
-    var options = {
-        server: {
-            socketOptions: {
-                keepAlive: 1
-            }
-        }
-    };
-    mongoose.connect(config.db, options);
-};
-connect();
-// Error handler
-mongoose.connection.on('error', function(err) {
-    console.log(err);
-});
-// Reconnect when closed
-mongoose.connection.on('disconnected', function() {
-    connect();
-});

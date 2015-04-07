@@ -28,8 +28,11 @@ require('./config/express')(app, passport);
 // Import routes
 require('./config/routes')(app, passport);
 
+// database settings
+require('./config/database')(app);
+
 app.listen(3000);
-console.log("Relax is listening to port 3000.");
+console.log("Niukj is listening to port 3000.");
 
 // expose app
 exports = module.exports = app;

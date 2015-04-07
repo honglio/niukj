@@ -11,7 +11,7 @@ var _ = require('underscore'),
 
 // serialize sessions
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user.id); // the callback function
 });
 
 passport.deserializeUser(function(id, done) {
