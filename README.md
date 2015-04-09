@@ -42,7 +42,7 @@ the resulting build will be location in 'currentDirectory/built'.
 Clone the repository:
 
 ```shell
-$ git clone https://github.com/honglio/FangCheng.git
+$ git clone https://github.com/honglio/niukj.git
 ```
 
 Start the Vagrant virtual machine:

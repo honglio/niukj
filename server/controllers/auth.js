@@ -34,6 +34,8 @@ exports.postLogin = function(req, res, next) {
             });
             return res.redirect('/login');
         }
+
+        // add user to session
         req.logIn(user, function(err) {
             if (err) {
                 return next(err);
@@ -85,6 +87,7 @@ exports.postSignup = function(req, res, next) {
             if (err) {
                 return next(err);
             }
+            // add user to session
             req.logIn(user, function(err) {
                 if (err) {
                     return next(err);

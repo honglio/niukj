@@ -1,7 +1,12 @@
 exports.notfound = function(req, res) {
-    res.render('404', {
-        title: '网页无法访问'
-    });
+    if ( ( /json|txt|js|css|gif|png|jpg|jpeg|ico/ ).test( req.url ) ) {
+        res.status( 404 ).end();
+    } else {
+        res.statusCode = 404;
+        res.render( '404', {
+            title: '网页无法访问'
+        } );
+    }
 };
 
 /**
@@ -35,6 +40,8 @@ exports.login = function(req, res) {
 
 exports.logout = function(req, res) {
     req.logout();
+    req.session.destroy(); // For Redis, Deletes the session in the database.
+    // req.session = null // Deletes the cookie.
     res.redirect('/');
 };
 

@@ -174,8 +174,12 @@ exports.create = function(req, res, next) {
 /**
  * Edit an article
  */
-
 exports.edit = function(req, res) {
+    // TODO: if mobile, redirect to mobile edit page
+    // var ua = req.header( 'user-agent' );
+    // if ( /mobile/i.test( ua ) ) {
+    //     // if access from mobile
+    // }
     res.render('article/edit', {
         title: '编辑课件' + req.article.fileName,
         oss: config.oss
