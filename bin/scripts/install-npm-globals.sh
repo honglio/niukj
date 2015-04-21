@@ -25,3 +25,9 @@ if [ ! -f /usr/bin/next-update ]; then
 else
   echo "Skipping next-update - already installed"
 fi
+
+if [ ! -f /usr/bin/imagemin ]; then
+  npm install -g imagemin
+else
+  echo "Skipping imagemin - already installed"
+fi

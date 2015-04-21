@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: env["PORT"], host: env["VAGRANT_NODEJS_HOST_PORT"]
   config.vm.network :forwarded_port, guest: env["THROTTLE_PORT"], host: env["THROTTLE_PORT"]
   config.vm.network :forwarded_port, guest: env["PGPORT"], host: env["VAGRANT_PG_HOST_PORT"]
-  config.vm.network :forwarded_port, guest: env["KLSG_LIVERELOAD_PORT"], host: env["KLSG_LIVERELOAD_PORT"]
+  config.vm.network :forwarded_port, guest: env["NKJ_LIVERELOAD_PORT"], host: env["NKJ_LIVERELOAD_PORT"]
 
   if Vagrant.has_plugin?("vagrant-cachier")
   	config.cache.scope = :box

@@ -8,8 +8,8 @@
 # If you need to override them temporarily, create file env.local.sh in ../local/
 
 # Vagrant box
-export VAGRANT_BOX_NAME=thomas.140320
-export VAGRANT_BOX_URL=ftp://192.168.1.6/dev/honglio.box
+export VAGRANT_BOX_NAME=honglio.150421
+export VAGRANT_BOX_URL=./honglio.box
 export VAGRANT_CPU_CAP=100
 export VAGRANT_MEMORY=512
 export VAGRANT_CPUS=1
@@ -23,28 +23,28 @@ export VAGRANT_PG_HOST_PORT=5432
 export PORT=3000
 export THROTTLE_PORT=3001
 export PGPORT=5432
-export KLSG_LIVERELOAD_PORT=35729
+export NKJ_LIVERELOAD_PORT=35729
 
 # Other Postgres settings
-export PGUSER=keylocationsg
+export PGUSER=niukj
 export PGPASSWORD=devpg
 export PGHOST=127.0.0.1
 
 # App configuration
-export KLSG_LIVERELOAD=true
-export PGUSER=keylocationsg
+export NKJ_LIVERELOAD=true
+export PGUSER=niukj
 export PGPASSWORD=devpg
 
 # Mail configuration
-export KLSG_SMTP_PORT=3025
-export KLSG_SMTP_NO_TLS=true
-export KLSG_SMTP_DEV=true
+export NKJ_SMTP_PORT=3025
+export NKJ_SMTP_NO_TLS=true
+export NKJ_SMTP_DEV=true
 
 git config --global core.editor nano
 git config --global color.ui true
 
-export KLSG_MINIFY_BUILDS=false
-export KLSG_BUILD_ON_START=true
+export NKJ_MINIFY_BUILDS=false
+export NKJ_BUILD_ON_START=true
 
 # Windows hosts can't support symlinks
 export NPM_CONFIG_BIN_LINKS=false
@@ -58,7 +58,7 @@ export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export NODE_PATH=$NODE_MODULES:$NODE_PATH
 
 # Bing search images for condo page
-export KLSG_BING_KEY=mYWkXdpPJuREXcKdkafZqkK6qkstnOZ4pD39y2MeQEw=
+export NKJ_BING_KEY=mYWkXdpPJuREXcKdkafZqkK6qkstnOZ4pD39y2MeQEw=
 
 # Auth
 export AUTH_FACEBOOK_CALLBACKURL=http://localhost:3000/auth/facebook/callback
@@ -83,4 +83,4 @@ export PS1
 
 export SHOW_ERRORS_ON_500_PAGE=true
 
-export LOCALTUNNELNAME=klsg
+export LOCALTUNNELNAME=nkj
