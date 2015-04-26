@@ -117,9 +117,9 @@
     border: 2px solid #272b31;
     border-radius: 50%;
     -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+       -moz-transition: 0.5s;
+         -o-transition: 0.5s;
+            transition: 0.5s;
 }
 
 .social li:last-child {
@@ -138,6 +138,7 @@
     color: #272b31;
     text-align: center;
     text-shadow: none;
+
     -webkit-font-smoothing: antialiased;
 }
 
@@ -214,9 +215,9 @@
     background: url(../img/play-button.png) center center no-repeat;
     opacity: 0.7;
     -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+       -moz-transition: 0.5s;
+         -o-transition: 0.5s;
+            transition: 0.5s;
 }
 
 .product-teaser span.play-button:hover {
@@ -233,8 +234,8 @@ span.rollover {
     opacity: 1;
     -webkit-transition: -webkit-transform 1s;
     -moz-transition-duration: 1s;
-    -o-transition-duration: 1s;
-    transition-duration: 1s;
+      -o-transition-duration: 1s;
+         transition-duration: 1s;
 }
 
 span.rollover:hover {
@@ -263,9 +264,9 @@ span.rollover:hover {
     border-radius: 50%;
     box-shadow: 0 0 0 5px #272b31;
     -webkit-transition: 0.25s;
-    -moz-transition: 0.25s;
-    -o-transition: 0.25s;
-    transition: 0.25s;
+       -moz-transition: 0.25s;
+         -o-transition: 0.25s;
+            transition: 0.25s;
 }
 
 .marketing-icon:hover {

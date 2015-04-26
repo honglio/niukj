@@ -40,18 +40,18 @@ sudo chown -R vagrant:vagrant /home/vagrant
 cd /vagrant
 sudo make npm-globals
 
-# if [ $VAGRANT_SHARE_MODE !=' rsync' ]; then
-	# [ ! -d /vagrant/.git/hooks ] && mkdir /vagrant/.git/hooks
-	# cp /vagrant/bin/scripts/pre-commit /vagrant/.git/hooks/
-	# chmod +x /vagrant/.git/hooks/pre-commit
+if [ $VAGRANT_SHARE_MODE !=' rsync' ]; then
+	[ ! -d /vagrant/.git/hooks ] && mkdir /vagrant/.git/hooks
+	cp /vagrant/bin/scripts/pre-commit /vagrant/.git/hooks/
+	chmod +x /vagrant/.git/hooks/pre-commit
 
-	# PARTY=${COMMIT_PARTY:-}
-	# if [ ! -z ${PARTY} ]; then
-	# 	rm /vagrant/.git/hooks/pre-commit
-	# fi
-# else
-# 	chown -R vagrant:vagrant /vagrant
-# fi
+	PARTY=${COMMIT_PARTY:-}
+	if [ ! -z ${PARTY} ]; then
+		rm /vagrant/.git/hooks/pre-commit
+	fi
+else
+	chown -R vagrant:vagrant /vagrant
+fi
 
 sudo chown -R vagrant:vagrant /vagrant
 

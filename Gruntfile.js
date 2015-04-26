@@ -34,13 +34,6 @@ module.exports = function(grunt) {
             release: ['.tmp', '<%= yeoman.release %>/*'],
             dev: '.tmp'
         },
-        jscs: {
-            src: ['<%= yeoman.jsServer %>', '<%= yeoman.jsClient %>'],
-            options: {
-                config: ".jscsrc",
-                requireCurlyBraces: [ "if" ]
-            }
-        },
         jsbeautifier: {
             fix: {
                 src: [
@@ -51,8 +44,6 @@ module.exports = function(grunt) {
                     'lib/**/*.js',
                     'config/**/*.js',
                     '*.js',
-                    '<%= yeoman.css %>',
-                    '!<%= yeoman.app %>/css/lib/**/*.css',
                     '<%= yeoman.hbs %>'
                 ],
                 options: {
@@ -65,10 +56,6 @@ module.exports = function(grunt) {
                         preserveNewlines: true,
                         unformatted: ["a", "sub", "sup", "b", "i", "u"],
                         wrapLineLength: 0
-                    },
-                    css: {
-                        indentChar: " ",
-                        indentSize: 4
                     },
                     js: {
                         braceStyle: "collapse",
@@ -101,8 +88,6 @@ module.exports = function(grunt) {
                     'lib/**/*.js',
                     'config/**/*.js',
                     '*.js',
-                    '<%= yeoman.css %>',
-                    '!<%= yeoman.app %>/css/lib/**/*.css',
                     '<%= yeoman.hbs %>'
                 ],
                 options: {
@@ -115,10 +100,6 @@ module.exports = function(grunt) {
                         preserveNewlines: true,
                         unformatted: ["a", "sub", "sup", "b", "i", "u"],
                         wrapLineLength: 0
-                    },
-                    css: {
-                        indentChar: " ",
-                        indentSize: 4
                     },
                     js: {
                         braceStyle: "collapse",
@@ -629,7 +610,7 @@ module.exports = function(grunt) {
             },
             jade: ['<%= yeoman.release %>/server/views/{,**/}*.jade'],
             css: ['<%= yeoman.release %>/css/{,**/}*.css']
-            // js: ['<%= yeoman.release %>/js/{,**/}*.js'],
+                // js: ['<%= yeoman.release %>/js/{,**/}*.js'],
         },
         concurrent: {
             dev: {
@@ -697,9 +678,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test-lint', [
         'jsbeautifier:test',
-        // 'jshint',
+        'jshint',
         'csslint:lax'
-        // 'jscs'
     ]);
 
     grunt.registerTask('test-unit', [
@@ -743,7 +723,7 @@ module.exports = function(grunt) {
     // ]);
 
     grunt.registerTask('default', [
-        'test-dev',
+        'test',
         'build'
     ]);
 };

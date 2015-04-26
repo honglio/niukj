@@ -1,4 +1,4 @@
-var _ = require( 'underscore' ),
+var _ = require('underscore'),
     express = require('express'),
     flash = require('express-flash'),
     winston = require('winston'),
@@ -101,7 +101,7 @@ winston.add(winston.transports.File, {
     timestamp: timestamp
 });
 
-if ( config.logmail ) {
+if (config.logmail) {
     winston.add(MailLogger, {
         level: 'error',
         timestamp: timestamp,
@@ -111,21 +111,21 @@ if ( config.logmail ) {
 
 module.exports = function(app, passport) {
     // set the template engine to .jade files
-    app.set( 'view engine', 'jade' );
+    app.set('view engine', 'jade');
 
     // should be placed before express.static
     // To ensure that all assets and data are compressed (utilize bandwidth)
     // Levels are specified in a range of 0 to 9, where-as 0 is
     // no compression and 9 is best compression, but slowest
-    app.use( compression( {
+    app.use(compression({
         // filter: function(req, res) {
         //     return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
         // },
         level: 9
-    } ) );
+    }));
 
     // set backend views path and default layout
-    if ( config.env === 'develop' ) {
+    if (config.env === 'develop') {
         app.set('views', join(config.root, '/server/views'));
         app.use(express.static(join(config.root, '/public')));
         app.use(favicon(join(config.root, '/public/img/ico/favicon.ico')));
@@ -138,7 +138,7 @@ module.exports = function(app, passport) {
     }
 
     app.use(multer({
-        dest: join( config.root, '/uploads/' )
+        dest: join(config.root, '/uploads/')
     }));
 
     var log = {
@@ -159,20 +159,24 @@ module.exports = function(app, passport) {
     };
 
     // Add custom variables to log
-    logger.token( 'userId', function getSession( req ) {
+    logger.token('userId', function getSession(req) {
         var userId;
-        if ( req.session !== undefined && !_.isEmpty( req.session.passport ) ) {
+        if (req.session !== undefined && !_.isEmpty(req.session.passport)) {
             userId = req.session.passport.user.id;
         }
         return 'userId: ' + userId;
-    } );
-    logger.token( 'returnTo', function getSession( req ) {
+    });
+    logger.token('returnTo', function getSession(req) {
         var returnTo = req.session === undefined ? '' : req.session.returnTo;
         return 'returnTo: ' + returnTo;
-    } );
+    });
 
+    var format = ':remote-addr - :remote-user [:date[clf]] ' +
+        '":method :url HTTP/:http-version" :status ' +
+        ':res[content-length] ":referrer" ":user-agent" ' +
+        '":userId" ":returnTo"';
     // combined log format
-    app.use( logger( ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" ":userId" ":returnTo"', log ) );
+    app.use(logger(format, log));
 
     // cookieParser should be above session
     app.use(cookieParser());
@@ -181,9 +185,9 @@ module.exports = function(app, passport) {
     app.use(bodyParser.json({
         limit: '50mb'
     }));
-    app.use( bodyParser.raw( {
+    app.use(bodyParser.raw({
         limit: '50mb'
-    } ) );
+    }));
     app.use(bodyParser.urlencoded({
         limit: '50mb',
         extended: true

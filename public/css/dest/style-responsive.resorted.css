@@ -3,14 +3,14 @@
 @media (min-width: 1200px) {
     /* General
 	--------------------*/
-    
+
     span.rollover {
         width: 510px;
     }
     /* Head Banner
 	--------------------*/
     /* Product Teaser */
-    
+
     .product-teaser span.play-button {
         width: 570px;
         height: 427px;
@@ -20,13 +20,13 @@
     }
     /* Content
 	--------------------*/
-    
+
     .section-subtitle {
         width: 55%;
     }
     /* #Featurettes
 	--------------------*/
-    
+
     .featurettes-inner-section img {
         margin: 20px 0 0 0;
     }
@@ -38,7 +38,7 @@
     /* #Annotations
 	--------------------*/
     /*product dot*/
-    
+
     .product-dot1 {
         margin-top: 50px;
         margin-left: 110px;
@@ -76,7 +76,7 @@
     }
     /* #Breakline
 	--------------------*/
-    
+
     #breakline h3:after {
         margin-top: 0;
         margin-left: 50px;
@@ -86,13 +86,13 @@
 
 @media (min-width: 768px) and (max-width: 979px) {
     /* General */
-    
+
     span.rollover {
         width: 308px;
     }
     /* #Top Nav
 	--------------------*/
-    
+
     #top-nav {
         padding: 0;
     }
@@ -130,12 +130,12 @@
     }
     /* #Head Banner
 	---------------------*/
-    
+
     #head-banner {
         margin-top: 55px;
     }
     /*Produt Teaser */
-    
+
     .product-teaser span.play-button {
         width: 352px;
         height: 264px;
@@ -159,19 +159,19 @@
     }
     /* #Featurettes
 	----------------------*/
-    
+
     .row-fluid.featurettes-inner-section [class*='span'] {
         width: 100%;
         margin-left: 0;
     }
     /* featurettes flexslider */
-    
+
     .featurettes-inner-section img {
         margin: 0 auto;
     }
     /* #Annotations
 	----------------------*/
-    
+
     .annotation-link {
         width: 15px;
         height: 15px;
@@ -180,7 +180,7 @@
         padding: 15px 20px;
     }
     /* Product Dots */
-    
+
     .product-dot1 {
         margin-top: 38px;
         margin-left: 98px;
@@ -220,7 +220,7 @@
 
 @media (max-width: 568px) {
     /* General */
-    
+
     h1 {
         font-size: 38.5px;
     }
@@ -255,7 +255,7 @@
     }
     /* #Top Nav
 	--------------------*/
-    
+
     #top-nav {
         padding: 0 20px;
     }
@@ -293,7 +293,7 @@
     }
     /* #Head Banner
 	---------------------*/
-    
+
     #head-banner {
         margin-top: 55px;
         text-align: center;
@@ -304,7 +304,7 @@
         margin-left: 20px;
     }
     /*Product Teaser */
-    
+
     .product-teaser {
         margin-top: 0;
     }
@@ -325,7 +325,7 @@
     }
     /* #Marketing
 	---------------------*/
-    
+
     #marketing {
         margin-top: 0 !important;
         text-align: center;
@@ -335,7 +335,7 @@
     }
     /* #Featurettes
 	---------------------*/
-    
+
     #featurettes {
         text-align: center;
     }
@@ -349,7 +349,7 @@
     }
     /* #Annotations
 	---------------------*/
-    
+
     #annotations {
         text-align: center;
     }
@@ -365,13 +365,13 @@
     }
     /* #Annotations
 	----------------------*/
-    
+
     .annotation-link {
         width: 15px;
         height: 15px;
     }
     /* Product Dots */
-    
+
     .product-dot1 {
         margin-top: 65px;
         margin-left: -190px;
@@ -406,7 +406,7 @@
     }
     /* #Breakline
 	---------------------*/
-    
+
     #breakline h3 {
         padding: 0;
     }
@@ -415,7 +415,7 @@
     }
     /* #Footer
 	---------------------*/
-    
+
     #footer {
         text-align: center;
     }
@@ -427,14 +427,14 @@
 
 @media (max-width: 480px) {
     /* General */
-    
+
     span.rollover {
         width: 440px;
     }
     /* #Annotations
 	---------------------*/
     /* Product Dots */
-    
+
     .product-dot1 {
         margin-top: 50px;
         margin-left: -160px;
@@ -472,14 +472,14 @@
 
 @media (max-width: 320px) {
     /* General */
-    
+
     span.rollover {
         width: 280px;
         height: 244px;
     }
     /* #Head Banner
 	---------------------*/
-    
+
     .head-cta .col-xs-6 {
         width: 100%;
         margin: 10px 0 0 0;
@@ -488,31 +488,31 @@
         float: none !important;
     }
     /* Product Teaser */
-    
+
     .product-teaser span.play-button {
         margin-top: -50px;
     }
     /* Content
 	--------------------*/
-    
+
     .section-subtitle {
         width: 100%;
         font-size: smaller;
     }
     /* Marketing */
-    
+
     .marketing-content {
         margin-bottom: 40px;
     }
     /* #Featurettes
 	----------------------*/
-    
+
     .featurettes-inner-section .col-xs-6 {
         width: 100%;
         margin-left: 0;
     }
     /* featurettes flexslider */
-    
+
     .featurettes-inner-section img {
         margin: 0 auto;
     }
@@ -521,12 +521,12 @@
     }
     /* #Annotations
 	---------------------*/
-    
+
     .right-annotation .checklist {
         margin: 0 20px;
     }
     /* Product Dots */
-    
+
     .product-dot1 {
         margin-top: 30px;
         margin-left: -100px;

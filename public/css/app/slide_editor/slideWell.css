@@ -1,10 +1,12 @@
 .slideWell .scrollbar {
     position: relative;
 }
+
 .slideWell .slideSnapshot .badge:before {
     counter-increment: slideSnapshot;
     content: counter(slideSnapshot);
 }
+
 .slideWell .slideSnapshot {
     width: 120px;
     height: 78px;
@@ -14,6 +16,7 @@
     user-select: none;
     box-shadow: 0 0 5px rgba(black, 0.5);
 }
+
 .slideWell {
     float: left;
     -ms-overflow-y: auto;
@@ -24,6 +27,7 @@
     background: #E3E7ED;
     counter-reset: slideSnapshot;
 }
+
 .ui-sortable-helper {
     /*transition*/
     
@@ -60,6 +64,7 @@
     -o-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
 }
+
 @keyframes pulse {
     100% {
         /*transform*/

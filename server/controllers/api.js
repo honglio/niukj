@@ -5,7 +5,7 @@ var request = require('request');
 var Linkedin = require('node-linkedin')(config.linkedin.clientID, config.linkedin.clientSecret, config.linkedin.callbackURL);
 var Renren = require('passport-weibo');
 var _ = require('underscore');
-var fs = require( 'fs' );
+var fs = require('fs');
 
 /**
  * GET /api/weibo
@@ -115,80 +115,80 @@ exports.getLinkedin = function(req, res, next) {
  * GET /api/upload
  * Image upload API when user signup.
  */
-exports.postImage = function( req, res, next ) {
-    console.log( req.body );
-    console.log( req.files.file );
-    var callback = function( err, response, body ) {
-        if ( response.statusCode == 404 ) {
-            return res.status( 404 ).end( '404 无法访问' );
+exports.postImage = function(req, res, next) {
+    console.log(req.body);
+    console.log(req.files.file);
+    var callback = function(err, response, body) {
+        if (response.statusCode.toString() === '404') {
+            return res.status(404).end('404 无法访问');
         }
-        if ( err ) {
-            res.status( 400 ).end( 'Bad Request' );
-            return next( err );
+        if (err) {
+            res.status(400).end('Bad Request');
+            return next(err);
         }
-        if ( body ) {
-            console.log( 'body:' + body );
+        if (body) {
+            console.log('body:' + body);
         }
-        var json = JSON.parse( body );
+        var json = JSON.parse(body);
 
-        if ( json.picture && !json.picture.result ) {
-            return res.status( 400 ).end( "uploadError" );
+        if (json.picture && !json.picture.result) {
+            return res.status(400).end("uploadError");
         }
         req.session.bcImage = json.picture.path;
-        console.log( req.session );
+        console.log(req.session);
         // TODO: end with a json?
-        res.status( 200 ).end( "uploadSuccess" );
+        res.status(200).end("uploadSuccess");
     };
     // console.log(config);
-    var api = request.post( config.apiurl + 'passports/upload/', callback );
+    var api = request.post(config.apiurl + 'passports/upload/', callback);
     var form = api.form();
-    form.append( 'picture', fs.createReadStream( req.files.file.path ) );
+    form.append('picture', fs.createReadStream(req.files.file.path));
     // var image = req.files.business_card;
     // form.append('picture', fs.createReadStream(image.path));
 };
 
 
-exports.addBrand = function( req, res, next ) {
-    request( {
+exports.addBrand = function(req, res, next) {
+    request({
             method: 'POST',
             uri: config.apiurl + "demands/",
             json: req.body
         },
-        function( err, response, body ) {
-            if ( err ) {
-                return next( err );
+        function(err, response, body) {
+            if (err) {
+                return next(err);
             }
-            console.log( body );
-            var json = JSON.parse( body );
-            res.json( json );
-        } );
+            console.log(body);
+            var json = JSON.parse(body);
+            res.json(json);
+        });
 };
 
 /**
  * GET /malls/3/avg_price
  */
-exports.getAvgPrice = function( req, res ) {
-    console.log( ' *** getAvgPrice *** ' );
-    request.get( config.apiurl + 'malls/3/avg_price', function( err, response, body ) {
-        if ( err ) {
-            return console.log( ' *** getAvgPrice error *** ' );
+exports.getAvgPrice = function(req, res) {
+    console.log(' *** getAvgPrice *** ');
+    request.get(config.apiurl + 'malls/3/avg_price', function(err, response, body) {
+        if (err) {
+            return console.log(' *** getAvgPrice error *** ');
         }
-        console.log( JSON.parse( body ) );
-        res.json( body );
-    } );
+        console.log(JSON.parse(body));
+        res.json(body);
+    });
 };
 
-exports.getBrandList = function( req, res, next ) {
-    var callback = function( err, response, body ) {
-        if ( err ) {
-            return next( err );
+exports.getBrandList = function(req, res, next) {
+    var callback = function(err, response, body) {
+        if (err) {
+            return next(err);
         }
-        console.log( body );
-        var json = JSON.parse( body );
-        res.json( json );
+        console.log(body);
+        var json = JSON.parse(body);
+        res.json(json);
     };
 
-    var api = request.post( config.apiurl + 'demands/brand_or_mall_list/', callback );
+    var api = request.post(config.apiurl + 'demands/brand_or_mall_list/', callback);
     var form = api.form();
-    form.append( 'brand', req.body.brand );
+    form.append('brand', req.body.brand);
 };

@@ -34,7 +34,7 @@ define(["jquery",
                 expect(FileUtils.extension('http://t3.gstatic.com/images?q=tbn:ANd9GcRc')).to.deep.equal('COM/IMAGES');
             });
             it("Returns invalid image url with 'image'", function() {
-                expect(FileUtils.extension('http://www.google.com/url?sa=i&source=images&cd=&cad=rja')).to.deep.equal('COM/URL');
+                expect(FileUtils.extension('http://www.google.com/url?sa=i&source=images')).to.deep.equal('COM/URL');
             });
         });
 

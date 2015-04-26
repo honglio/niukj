@@ -62,3 +62,4 @@ config/local/*
 !config/local/*.example
 
 *.box
+/uploads

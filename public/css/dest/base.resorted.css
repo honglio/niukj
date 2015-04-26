@@ -8,6 +8,7 @@ body {
     font-family: sans-serif;
     font-weight: 300;
     background: #ffffff;
+
     text-rendering: optimizeLegibility;
 }
 
@@ -67,9 +68,9 @@ h6 {
 a {
     color: #428bca;
     -webkit-transition: 0.25s;
-    -moz-transition: 0.25s;
-    -o-transition: 0.25s;
-    transition: 0.25s;
+       -moz-transition: 0.25s;
+         -o-transition: 0.25s;
+            transition: 0.25s;
 }
 
 a:hover {

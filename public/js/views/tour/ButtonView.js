@@ -72,7 +72,8 @@ define(["CustomView"], function(CustomView) {
                 navCaption: "快捷键",
                 selector: ".slideWell",
                 addPadding: true,
-                html: "<br><p>亲，对快照和课件内容的任何操作都支持撤销与重复，还有快捷键哦！</p><br><p>'ctrl+x' 剪切</p><p>'ctrl+c' 复制</p><p>'ctrl+v' 粘贴</p><p>'del' 删除</p><p>'ctrl+z' 撤销</p><p>'ctrl+y' 重复</p>",
+                html: "<br><p>可撤销与重复对快照和课件内容的操作。快捷键：</p><br>" +
+                    "<p>'ctrl+x' 剪切</p><p>'ctrl+c' 复制</p><p>'ctrl+v' 粘贴</p><p>'del' 删除</p><p>'ctrl+z' 撤销</p><p>'ctrl+y' 重复</p>",
                 padding: "top",
                 position: "right",
                 scrollTo: false

@@ -1,11 +1,11 @@
 exports.notfound = function(req, res) {
-    if ( ( /json|txt|js|css|gif|png|jpg|jpeg|ico/ ).test( req.url ) ) {
-        res.status( 404 ).end();
+    if ((/json|txt|js|css|gif|png|jpg|jpeg|ico/).test(req.url)) {
+        res.status(404).end();
     } else {
         res.statusCode = 404;
-        res.render( '404', {
+        res.render('404', {
             title: '网页无法访问'
-        } );
+        });
     }
 };
 

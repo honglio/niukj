@@ -1,9 +1,9 @@
 // develop settings
-var path = require( 'path' );
+var path = require('path');
 
 module.exports = {
     env: 'develop',
-        app: {
+    app: {
         name: 'Niukj'
     },
     server: {
@@ -15,12 +15,12 @@ module.exports = {
         port: 6379
     },
     db: process.env.MONGODB || 'mongodb://localhost/niukj',
-    root: path.normalize( __dirname + '/../..' ),
+    root: path.normalize(__dirname + '/../..'),
     sessionSecret: process.env.SESSION_SECRET || 'Niukj',
     apiurl: 'http://127.0.0.1:9698/',
     // Copy in your particulars and rename this to mail.js
 
-    whitelist: [ '/api/upload', '/questions/answer/upload' ],
+    whitelist: ['/api/upload', '/questions/answer/upload'],
     mail: {
         service: "user_log",
         host: "smtp.mxhichina.com",

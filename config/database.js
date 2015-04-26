@@ -1,7 +1,7 @@
-var config = require( './config' ),
-    mongoose = require( 'mongoose' );
+var config = require('./config'),
+    mongoose = require('mongoose');
 
-module.exports = function( app ) {
+module.exports = function() {
     // Connect to mongodb
     var connect = function() {
         var options = {
@@ -11,16 +11,16 @@ module.exports = function( app ) {
                 }
             }
         };
-        mongoose.connect( config.db, options );
+        mongoose.connect(config.db, options);
     };
     connect();
     // Error handler
-    mongoose.connection.on( 'error', function( err ) {
-        console.log( err );
-    } );
+    mongoose.connection.on('error', function(err) {
+        console.log(err);
+    });
     // Reconnect when closed
-    mongoose.connection.on( 'disconnected', function() {
+    mongoose.connection.on('disconnected', function() {
         connect();
-    } );
+    });
 
 };

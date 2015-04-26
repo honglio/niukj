@@ -58,7 +58,9 @@ passport.use(new RenrenStrategy(config.renren, function(req, accessToken, tokenS
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a RenRen account that belongs to you. Sign in with that account or delete it, then link it with your current account.'
+                    msg: 'There is already a RenRen account that belongs to you. ' +
+                        'Sign in with that account or delete it, ' +
+                        'then link it with your current account.'
                 });
                 done(err);
             } else {
@@ -89,7 +91,9 @@ passport.use(new RenrenStrategy(config.renren, function(req, accessToken, tokenS
             console.log(profile._json);
             // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
             //   if (existingEmailUser) {
-            //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Weibo manually from Account Settings.' });
+            //     req.flash('errors', { msg: 'There is already an account using this email address. ' +
+            //                                'Sign in to that account and link it with Weibo manually ' +
+            //                                'from Account Settings.' });
             //     done(err);
             //   } else {
             var user = new User();
@@ -118,7 +122,9 @@ passport.use(new WeiboStrategy(config.weibo, function(req, accessToken, tokenSec
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a Weibo account that belongs to you. Sign in with that account or delete it, then link it with your current account.'
+                    msg: 'There is already a Weibo account that belongs to you. ' +
+                        'Sign in with that account or delete it, ' +
+                        'then link it with your current account.'
                 });
                 done(err);
             } else {
@@ -148,7 +154,9 @@ passport.use(new WeiboStrategy(config.weibo, function(req, accessToken, tokenSec
             console.log(profile._json);
             // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
             //   if (existingEmailUser) {
-            //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Weibo manually from Account Settings.' });
+            //     req.flash('errors', { msg: 'There is already an account using this email address. ' +
+            //                                'Sign in to that account and link it with Weibo manually ' +
+            //                                'from Account Settings.' });
             //     done(err);
             //   } else {
             var user = new User();
@@ -176,7 +184,9 @@ passport.use(new QQStrategy(config.qq, function(req, accessToken, refreshToken, 
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a QQ account that belongs to you. Sign in with that account or delete it, then link it with your current account.'
+                    msg: 'There is already a QQ account that belongs to you. ' +
+                        'Sign in with that account or delete it, ' +
+                        'then link it with your current account.'
                 });
                 done(err);
             } else {
@@ -207,7 +217,9 @@ passport.use(new QQStrategy(config.qq, function(req, accessToken, refreshToken, 
             console.log(profile._json);
             // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
             //   if (existingEmailUser) {
-            //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with QQ manually from Account Settings.' });
+            //     req.flash('errors', { msg: 'There is already an account using this email address. ' +
+            //                                'Sign in to that account and link it with QQ manually ' +
+            //                                 'from Account Settings.' });
             //     done(err);
             //   } else {
             var user = new User();
@@ -236,7 +248,9 @@ passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, re
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a LinkedIn account that belongs to you. Sign in with that account or delete it, then link it with your current account.'
+                    msg: 'There is already a LinkedIn account that belongs to you. ' +
+                        'Sign in with that account or delete it, ' +
+                        'then link it with your current account.'
                 });
                 done(err);
             } else {
@@ -269,7 +283,9 @@ passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, re
             console.log(profile._json);
             // User.findOne({ email: profile._json.emailAddress }, function(err, existingEmailUser) {
             //   if (existingEmailUser) {
-            //     req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with LinkedIn manually from Account Settings.' });
+            //     req.flash('errors', { msg: 'There is already an account using this email address. ' +
+            //                                'Sign in to that account and link it with LinkedIn manually ' +
+            //                                'from Account Settings.' });
             //     done(err);
             //   } else {
             var user = new User();
