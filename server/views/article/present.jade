@@ -25,7 +25,7 @@ block content
                   - if (component.type == 'TextBox')
                     div(style="font-family:#{component.face}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-decoration: #{component.decoration}; text-align: #{component.align}")= component.text
 
-  .container
+  .container.comments
     h3 评论
     - each comment in article.comments
       include ../comment/comment
@@ -39,3 +39,6 @@ append scripts
       startPres(document, window);
       pres().init();
     }
+
+    $('.navbar').addClass('hidden-sm hidden-xs');
+    $('.comments').addClass('hidden-sm hidden-xs');
