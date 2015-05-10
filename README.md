@@ -55,9 +55,8 @@ To running locally, you'll need Grunt v0.4.0 or later.
 
 1. Install the latest Grunt: 'npm install -g grunt-cli'
 2. Install development dependencies: 'npm install'
-3. Build pages from template: 'grunt build'
-
-the resulting build will be location in 'currentDirectory/built'.
+3. Build pages from template: 'grunt build'. *The resulting build will be location in 'currentDirectory/built'.*
+4. Update the release version with [grunt-bump](https://github.com/vojtajina/grunt-bump#usage-examples)
 
 ### Add custom fonts: ###
 1. Reference them in web-fonts.css

@@ -17,7 +17,7 @@ apt-get install -y dos2unix
 apt-get install -y libtool automake autoconf nasm
 apt-get install -y imagemagick graphicsmagick
 apt-get install -y libjpeg62 libjpeg62-dev zlib1g-dev python-dev libpng-dev
-apt-get install -y mongodb-org=2.6.9 mongodb-org-server=2.6.9 mongodb-org-shell=2.6.9 mongodb-org-mongos=2.6.9 mongodb-org-tools=2.6.9
+apt-get install -y mongodb-org=2.6.8 mongodb-org-server=2.6.8 mongodb-org-shell=2.6.8 mongodb-org-mongos=2.6.8 mongodb-org-tools=2.6.8
 
 echo SETTING ENVIRONMENT VARIABLES
 echo "source /vagrant/config/environments/env.vagrant.sh" > /home/vagrant/.bash_profile

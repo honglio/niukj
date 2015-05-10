@@ -59,6 +59,11 @@ h6,
     font-size: 26px;
 }
 
+.meta {
+    padding: 10px;
+    margin: 10px;
+}
+
 blockquote p {
     font-size: 15px;
 }
