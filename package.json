@@ -1,7 +1,7 @@
 {
   "name": "niukj",
   "description": "An Online Presentation Platform - writing/collecting/presenting",
-  "version": "2.1.12",
+  "version": "2.1.13",
   "private": true,
   "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
   "repository": {
@@ -67,7 +67,6 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jsbeautifier": "^0.2.7",
     "grunt-csscomb": "^3.0.0",
-    "grunt-mocha": "^0.4.11",
     "grunt-mocha-test": "^0.12.6",
     "grunt-uncss": "*",
     "grunt-rev": "^0.1.0",

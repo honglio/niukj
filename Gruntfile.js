@@ -661,7 +661,7 @@ module.exports = function(grunt) {
                 updateConfigs: [],
                 commit: true,
                 commitMessage: 'Release v%VERSION%',
-                commitFiles: ['package.json'],
+                commitFiles: ['-a'],
                 createTag: true,
                 tagName: 'v%VERSION%',
                 tagMessage: 'Version %VERSION%',
@@ -701,7 +701,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test-unit', [
-        // 'mocha',
+        // 'mocha', use a better client-side test plugin instead.
         'mochaTest'
     ]);
 

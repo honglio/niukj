@@ -125,16 +125,16 @@ module.exports = function(app, passport) {
     }));
 
     // set backend views path and default layout
-    if (config.env === 'develop') {
-        app.set('views', join(config.root, '/server/views'));
-        app.use(express.static(join(config.root, '/public')));
-        app.use(favicon(join(config.root, '/public/img/ico/favicon.ico')));
-    } else {
+    if (config.env === 'production') {
         app.set('views', join(config.root, '/built/server/views'));
         app.use(express.static(join(config.root, '/built'), {
             maxAge: 30 * 1000
         }));
         app.use(favicon(join(config.root, '/built/img/ico/favicon.ico')));
+    } else {
+        app.set('views', join(config.root, '/server/views'));
+        app.use(express.static(join(config.root, '/public')));
+        app.use(favicon(join(config.root, '/public/img/ico/favicon.ico')));
     }
 
     app.use(multer({

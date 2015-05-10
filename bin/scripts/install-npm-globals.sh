@@ -8,12 +8,6 @@ else
   echo "Skipping grunt-cli - already installed"
 fi
 
-if [ ! -f /usr/bin/mocha ]; then
-  npm install -g mocha
-else
-  echo "Skipping mocha - already installed"
-fi
-
 if [ ! -f /usr/bin/lt ]; then
   npm install -g localtunnel
 else
@@ -24,12 +18,6 @@ if [ ! -f /usr/bin/next-update ]; then
   npm install -g next-update
 else
   echo "Skipping next-update - already installed"
-fi
-
-if [ ! -f /usr/bin/imagemin ]; then
-  npm install -g imagemin
-else
-  echo "Skipping imagemin - already installed"
 fi
 
 if [ ! -f /usr/bin/nodemon ]; then
