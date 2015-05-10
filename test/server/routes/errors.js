@@ -12,7 +12,7 @@ describe('Routes: Errors', function() {
         .get('/niukj-asdf')
         .expect(404)
         .end(function(err, res) {
-          res.text.should.include('404');
+          res.text.should.containEql('404错误');
           if (err) {
             return done(err);
           }

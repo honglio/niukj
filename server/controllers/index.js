@@ -26,7 +26,7 @@ exports.home = function(req, res) {
  */
 exports.login = function(req, res) {
     if (req.isAuthenticated()) {
-        return res.redirect('/');
+        return res.redirect(req.session.returnTo || '/account');
     }
     res.render('account/login', {
         title: '登录'
@@ -42,7 +42,7 @@ exports.logout = function(req, res) {
     req.logout();
     req.session.destroy(); // For Redis, Deletes the session in the database.
     // req.session = null // Deletes the cookie.
-    res.redirect('/');
+    res.redirect('/login');
 };
 
 /**
@@ -52,7 +52,7 @@ exports.logout = function(req, res) {
 
 exports.signup = function(req, res) {
     if (req.isAuthenticated()) {
-        return res.redirect('/');
+        return res.redirect(req.session.returnTo || '/account');
     }
     res.render('account/signup', {
         title: '注册'

@@ -14,7 +14,7 @@ describe('Routes: Home', function() {
           if (err) {
             return done(err);
           }
-          res.text.should.include('牛课件');
+          res.text.should.containEql('牛课件');
           done();
         });
     });

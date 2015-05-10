@@ -4,6 +4,8 @@
 var should = require('should');
 var request = require('supertest');
 var support = require('./support');
+var mongoose = require('mongoose');
+var Account = mongoose.model('Account');
 var app = require('../../../app');
 
 describe('app', function() {
@@ -36,30 +38,30 @@ describe('app', function() {
   //   });
   // });
 
-  // [
-  //   '/account',
-  //   '/logout'
-  // ].forEach(function(route) {
-  //   it('should redirect to / on GET ' + route, function(done) {
-  //     request(app)
-  //       .get(route)
-  //       .expect(302)
-  //       .expect('location', /\//)
-  //       .end(done);
-  //   });
-  // });
+  [
+    '/account',
+    '/logout'
+  ].forEach(function(route) {
+    it('should redirect to / on GET ' + route, function(done) {
+      request(app)
+        .get(route)
+        .expect(302)
+        .expect('location', /\/login/)
+        .end(done);
+    });
+  });
 
-  // it('should render forgot on GET /reset/wrongtoken', function(done) {
-  //   request(app)
-  //     .get('/reset/wrongtoken')
-  //     .expect(302)
-  //     .expect('location', /\/forgot/)
-  //     .end(done);
-  // });
+  it('should render forgot on GET /reset/wrongtoken', function(done) {
+    request(app)
+      .get('/reset/wrongtoken')
+      .expect(302)
+      .expect('location', /\/forgot/)
+      .end(done);
+  });
 
   // it('should redirect to previous page after login', function(done) {
   //   request(app)
-  //     .get('/login?redirectTo=/test-page')
+  //     .get('/login?returnTo=/test-page')
   //     .expect(200)
   //     .end(function(err, res) {
   //       if (err) {
@@ -78,28 +80,30 @@ describe('app', function() {
   describe('registered user', function() {
     var user;
     before(function(done) {
-      support.createUser(function(err, response, body) {
-        if (err) {
-          return done(err);
+      support.createUser(function(response, body) {
+        if (!response) {
+          return done('User not created.');
         }
-        // console.log( "======" + body );
-        var json = JSON.parse( body );
-        console.log(json);
-        should(json.result).equal(true);
-
-        user = json.info;
+        console.log( body );
+        user = body;
         done();
       });
     });
-    // after(function(done) {
-      // user.destroy(done);
-    // });
+    after(function(done) {
+      Account.remove({
+          _id: user.id
+      }, function(err){
+        if(!err) {
+          done();
+        }
+      });
+    });
 
     function login(password) {
       return request(app)
         .post('/login')
         .send({
-          username: user.email,
+          email: user.email,
           password: password
         });
     }
@@ -108,15 +112,16 @@ describe('app', function() {
       // console.log(support.password);
       login(support.password)
         .expect(302)
-        .expect('location', /\/loginOK/)
+        .expect('location', /\/articles/)
         .end(done);
     });
+
     [0, null, 'wrong password', '', undefined].forEach(function(password) {
 
       it('cannot login with password : ' + password, function(done) {
         login(password)
           .expect(302)
-          .expect('location', /\//)
+          .expect('location', /\/login/)
           .end(done);
       });
 
@@ -129,20 +134,17 @@ describe('app', function() {
     var cookies;
     before(function(done) {
       //create user
-      support.createUser(function(err, response, body) {
-        if (err) {
-          return done(err);
+      support.createUser(function(response, body) {
+        if (!response) {
+          return done('User not created.');
         }
-        var json = JSON.parse( body );
-        console.log(json);
-        should(json.result).equal(true);
-
-        user = json.info;
+        console.log( "======" + body );
+        user = body;
         //log user
         request(app)
           .post('/login')
           .send({
-            username: user.email,
+            email: user.email,
             password: support.password
           })
           .end(function(err, res) {
@@ -156,46 +158,39 @@ describe('app', function() {
       });
     });
 
-    // after(function(done) {
-    //   logged('/destroy')
-    //     .expect(302)
-    //     .end(done);
-    //   //user.destroy(done);
-    // });
+    after(function(done) {
+      Account.remove({
+          _id: user.id
+      }, function(err){
+        if(!err) {
+          done();
+        }
+      });
+    });
 
-    function logged(route) {
-      return request(app)
-        .get(route)
-        .set('Cookie', cookies);
-    }
-
-    it('should see page on GET /activityShare', function(done) {
-      logged('/activityShare')
+    it('should see page on GET /account', function(done) {
+      request(app)
+        .get('/account')
+        .set('Cookie', cookies)
         .expect(200)
         .end(function(err, res) {
           // console.log(err);
           if (err) {
             return done(err);
           }
-          // console.log(res);
-          res.text.should.include('了解方橙');
+          console.log(res);
+          res.text.should.containEql('粉丝');
           done();
         });
     });
 
-    it('should see page on GET /questionTemplate', function(done) {
-      logged('/questionTemplate')
+    it('should see page on GET /articles/my', function(done) {
+      request(app)
+        .get('/articles/my')
+        .set('Cookie', cookies)
         .expect(200)
         .end(done);
     });
-
-    it('should see page on GET /submitAnswer', function(done) {
-      logged('/submitAnswer')
-        .expect(302)
-        .expect('location', /\//)
-        .end(done);
-    });
-
   });
 
 });

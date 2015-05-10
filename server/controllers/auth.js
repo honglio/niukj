@@ -21,6 +21,7 @@ exports.postLogin = function(req, res, next) {
 
     if (errors) {
         req.flash('errors', errors);
+        console.log(errors);
         return res.redirect('/login');
     }
 
@@ -29,6 +30,7 @@ exports.postLogin = function(req, res, next) {
             return next(err);
         }
         if (!user) {
+            console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++');
             req.flash('errors', {
                 msg: info.message
             });
@@ -49,6 +51,31 @@ exports.postLogin = function(req, res, next) {
     })(req, res, next);
 };
 
+/**
+ * Create a new local account for Testing.
+ * @param profile - email, password
+ * @param done - callback
+ */
+exports.createUser = function(profile, done) {
+    var user = new User({
+        email: profile.email,
+        password: profile.password
+    });
+
+    User.findOne({
+        email: profile.email
+    }, function(err, existingUser) {
+        if (existingUser) {
+            done(false);
+        }
+        user.save(function(err) {
+            if (err) {
+                done(false);
+            }
+            done(true, user);
+        });
+    });
+};
 
 /**
  * POST /signup
@@ -92,7 +119,7 @@ exports.postSignup = function(req, res, next) {
                 if (err) {
                     return next(err);
                 }
-                res.redirect('/');
+                res.redirect('/account');
             });
         });
     });

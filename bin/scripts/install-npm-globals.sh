@@ -31,3 +31,9 @@ if [ ! -f /usr/bin/imagemin ]; then
 else
   echo "Skipping imagemin - already installed"
 fi
+
+if [ ! -f /usr/bin/nodemon ]; then
+  npm install -g nodemon
+else
+  echo "Skipping nodemon - already installed"
+fi

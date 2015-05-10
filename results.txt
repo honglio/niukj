@@ -1,0 +1,547 @@
+[33m
+##############################################################
+#
+#   !!! MONGOOSE WARNING !!!
+#
+#   This is an UNSTABLE release of Mongoose.
+#   Unstable releases are available for preview/testing only.
+#   DO NOT run this in production.
+#
+##############################################################
+[0m
+Niukj is listening to port 3000.
+
+[0m[0m
+[0m  app[0m
+2015-05-10 04:12:12,217 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "GET /signup HTTP/1.1" 200 - "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G  [32m  ✓[0m[90m should render signup on GET /signup[0m[31m (1472ms)[0m
+2015-05-10 04:12:12,486 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "GET /login HTTP/1.1" 200 - "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G  [32m  ✓[0m[90m should render login on GET /login[0m[31m (254ms)[0m
+2015-05-10 04:12:12,677 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "GET /forgot HTTP/1.1" 200 - "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: /forgot"
+
+[2K[0G  [32m  ✓[0m[90m should render forgot on GET /forgot[0m[31m (187ms)[0m
+2015-05-10 04:12:12,700 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "GET /account HTTP/1.1" 302 40 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: /account"
+
+[2K[0G  [32m  ✓[0m[90m should redirect to / on GET /account[0m
+2015-05-10 04:12:12,718 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "GET /logout HTTP/1.1" 302 40 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: "
+
+[2K[0G  [32m  ✓[0m[90m should redirect to / on GET /logout[0m
+2015-05-10 04:12:12,746 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "GET /reset/wrongtoken HTTP/1.1" 302 41 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: /reset/wrongtoken"
+
+[2K[0G  [32m  ✓[0m[90m should render forgot on GET /reset/wrongtoken[0m
+[0m    registered user[0m
+{ __v: 0,
+  email: '6co@test.com',
+  password: '$2a$05$HIDKoooSGQDyFlAGPuFmqu8I95BIkqWGKg/lz3S7IDZ0IKzVKuYwa',
+  _id: 554eda9c09320dc5061e40f7,
+  viewNum: 0,
+  status: [],
+  contacts: { followings: [], followers: [] },
+  profile: 
+   { biography: '',
+     picture: [],
+     website: '',
+     location: '',
+     gender: '' },
+  tokens: [] }
+2015-05-10 04:12:12,949 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "POST /login HTTP/1.1" 302 43 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G    [32m  ✓[0m[90m can login[0m[31m (128ms)[0m
++++++++++++++++++++++++++++++++++++++++++++++++++++
+2015-05-10 04:12:12,970 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "POST /login HTTP/1.1" 302 40 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G    [32m  ✓[0m[90m cannot login with password : 0[0m
+[ { param: 'password',
+    msg: 'Password cannot be blank',
+    value: null } ]
+2015-05-10 04:12:12,994 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:12 +0000] "POST /login HTTP/1.1" 302 40 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G    [32m  ✓[0m[90m cannot login with password : null[0m
++++++++++++++++++++++++++++++++++++++++++++++++++++
+2015-05-10 04:12:13,044 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:13 +0000] "POST /login HTTP/1.1" 302 40 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G    [32m  ✓[0m[90m cannot login with password : wrong password[0m[33m (42ms)[0m
+[ { param: 'password', msg: 'Password cannot be blank', value: '' } ]
+2015-05-10 04:12:13,066 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:13 +0000] "POST /login HTTP/1.1" 302 40 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G    [32m  ✓[0m[90m cannot login with password : [0m
+[ { param: 'password',
+    msg: 'Password cannot be blank',
+    value: undefined } ]
+2015-05-10 04:12:13,089 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:13 +0000] "POST /login HTTP/1.1" 302 40 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+[2K[0G    [32m  ✓[0m[90m cannot login with password : undefined[0m
+[0m    logged user[0m
+======{ __v: 0,
+  email: 'tqg@test.com',
+  password: '$2a$05$cfYwoDBgwbzVsHNiIvyVoulc4JZGJa42Zu7rYB2Xwa8goYAxy9uPK',
+  _id: 554eda9d09320dc5061e40f8,
+  viewNum: 0,
+  status: [],
+  contacts: { followings: [], followers: [] },
+  profile: 
+   { biography: '',
+     picture: [],
+     website: '',
+     location: '',
+     gender: '' },
+  tokens: [] }
+2015-05-10 04:12:13,192 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:13 +0000] "POST /login HTTP/1.1" 302 43 "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: undefined"
+
+2015-05-10 04:12:13,445 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:13 +0000] "GET /account HTTP/1.1" 200 - "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: /account"
+
+{ domain: 
+   { domain: null,
+     _events: { error: [Function] },
+     _maxListeners: 10,
+     members: [] },
+  _events: {},
+  _maxListeners: 10,
+  res: 
+   { _readableState: 
+      { highWaterMark: 16384,
+        buffer: [],
+        length: 0,
+        pipes: null,
+        pipesCount: 0,
+        flowing: false,
+        ended: true,
+        endEmitted: true,
+        reading: false,
+        calledRead: true,
+        sync: false,
+        needReadable: true,
+        emittedReadable: false,
+        readableListening: true,
+        objectMode: false,
+        defaultEncoding: 'utf8',
+        ranOut: true,
+        awaitDrain: 0,
+        readingMore: false,
+        decoder: null,
+        encoding: null },
+     readable: false,
+     domain: 
+      { domain: null,
+        _events: [Object],
+        _maxListeners: 10,
+        members: [] },
+     _events: { end: [Object], close: [Function], error: [Function] },
+     _maxListeners: 10,
+     socket: 
+      { _connecting: false,
+        _handle: null,
+        _readableState: [Object],
+        readable: false,
+        domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        _writableState: [Object],
+        writable: false,
+        allowHalfOpen: false,
+        onend: null,
+        destroyed: true,
+        bytesRead: 2979,
+        _bytesDispatched: 239,
+        _pendingData: null,
+        _pendingEncoding: '',
+        parser: null,
+        _httpMessage: [Object],
+        ondata: null,
+        _idleNext: null,
+        _idlePrev: null,
+        _idleTimeout: -1 },
+     connection: 
+      { _connecting: false,
+        _handle: null,
+        _readableState: [Object],
+        readable: false,
+        domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        _writableState: [Object],
+        writable: false,
+        allowHalfOpen: false,
+        onend: null,
+        destroyed: true,
+        bytesRead: 2979,
+        _bytesDispatched: 239,
+        _pendingData: null,
+        _pendingEncoding: '',
+        parser: null,
+        _httpMessage: [Object],
+        ondata: null,
+        _idleNext: null,
+        _idlePrev: null,
+        _idleTimeout: -1 },
+     httpVersion: '1.1',
+     complete: true,
+     headers: 
+      { 'x-powered-by': 'Express',
+        'content-type': 'text/html; charset=utf-8',
+        etag: 'W/"DwnW3K1K8Fj88eREXyJC3g=="',
+        vary: 'Accept-Encoding',
+        'content-encoding': 'gzip',
+        date: 'Sun, 10 May 2015 04:12:13 GMT',
+        connection: 'close',
+        'transfer-encoding': 'chunked' },
+     trailers: {},
+     _pendings: [],
+     _pendingIndex: 0,
+     url: '',
+     method: null,
+     statusCode: 200,
+     client: 
+      { _connecting: false,
+        _handle: null,
+        _readableState: [Object],
+        readable: false,
+        domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        _writableState: [Object],
+        writable: false,
+        allowHalfOpen: false,
+        onend: null,
+        destroyed: true,
+        bytesRead: 2979,
+        _bytesDispatched: 239,
+        _pendingData: null,
+        _pendingEncoding: '',
+        parser: null,
+        _httpMessage: [Object],
+        ondata: null,
+        _idleNext: null,
+        _idlePrev: null,
+        _idleTimeout: -1 },
+     _consuming: true,
+     _dumped: false,
+     httpVersionMajor: 1,
+     httpVersionMinor: 1,
+     upgrade: false,
+     req: 
+      { domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        output: [],
+        outputEncodings: [],
+        writable: true,
+        _last: true,
+        chunkedEncoding: false,
+        shouldKeepAlive: false,
+        useChunkedEncodingByDefault: false,
+        sendDate: false,
+        _headerSent: true,
+        _header: 'GET /account HTTP/1.1\r\nHost: 127.0.0.1:45917\r\nAccept-Encoding: gzip, deflate\r\nUser-Agent: node-superagent/0.21.0\r\nCookie: connect.sid=s%3AqvwzBMl4_sIlwMxDxJNEdLy1tZix2toD.yF5G2fynE3hTIOT%2FDmJubULETlKp6FMBoir6TC9wknE\r\nConnection: close\r\n\r\n',
+        _hasBody: true,
+        _trailer: '',
+        finished: true,
+        _hangupClose: false,
+        socket: [Object],
+        connection: [Object],
+        agent: false,
+        socketPath: undefined,
+        method: 'GET',
+        path: '/account',
+        _headers: [Object],
+        _headerNames: [Object],
+        parser: null,
+        res: [Circular] },
+     read: [Function],
+     setEncoding: [Function],
+     on: [Function],
+     text: '<!DOCTYPE html><html class="js no-touch"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><meta http-equiv="CACHE-CONTROL" content="PUBLIC"><meta http-equiv="EXPIRES" content="Mon, 16 May 2016 11:12:01 GMT"><meta http-equiv="cleartype" content="on"><meta name="HandheldFriendly" content="True"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content="新一代的课件编写与展示平台"><meta name="csrf-token" content="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><meta name="author" content="Honglio"><title>账户信息 | 牛课件</title><!--[if lt IE 9]>\n<script src="/js/vendors/262bb888.html5shiv.js"></script>\n<![endif]--><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/ico/apple-touch-icon-144-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/ico/apple-touch-icon-114-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/ico/apple-touch-icon-72-precomposed.png"><link rel="apple-touch-icon-precomposed" href="/img/ico/apple-touch-icon-57-precomposed.png"><link rel="shortcut icon" href="/img/ico/favicon.png"><link rel="stylesheet" href="http://lib.sinaapp.com/js/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css"><link rel="stylesheet" href="http://libs.baidu.com/fontawesome/4.1.0/css/font-awesome.min.css" type="text/css"><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script><script type="text/javascript">if (typeof jQuery === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/08c235d3.jquery.js\'>")</script><script type="text/javascript" src="http://lib.sinaapp.com/js/bootstrap/3.0.0/js/bootstrap.min.js"></script><script type="text/javascript">if (typeof jQuery.fn.modal === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/93026945.bootstrap.js\'>")</script><script type="text/javascript">$(function() {\n  if($(\'body\').css(\'color\') !== \'rgb(51, 51, 51)\') {\n    $("head").prepend(\'<link rel="stylesheet" href="/css/lib/b16ceaf0.bootstrap.min.css">\')\n  }\n});</script><script type="text/javascript">$(function() {\n  var $span = $(\'<span class="fa" style="display:none"></span>\').appendTo(\'body\');\n  if ($span.css(\'fontFamily\') !== \'FontAwesome\' ) {\n    $(\'head\').append("<link rel=\'stylesheet\' href=\'/css/lib/39860f6b.font-awesome.min.css\'>")\n  }\n});</script><link rel="stylesheet" href="/css/2aaa4697.core.css"></head><body><header><section id="top-nav"><div role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-header"><a href="#" class="navbar-brand logo"><i class="fa fa-paper-plane-o fa-2x"></i><span class="h3">牛课件</span></a><button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><div class="container"><div class="collapse navbar-collapse"><ul class="nav nav-pills navbar-nav"><li><a href="/articles/explore">探索课件</a></li><li><a href="/articles/my">我的课件</a></li><li><a href="/articles/new">创建课件</a></li><li><a href="#contactModal" data-toggle="modal">问题汇报</a></li></ul><form role="search" method="GET" action="/articles" class="navbar-form navbar-left"><div class="form-group"><input type="text" name="q" placeholder="课件标题..." class="form-control search-input"></div><button type="submit" class="btn btn-default span"><i class="fa fa-search"></i></button></form><ul class="nav nav-pills navbar-nav navbar-right"><li class="dropdown"><a data-target="#" data-toggle="dropdown" role="button" class="dropdown-toggle"><img src="">tqg@test.com&nbsp;<span class="caret"></span></a><ul role="menu" class="dropdown-menu"><li><a href="/account">账户信息</a></li><li class="divider"></li><li><a href="/account/password">修改密码</a></li><li class="divider"></li><li><a href="/account/manage">管理账户</a></li><li class="divider"></li><li><a href="/logout">登出</a></li></ul></li></ul></div></div></div></section><div class="alert alert-success fade in"><button type="button" data-dismiss="alert" class="close">×</button><span class="alert-icon"><i class="fa fa-thumbs-up icon-white"></i></span>&#160; &#160;<strong>Success! You are logged in.</strong></div><div id="contactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button><h5 class="modal-label">问题汇报</h5></div><div class="modal-body"><form role="form" action="/contact-form" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="name" class="col-sm-2 control-label">用户名</label><div class="col-sm-10"><input type="text" name="name" id="name" placeholder="请输入您的用户名" autofocus required class="form-control"></div></div><div class="form-group"><label for="email" class="col-sm-2 control-label">Email地址</label><div class="col-sm-10"><input type="email" name="email" id="email" placeholder="方便联系您的Email地址" required class="form-control"></div></div><div class="form-group"><label for="message" class="col-sm-2 control-label">问题内容</label><div class="col-sm-10"><textarea type="text" name="message" id="message" rows="7" placeholder="您的问题" required class="form-control"></textarea></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-8"><button type="submit" class="btn btn-primary"><i class="fa fa-mail-forward"></i> 发送</button></div></div></form></div></div></div></div></header><main><div class="container"><h3 class="text-center">账户信息</h3><hr><section class="row"><div class="col-sm-10 col-md-10"><form action="/account/profile" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="email" class="col-sm-2 control-label">Email</label><div class="col-sm-4"><input type="email" name="email" id="email" value="tqg@test.com" class="form-control"></div></div><div class="form-group"><label for="name" class="col-sm-2 control-label">昵称</label><div class="col-sm-4"><input type="text" name="name" id="name" value="undefined" class="form-control"></div></div><div class="form-group"><label for="gender" class="col-sm-2 control-label">性别</label><div class="col-sm-4"><label class="radio"><input type="radio" name="gender" value="male" data-toggle="radio"><span>男</span></label><label class="radio"><input type="radio" name="gender" value="female" data-toggle="radio"><span>女</span></label></div></div><div class="form-group"><label for="location" class="col-sm-2 control-label">居住地</label><div class="col-sm-4"><input type="text" name="location" id="location" value="" class="form-control"></div></div><div class="form-group"><label for="website" class="col-sm-2 control-label">个人网站</label><div class="col-sm-4"><input type="text" name="website" id="website" value="" class="form-control"></div></div><div class="form-group"><label for="gravatar" class="col-sm-2 control-label">个人头像</label><div class="col-sm-4"><img src="" width="100" height="100" class="profile"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-4"><button type="submit" class="btn btn btn-primary"><i class="fa fa-magnet"></i> 上传更新</button></div></div></form></div><div class="col-sm-2 col-md-2"><ul class="profile-info-sections"><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followers">粉丝</a></span></div></li><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followings">关注</a></span></div></li></ul></div></section></div></main><footer><section id="footer"><div class="container-fluid"><div class="row"><div class="col-md-5 col-sm-5 col-md-offset-4 col-sm-offset-4"><p class="copyright"><i class="fa fa-paper-plane-o fa-lg">牛课件</i>© 版权所有 2014。</p></div></div></div></section></footer></body></html>',
+     body: undefined },
+  request: 
+   { domain: 
+      { domain: null,
+        _events: [Object],
+        _maxListeners: 10,
+        members: [] },
+     _events: { end: [Function], response: [Function] },
+     _maxListeners: 10,
+     _agent: false,
+     _formData: null,
+     method: 'get',
+     url: 'http://127.0.0.1:45917/account',
+     header: {},
+     writable: true,
+     _redirects: 0,
+     _maxRedirects: 0,
+     cookies: '',
+     qs: {},
+     _redirectList: [],
+     _buffer: true,
+     app: 
+      { domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        _connections: 0,
+        connections: [Getter/Setter],
+        _handle: null,
+        _usingSlaves: false,
+        _slaves: [],
+        allowHalfOpen: true,
+        httpAllowHalfOpen: false,
+        timeout: 120000,
+        _connectionKey: '4:0.0.0.0:0' },
+     _fields: {},
+     _bodies: [],
+     _asserts: [],
+     _server: 
+      { domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        _connections: 0,
+        connections: [Getter/Setter],
+        _handle: null,
+        _usingSlaves: false,
+        _slaves: [],
+        allowHalfOpen: true,
+        httpAllowHalfOpen: false,
+        timeout: 120000,
+        _connectionKey: '4:0.0.0.0:0' },
+     req: 
+      { domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        output: [],
+        outputEncodings: [],
+        writable: true,
+        _last: true,
+        chunkedEncoding: false,
+        shouldKeepAlive: false,
+        useChunkedEncodingByDefault: false,
+        sendDate: false,
+        _headerSent: true,
+        _header: 'GET /account HTTP/1.1\r\nHost: 127.0.0.1:45917\r\nAccept-Encoding: gzip, deflate\r\nUser-Agent: node-superagent/0.21.0\r\nCookie: connect.sid=s%3AqvwzBMl4_sIlwMxDxJNEdLy1tZix2toD.yF5G2fynE3hTIOT%2FDmJubULETlKp6FMBoir6TC9wknE\r\nConnection: close\r\n\r\n',
+        _hasBody: true,
+        _trailer: '',
+        finished: true,
+        _hangupClose: false,
+        socket: [Object],
+        connection: [Object],
+        agent: false,
+        socketPath: undefined,
+        method: 'GET',
+        path: '/account',
+        _headers: [Object],
+        _headerNames: [Object],
+        parser: null,
+        res: [Object] },
+     protocol: 'http:',
+     host: '127.0.0.1:45917',
+     _status: 200,
+     _callback: [Function],
+     res: 
+      { _readableState: [Object],
+        readable: false,
+        domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        socket: [Object],
+        connection: [Object],
+        httpVersion: '1.1',
+        complete: true,
+        headers: [Object],
+        trailers: {},
+        _pendings: [],
+        _pendingIndex: 0,
+        url: '',
+        method: null,
+        statusCode: 200,
+        client: [Object],
+        _consuming: true,
+        _dumped: false,
+        httpVersionMajor: 1,
+        httpVersionMinor: 1,
+        upgrade: false,
+        req: [Object],
+        read: [Function],
+        setEncoding: [Function],
+        on: [Function],
+        text: '<!DOCTYPE html><html class="js no-touch"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><meta http-equiv="CACHE-CONTROL" content="PUBLIC"><meta http-equiv="EXPIRES" content="Mon, 16 May 2016 11:12:01 GMT"><meta http-equiv="cleartype" content="on"><meta name="HandheldFriendly" content="True"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content="新一代的课件编写与展示平台"><meta name="csrf-token" content="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><meta name="author" content="Honglio"><title>账户信息 | 牛课件</title><!--[if lt IE 9]>\n<script src="/js/vendors/262bb888.html5shiv.js"></script>\n<![endif]--><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/ico/apple-touch-icon-144-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/ico/apple-touch-icon-114-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/ico/apple-touch-icon-72-precomposed.png"><link rel="apple-touch-icon-precomposed" href="/img/ico/apple-touch-icon-57-precomposed.png"><link rel="shortcut icon" href="/img/ico/favicon.png"><link rel="stylesheet" href="http://lib.sinaapp.com/js/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css"><link rel="stylesheet" href="http://libs.baidu.com/fontawesome/4.1.0/css/font-awesome.min.css" type="text/css"><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script><script type="text/javascript">if (typeof jQuery === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/08c235d3.jquery.js\'>")</script><script type="text/javascript" src="http://lib.sinaapp.com/js/bootstrap/3.0.0/js/bootstrap.min.js"></script><script type="text/javascript">if (typeof jQuery.fn.modal === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/93026945.bootstrap.js\'>")</script><script type="text/javascript">$(function() {\n  if($(\'body\').css(\'color\') !== \'rgb(51, 51, 51)\') {\n    $("head").prepend(\'<link rel="stylesheet" href="/css/lib/b16ceaf0.bootstrap.min.css">\')\n  }\n});</script><script type="text/javascript">$(function() {\n  var $span = $(\'<span class="fa" style="display:none"></span>\').appendTo(\'body\');\n  if ($span.css(\'fontFamily\') !== \'FontAwesome\' ) {\n    $(\'head\').append("<link rel=\'stylesheet\' href=\'/css/lib/39860f6b.font-awesome.min.css\'>")\n  }\n});</script><link rel="stylesheet" href="/css/2aaa4697.core.css"></head><body><header><section id="top-nav"><div role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-header"><a href="#" class="navbar-brand logo"><i class="fa fa-paper-plane-o fa-2x"></i><span class="h3">牛课件</span></a><button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><div class="container"><div class="collapse navbar-collapse"><ul class="nav nav-pills navbar-nav"><li><a href="/articles/explore">探索课件</a></li><li><a href="/articles/my">我的课件</a></li><li><a href="/articles/new">创建课件</a></li><li><a href="#contactModal" data-toggle="modal">问题汇报</a></li></ul><form role="search" method="GET" action="/articles" class="navbar-form navbar-left"><div class="form-group"><input type="text" name="q" placeholder="课件标题..." class="form-control search-input"></div><button type="submit" class="btn btn-default span"><i class="fa fa-search"></i></button></form><ul class="nav nav-pills navbar-nav navbar-right"><li class="dropdown"><a data-target="#" data-toggle="dropdown" role="button" class="dropdown-toggle"><img src="">tqg@test.com&nbsp;<span class="caret"></span></a><ul role="menu" class="dropdown-menu"><li><a href="/account">账户信息</a></li><li class="divider"></li><li><a href="/account/password">修改密码</a></li><li class="divider"></li><li><a href="/account/manage">管理账户</a></li><li class="divider"></li><li><a href="/logout">登出</a></li></ul></li></ul></div></div></div></section><div class="alert alert-success fade in"><button type="button" data-dismiss="alert" class="close">×</button><span class="alert-icon"><i class="fa fa-thumbs-up icon-white"></i></span>&#160; &#160;<strong>Success! You are logged in.</strong></div><div id="contactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button><h5 class="modal-label">问题汇报</h5></div><div class="modal-body"><form role="form" action="/contact-form" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="name" class="col-sm-2 control-label">用户名</label><div class="col-sm-10"><input type="text" name="name" id="name" placeholder="请输入您的用户名" autofocus required class="form-control"></div></div><div class="form-group"><label for="email" class="col-sm-2 control-label">Email地址</label><div class="col-sm-10"><input type="email" name="email" id="email" placeholder="方便联系您的Email地址" required class="form-control"></div></div><div class="form-group"><label for="message" class="col-sm-2 control-label">问题内容</label><div class="col-sm-10"><textarea type="text" name="message" id="message" rows="7" placeholder="您的问题" required class="form-control"></textarea></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-8"><button type="submit" class="btn btn-primary"><i class="fa fa-mail-forward"></i> 发送</button></div></div></form></div></div></div></div></header><main><div class="container"><h3 class="text-center">账户信息</h3><hr><section class="row"><div class="col-sm-10 col-md-10"><form action="/account/profile" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="email" class="col-sm-2 control-label">Email</label><div class="col-sm-4"><input type="email" name="email" id="email" value="tqg@test.com" class="form-control"></div></div><div class="form-group"><label for="name" class="col-sm-2 control-label">昵称</label><div class="col-sm-4"><input type="text" name="name" id="name" value="undefined" class="form-control"></div></div><div class="form-group"><label for="gender" class="col-sm-2 control-label">性别</label><div class="col-sm-4"><label class="radio"><input type="radio" name="gender" value="male" data-toggle="radio"><span>男</span></label><label class="radio"><input type="radio" name="gender" value="female" data-toggle="radio"><span>女</span></label></div></div><div class="form-group"><label for="location" class="col-sm-2 control-label">居住地</label><div class="col-sm-4"><input type="text" name="location" id="location" value="" class="form-control"></div></div><div class="form-group"><label for="website" class="col-sm-2 control-label">个人网站</label><div class="col-sm-4"><input type="text" name="website" id="website" value="" class="form-control"></div></div><div class="form-group"><label for="gravatar" class="col-sm-2 control-label">个人头像</label><div class="col-sm-4"><img src="" width="100" height="100" class="profile"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-4"><button type="submit" class="btn btn btn-primary"><i class="fa fa-magnet"></i> 上传更新</button></div></div></form></div><div class="col-sm-2 col-md-2"><ul class="profile-info-sections"><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followers">粉丝</a></span></div></li><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followings">关注</a></span></div></li></ul></div></section></div></main><footer><section id="footer"><div class="container-fluid"><div class="row"><div class="col-md-5 col-sm-5 col-md-offset-4 col-sm-offset-4"><p class="copyright"><i class="fa fa-paper-plane-o fa-lg">牛课件</i>© 版权所有 2014。</p></div></div></div></section></footer></body></html>',
+        body: undefined },
+     response: [Circular],
+     _timeout: 0,
+     called: true },
+  req: 
+   { domain: 
+      { domain: null,
+        _events: [Object],
+        _maxListeners: 10,
+        members: [] },
+     _events: { drain: [Function], error: [Function], response: [Function] },
+     _maxListeners: 10,
+     output: [],
+     outputEncodings: [],
+     writable: true,
+     _last: true,
+     chunkedEncoding: false,
+     shouldKeepAlive: false,
+     useChunkedEncodingByDefault: false,
+     sendDate: false,
+     _headerSent: true,
+     _header: 'GET /account HTTP/1.1\r\nHost: 127.0.0.1:45917\r\nAccept-Encoding: gzip, deflate\r\nUser-Agent: node-superagent/0.21.0\r\nCookie: connect.sid=s%3AqvwzBMl4_sIlwMxDxJNEdLy1tZix2toD.yF5G2fynE3hTIOT%2FDmJubULETlKp6FMBoir6TC9wknE\r\nConnection: close\r\n\r\n',
+     _hasBody: true,
+     _trailer: '',
+     finished: true,
+     _hangupClose: false,
+     socket: 
+      { _connecting: false,
+        _handle: null,
+        _readableState: [Object],
+        readable: false,
+        domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        _writableState: [Object],
+        writable: false,
+        allowHalfOpen: false,
+        onend: null,
+        destroyed: true,
+        bytesRead: 2979,
+        _bytesDispatched: 239,
+        _pendingData: null,
+        _pendingEncoding: '',
+        parser: null,
+        _httpMessage: [Circular],
+        ondata: null,
+        _idleNext: null,
+        _idlePrev: null,
+        _idleTimeout: -1 },
+     connection: 
+      { _connecting: false,
+        _handle: null,
+        _readableState: [Object],
+        readable: false,
+        domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        _writableState: [Object],
+        writable: false,
+        allowHalfOpen: false,
+        onend: null,
+        destroyed: true,
+        bytesRead: 2979,
+        _bytesDispatched: 239,
+        _pendingData: null,
+        _pendingEncoding: '',
+        parser: null,
+        _httpMessage: [Circular],
+        ondata: null,
+        _idleNext: null,
+        _idlePrev: null,
+        _idleTimeout: -1 },
+     agent: false,
+     socketPath: undefined,
+     method: 'GET',
+     path: '/account',
+     _headers: 
+      { host: '127.0.0.1:45917',
+        'accept-encoding': 'gzip, deflate',
+        'user-agent': 'node-superagent/0.21.0',
+        cookie: 'connect.sid=s%3AqvwzBMl4_sIlwMxDxJNEdLy1tZix2toD.yF5G2fynE3hTIOT%2FDmJubULETlKp6FMBoir6TC9wknE' },
+     _headerNames: 
+      { host: 'Host',
+        'accept-encoding': 'Accept-Encoding',
+        'user-agent': 'User-Agent',
+        cookie: 'Cookie' },
+     parser: null,
+     res: 
+      { _readableState: [Object],
+        readable: false,
+        domain: [Object],
+        _events: [Object],
+        _maxListeners: 10,
+        socket: [Object],
+        connection: [Object],
+        httpVersion: '1.1',
+        complete: true,
+        headers: [Object],
+        trailers: {},
+        _pendings: [],
+        _pendingIndex: 0,
+        url: '',
+        method: null,
+        statusCode: 200,
+        client: [Object],
+        _consuming: true,
+        _dumped: false,
+        httpVersionMajor: 1,
+        httpVersionMinor: 1,
+        upgrade: false,
+        req: [Circular],
+        read: [Function],
+        setEncoding: [Function],
+        on: [Function],
+        text: '<!DOCTYPE html><html class="js no-touch"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><meta http-equiv="CACHE-CONTROL" content="PUBLIC"><meta http-equiv="EXPIRES" content="Mon, 16 May 2016 11:12:01 GMT"><meta http-equiv="cleartype" content="on"><meta name="HandheldFriendly" content="True"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content="新一代的课件编写与展示平台"><meta name="csrf-token" content="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><meta name="author" content="Honglio"><title>账户信息 | 牛课件</title><!--[if lt IE 9]>\n<script src="/js/vendors/262bb888.html5shiv.js"></script>\n<![endif]--><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/ico/apple-touch-icon-144-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/ico/apple-touch-icon-114-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/ico/apple-touch-icon-72-precomposed.png"><link rel="apple-touch-icon-precomposed" href="/img/ico/apple-touch-icon-57-precomposed.png"><link rel="shortcut icon" href="/img/ico/favicon.png"><link rel="stylesheet" href="http://lib.sinaapp.com/js/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css"><link rel="stylesheet" href="http://libs.baidu.com/fontawesome/4.1.0/css/font-awesome.min.css" type="text/css"><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script><script type="text/javascript">if (typeof jQuery === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/08c235d3.jquery.js\'>")</script><script type="text/javascript" src="http://lib.sinaapp.com/js/bootstrap/3.0.0/js/bootstrap.min.js"></script><script type="text/javascript">if (typeof jQuery.fn.modal === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/93026945.bootstrap.js\'>")</script><script type="text/javascript">$(function() {\n  if($(\'body\').css(\'color\') !== \'rgb(51, 51, 51)\') {\n    $("head").prepend(\'<link rel="stylesheet" href="/css/lib/b16ceaf0.bootstrap.min.css">\')\n  }\n});</script><script type="text/javascript">$(function() {\n  var $span = $(\'<span class="fa" style="display:none"></span>\').appendTo(\'body\');\n  if ($span.css(\'fontFamily\') !== \'FontAwesome\' ) {\n    $(\'head\').append("<link rel=\'stylesheet\' href=\'/css/lib/39860f6b.font-awesome.min.css\'>")\n  }\n});</script><link rel="stylesheet" href="/css/2aaa4697.core.css"></head><body><header><section id="top-nav"><div role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-header"><a href="#" class="navbar-brand logo"><i class="fa fa-paper-plane-o fa-2x"></i><span class="h3">牛课件</span></a><button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><div class="container"><div class="collapse navbar-collapse"><ul class="nav nav-pills navbar-nav"><li><a href="/articles/explore">探索课件</a></li><li><a href="/articles/my">我的课件</a></li><li><a href="/articles/new">创建课件</a></li><li><a href="#contactModal" data-toggle="modal">问题汇报</a></li></ul><form role="search" method="GET" action="/articles" class="navbar-form navbar-left"><div class="form-group"><input type="text" name="q" placeholder="课件标题..." class="form-control search-input"></div><button type="submit" class="btn btn-default span"><i class="fa fa-search"></i></button></form><ul class="nav nav-pills navbar-nav navbar-right"><li class="dropdown"><a data-target="#" data-toggle="dropdown" role="button" class="dropdown-toggle"><img src="">tqg@test.com&nbsp;<span class="caret"></span></a><ul role="menu" class="dropdown-menu"><li><a href="/account">账户信息</a></li><li class="divider"></li><li><a href="/account/password">修改密码</a></li><li class="divider"></li><li><a href="/account/manage">管理账户</a></li><li class="divider"></li><li><a href="/logout">登出</a></li></ul></li></ul></div></div></div></section><div class="alert alert-success fade in"><button type="button" data-dismiss="alert" class="close">×</button><span class="alert-icon"><i class="fa fa-thumbs-up icon-white"></i></span>&#160; &#160;<strong>Success! You are logged in.</strong></div><div id="contactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button><h5 class="modal-label">问题汇报</h5></div><div class="modal-body"><form role="form" action="/contact-form" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="name" class="col-sm-2 control-label">用户名</label><div class="col-sm-10"><input type="text" name="name" id="name" placeholder="请输入您的用户名" autofocus required class="form-control"></div></div><div class="form-group"><label for="email" class="col-sm-2 control-label">Email地址</label><div class="col-sm-10"><input type="email" name="email" id="email" placeholder="方便联系您的Email地址" required class="form-control"></div></div><div class="form-group"><label for="message" class="col-sm-2 control-label">问题内容</label><div class="col-sm-10"><textarea type="text" name="message" id="message" rows="7" placeholder="您的问题" required class="form-control"></textarea></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-8"><button type="submit" class="btn btn-primary"><i class="fa fa-mail-forward"></i> 发送</button></div></div></form></div></div></div></div></header><main><div class="container"><h3 class="text-center">账户信息</h3><hr><section class="row"><div class="col-sm-10 col-md-10"><form action="/account/profile" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="email" class="col-sm-2 control-label">Email</label><div class="col-sm-4"><input type="email" name="email" id="email" value="tqg@test.com" class="form-control"></div></div><div class="form-group"><label for="name" class="col-sm-2 control-label">昵称</label><div class="col-sm-4"><input type="text" name="name" id="name" value="undefined" class="form-control"></div></div><div class="form-group"><label for="gender" class="col-sm-2 control-label">性别</label><div class="col-sm-4"><label class="radio"><input type="radio" name="gender" value="male" data-toggle="radio"><span>男</span></label><label class="radio"><input type="radio" name="gender" value="female" data-toggle="radio"><span>女</span></label></div></div><div class="form-group"><label for="location" class="col-sm-2 control-label">居住地</label><div class="col-sm-4"><input type="text" name="location" id="location" value="" class="form-control"></div></div><div class="form-group"><label for="website" class="col-sm-2 control-label">个人网站</label><div class="col-sm-4"><input type="text" name="website" id="website" value="" class="form-control"></div></div><div class="form-group"><label for="gravatar" class="col-sm-2 control-label">个人头像</label><div class="col-sm-4"><img src="" width="100" height="100" class="profile"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-4"><button type="submit" class="btn btn btn-primary"><i class="fa fa-magnet"></i> 上传更新</button></div></div></form></div><div class="col-sm-2 col-md-2"><ul class="profile-info-sections"><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followers">粉丝</a></span></div></li><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followings">关注</a></span></div></li></ul></div></section></div></main><footer><section id="footer"><div class="container-fluid"><div class="row"><div class="col-md-5 col-sm-5 col-md-offset-4 col-sm-offset-4"><p class="copyright"><i class="fa fa-paper-plane-o fa-lg">牛课件</i>© 版权所有 2014。</p></div></div></div></section></footer></body></html>',
+        body: undefined } },
+  links: {},
+  text: '<!DOCTYPE html><html class="js no-touch"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"><meta http-equiv="CACHE-CONTROL" content="PUBLIC"><meta http-equiv="EXPIRES" content="Mon, 16 May 2016 11:12:01 GMT"><meta http-equiv="cleartype" content="on"><meta name="HandheldFriendly" content="True"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content="新一代的课件编写与展示平台"><meta name="csrf-token" content="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><meta name="author" content="Honglio"><title>账户信息 | 牛课件</title><!--[if lt IE 9]>\n<script src="/js/vendors/262bb888.html5shiv.js"></script>\n<![endif]--><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/ico/apple-touch-icon-144-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/ico/apple-touch-icon-114-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/ico/apple-touch-icon-72-precomposed.png"><link rel="apple-touch-icon-precomposed" href="/img/ico/apple-touch-icon-57-precomposed.png"><link rel="shortcut icon" href="/img/ico/favicon.png"><link rel="stylesheet" href="http://lib.sinaapp.com/js/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css"><link rel="stylesheet" href="http://libs.baidu.com/fontawesome/4.1.0/css/font-awesome.min.css" type="text/css"><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script><script type="text/javascript">if (typeof jQuery === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/08c235d3.jquery.js\'>")</script><script type="text/javascript" src="http://lib.sinaapp.com/js/bootstrap/3.0.0/js/bootstrap.min.js"></script><script type="text/javascript">if (typeof jQuery.fn.modal === \'undefined\')\n  document.write("<script type=\'text/javascript\' src=\'/js/vendors/93026945.bootstrap.js\'>")</script><script type="text/javascript">$(function() {\n  if($(\'body\').css(\'color\') !== \'rgb(51, 51, 51)\') {\n    $("head").prepend(\'<link rel="stylesheet" href="/css/lib/b16ceaf0.bootstrap.min.css">\')\n  }\n});</script><script type="text/javascript">$(function() {\n  var $span = $(\'<span class="fa" style="display:none"></span>\').appendTo(\'body\');\n  if ($span.css(\'fontFamily\') !== \'FontAwesome\' ) {\n    $(\'head\').append("<link rel=\'stylesheet\' href=\'/css/lib/39860f6b.font-awesome.min.css\'>")\n  }\n});</script><link rel="stylesheet" href="/css/2aaa4697.core.css"></head><body><header><section id="top-nav"><div role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-header"><a href="#" class="navbar-brand logo"><i class="fa fa-paper-plane-o fa-2x"></i><span class="h3">牛课件</span></a><button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><div class="container"><div class="collapse navbar-collapse"><ul class="nav nav-pills navbar-nav"><li><a href="/articles/explore">探索课件</a></li><li><a href="/articles/my">我的课件</a></li><li><a href="/articles/new">创建课件</a></li><li><a href="#contactModal" data-toggle="modal">问题汇报</a></li></ul><form role="search" method="GET" action="/articles" class="navbar-form navbar-left"><div class="form-group"><input type="text" name="q" placeholder="课件标题..." class="form-control search-input"></div><button type="submit" class="btn btn-default span"><i class="fa fa-search"></i></button></form><ul class="nav nav-pills navbar-nav navbar-right"><li class="dropdown"><a data-target="#" data-toggle="dropdown" role="button" class="dropdown-toggle"><img src="">tqg@test.com&nbsp;<span class="caret"></span></a><ul role="menu" class="dropdown-menu"><li><a href="/account">账户信息</a></li><li class="divider"></li><li><a href="/account/password">修改密码</a></li><li class="divider"></li><li><a href="/account/manage">管理账户</a></li><li class="divider"></li><li><a href="/logout">登出</a></li></ul></li></ul></div></div></div></section><div class="alert alert-success fade in"><button type="button" data-dismiss="alert" class="close">×</button><span class="alert-icon"><i class="fa fa-thumbs-up icon-white"></i></span>&#160; &#160;<strong>Success! You are logged in.</strong></div><div id="contactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button><h5 class="modal-label">问题汇报</h5></div><div class="modal-body"><form role="form" action="/contact-form" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="name" class="col-sm-2 control-label">用户名</label><div class="col-sm-10"><input type="text" name="name" id="name" placeholder="请输入您的用户名" autofocus required class="form-control"></div></div><div class="form-group"><label for="email" class="col-sm-2 control-label">Email地址</label><div class="col-sm-10"><input type="email" name="email" id="email" placeholder="方便联系您的Email地址" required class="form-control"></div></div><div class="form-group"><label for="message" class="col-sm-2 control-label">问题内容</label><div class="col-sm-10"><textarea type="text" name="message" id="message" rows="7" placeholder="您的问题" required class="form-control"></textarea></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-8"><button type="submit" class="btn btn-primary"><i class="fa fa-mail-forward"></i> 发送</button></div></div></form></div></div></div></div></header><main><div class="container"><h3 class="text-center">账户信息</h3><hr><section class="row"><div class="col-sm-10 col-md-10"><form action="/account/profile" method="POST" class="form-horizontal"><input type="hidden" name="_csrf" value="gy7icG8FIeX3FIDbaHmupn7ZxQiRsQTl7cPOo="><div class="form-group"><label for="email" class="col-sm-2 control-label">Email</label><div class="col-sm-4"><input type="email" name="email" id="email" value="tqg@test.com" class="form-control"></div></div><div class="form-group"><label for="name" class="col-sm-2 control-label">昵称</label><div class="col-sm-4"><input type="text" name="name" id="name" value="undefined" class="form-control"></div></div><div class="form-group"><label for="gender" class="col-sm-2 control-label">性别</label><div class="col-sm-4"><label class="radio"><input type="radio" name="gender" value="male" data-toggle="radio"><span>男</span></label><label class="radio"><input type="radio" name="gender" value="female" data-toggle="radio"><span>女</span></label></div></div><div class="form-group"><label for="location" class="col-sm-2 control-label">居住地</label><div class="col-sm-4"><input type="text" name="location" id="location" value="" class="form-control"></div></div><div class="form-group"><label for="website" class="col-sm-2 control-label">个人网站</label><div class="col-sm-4"><input type="text" name="website" id="website" value="" class="form-control"></div></div><div class="form-group"><label for="gravatar" class="col-sm-2 control-label">个人头像</label><div class="col-sm-4"><img src="" width="100" height="100" class="profile"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-4"><button type="submit" class="btn btn btn-primary"><i class="fa fa-magnet"></i> 上传更新</button></div></div></form></div><div class="col-sm-2 col-md-2"><ul class="profile-info-sections"><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followers">粉丝</a></span></div></li><li><div class="profile-stat"><h3>0</h3><span><a href="/account/554eda9d09320dc5061e40f8/followings">关注</a></span></div></li></ul></div></section></div></main><footer><section id="footer"><div class="container-fluid"><div class="row"><div class="col-md-5 col-sm-5 col-md-offset-4 col-sm-offset-4"><p class="copyright"><i class="fa fa-paper-plane-o fa-lg">牛课件</i>© 版权所有 2014。</p></div></div></div></section></footer></body></html>',
+  body: {},
+  files: {},
+  buffered: true,
+  headers: 
+   { 'x-powered-by': 'Express',
+     'content-type': 'text/html; charset=utf-8',
+     etag: 'W/"DwnW3K1K8Fj88eREXyJC3g=="',
+     vary: 'Accept-Encoding',
+     'content-encoding': 'gzip',
+     date: 'Sun, 10 May 2015 04:12:13 GMT',
+     connection: 'close',
+     'transfer-encoding': 'chunked' },
+  header: 
+   { 'x-powered-by': 'Express',
+     'content-type': 'text/html; charset=utf-8',
+     etag: 'W/"DwnW3K1K8Fj88eREXyJC3g=="',
+     vary: 'Accept-Encoding',
+     'content-encoding': 'gzip',
+     date: 'Sun, 10 May 2015 04:12:13 GMT',
+     connection: 'close',
+     'transfer-encoding': 'chunked' },
+  statusCode: 200,
+  status: 200,
+  statusType: 2,
+  info: false,
+  ok: true,
+  redirect: false,
+  clientError: false,
+  serverError: false,
+  error: false,
+  accepted: false,
+  noContent: false,
+  badRequest: false,
+  unauthorized: false,
+  notAcceptable: false,
+  forbidden: false,
+  notFound: false,
+  charset: 'utf-8',
+  type: 'text/html',
+  setEncoding: [Function],
+  redirects: [] }
+[2K[0G    [32m  ✓[0m[90m should see page on GET /account[0m[31m (393ms)[0m
+2015-05-10 04:12:14,057 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:14 +0000] "GET /articles/my HTTP/1.1" 200 - "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: /articles/my"
+
+[2K[0G    [32m  ✓[0m[90m should see page on GET /articles/my[0m[31m (468ms)[0m
+
+[0m  User[0m
+[2K[0G  [32m  ✓[0m[90m should be able to register[0m[33m (40ms)[0m
+
+[0m  Routes: Errors[0m
+[0m    GET /404:HTML Page[0m
+2015-05-10 04:12:14,318 - [33mwarn[39m: 127.0.0.1 - - [10/May/2015:04:12:14 +0000] "GET /niukj-asdf HTTP/1.1" 404 - "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: /niukj-asdf"
+
+[2K[0G    [32m  ✓[0m[90m should response 404 status and render corresponding message[0m[31m (197ms)[0m
+
+[0m  Routes: Home[0m
+[0m    GET /[0m
+2015-05-10 04:12:14,495 - [32minfo[39m: 127.0.0.1 - - [10/May/2015:04:12:14 +0000] "GET / HTTP/1.1" 200 - "-" "node-superagent/0.21.0" "userId: undefined" "returnTo: /"
+
+[2K[0G    [32m  ✓[0m[90m should correct render page[0m[31m (163ms)[0m
+
+
+[92m [0m[32m 17 passing[0m[90m (4s)[0m
+
