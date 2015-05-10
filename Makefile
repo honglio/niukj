@@ -7,7 +7,7 @@ run:
 	@killall node | echo
 	@killall nodejs | echo
 	@clear
-	@node ./app.js
+	@NODE_ENV=develop node ./app.js
 
 run-production:
 	@NODE_ENV=production node ./app.js

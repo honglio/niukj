@@ -6,29 +6,6 @@
 
 Details of contributing on this project can be found in the [wiki](https://github.com/honglio/niukj/wiki).
 
-### Source Structure ###
-
-* Presentation Model: public/js/models
-* Editor UI Layer: public/js/views
-* Presentation Rendering: server/views/article
-* templates for UI components: in public/js/templates 
-
-### Building ###
-
-To running locally, you'll need Grunt v0.4.0 or later.
-
-1. Install the latest Grunt: 'npm install -g grunt-cli'
-2. Install development dependencies: 'npm install'
-3. Build pages from template: 'grunt'
-
-the resulting build will be location in 'currentDirectory/built'.
-
-### Add custom fonts: ###
-1. Reference them in web-fonts.css
-2. Add the image hack for the given font to ImpressTemplate.hbs
-3. Add the base-64 version of the font to present_dependence/base64/fonts
-4. ttf2woff tool: npm install ttf2woff -g
-
 ## Developers Guide ##
 
 ### Install requirements
@@ -64,3 +41,26 @@ $ make
 ```
 
 Now you can open `http://localhost:3000` in your browser.
+
+### Source Structure ###
+
+* Presentation Model: public/js/models
+* Editor UI Layer: public/js/views
+* Presentation Rendering: server/views/article
+* templates for UI components: in public/js/templates 
+
+### Build and Release ###
+
+To running locally, you'll need Grunt v0.4.0 or later.
+
+1. Install the latest Grunt: 'npm install -g grunt-cli'
+2. Install development dependencies: 'npm install'
+3. Build pages from template: 'grunt build'
+
+the resulting build will be location in 'currentDirectory/built'.
+
+### Add custom fonts: ###
+1. Reference them in web-fonts.css
+2. Add the image hack for the given font to ImpressTemplate.hbs
+3. Add the base-64 version of the font to present_dependence/base64/fonts
+4. ttf2woff tool: npm install ttf2woff -g
