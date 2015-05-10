@@ -402,9 +402,9 @@ function startPres(document, window) {
                 document.documentElement.style.height = "100%";
                 console.log('document.documentElement.style.height: ' +
                     document.documentElement.style.height);
+                // original version has overflow: "hidden"
                 css(body, {
-                    height: "100%",
-                    overflow: "hidden"
+                    height: "100%"
                 });
 
                 console.log('body.height: ' + body.style.height);
