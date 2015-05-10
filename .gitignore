@@ -63,3 +63,4 @@ config/local/*
 
 *.box
 /uploads
+/npm-debug.log
