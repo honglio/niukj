@@ -1,6 +1,7 @@
 var _ = require('underscore'),
     express = require('express'),
     flash = require('express-flash'),
+    raven = require('raven'),
     winston = require('winston'),
     expressValidator = require('express-validator'),
     errorHandler = require('errorhandler'),
@@ -282,6 +283,8 @@ module.exports = function(app, passport) {
      */
     if (process.env.NODE_ENV === 'develop') {
         app.use(errorHandler());
+    } else {
+        app.use(raven.middleware.express('https://56176c36c15846c58137bbd2e7f4bd30:34178d8cd6734be69f351171908ce581@app.getsentry.com/43942'));
     }
     // Nginx support
     app.enable('trust proxy');

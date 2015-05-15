@@ -1,7 +1,7 @@
 {
   "name": "niukj",
   "description": "An Online Presentation Platform - writing/collecting/presenting",
-  "version": "2.1.15-v2.1.14.0",
+  "version": "2.1.16",
   "private": true,
   "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
   "repository": {
@@ -48,7 +48,8 @@
     "underscore": "^1.7.0",
     "node-linkedin": "^0.3.4",
     "view-helpers": "^0.1.5",
-    "aliyun-oss": "latest"
+    "aliyun-oss": "latest",
+    "raven": "^0.7.3"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
