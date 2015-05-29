@@ -20,6 +20,7 @@ define(["underscore",
             this.model.on("change:active", this._activeChanged, this);
             this.model.on("contentsChanged", this.render, this);
             this.model.on("change:background", this.render, this);
+            this.model.on("saveBtnClicked", this.genCoverPic, this);
         },
 
         /**
@@ -147,7 +148,7 @@ define(["underscore",
 
             this._bgChanged();
 
-            if (this.isSelected() === true) {
+            if (this.isSelected()) {
                 this.$el.addClass('active');
             }
 
@@ -159,13 +160,14 @@ define(["underscore",
             this._slideDrawer = new SlideDrawer(this.model, g2d, bg);
             this._slideDrawer.paint();
 
-            // update picture
-            if (this.isSelected() && this.model.get('index') === '0') {
-                var img = this._toImage(this.$el.find('canvas')[0]);
-                this.options.deck.set('picture', img.src);
-            }
-
             return this;
+        },
+
+        // update slide cover picture
+        genCoverPic: function() {
+            // if (this.isSelected() && this.model.get('index') === '0') {
+            var img = this._toImage(this.$el.find('canvas')[0]);
+            this.options.deck.set('picture', img.src);
         },
 
         _toImage: function(oCanvas) {

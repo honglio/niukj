@@ -20,6 +20,7 @@ define(["CustomView", "../storage/StorageModal"], function(CustomView, StorageMo
 
         _clicked: function() {
             this._modal.show();
+            this.model._deck.get('activeSlide').trigger('saveBtnClicked');
         }
     });
 });
