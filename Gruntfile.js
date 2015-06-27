@@ -515,7 +515,7 @@ module.exports = function(grunt) {
             release: {
                 files: {
                     '<%= yeoman.release %>/css/main.css': [
-                        // '.tmp/styles/main.css'
+                        '.tmp/css/custom.css',
                         '.tmp/css/base.css',
                         '.tmp/css/styles.css',
                         '.tmp/css/style-responsive.css',
@@ -527,7 +527,8 @@ module.exports = function(grunt) {
                     '<%= yeoman.release %>/css/core.css': [
                         '.tmp/css/base2.css',
                         '.tmp/css/style2.css',
-                        '.tmp/css/core.css'
+                        '.tmp/css/core.css',
+                        '.tmp/css/custom.css'
                     ]
                 }
             }

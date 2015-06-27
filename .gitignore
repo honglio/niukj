@@ -64,3 +64,4 @@ config/local/*
 *.box
 /uploads
 /npm-debug.log
+/results.txt
