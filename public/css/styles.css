@@ -1,3 +1,15 @@
+hr.title-line {
+    display: block;
+    width: 50%;
+    margin: -38px auto 40px;
+}
+
+hr.content-hr {
+    margin-bottom: 0;
+    border: 0;
+    border-top: 1px solid #428bca;
+}
+
 /* #TOP NAV
 =============================== */
 

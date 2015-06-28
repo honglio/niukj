@@ -8,38 +8,37 @@ block content
       #Grid.row
         - each article in articles
           .col-xs-12.col-sm-6.col-md-3
-            .portlio-list
-                .grid.cs-style-2
-                  figure
-                    img.portlio-list-img(src=(article.picture || '/img/generic.png') alt='' width="300" height="250")
-                    figcaption
-                      .image-buttons
-                        a.btn.btn-primary(href='/articles/'+ article._id + '/present')
-                          i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
-                        a.btn.btn-primary(href='/articles/'+ article._id + '/manage')
-                          i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='管理课件')
-                h4.text-center= article.fileName || '未命名'
+            .grid.cs-style-3
+              figure
+                img(src=(article.picture || '/img/generic.png') alt='' width="300" height="250")
+                figcaption
+                  .image-buttons
+                    a.btn.btn-primary(href='/articles/'+ article._id + '/present')
+                      i.fa.fa-video-camera(data-toggle='tooltip', data-placement='top', title='放映课件')
+                    a.btn.btn-primary(href='/articles/'+ article._id + '/manage')
+                      i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='管理课件')
+            h4.text-center= article.fileName || '未命名'
 
-                .meta
-                  span.fa.fa-eye
-                  |  #{article.hitCounter}
-                  |  &nbsp; 创建于&nbsp;
-                  span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
-                  br
-                  span 作者 - &nbsp;
+            .meta
+              span.fa.fa-eye
+              |  #{article.hitCounter}
+              |  &nbsp; 创建于&nbsp;
+              span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
+              br
+              span 作者 - &nbsp;
 
-                  if (article.user)
-                    - var name = article.user.profile.name ? article.user.profile.name : article.user.email
-                    a(href="/account/"+article.user._id)= name
+              if (article.user)
+                - var name = article.user.profile.name ? article.user.profile.name : article.user.email
+                a(href="/account/"+article.user._id)= name
 
-                  br
-                  span 标签 - &nbsp;
+              br
+              span 标签 - &nbsp;
 
-                  if (article.tags)
-                    - each tag in article.tags
-                      i.text-muted.fa.fa-tag &nbsp;
-                      a.tag(href="/tags/"+tag)= tag
-                      | &nbsp;&nbsp;
+              if (article.tags)
+                - each tag in article.tags
+                  i.text-muted.fa.fa-tag &nbsp;
+                  a.tag(href="/tags/"+tag)= tag
+                  | &nbsp;&nbsp;
 
       - if (pages > 1)
         .row.text-center
