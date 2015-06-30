@@ -1,11 +1,11 @@
 extends ../layout
 
 block content
-  .container-fluid
-    .page-header
+  .container
+    section.page-header
       h2.text-center= title
     section.row
-      .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
+      .col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
         form.form-horizontal(role='signin' method='POST')
           input(type='hidden' name='_csrf' value=_csrf)
           .form-group
@@ -22,27 +22,25 @@ block content
                 i.fa.fa-unlock-alt
                 |  登录
               a.btn.btn-link(href='/forgot') 忘记密码?
-        hr
-        .row
-          .col-xs-12.col-sm-10.col-md-8.col-sm-offset-1.col-md-offset-2
-            .panel.panel-default
-                .panel-heading
-                  h3.panel-title 使用其它帐号登录：
-                .panel-body
-                  .col-md-3
-                    a.btn.btn-block.btn-weibo.btn-lg(href='/auth/weibo')
-                      i.fa.fa-weibo
-                      |  微博
-                  .col-md-3
-                    a.btn.btn-block.btn-qq.btn-lg(href='/auth/qq')
-                      i.fa.fa-qq
-                      |  QQ
-                  .col-md-3
-                    a.btn.btn-block.btn-renren.btn-lg(href='/auth/renren')
-                      i.fa.fa-renren
-                      |  人人
-                  .col-md-3
-                    a.btn.btn-block.btn-linkedin.btn-lg(href='/auth/linkedin')
-                      i.fa.fa-linkedin
-                      |  领英
-    hr
+    section.row
+      .col-sm-10.col-md-8.col-sm-offset-1.col-md-offset-2
+        .panel.panel-default
+            .panel-heading
+              h3.panel-title 使用其它帐号登录：
+            .panel-body
+              .col-md-3
+                a.btn.btn-block.btn-weibo.btn-lg(href='/auth/weibo')
+                  i.fa.fa-weibo
+                  |  微博
+              .col-md-3
+                a.btn.btn-block.btn-qq.btn-lg(href='/auth/qq')
+                  i.fa.fa-qq
+                  |  QQ
+              .col-md-3
+                a.btn.btn-block.btn-renren.btn-lg(href='/auth/renren')
+                  i.fa.fa-renren
+                  |  人人
+              .col-md-3
+                a.btn.btn-block.btn-linkedin.btn-lg(href='/auth/linkedin')
+                  i.fa.fa-linkedin
+                  |  领英

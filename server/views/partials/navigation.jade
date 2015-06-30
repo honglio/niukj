@@ -1,13 +1,21 @@
+script(type='text/javascript').
+  $(function() {
+    var $searchIcon = $('#search-deck i');
+    $searchIcon.click(function(e){
+      $('#search-deck').submit();
+    });
+  });
+
 section#top-nav
   .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
     .navbar-header
       if !user
         a.navbar-brand.logo(href='/')
-          i.fa.fa-paper-plane-o.fa-2x
+          img(src='/img/ico/favicon.png' alt='' width='30')
           span.h3 牛课件
       else
         a.navbar-brand.logo(href='#')
-          i.fa.fa-paper-plane-o.fa-2x
+          img(src='/img/ico/favicon.png' alt='' width='30')
           span.h3 牛课件
       button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-collapse')
         span.sr-only Toggle navigation
@@ -43,11 +51,10 @@ section#top-nav
               a(href='/api') API Examples
             li(class=title=='问题汇报'?'active':undefined)
               a(href='#contactModal' data-toggle="modal") 问题汇报
-          form.navbar-form.navbar-left(role='search' method="GET" action="/articles")
+          form#search-deck.search-form-full.navbar-left(role='search' method="GET" action="/articles")
             .form-group
-              input.form-control.search-input(type='text' name='q' placeholder='课件标题...')
-            button.btn.btn-default.span(type='submit')
-              i.fa.fa-search
+              input.form-control(type='text' name='q' placeholder='课件标题...')
+              i.fa.fa-search(type="submit")
         ul.nav.nav-pills.navbar-nav.navbar-right
           if !user
             li(class=title=='登录'?'active':undefined)

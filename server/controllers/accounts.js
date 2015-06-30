@@ -67,7 +67,7 @@ exports.followerbyId = function(req, res, next) {
 
     setTimeout(function() {
         res.render('account/follower', {
-            title: '全部粉丝',
+            title: '粉丝列表',
             account: req.account
         });
     }, 100);
@@ -86,7 +86,7 @@ exports.followingbyId = function(req, res, next) {
 
     setTimeout(function() {
         res.render('account/following', {
-            title: '全部关注',
+            title: '关注列表',
             account: req.account
         });
     }, 100);

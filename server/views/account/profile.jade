@@ -2,8 +2,8 @@ extends ../layout
 
 block content
   .container
-    h3.text-center= title
-    hr
+    section.page-header
+      h2.text-center= title
     section.row
       .col-sm-10.col-md-10
         form.form-horizontal(action='/account/profile', method='POST')

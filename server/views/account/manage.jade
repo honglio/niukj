@@ -1,41 +1,42 @@
 extends ../layout
 
 block content
-  .container-fluid
-    .page-header
+  .container
+    section.page-header
       h2.text-center= title
     section.row
       .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
-        h3 删除账户
-        hr
+        .panel.panel-primary
+          .panel-heading
+            h3 关联的账户
+          .panel-body
+            if user.qq
+              p: a.btn.btn-danger(href='/account/unlink/qq') 取消 QQ 关联
+            else
+              p: a.btn.btn-default(href='/auth/qq') 关联 QQ 账户
 
-        p 您在删除自己的账户, 账户一旦删除，将不可恢复。账户中的所有数据将丢失！
-        form(action='/account/delete', method='POST')
-          input(type='hidden', name='_csrf', value=_csrf)
-          button.btn.btn-danger(type='submit')
-            i.fa.fa-trash-o
-            |  删除我的账户
+            if user.weibo
+              p: a.btn.btn-danger(href='/account/unlink/weibo') 取消 Weibo 关联
+            else
+              p: a.btn.btn-default(href='/auth/weibo') 关联 Weibo 账户
 
-        br
-        br
-        h3 关联的账户
-        hr
-        if user.qq
-          p: a.btn.btn-danger(href='/account/unlink/qq') 取消 QQ 关联
-        else
-          p: a.btn.btn-default(href='/auth/qq') 关联 QQ 账户
+            if user.renren
+              p: a.btn.btn-danger(href='/account/unlink/renren') 取消 Renren 关联
+            else
+              p: a.btn.btn-default(href='/auth/renren') 关联 Renren 账户
 
-        if user.weibo
-          p: a.btn.btn-danger(href='/account/unlink/weibo') 取消 Weibo 关联
-        else
-          p: a.btn.btn-default(href='/auth/weibo') 关联 Weibo 账户
-
-        if user.renren
-          p: a.btn.btn-danger(href='/account/unlink/renren') 取消 Renren 关联
-        else
-          p: a.btn.btn-default(href='/auth/renren') 关联 Renren 账户
-
-        if user.linkedin
-          p: a.btn.btn-danger(href='/account/unlink/linkedin') 取消 LinkedIn 关联
-        else
-          p: a.btn.btn-default(href='/auth/linkedin') 关联 LinkedIn 账户
+            if user.linkedin
+              p: a.btn.btn-danger(href='/account/unlink/linkedin') 取消 LinkedIn 关联
+            else
+              p: a.btn.btn-default(href='/auth/linkedin') 关联 LinkedIn 账户
+        //TODO: use modal to comfirm the delete.
+        .panel.panel-danger
+          .panel-heading
+            h3 删除账户
+          .panel-body
+            p.text-danger 您在删除自己的账户, 账户一旦删除，将不可恢复。账户中的所有数据将丢失！
+            form.form-group(action='/account/delete', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              button.btn.btn-danger(type='submit')
+                i.fa.fa-trash-o
+                |  删除我的账户

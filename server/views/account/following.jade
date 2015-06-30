@@ -2,30 +2,27 @@ extends ../layout
 
 block content
   .container
-    section.row
-      .col-md-12
-        a.profile-picture.pull-left.pull-none-xsm(href='#')
-          img.img-responsive.img-circle(src='#{account.profile.picture || account.gravatar()}' width='70')
-        .profile-name(style="margin:0 100px;padding-top:25px;")
-          strong
-            a(href='/account/' + account.id) #{account.profile.name || '未填'}
-          &#160;&#160;&#160;
-          span= account.email
-
-    hr
-
-    .row
-      .col-md-9.col-sm-7
-        h2= title
-      .col-md-3.col-sm-5
-        form.search-form-full(method='get', role='form')
-          .form-group
-            input#search-input.form-control(type='text', name='s', placeholder='Search...')
-            i.fa.fa-search
+    section.page-header
+      .row
+        .col-md-9.col-sm-9.col-xs-9
+          a.profile-picture.pull-left.pull-none-xsm(href='#')
+            img.img-responsive.img-circle(src='#{account.profile.picture || account.gravatar()}' width='70')
+          .profile-name(style="margin:0 100px;padding-top:25px;")
+            strong
+              if account
+                a(href='/account/' + account.id) #{account.profile.name || '未填'}
+            &#160;&#160;&#160;
+            code
+              | 的#{title}
+        .col-md-3.col-sm-3.col-xs-3
+          form.search-form-full(method='get', role='form')
+            .form-group
+              input#search-following.form-control(type='text', name='s', placeholder='粉丝搜索...')
+              i.fa.fa-search
     // Member Entries
     - each following in account.contacts.followings
       if following
-        .member-entry
+        .member-entry.clearfix
           .member-img
             img.img-rounded(src='#{following.profile.picture || following.gravatar()}', alt='', width='60')
           .member-details
