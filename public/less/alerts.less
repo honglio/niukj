@@ -1,0 +1,52 @@
+/* Alert */
+/*************************/
+
+.alert .close {
+    line-height: 12px;
+    color: #000000;
+    text-shadow: none;
+    background: none;
+    filter: alpha(opacity=20);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 0.2;
+}
+
+.alert .close:hover {
+    opacity: 0.5;
+}
+
+.alert {
+    margin-top: @alert-margin;
+    margin-bottom: 0;
+    color: #b38b46;
+    background-color: #ece1a5;
+    border: 1px solid #d19a24;
+    border-radius: @alert-border-radius;
+}
+
+.alert-danger,
+.alert-error {
+    color: @state-danger-text;
+    background-color: @state-danger-bg;
+    border-color: @state-danger-border;
+}
+
+.alert-warning {
+    color: @state-warning-text;
+    background-color: @state-warning-bg;
+    border-color: @state-warning-border;
+}
+
+.alert-info {
+    color: @state-info-text;
+    background-color: @state-info-bg;
+    border-color: @state-info-border;
+}
+
+.alert-success {
+    color: @state-success-text;
+    background-color: @state-success-bg;
+    border-color: @state-success-border;
+}

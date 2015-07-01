@@ -24,7 +24,7 @@ module.exports = function(grunt) {
             jade: '<%= yeoman.server %>/views/**/*.jade',
             css: '{.tmp,<%= yeoman.app %>}/css/**/*.css'
         },
-        reloadPort = 35729,
+        reloadPort = 1443,
         files;
 
     grunt.initConfig({
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
         less: {
             dist: {
                 files: {
-                    '<%= yeoman.release %>/css/lib/bootstrap.css': '<%= yeoman.app %>/less/bs-base.less'
+                    '.tmp/css/custom.css': '<%= yeoman.app %>/less/custom.less'
                 }
             }
         },
@@ -594,6 +594,13 @@ module.exports = function(grunt) {
                 cwd: '<%= yeoman.app %>/css',
                 dest: '.tmp/css/',
                 src: '{,**/}*.css'
+            },
+            less: {
+                expand: true,
+                dot: true,
+                cwd: '.tmp/css',
+                dest: '<%= yeoman.app %>/css/',
+                src: '{,**/}*.css'
             }
         },
         // Performs rewrites based on rev and the useminPrepare configuration
@@ -629,28 +636,18 @@ module.exports = function(grunt) {
             js: {
                 files: [
                     'app.js',
-                    '<%= yeoman.app %>/**/*.js',
-                    '<%= yeoman.server %>/**/*.js',
+                    '<%= yeoman.app %>/{,**/}*.js',
+                    '<%= yeoman.server %>/{,**/}*.js',
                     'lib/*.js',
-                    'config/*.js'
+                    'config/{,**/}*.js'
                 ],
                 tasks: ['jshint', 'delayed-livereload']
             },
             css: {
                 files: [
-                    '<%= yeoman.app %>/less/**/*.less'
+                    '<%= yeoman.app %>/less/{,**/}*.less'
                 ],
-                tasks: ['less'],
-                options: {
-                    livereload: reloadPort
-                }
-            },
-            views: {
-                files: [
-                    '<%= yeoman.server %>/views/*.jade',
-                    '<%= yeoman.server %>/views/**/*.jade'
-                ],
-                // tasks: ['nodemon'],
+                tasks: ['less', 'copy:less'],
                 options: {
                     livereload: reloadPort
                 }
@@ -725,9 +722,9 @@ module.exports = function(grunt) {
         'requirejs',
         'uglify',
         'imagemin',
+        'less',
         'copy:styles',
         'autoprefixer',
-        // 'less',
         'cssmin:minify',
         'cssmin:release',
         'copy:dist',
@@ -736,10 +733,10 @@ module.exports = function(grunt) {
         // 'htmlmin'
     ]);
 
-    // grunt.registerTask('server', [
-    //     'clean:dev',
-    //     // 'concurrent:dev'
-    // ]);
+    grunt.registerTask('dev', [
+        'clean:dev',
+        'concurrent:dev'
+    ]);
 
     grunt.registerTask('default', [
         // 'test',

@@ -1,87 +1,12 @@
-/* #TOP NAV
-=============================== */
-
-.navbar-inverse {
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    border-bottom: 1px solid #428bca;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-}
-
-.navbar-inverse .navbar-brand,
-.navbar-inverse .nav > li > a {
-    padding: 10px 15px;
-    font-size: 16px;
-    font-weight: 300;
-    color: #272b31;
-    text-shadow: none;
-}
-
-.navbar-inverse .nav .active > a,
-.navbar-inverse .nav .active > a:hover,
-.navbar-inverse .nav .active > a:focus {
-    color: #2a6496;
-    background: none;
-    border-radius: 0;
-    box-shadow: 0 2px 0 #2a6496;
-}
-
-.navbar-inverse .navbar-brand:hover,
-.navbar-inverse .nav > li > a:hover,
-.navbar-inverse .navbar-brand:focus,
-.navbar-inverse .nav > li > a:focus {
-    color: #428bca;
-}
-
-.navbar-nav img {
-    width: 30px;
-    height: 30px;
-    margin: -15px 15px -15px;
-}
-
-.navbar-brand {
-    padding-left: 50px;
-    margin-left: 15px;
-}
-
-.navbar .nav.nav-pills {
-    margin-top: 15px;
-}
-
-.navbar-toggle {
-    background-color: #272b31;
-}
-
-.logo {
-    margin: 11px;
-}
-
-.navbar-form {
-    margin: 18px 0;
-}
-/* Checklist */
-/*-------------------------*/
-
-.checklist {
-    margin: 0;
-}
-
-.checklist li {
-    padding-left: 30px;
-    margin-bottom: 10px;
-}
-
-.green-list {
-    background: url(../img/green-check.png) no-repeat;
-}
 /* Dark Background */
-
+/*-------------------------*/
 .dark-bg {
     color: #ffffff;
     background: #272b31 url(../img/dark-bg.png) repeat;
 }
-/* Buttons */
 
+/* Buttons */
+/*-------------------------*/
 .small-btn {
     display: inline-block;
     padding: 6px 15px;
@@ -102,8 +27,56 @@
     font-size: 18px;
     font-weight: 500;
 }
-/* Social Buttons
--------------------------------- */
+
+/* Content */
+/* -------------------------- */
+.section-title-wrapper {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    display: block;
+    width: 67%;
+    margin: 10px auto;
+}
+
+/*HerizonLine*/
+/*--------------------------------*/
+
+hr.title-line {
+    display: block;
+    width: 50%;
+    margin: -38px auto 40px;
+}
+
+hr.content-hr {
+    margin-bottom: 0;
+    border: 0;
+    border-top: 1px solid #428bca;
+}
+
+/* Checklist */
+/*=========================*/
+
+.checklist {
+    margin: 0;
+}
+
+.checklist li {
+    padding-left: 30px;
+    margin-bottom: 10px;
+}
+
+.green-list {
+    background: url(../img/green-check.png) no-repeat;
+}
+
+/* Social Buttons*/
+/* =============================== */
 
 .social {
     display: inline-block;
@@ -145,9 +118,8 @@
 .social li a:hover {
     color: #428bca;
 }
-/* #HEAD BANNER
-=============================== */
-
+/* #HEAD BANNER */
+/* =============================== */
 #head-banner {
     margin-top: 35px;
     border-top: 2px solid #428bca;
@@ -164,7 +136,7 @@
     text-shadow: 0 2px 3px rgba(0, 0, 0, 0.75);
 }
 /* Product Teaser */
-
+/*--------------------------------*/
 .product-teaser {
     margin-top: 60px;
     margin-bottom: 40px;
@@ -241,23 +213,8 @@ span.rollover {
 span.rollover:hover {
     opacity: 0.7;
 }
-/* Content */
-
-.section-title-wrapper {
-    margin-bottom: 60px;
-}
-
-.section-title {
-    margin-bottom: 20px;
-}
-
-.section-subtitle {
-    display: block;
-    width: 67%;
-    margin: 10px auto;
-}
-/* #Marketing
-=============================== */
+/* #Marketing */
+/* =============================== */
 
 .marketing-icon {
     margin-bottom: 10px;
@@ -272,9 +229,8 @@ span.rollover:hover {
 .marketing-icon:hover {
     box-shadow: 0 0 0 10px #272b31;
 }
-/* #Featurettes
-=============================== */
-
+/* #Featurettes */
+/* =============================== */
 .featurettes-inner-section img {
     margin: 20px 0 40px;
 }
@@ -288,10 +244,11 @@ span.rollover:hover {
     font-size: 12px;
     line-height: 20px;
 }
-/* #Annotations
-=============================== */
-/* Product Annotations */
+/* #Annotations */
+/* =============================== */
 
+/* Product Annotations */
+/*--------------------------------*/
 .annotation-link {
     position: absolute;
     width: 25px;
@@ -306,8 +263,9 @@ span.rollover:hover {
 .annotation-link:hover {
     box-shadow: 0 0 0 10px rgba(255, 36, 0, 0.32);
 }
-/*product dot*/
 
+/*ProductDot*/
+/*--------------------------------*/
 .product-dot1 {
     margin-top: 50px;
     margin-left: 110px;
@@ -347,8 +305,9 @@ span.rollover:hover {
     margin-top: 600px;
     margin-left: 475px;
 }
-/* #Breakline
-=============================== */
+
+/*Breakline*/
+/*================================*/
 
 #breakline {
     border-top: 2px solid #428bca;
@@ -360,6 +319,8 @@ span.rollover:hover {
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.75);
 }
 
+/*Jumbotron*/
+/*--------------------------------*/
 .jumbotron-alfa {
     margin-top: 46px;
     margin-bottom: 46px;

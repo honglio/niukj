@@ -1,6 +1,6 @@
 {
-  "name": "niukj",
-  "description": "An Online Presentation Platform - writing/collecting/presenting",
+  "name": "名画廊",
+  "description": "An Online Exhibition Platform - upload & present your drawing art",
   "version": "2.1.21",
   "private": true,
   "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
@@ -13,7 +13,7 @@
     "npm": "1.3.x"
   },
   "scripts": {
-    "start": "NODE_ENV=develop nodemon --debug app.js",
+    "start": "grunt dev && NODE_ENV=develop nodemon --debug app.js",
     "test": "NODE_ENV=test grunt test"
   },
   "dependencies": {
