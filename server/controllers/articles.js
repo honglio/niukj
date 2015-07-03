@@ -210,6 +210,38 @@ exports.update = function(req, res, next) {
     });
 };
 
+exports.desc = function(req, res) {
+    var article = req.article;
+
+    if (!req.body.desc) {
+        return res.redirect('/articles/' + article.id + '/manage');
+    }
+
+    article.updateDesc(req.body.desc, function(err) {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.redirect('/articles/' + article.id + '/manage');
+    });
+};
+
+var lastLover = {};
+exports.love = function(req, res) {
+    if (lastLover[req.user.email] == null) {
+        lastLover[req.user.email] = [];
+    }
+
+    if (lastLover[req.user.email].indexOf(req.article.fileName) === -1) {
+        req.article.love += 1;
+        req.article.save();
+        lastLover[req.user.email].push(req.article.fileName);
+        return res.status(200).end('' + req.article.love);
+    }
+
+    res.status(200).end('' + req.article.love);
+};
+
 exports.getContent = function(req, res) {
     res.send(req.article);
 };

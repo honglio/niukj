@@ -51,9 +51,9 @@ define(["jquery", "underscore",
             this._clipboard = this.model.clipboard;
 
             // size setting
-            // this._calculateLayout = this._calculateLayout.bind(this);
-            //          var lazyLayout = _.debounce(this._calculateLayout, 300);
-            //          $(window).resize(lazyLayout);
+            this._calculateLayout = this._calculateLayout.bind(this);
+            // var lazyLayout = _.debounce(this._calculateLayout, 100);
+            $(window).resize(this._calculateLayout);
 
             // HeadbarView.on('cut', this._cut, this);
             // HeadbarView.on('copy', this._copy, this);

@@ -35,7 +35,7 @@ block content
             h3 删除账户
           .panel-body
             p.text-danger 您在删除自己的账户, 账户一旦删除，将不可恢复。账户中的所有数据将丢失！
-            form.form-group(action='/account/delete', method='POST')
+            form.form-group(action='/account/delete', method='POST' onsubmit="return confirm('你确定吗?')")
               input(type='hidden', name='_csrf', value=_csrf)
               button.btn.btn-danger(type='submit')
                 i.fa.fa-trash-o

@@ -10,10 +10,8 @@ block scripts
   script(data-main='/main', type='text/javascript', src='/js/vendors/require.js')
 
 block content
+  section
   #content
   #modals
     form.form-horizontal(role='form', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
-
-
-

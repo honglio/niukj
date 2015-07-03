@@ -1,41 +1,59 @@
 extends ../layout
 
+append scripts
+  script(type='text/javascript').
+    $(function() {
+      var $tagBtn = $('#tags .btn');
+      $tagBtn.click(function(e){
+        console.log('test');
+        $('#tags').submit();
+        $('#desc').submit();
+      });
+    });
+
 block content
-  .container-fluid.text-center
-    .page-header
-      h3= article.fileName
+  .container.text-center
+    section.page-header
+      h2 编辑文案
     .row
       .col-md-12
-        img(src="#{article.picture}" width="300" height="250")
-        .meta
-          .col-md-4.col-md-offset-4
-            form.form-horizontal(method="POST", action='/articles/' + article._id + '/tags', role="form", enctype="multipart/form-data")
-
+        h4= article.fileName
+        img(src=(article.picture || '/img/generic.png') alt='' dth="300" height="250")
+        section.meta.row
+          .col-md-6.col-md-offset-3
+            form#desc.form-horizontal(method="POST", action='/articles/' + article._id + '/desc', role="form", enctype="multipart/form-data")
               input(type="hidden", name="_csrf", value=_csrf)
+              .form-group
+                label.col-sm-2.control-label(for='desc') 文档概述
+                .col-sm-10
+                  textarea.form-control(rows="5", name="desc", placeholder='良好的文档描述有助于提高观看此数。。。')=article.desc
 
-              //- .form-group
-              //-   label.col-sm-2.control-label(for='desc') 介绍
-              //-   .col-sm-10
-              //-     textarea.form-control#desc(rows="5", name="desc", placeholder='Enter the article description')=article.desc
-
+            form#tags.form-horizontal(method="POST", action='/articles/' + article._id + '/tags', role="form", enctype="multipart/form-data")
+              input(type="hidden", name="_csrf", value=_csrf)
               .form-group
                 label.col-sm-2.control-label(for='tags') 标签
-                .col-sm-8
-                  input.form-control#tags(type='text', name="tags", value=article.getTag(), placeholder='Enter the tags. split with ,')
-                .col-sm-2
-                  button.btn.btn-primary(type='submit') 保存
-
-
-      //- .col-md-6
-      //-   - if (!article.isNew && article.image && article.image.filename)
-      //-     img(src='http://' + oss.bucket + '.' + oss.host + '/' + article.image.filename)
-
-    form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
-      input(type='hidden', name='_csrf', value=_csrf)
-      a.btn.btn-success(href='/articles/'+article._id+'/edit', title="edit") 编辑
-        i.icon-edit
-      | &nbsp;&nbsp;
-      input(type="hidden", name="_method", value="DELETE")
-      button.btn.btn-danger(type="submit") 删除
-      | &nbsp;&nbsp;
-      a.btn.btn-default(href='/articles/my', title="cancel") 取消
+                .col-sm-10
+                  input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开')
+              .col-sm-12
+                button.btn.btn-primary(type='button')
+                  i.fa.fa-save
+                  |  保存更新
+                | &nbsp;&nbsp;
+                a.btn.btn-default(href='/articles/my', title="cancel")
+                  i.fa.fa-ban
+                  |  取消修改
+    hr
+    .row
+      .col-md-12
+        h2 文档管理
+        section.manage
+          form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
+            input(type='hidden', name='_csrf', value=_csrf)
+            a.btn.btn-success(href='/articles/'+article._id+'/edit', title="edit")
+              i.fa.fa-edit
+              |  编辑文档
+            | &nbsp;&nbsp;
+            input(type="hidden", name="_method", value="DELETE")
+            button.btn.btn-danger(type="submit")
+              i.fa.fa-trash-o
+              |  删除文档

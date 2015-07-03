@@ -15,7 +15,7 @@
             |  以前
           blockquote.comment-text
             = comment.body
-
+      - if (article.user && article.user.id === req.user.id)
         p.text-muted
           form.form-inline(role='form', method='POST', action='/articles/' + article._id + '/comments/' + comment._id, onsubmit='return confirm("你确定吗?")')
             input(type='hidden', name='_csrf', value=_csrf)

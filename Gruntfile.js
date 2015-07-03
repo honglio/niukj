@@ -651,6 +651,14 @@ module.exports = function(grunt) {
                 options: {
                     livereload: reloadPort
                 }
+            },
+            views: {
+                files: [
+                    '<%= yeoman.server %>/views/{,**/}*.jade',
+                ],
+                options: {
+                    livereload: reloadPort
+                }
             }
         },
         bump: {

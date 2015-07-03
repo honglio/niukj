@@ -18,8 +18,8 @@ define(["underscore",
         };
 
         this.scale = {
-            x: this.size.width / Config.slide.size.width * 0.66,
-            y: this.size.height / Config.slide.size.height * 0.66
+            x: this.size.width / Config.slide.size.width * 0.666666666,
+            y: this.size.height / Config.slide.size.height * 0.666666666
         };
 
         this._drawers = {};

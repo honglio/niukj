@@ -1,13 +1,15 @@
 extends ../layout
 
-block head
+append head
   link(rel='stylesheet', href="/css/app/web-fonts.css", type='text/css')
   link(rel='stylesheet', href="/css/app/themes/backgroundClasses.css", type='text/css')
 
 block content
   - function round(v) {return Math2.round(v, 2);}
-  .container-fluid(style="min-height: 750px;")
-    .bg(style="width: 100%; height: 100%;")
+  .container-fluid
+    section.page-header
+      .id.hidden= article.id
+    .bg
       #impress
         - each slide in article.slides
           .step(data-x='#{slide.x}', data-y='#{slide.y}')
@@ -24,6 +26,20 @@ block content
                     img(src='#{component.src}')
                   - if (component.type == 'TextBox')
                     div(style="font-family:#{component.face}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-decoration: #{component.decoration}; text-align: #{component.align}")= component.text
+  .container
+    .row
+      .col-sm-10
+        .meta.h4
+          | 创建于 &nbsp;
+          span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
+          | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          if (article.user)
+            span 作者 - &nbsp;
+            - var name = article.user.profile.name ? article.user.profile.name : article.user.email
+            a(href="/account/"+article.user._id)= name
+      .col-sm-2
+        .loves
+          i.fa.fa-heart.fa-2x &nbsp;#{article.love}
 
   .container.comments
     h3 评论
@@ -42,3 +58,20 @@ append scripts
 
     $('.navbar').addClass('hidden-sm hidden-xs');
     $('.comments').addClass('hidden-sm hidden-xs');
+
+    $(function() {
+      var slideHeight = $('.step').height();
+      console.log(slideHeight);
+      $('.bg').height(slideHeight + 30);
+    });
+    $(function() {
+      var $loveIcon = $('.loves i');
+      var articleId = $('.id').text();
+      $loveIcon.click(function(e){
+        $loveIcon.toggleClass('getbigger');
+        $.get('/articles/' + articleId + '/love', function( data ) {
+          console.log(data);
+          $loveIcon.text(' ' + data);
+        });
+      });
+    });

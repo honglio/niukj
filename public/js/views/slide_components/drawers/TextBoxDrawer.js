@@ -22,8 +22,8 @@ define(["underscore", "./AbstractDrawer"], function(_, AbstractDrawer) {
         var lines = this._extractLines(text);
         var txtWidth = this._findWidestWidth(lines);
         var bbox = {
-            x: (textBox.x ? textBox.x : textBox.get('x')) * this.scale.x,
-            y: (textBox.y ? textBox.y : textBox.get('y')) * this.scale.y
+            x: (textBox.x ? textBox.x : textBox.get('x')) * this.scale.x * 0.98 - 2,
+            y: (textBox.y ? textBox.y : textBox.get('y')) * this.scale.y * 0.9 + 10
         };
 
         this.applyTransforms(textBox, bbox);
@@ -37,7 +37,6 @@ define(["underscore", "./AbstractDrawer"], function(_, AbstractDrawer) {
         if (line !== '') {
             line = line.replace(tagReg, '');
             this.g2d.fillText(line, bbox.x, bbox.y);
-            cnt += 1;
         }
     };
 

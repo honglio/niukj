@@ -132,6 +132,10 @@ var ArticleSchema = new mongoose.Schema({
     hitCounter: {
         type: Number,
         default: 0
+    },
+    love: {
+        type: Number,
+        default: 0
     }
 });
 
@@ -255,6 +259,18 @@ ArticleSchema.methods = {
         } else {
             return cb('not found');
         }
+        this.save(cb);
+    },
+
+    /**
+     * Update desc
+     *
+     * @param {desc} String
+     * @param {Function} cb
+     * @api private
+     */
+    updateDesc: function(desc, cb) {
+        this.desc = desc;
         this.save(cb);
     },
 
