@@ -1,6 +1,4 @@
 define(['backbone'], function(Backbone) {
-    "use strict";
-
     var models = {},
         views = {},
         collections = {},
@@ -23,10 +21,19 @@ define(['backbone'], function(Backbone) {
     };
 
     function extractValue(e) {
-        var value = e.target.dataset.value;
+        if (e.target.dataset) {
+            var value = e.target.dataset.value;
+        } else {
+            var value = e.target.getAttribute('value');
+        }
+
         if (!value) {
-            $target = $(e.target);
-            value = $target.parent()[0].dataset.value;
+            $target = $(e.target).parent();
+            if ($target.dataset) {
+                value = $target[0].dataset.value;
+            } else {
+                value = $target[0].getAttribute('value');
+            }
         }
         return value;
     }
@@ -245,7 +252,9 @@ define(['backbone'], function(Backbone) {
 
             document.execCommand('fontName', false, value); // set font family on Textbox
 
-            value = value.substr(value.indexOf("'") + 1, value.lastIndexOf("'") - 1);
+            if (value) {
+                value = value.substr(value.indexOf("'") + 1, value.lastIndexOf("'") - 1);
+            }
 
             this.$el.find(".fontFamilyBtn .text").text(value); // set font family in Etch panel
 
@@ -489,9 +498,9 @@ define(['backbone'], function(Backbone) {
                 document.execCommand('StyleWithCSS', false, false);
             } catch (err) {
                 // expecting to just eat IE8 error, but if different error, rethrow
-                if (err.message !== "Invalid argument.") {
-                    throw err;
-                }
+                // if (err.message !== "Invalid argument.") {
+                //     throw err;
+                // }
             }
 
             if (models.EditableImage) {
