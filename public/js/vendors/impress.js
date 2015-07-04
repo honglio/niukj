@@ -30,6 +30,48 @@ function startPres(document, window) {
 
         // HELPER FUNCTIONS
 
+        //  IE 10以前的版本兼容 document element 的classList
+        if (!("classList" in document.documentElement)) {
+            Object.defineProperty(HTMLElement.prototype, 'classList', {
+                get: function() {
+                    var self = this;
+                    function update(fn) {
+                        return function(value) {
+                            var classes = self.className.split(/\s+/g),
+                                index = classes.indexOf(value);
+
+                            fn(classes, index, value);
+                            self.className = classes.join(" ");
+                        }
+                    }
+
+                    return {
+                        add: update(function(classes, index, value) {
+                            if (!~index) classes.push(value);
+                        }),
+
+                        remove: update(function(classes, index) {
+                            if (~index) classes.splice(index, 1);
+                        }),
+
+                        toggle: update(function(classes, index, value) {
+                            if (~index)
+                                classes.splice(index, 1);
+                            else
+                                classes.push(value);
+                        }),
+
+                        contains: function(value) {
+                            return !!~self.className.split(/\s+/g).indexOf(value);
+                        },
+
+                        item: function(i) {
+                            return self.className.split(/\s+/g)[i] || null;
+                        }
+                    };
+                }
+            });
+        }
         // `pfx` is a function that takes a standard CSS property name as a parameter
         // and returns it's prefixed version valid for current browser it runs in.
         // The code is heavily inspired by Modernizr http://www.modernizr.com/
@@ -201,8 +243,8 @@ function startPres(document, window) {
         // some default config values.
         var defaults = {
             width: 1024,
-            height: 640,
-            maxScale: 1,
+            height: 666,
+            maxScale: 2,
             minScale: 0,
 
             perspective: 1000,
@@ -306,7 +348,6 @@ function startPres(document, window) {
             // `initStep` initializes given step element by reading data from its
             // data attributes and setting correct styles.
             var initStep = function(el, idx) {
-                console.log(el);
                 var data;
                 if (el.dataset) {
                     data = el.dataset;
@@ -317,9 +358,7 @@ function startPres(document, window) {
                         scale: el.getAttribute('data-scale')
                     };
                 }
-                console.log(data.x);
-                console.log(data.y);
-                console.log(data.scale);
+
                 var step = {
                     translate: {
                         x: toNumber(data.x),
@@ -375,21 +414,16 @@ function startPres(document, window) {
                     transitionDuration: toNumber(rootData.transitionDuration, defaults.transitionDuration)
                 };
 
-                console.log(config.width);
-                console.log(config.height);
-                console.log(config.maxScale);
-                console.log(config.minScale);
-
                 windowScale = computeWindowScale(config);
 
-                console.log('windowScale: ' + windowScale);
+                // console.log('windowScale: ' + windowScale);
 
 
-                console.log('root.childNodes: ' + root.childNodes);
+                // console.log('root.childNodes: ' + root.childNodes);
 
-                console.log('previousInit: ' + previousInit);
+                // console.log('previousInit: ' + previousInit);
 
-                console.log('canvas: ' + canvas);
+                // console.log('canvas: ' + canvas);
                 // wrap steps with "canvas" element
                 if (!previousInit) {
                     arrayify(root.childNodes).forEach(function(el) {
@@ -400,15 +434,15 @@ function startPres(document, window) {
 
                 // set initial styles
                 document.documentElement.style.height = "100%";
-                console.log('document.documentElement.style.height: ' +
-                    document.documentElement.style.height);
+                // console.log('document.documentElement.style.height: ' +
+                //     document.documentElement.style.height);
                 // original version has overflow: "hidden"
                 css(body, {
                     height: "100%"
                 });
 
-                console.log('body.height: ' + body.style.height);
-                console.log('body.overflow: ' + body.style.overflow);
+                // console.log('body.height: ' + body.style.height);
+                // console.log('body.overflow: ' + body.style.overflow);
 
                 var rootStyles = {
                     position: "absolute",
@@ -431,8 +465,8 @@ function startPres(document, window) {
 
                 // get and init steps
                 steps = $$(".step", root);
-                console.log('steps: ' + steps);
-                console.log('initStep: ' + initStep);
+                // console.log('steps: ' + steps);
+                // console.log('initStep: ' + initStep);
                 steps.forEach(initStep);
 
                 // set a default initial state of the canvas

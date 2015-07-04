@@ -20,20 +20,6 @@ define(['AppView', 'etch_extension', 'bootstrap', 'colorpicker'], function(AppVi
             }
         };
 
-        // why we need to detect browser type? try use feature detect.
-        var agent = window.navigator.userAgent;
-        if (agent.indexOf('WebKit') >= 0) {
-            window.browserPrefix = "-webkit-";
-        } else if (agent.indexOf('Presto') >= 0) {
-            window.browserPrefix = "-o-";
-        } else if (agent.indexOf('Gecko') >= 0) {
-            window.browserPrefix = "-moz-";
-        } else if (agent.indexOf('Trident') >= 0) {
-            window.browserPrefix = "-ms-";
-        } else {
-            window.browserPrefix = "";
-        }
-
         // Init Etch, the text editor
         Etch.initialize();
 
