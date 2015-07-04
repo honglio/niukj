@@ -22,13 +22,6 @@ jQuery(document).ready(function($) {
         directionNav: false
     });
 
-    // jQuery PrettyPhoto ------------------------------------------------------ //
-    $("a[rel^='prettyPhoto']").prettyPhoto({
-        social_tools: '',
-        default_width: 800,
-        default_height: 488
-    });
-
     // jQuery ToTop ------------------------------------------------------ //
 
 });

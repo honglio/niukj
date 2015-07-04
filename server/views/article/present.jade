@@ -30,6 +30,8 @@ block content
                     img(src='#{component.src}')
                   - if (component.type == 'TextBox')
                     div(style="font-family:#{component.face}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-decoration: #{component.decoration}; text-align: #{component.align}")= component.text
+      a#arrowLeft.arrow &lt;
+      a#arrowRight.arrow &gt;
   .container
     .row
       .col-sm-10
@@ -59,6 +61,16 @@ append scripts
       startPres(document, window);
       pres().init();
     }
+
+    $('#arrowLeft').click(function(e){
+      pres().prev();
+      e.preventDefault();
+    });
+
+    $('#arrowRight').click(function(e){
+      pres().next();
+      e.preventDefault();
+    });
 
     $('.navbar').addClass('hidden-sm hidden-xs');
     $('.comments').addClass('hidden-sm hidden-xs');
