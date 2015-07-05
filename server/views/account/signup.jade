@@ -3,26 +3,28 @@ extends ../layout
 block content
   .container
     section.page-header
-      h2.text-center= title
     section.row
       .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
-        form.form-horizontal(role='signup' method='POST')
-          input(type='hidden' name='_csrf' value=_csrf)
-          .form-group
-            label.col-md-3.control-label(for='email') 用户名
-            .col-md-9
-              input.form-control(type='email' name='email' placeholder='Email地址' autofocus required)
-          .form-group
-            label.col-md-3.control-label(for='password') 密码
-            .col-md-9
-              input.form-control(type='password' name='password' placeholder='6-14位密码' required)
-          .form-group
-            label.col-md-3.control-label(for='confirmPassword') 确认密码
-            .col-md-9
-              input.form-control(type='password' name='confirmPassword' placeholder='输入相同的密码' required)
-          .form-group
-            .col-md-6.col-md-offset-3
-              button.btn.btn-success(type='submit')
-                i.fa.fa-check
-                |  注册
-    hr
+        .panel.panel-default
+          .panel-heading
+            h5.text-center= title
+          .panel-body
+            form.form-horizontal(role='signup' method='POST')
+              input(type='hidden' name='_csrf' value=_csrf)
+              .form-group
+                label.col-md-3.control-label(for='email') 用户名
+                .col-md-9
+                  input.form-control(type='email' name='email' placeholder='Email地址' autofocus required)
+              .form-group
+                label.col-md-3.control-label(for='password') 密码
+                .col-md-9
+                  input.form-control(type='password' name='password' placeholder='6-14位密码' required)
+              .form-group
+                label.col-md-3.control-label(for='confirmPassword') 确认密码
+                .col-md-9
+                  input.form-control(type='password' name='confirmPassword' placeholder='输入相同的密码' required)
+              .form-group
+                .col-md-6.col-md-offset-3
+                  button.btn.btn-success(type='submit')
+                    i.fa.fa-check
+                    |  注册
