@@ -8,13 +8,13 @@ append head
 block content
   - function round(v) {return Math2.round(v, 2);}
   .container-fluid
-    section.page-header
-      .id.hidden= article.id
     .bg.impress-not-supported
-      .fallback-message.text-center
+      .page-header.fallback-message.text-center
         p 你的浏览器不支持此功能，请下载并更新浏览器。
 
       #impress
+        div.id
+          .hidden= article.id
         - each slide in article.slides
           .step(data-x='#{slide.x}', data-y='#{slide.y}')
             div(class="#{slide.background}" style="width:#{article.width}px; height:#{article.height}px;")
@@ -33,8 +33,8 @@ block content
       a#arrowLeft.arrow &lt;
       a#arrowRight.arrow &gt;
   .container
-    .row
-      .col-sm-10
+    .present-footer
+      .footer-left
         .meta.h4
           | 创建于 &nbsp;
           span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
@@ -43,15 +43,15 @@ block content
             span 作者 - &nbsp;
             - var name = article.user.profile.name ? article.user.profile.name : article.user.email
             a(href="/account/"+article.user._id)= name
-      .col-sm-2
+      .footer-right
         .loves
           i.fa.fa-heart.fa-2x &nbsp;#{article.love}
-
-  .container.comments
-    h3 评论
-    - each comment in article.comments
-      include ../comment/comment
-    include ../comment/form
+    .comments
+      h3 评论
+      - each comment in article.comments
+        include ../comment/comment
+      include ../comment/form
+    section
 
 append scripts
   script(type='text/javascript', src='/js/vendors/impress.js')
@@ -85,9 +85,9 @@ append scripts
       // matches[1] will contain scaleX and matches[2] will contain scaleY.
       // if orientation is landscape
       if(window.innerHeight < window.innerWidth){
-        $('.bg').height(slideHeight * matches[2]);
+        $('.bg').height((slideHeight + 30) * matches[2]);
       } else { // if orientation is protrait
-        $('.bg').height(slideWidth * matches[1]);
+        $('.bg').height((slideHeight * 2) * matches[1]);
       }
     };
 
