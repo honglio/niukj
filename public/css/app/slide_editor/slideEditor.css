@@ -4,4 +4,9 @@
 #slide-editor {
     background: #8D939D;
     padding-bottom: 20px;
+    min-width: 1100px;
+}
+
+.editor-header {
+  min-width: 800px;
 }
