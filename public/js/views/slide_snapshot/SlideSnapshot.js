@@ -168,7 +168,8 @@ define(["underscore",
             // Only generate when focus on the first slide
             // if (this.isSelected() && this.model.get('index') === '0') {
             var self = this;
-            this._toImage(this.$el.find('canvas')[0], this.options.deck.id, function(img) {
+            var canvas = this.$el.find('canvas')[0];
+            this._toImage(canvas, this.options.deck.id, function(img) {
                 console.log(img);
                 self.options.deck.set('picture', img);
             });
@@ -176,6 +177,7 @@ define(["underscore",
         },
 
         _toImage: function(oCanvas, deckId, cb) {
+            // true: save img to db. false: save img to aliyun-oss
             return Slide2Image.saveAsPNG(oCanvas, false, 300, 250, deckId, cb);
         }
     });

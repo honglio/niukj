@@ -22,20 +22,23 @@ define(['jquery'], function($) {
         // sends the generated file to the client
         var saveFile = function(strData, deckId, cb) {
             $.ajax({
-                url: '/articles/uploadImg',
-                type: 'POST',
-                data: {src: strData, name: deckId}
-            })
-            .success(function(res, status, body) {
-                console.log(res);
-                cb(res);
-            })
-            .error(function(body, status, err) {
-                console.log("error");
-                console.log('body' + body);
-                console.log('status' + status);
-                console.log('err' + err);
-            });
+                    url: '/articles/uploadImg',
+                    type: 'POST',
+                    data: {
+                        src: strData,
+                        name: deckId + '.png'
+                    }
+                })
+                .success(function(res, status, body) {
+                    console.log(res);
+                    cb(res);
+                })
+                .error(function(body, status, err) {
+                    console.log("error");
+                    console.log('body' + body);
+                    console.log('status' + status);
+                    console.log('err' + err);
+                });
         };
 
         // generates a <img> object containing the imagedata

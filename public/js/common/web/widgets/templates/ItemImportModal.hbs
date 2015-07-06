@@ -9,11 +9,13 @@
             <div class="alert alert-error hide">
                 图片网址不正确
             </div>
-            <h4>网址:</h4>
             <div class="form-inline">
-                <input type="text" name="itemUrl"></input>&nbsp; {{#if browsable}}
-                <div data-option="browse" class="btn btn-default">上传</div>
-                {{/if}}
+                {{#if browsable}}
+                <input type="text" name="itemUrl"></input>
+                {{else}}
+                <input type="text" name="itemUrl" class="hidden"></input>
+                {{/if}} &nbsp;
+                <div data-option="browse" class="btn btn-default">选择本地图片</div>
             </div>
             <input type="file" name="image" accept="image/*" style="display:none" capture>
             <h4>预览:</h4>

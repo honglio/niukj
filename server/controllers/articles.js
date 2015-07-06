@@ -324,22 +324,22 @@ exports.present = function(req, res) {
 
 exports.uploadImg = function(req, res, next) {
     var imgBuf = new Buffer(req.body.src, 'base64');
-    var filename = req.body.name + '.png';
+    var filename = req.body.name;
     console.log(req.body);
     var oss = OSS.createClient(config.oss);
     var aliImg = {
-                    src: '',
-                    name: ''
-                 };
+        src: '',
+        name: ''
+    };
 
     oss.putObject({
-        bucket: config.oss.bucket,
+        bucket: config.oss.bucket.component,
         object: filename,
         source: imgBuf,
         headers: {
-          'content-type': 'application/octet-stream'
+            'content-type': 'application/octet-stream'
         }
-    }, function (err, response) {
+    }, function(err, response) {
         console.log(err);
         if (err) {
             res.sendStatus(501);

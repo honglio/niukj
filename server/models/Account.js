@@ -136,19 +136,21 @@ AccountSchema.pre('save', function(next) {
  * Pre-remove hook
  */
 
-AccountSchema.pre('remove', function (next) {
-  var oss = OSS.createClient(config.oss);
+AccountSchema.pre('remove', function(next) {
+    var oss = OSS.createClient(config.oss);
 
-  // if there are files associated with the item, remove from the cloud too
-  oss.deleteObject({
-    bucket: config.oss.bucket,
-    object: this.profile.picture.name
-  }, function (err , response) {
-    console.log(err);
-    if (err) { return next(err); }
-    console.log(response);
-    next(response.status);
-  });
+    // if there are files associated with the item, remove from the cloud too
+    oss.deleteObject({
+        bucket: config.oss.bucket.profile,
+        object: this.profile.picture.name
+    }, function(err, response) {
+        console.log(err);
+        if (err) {
+            return next(err);
+        }
+        console.log(response);
+        next(response.status);
+    });
 });
 
 AccountSchema.statics = {

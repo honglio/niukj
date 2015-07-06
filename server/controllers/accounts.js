@@ -265,16 +265,16 @@ exports.uploadProfileImg = function(req, res, next) {
     var filename = req.files.file.name;
     var oss = OSS.createClient(config.oss);
     //   next();
-    Account.findById(req.user.id, function (err, user) {
+    Account.findById(req.user.id, function(err, user) {
         // console.log(req.user);
         if (err) {
             return next(err);
         }
         oss.putObject({
-            bucket: config.oss.bucket,
+            bucket: config.oss.bucket.profile,
             object: filename,
             source: imgPath
-        }, function (err, response) {
+        }, function(err, response) {
             console.log(err);
             if (err) {
                 res.sendStatus(501);
@@ -362,7 +362,7 @@ exports.getManage = function(req, res) {
  */
 
 exports.postDeleteAccount = function(req, res, next) {
-    Account.findById(req.user.id, function(err, user){
+    Account.findById(req.user.id, function(err, user) {
         if (err) {
             return next(err);
         }

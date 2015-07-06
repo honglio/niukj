@@ -1,4 +1,4 @@
-define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], function(_, CustomView, ItemImportModalTemplate) {
+define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal", ], function(_, $, CustomView, ItemImportModalTemplate) {
 
     var modalCache = {};
 
@@ -8,9 +8,8 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], functi
             "click .ok": "_okClicked",
             "click div[data-option='browse']": "_browseClicked",
             "change input[type='file']": "_fileChosen",
-            "keyup input[name='itemUrl']": "_urlChanged",
-            "paste input[name='itemUrl']": "_urlChanged",
-            "hidden": "_hidden"
+            // "keyup input[name='itemUrl']": "_urlChanged",
+            // "paste input[name='itemUrl']": "_urlChanged"
         },
         initialize: function() {
             this._loadItem = _.debounce(this._loadItem.bind(this), 200);
@@ -33,12 +32,14 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], functi
         _fileChosen: function(e) {
             var file = e.target.files[0]; // selected file
             console.log(file);
+            this.fileName = file.name;
             if (!file.type.match('image.*')) {
                 return;
             }
             var reader = new FileReader();
 
             var self = this;
+
             // run after file chosen
             reader.onload = function(e) {
                 console.log(e.target.result);
@@ -54,11 +55,6 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], functi
         _browseClicked: function() {
             this.$el.find('input[type="file"]').click();
         },
-        _hidden: function() {
-            if (this.$input) {
-                return this.$input.val("");
-            }
-        },
         _urlChanged: function(e) {
             if (this.$input.val()) {
                 this.$el.find(".ok").removeAttr('disabled');
@@ -70,13 +66,17 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], functi
                 this.src = this.$input.val();
                 return this._okClicked();
             } else {
-                this._loadItem(e);
+                var self = this;
+                this._loadItem(e, function(res) {
+                    self.$preview.src = res.src;
+                    self.src = res.src;
+                });
             }
         },
         /*
          * set $preview's src by input value
          */
-        _loadItem: function(e) {
+        _loadItem: function(e, cb) {
             var val = this.$input.val();
             console.log(val);
             var reg = /[a-z]+:/;
@@ -84,9 +84,33 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], functi
             if (r == null || r.index !== 0) {
                 val = 'http://' + val;
             }
+            // else {
+            //     val = val.replace(/^data:image\/\w+;base64,/, "");
+            // }
+
             console.log(val);
-            this.$preview.src = val;
-            this.src = this.$preview.src;
+            cb({
+                src: val,
+                name: this.fileName
+            });
+            // $.ajax({
+            //         url: '/articles/uploadImg',
+            //         type: 'POST',
+            //         data: {
+            //             src: val,
+            //             name: this.fileName
+            //         }
+            //     })
+            //     .success(function(res, status, body) {
+            //         console.log(res);
+            //         cb(res);
+            //     })
+            //     .error(function(body, status, err) {
+            //         console.log("error");
+            //         console.log('body' + body);
+            //         console.log('status' + status);
+            //         console.log('err' + err);
+            //     });
         },
         _itemLoadError: function() {
             this.$el.find('.ok').addClass('disabled');
@@ -111,7 +135,6 @@ define(["underscore", "CustomView", "hbs!./templates/ItemImportModal", ], functi
                 };
             }
             this.$input = this.$el.find("input[name='itemUrl']");
-
             return this.$el;
         }
     });

@@ -3072,6 +3072,9 @@ a.text-#000000:hover {
 }
 /* #TOP NAV
 =============================== */
+.collapse {
+    min-width: 950px !important;
+}
 .navbar-inverse {
     background: #272b31;
     border: 0;
@@ -3120,4 +3123,33 @@ a.text-#000000:hover {
 }
 .logo img {
     margin-top: -9px;
+}
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 5001;
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
+    line-height: 28px;
+    color: #999999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#505050), to(#383838));
+    background: -webkit-linear-gradient(#505050, #383838);
+    background:         linear-gradient(#505050, #383838);
+    border-top: 1px solid black;
+    -webkit-box-shadow: inset 0 1px 0 #6e6e6e, 0 2px 2px rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0 1px 0 #6e6e6e, 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+.present-footer {
+    min-width: 700px;
+    height: 30px;
+}
+.footer-left {
+    z-index: 1;
+    float: left;
+}
+.footer-right {
+    z-index: 1;
+    float: right;
 }

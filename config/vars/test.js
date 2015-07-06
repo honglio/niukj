@@ -20,7 +20,11 @@ module.exports = {
     apiurl: 'http://127.0.0.1:9698/',
     // Copy in your particulars and rename this to mail.js
 
-    whitelist: ['/login', '/account/uploadProfileImg', '/articles/uploadImg'],
+    whitelist: [
+        '/login',
+        '/account/uploadProfileImg',
+        '/articles/uploadImg'
+    ],
     mail: {
         service: "user_log",
         host: "smtp.mxhichina.com",
@@ -52,8 +56,11 @@ module.exports = {
     oss: {
         accessKeyId: '3wXgudE0HBMAsuvb',
         accessKeySecret: '8Fl01JVf9L60DDWxighJq8dl4PeAPj',
-        host: 'oss-cn-beijing.aliyuncs.com',
-        bucket: 'test-niukj'
+        host: 'oss-cn-qingdao.aliyuncs.com',
+        bucket: {
+            profile: 'niukj-profile',
+            component: 'niukj-component'
+        }
     },
     weibo: {
         clientID: "1876751546",

@@ -155,19 +155,21 @@ ArticleSchema.path('fileName').required(true, 'Article title cannot be blank');
  * Pre-remove hook
  */
 
-ArticleSchema.pre('remove', function (next) {
-  var oss = OSS.createClient(config.oss);
+ArticleSchema.pre('remove', function(next) {
+    var oss = OSS.createClient(config.oss);
 
-  // if there are files associated with the item, remove from the cloud too
-  oss.deleteObject({
-    bucket: config.oss.bucket,
-    object: this.picture.name
-  }, function (err , response) {
-    console.log(err);
-    if (err) { return next(err); }
-    console.log(response);
-    next(response.status);
-  });
+    // remove from the cloud too
+    oss.deleteObject({
+        bucket: config.oss.bucket.component,
+        object: this.picture.name
+    }, function(err, response) {
+        console.log(err);
+        if (err) {
+            return next(err);
+        }
+        console.log(response);
+        next(response.status);
+    });
 });
 
 /**
@@ -191,42 +193,6 @@ var setTags = function(tags) {
  */
 
 ArticleSchema.methods = {
-
-    /**
-     * Save article and upload image
-     *
-     * @param {Object} image
-     * @param {Function} cb
-     * @api private
-     */
-
-    uploadAndSave: function(image, cb) {
-        if (!image.name || !image.src) {
-            return this.save(cb);
-        }
-
-        console.log(image);
-        var oss = OSS.createClient(config.oss);
-        var self = this;
-        console.log(oss);
-
-        oss.putObject({
-            bucket: config.oss.bucket,
-            object: image.name,
-            source: image.src,
-            headers: {}
-        }, function(err, res) {
-            if (err) {
-                console.log(err);
-                return cb(err);
-            }
-            if (res) {
-                console.log(res);
-                return cb(res);
-            }
-            self.save(cb);
-        });
-    },
 
     /**
      * Add comment

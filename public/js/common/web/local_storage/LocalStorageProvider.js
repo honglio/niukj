@@ -1,7 +1,7 @@
 define(function() {
 
 
-    var prefix = "cloudslide-";
+    var prefix = "niukj-";
 
     function LocalStorageProvider() {
         this.storageImpl = localStorage;

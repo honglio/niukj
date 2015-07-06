@@ -37,7 +37,7 @@ define(["CustomView",
                 tag: 'img',
                 title: '插入图片',
                 model: this.model,
-                browsable: true
+                browsable: false
             });
         },
 

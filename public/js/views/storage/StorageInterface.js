@@ -5,7 +5,6 @@ define(["common/web/local_storage/LocalStorageProvider",
 
 
         function StorageInterface() {
-            // change to LocalStorageProbider when you want.
             this._providers = new RemoteStorageProvider();
         }
 
