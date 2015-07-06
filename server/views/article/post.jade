@@ -18,7 +18,7 @@ block content
     .row
       .col-md-12
         h4= article.fileName
-        img(src=(article.picture || '/img/generic.png') alt='' dth="300" height="250")
+        img(src=(article.picture.src || '/img/generic.png') alt='' dth="300" height="250")
         section.meta.row
           .col-md-6.col-md-offset-3
             form#desc.form-horizontal(method="POST", action='/articles/' + article._id + '/desc', role="form", enctype="multipart/form-data")

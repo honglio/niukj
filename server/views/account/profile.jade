@@ -9,7 +9,7 @@ block content
           .panel-heading
             h5.text-center= title
           .panel-body
-            form.form-horizontal(action='/account/profile', method='POST')
+            form#profile.form-horizontal(name='profile' action='/account/profile', method='POST')
               input(type='hidden', name='_csrf', value=_csrf)
               .form-group
                 label.col-sm-2.control-label(for='email') Email
@@ -20,6 +20,7 @@ block content
                 .col-sm-10
                   input.form-control(type='text', name='name', id='name', value='#{user.profile.name}')
               .form-group
+                //- TODO: decorate radio button to iphone like
                 label.col-sm-2.control-label(for='gender') 性别
                 .col-sm-5
                   label.radio
@@ -42,7 +43,7 @@ block content
                 .col-sm-10
                   if (user.profile.picture.url)
                     //- = user.profile.picture
-                    img(src="#{user.profile.picture.url}", class='profile', width='100', height='100')
+                    img(src="#{user.profile.picture.url}", class='profile', name='gravatar', width='100', height='100')
                   else
                     #uploader
                       #filelist
@@ -50,7 +51,7 @@ block content
           footer.panel-footer.text-right.bg-light.lter
             .form-group.clearfix
               .col-sm-4
-                a.btn.btn-primary(type='submit')
+                a.submit-profile.btn.btn-primary(type='submit')
                   i.fa.fa-magnet
                   |  上传更新
 
@@ -78,6 +79,9 @@ append head
 append scripts
   script(type="text/javascript", src="/js/vendors/webuploader.min.js")
   script(type="text/javascript").
+    $('.submit-profile').click(function(e){
+      $('#profile').submit();
+    });
 
     if ( !WebUploader.Uploader.support() ) {
         alert( 'Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');

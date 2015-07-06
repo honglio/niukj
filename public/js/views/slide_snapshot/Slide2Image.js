@@ -1,4 +1,4 @@
-define([], function() {
+define(['jquery'], function($) {
 
 
     var Slide2Image = (function() {
@@ -17,19 +17,32 @@ define([], function() {
             };
         }
 
-        var strDownloadMime = "image/octet-stream";
         var bHasDataURL = !!(oCanvas.toDataURL);
 
         // sends the generated file to the client
-        var saveFile = function(strData) {
-            document.location.href = strData;
+        var saveFile = function(strData, deckId, cb) {
+            $.ajax({
+                url: '/articles/uploadImg',
+                type: 'POST',
+                data: {src: strData, name: deckId}
+            })
+            .success(function(res, status, body) {
+                console.log(res);
+                cb(res);
+            })
+            .error(function(body, status, err) {
+                console.log("error");
+                console.log('body' + body);
+                console.log('status' + status);
+                console.log('err' + err);
+            });
         };
 
         // generates a <img> object containing the imagedata
-        var makeImageObject = function(strSource) {
+        var makeImageObject = function(strSource, cb) {
             var oImgElement = document.createElement("img");
             oImgElement.src = strSource;
-            return oImgElement;
+            cb(oImgElement);
         };
 
         var scaleCanvas = function(oCanvas, iWidth, iHeight) {
@@ -50,16 +63,16 @@ define([], function() {
         };
 
         return {
-            saveAsPNG: function(oCanvas, bReturnImg, iWidth, iHeight) {
+            saveAsPNG: function(oCanvas, bReturnImg, iWidth, iHeight, deckId, cb) {
                 if (!bHasDataURL) {
                     return false;
                 }
                 var oScaledCanvas = scaleCanvas(oCanvas, iWidth, iHeight);
                 var strData = oScaledCanvas.toDataURL("image/png");
                 if (bReturnImg) {
-                    return makeImageObject(strData);
+                    return makeImageObject(strData, cb);
                 } else {
-                    saveFile(strData.replace("image/png", strDownloadMime));
+                    return saveFile(strData.replace(/^data:image\/\w+;base64,/, ""), deckId, cb);
                 }
                 return true;
             }

@@ -122,8 +122,14 @@ var ArticleSchema = new mongoose.Schema({
         default: ''
     },
     picture: {
-        type: String,
-        default: ''
+        name: {
+            type: String,
+            default: ''
+        },
+        src: {
+            type: String,
+            default: ''
+        }
     },
     createdAt: {
         type: Date,
@@ -149,21 +155,20 @@ ArticleSchema.path('fileName').required(true, 'Article title cannot be blank');
  * Pre-remove hook
  */
 
-// ArticleSchema.pre('remove', function (next) {
-//   var oss = OSS.createClient(config.oss);
-//   var filename = this.picture.filename;
+ArticleSchema.pre('remove', function (next) {
+  var oss = OSS.createClient(config.oss);
 
-//   // if there are files associated with the item, remove from the cloud too
-//   oss.deleteObject({
-//     bucket: config.oss.bucket,
-//     object: filename
-//   }, function (err) {
-//     console.log(err);
-//     if (err) return next(err);
-//   });
-
-//   next();
-// });
+  // if there are files associated with the item, remove from the cloud too
+  oss.deleteObject({
+    bucket: config.oss.bucket,
+    object: this.picture.name
+  }, function (err , response) {
+    console.log(err);
+    if (err) { return next(err); }
+    console.log(response);
+    next(response.status);
+  });
+});
 
 /**
  * Getters

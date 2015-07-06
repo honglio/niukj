@@ -11,7 +11,7 @@ block content
             .grid.cs-style-1
               figure.single-deck
                 a.cover-link(href='/articles/'+ article._id + '/present')
-                img.img-responsive(src=(article.picture || '/img/generic.png') alt='')
+                img.img-responsive(src=(article.picture.src || '/img/generic.png') alt='')
                 figcaption
                   h4.text-center= article.fileName || '未命名'
                   .meta

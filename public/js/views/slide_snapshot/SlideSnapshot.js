@@ -165,13 +165,18 @@ define(["underscore",
 
         // update slide cover picture
         genCoverPic: function() {
+            // Only generate when focus on the first slide
             // if (this.isSelected() && this.model.get('index') === '0') {
-            var img = this._toImage(this.$el.find('canvas')[0]);
-            this.options.deck.set('picture', img.src);
+            var self = this;
+            this._toImage(this.$el.find('canvas')[0], this.options.deck.id, function(img) {
+                console.log(img);
+                self.options.deck.set('picture', img);
+            });
+
         },
 
-        _toImage: function(oCanvas) {
-            return Slide2Image.saveAsPNG(oCanvas, true, 300, 250);
+        _toImage: function(oCanvas, deckId, cb) {
+            return Slide2Image.saveAsPNG(oCanvas, false, 300, 250, deckId, cb);
         }
     });
 });

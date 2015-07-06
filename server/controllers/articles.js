@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
     utils = require('../../lib/utils'),
     _ = require('underscore'),
     math2 = require('../../lib/math2'),
-    config = require('../../config/config');
+    config = require('../../config/config'),
+    OSS = require('aliyun-oss');
 
 /**
  * Load
@@ -318,6 +319,38 @@ exports.present = function(req, res) {
             return Math.floor(seconds) + " 秒";
         }
     });
+};
+
+
+exports.uploadImg = function(req, res, next) {
+    var imgBuf = new Buffer(req.body.src, 'base64');
+    var filename = req.body.name + '.png';
+    console.log(req.body);
+    var oss = OSS.createClient(config.oss);
+    var aliImg = {
+                    src: '',
+                    name: ''
+                 };
+
+    oss.putObject({
+        bucket: config.oss.bucket,
+        object: filename,
+        source: imgBuf,
+        headers: {
+          'content-type': 'application/octet-stream'
+        }
+    }, function (err, response) {
+        console.log(err);
+        if (err) {
+            res.sendStatus(501);
+            return next(err);
+        }
+        console.log(response.objectUrl);
+        aliImg.src = response.objectUrl;
+        aliImg.name = filename;
+        res.status(200).send(aliImg);
+    });
+
 };
 
 /**
