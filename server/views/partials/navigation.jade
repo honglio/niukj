@@ -77,7 +77,7 @@ section#top-nav
           else
             li.dropdown(class=title=='账户管理'?'active':undefined)
               a.dropdown-toggle(data-target="#" data-toggle='dropdown' role="button")
-                img(src='#{user.profile.picture || user.gravatar()}')
+                img(src='#{user.profile.picture.url || user.gravatar()}')
                 | #{user.profile.name || user.email || user.id}&nbsp;
                 span.caret
               ul.dropdown-menu(role="menu")

@@ -20,7 +20,7 @@ module.exports = {
     apiurl: 'http://127.0.0.1:9698/',
     // Copy in your particulars and rename this to mail.js
 
-    whitelist: ['/login', '/upload'],
+    whitelist: ['/login', '/account/uploadProfileImg'],
     mail: {
         service: "user_log",
         host: "smtp.mxhichina.com",

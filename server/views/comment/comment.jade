@@ -6,7 +6,7 @@
       .col-sm-12
         .comment-thumb.pull-left
           a(href='#')
-            img.img-circle(src='#{comment.user.profile.picture || comment.user.gravatar()}', height='40')
+            img.img-circle(src='#{comment.user.profile.picture.url || comment.user.gravatar()}', height='40')
         .comment-content(style="margin:0 50px;")
           .comment-author
             a(href='/account/'+comment.user._id)= name

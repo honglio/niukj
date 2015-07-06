@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
+var config = require('../../config/config');
+var OSS = require('aliyun-oss');
+
 
 var Status = new mongoose.Schema({
     name: {
@@ -77,7 +80,14 @@ var AccountSchema = new mongoose.Schema({
             default: ''
         },
         picture: {
-            type: Array
+            url: {
+                type: String,
+                default: ''
+            },
+            name: {
+                type: String,
+                default: ''
+            }
         },
         biography: {
             type: String,
@@ -120,6 +130,25 @@ AccountSchema.pre('save', function(next) {
             next();
         });
     });
+});
+
+/**
+ * Pre-remove hook
+ */
+
+AccountSchema.pre('remove', function (next) {
+  var oss = OSS.createClient(config.oss);
+
+  // if there are files associated with the item, remove from the cloud too
+  oss.deleteObject({
+    bucket: config.oss.bucket,
+    object: this.profile.picture.name
+  }, function (err , response) {
+    console.log(err);
+    if (err) { return next(err); }
+    console.log(response);
+    next(response.status);
+  });
 });
 
 AccountSchema.statics = {

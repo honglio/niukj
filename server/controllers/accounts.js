@@ -1,26 +1,30 @@
 var mongoose = require('mongoose');
 var Account = mongoose.model('Account');
 var _ = require('underscore');
+var fs = require('fs');
+var config = require('../../config/config');
+var OSS = require('aliyun-oss');
 
 function findByString(searchStr, callback) {
-        var searchRegex = new RegExp(searchStr, 'i');
-        Account.find({
-            $or: [{
-                'name': {
-                    $regex: searchRegex
-                }
-            }, {
-                email: {
-                    $regex: searchRegex
-                }
-            }]
-        }, callback);
-    }
-    /***************************************************
-     *
-     * Account
-     *
-     ***************************************************/
+    var searchRegex = new RegExp(searchStr, 'i');
+    Account.find({
+        $or: [{
+            'name': {
+                $regex: searchRegex
+            }
+        }, {
+            email: {
+                $regex: searchRegex
+            }
+        }]
+    }, callback);
+}
+
+/***************************************************
+ *
+ * Account
+ *
+ ***************************************************/
 
 /**
  * GET /account
@@ -252,6 +256,48 @@ exports.postUpdateProfile = function(req, res, next) {
 };
 
 /**
+ * GET /account/uploadProfileImg
+ * Image upload API when user manage profile.
+ */
+exports.uploadProfileImg = function(req, res, next) {
+    console.log(req.files);
+    var imgPath = req.files.file.path;
+    var filename = req.files.file.name;
+    var oss = OSS.createClient(config.oss);
+    //   next();
+    Account.findById(req.user.id, function (err, user) {
+        // console.log(req.user);
+        if (err) {
+            return next(err);
+        }
+        oss.putObject({
+            bucket: config.oss.bucket,
+            object: filename,
+            source: imgPath
+        }, function (err, response) {
+            console.log(err);
+            if (err) {
+                res.sendStatus(501);
+                return next(err);
+            }
+            console.log(response.objectUrl);
+            user.profile.picture.url = response.objectUrl;
+            user.profile.picture.name = filename;
+
+            // user.profile.picture.data = fs.readFileSync(imgPath);
+            // user.profile.picture.contentType = req.files.file.mimetype;
+            user.save(function(err) {
+                if (err) {
+                    res.sendStatus(500);
+                    return next(err);
+                }
+                res.sendStatus(200);
+            });
+        });
+    });
+};
+
+/**
  * GET /account/password
  * Send Update password page.
  */
@@ -316,14 +362,25 @@ exports.getManage = function(req, res) {
  */
 
 exports.postDeleteAccount = function(req, res, next) {
-    Account.remove({
-        _id: req.user.id
-    }, function(err) {
+    Account.findById(req.user.id, function(err, user){
         if (err) {
             return next(err);
         }
-        req.logout();
-        res.redirect('/');
+        user.remove(function(err, acc) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+            Account.remove({
+                _id: req.user.id
+            }, function(err) {
+                if (err) {
+                    return next(err);
+                }
+                req.logout();
+                res.redirect('/');
+            });
+        });
     });
 };
 

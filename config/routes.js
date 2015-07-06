@@ -76,7 +76,7 @@ module.exports = function(app, passport) {
     app.get('/account/:uid/followings', passportConf.isAuthenticated, accounts.followingbyId);
     app.post('/account/:uid/contact', passportConf.isAuthenticated, accounts.addContact);
     app.delete('/account/:uid/contact', passportConf.isAuthenticated, accounts.removeContact);
-
+    app.post('/account/uploadProfileImg', passportConf.isAuthenticated, accounts.uploadProfileImg);
     /**
      * 3rd party account routes.
      */
