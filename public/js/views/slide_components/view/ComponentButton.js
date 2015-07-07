@@ -1,7 +1,7 @@
 define(["CustomView"], function(CustomView) {
 
     return CustomView.extend({
-        className: 'btn btn-primary btn-icon icon-left hidden-print',
+        className: 'btn btn-icon icon-left hidden-print',
         tagName: 'a',
 
         events: {
@@ -10,6 +10,7 @@ define(["CustomView"], function(CustomView) {
 
         initialize: function() {
             this.$el.attr('data-compType', this.options.componentType);
+            this.$el.addClass(this.options.btnType);
         },
 
         _clicked: function() {

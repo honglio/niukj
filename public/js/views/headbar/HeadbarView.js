@@ -8,7 +8,6 @@ define(["CustomView",
     ComponentButton, ComponentImportButton, HeadbarTemplate) {
 
     return CustomView.extend({
-        className: 'page-header',
         events: {
             'click .undo': 'undo',
             'click .redo': 'redo',
@@ -26,14 +25,16 @@ define(["CustomView",
             });
             this._textBoxButton = new ComponentButton({
                 componentType: 'TextBox',
-                icon: 'icon-text-width',
-                name: '插入文本框',
+                icon: 'fa fa-text-width',
+                btnType: 'btn-info',
+                name: '',
                 model: this.model
             });
             this._imageButton = new ComponentImportButton({
                 componentType: 'Image',
-                icon: 'icon-picture',
-                name: '插入图片',
+                icon: 'fa fa-picture-o',
+                name: '',
+                btnType: 'btn-success',
                 tag: 'img',
                 title: '插入图片',
                 model: this.model,

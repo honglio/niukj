@@ -1,7 +1,7 @@
 define(["CustomView", "../storage/StorageModal"], function(CustomView, StorageModal) {
 
     return CustomView.extend({
-        className: 'btn btn-success',
+        className: 'btn btn-info',
         tagName: 'a',
         events: {
             click: '_clicked'
@@ -14,7 +14,7 @@ define(["CustomView", "../storage/StorageModal"], function(CustomView, StorageMo
         },
 
         render: function() {
-            this.$el.html('保存');
+            this.$el.html('<i class="fa fa-save"></i>');
             return this;
         },
 

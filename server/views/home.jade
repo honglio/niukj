@@ -20,48 +20,44 @@ html.js.no-touch
     main
       section#head-banner.img-bg
         .container
-          .row
-            #tour-1.col-md-12
-              h1.tagline.centered.normal
-                span.bolder 牛课件
-              h3.centered.lighter 一个在线课件平台
-            .col-md-12.product-teaser
-              .row
-                .col-md-3.col-sm-3.left-desc
-                  p#startTourBtn.product-teaser-title 轻松编写
-                  p.product-teaser-desc
-                    | 牛课件的编辑模块是基于HTML5和CSS3的在线网页编辑器，无需安装任何程序，即可在浏览器中使用。
-                //- #tour-2.col-md-6.col-sm-6
-                //-     img.center-image.img-responsive(src='img/ss.jpg', alt='')
-                .col-md-3.col-sm-3.right-desc
-                  p.product-teaser-title 酷炫放映
-                  p.product-teaser-desc
-                    | 点击左图，查看课件的放映效果。如果你喜欢，马上开始创建自己的课件吧！
+          section#tour-1.text-center
+            h1.bolder 牛课件
+            h3.lighter 一个在线课件平台
+          .row.product-teaser
+            .col-md-3.col-sm-3.left-desc
+              p#startTourBtn.product-teaser-title 轻松编写
+              p.product-teaser-desc
+                | 移动设备支持，随时随地，轻松编写。
+            //- #tour-2.col-md-6.col-sm-6
+            //-     img.center-image.img-responsive(src='img/ss.jpg', alt='')
+            .col-md-3.col-sm-3.right-desc
+              p.product-teaser-title 酷炫放映
+              p.product-teaser-desc
+                | 多引擎全屏动态图片，有趣的欢动效果。
 
 
       section#marketing(style='margin-top: 60px;')
         .container
           .row
-            .col-md-12.col-sm-12.centered.section-title-wrapper
+            .col-md-12.col-sm-12.text-center.section-title-wrapper
               h2.section-title
-                | 多个模块尽在
-                span.normal 牛课件
+                | 功能介绍
               p.section-subtitle
-                | 我们的团队在网站开发和服务方面有着多年的经验，竭诚为您提供高质量的课件编写和展示平台。
-            .col-md-4.col-sm-4.marketing-content.centered
+                | 在网站开发和服务方面的多年经验，竭诚为您提供高质量的课件编写和展示平台。
+            .col-md-4.col-sm-4.marketing-content.text-center
               img.marketing-icon(src='/img/keyframes.png', alt='Marketing Icon')
               h4 内化社交网络
-              p.h4
+              p.h6
                 | 牛课件提供交友功能、可关注好友和被关注。朋友圈功能也会陆续开放。
-            .col-md-4.col-sm-4.marketing-content.centered
+            .col-md-4.col-sm-4.marketing-content.text-center
               img.marketing-icon(src='/img/phone.png', alt='Marketing Icon')
               h4 全面支持移动设备
-              p.h4
+              p.h6
                 | 智能手机和平板电脑可通过浏览器直接访问，无需另外安装App。
-            .col-md-4.col-sm-4.marketing-content.centered
+            .col-md-4.col-sm-4.marketing-content.text-center
               img.marketing-icon(src='/img/settings.png', alt='Marketing Icon')
               h4 在线编辑文本、图片与背景
-              p.h4
+              p.h6
                 | 独创的所见即所得编辑器，可随意编辑文本图片并调整位置。10种背景任意更换。
 
       .container
@@ -69,40 +65,34 @@ html.js.no-touch
             .col-md-12
               hr.content-hr
 
-
       section#featurettes
         .container
           .row
-            #tour-3.col-md-12.centered.section-title-wrapper
+            #tour-3.col-md-12.text-center.section-title-wrapper
               h2.section-title
-                | 牛课件的
-                span.normal 新功能
+                | 新特性
               p.section-subtitle
-                | 我们相信HTML5和CSS3驱动的网页App将成为主流。
+                | 基于HTML5和CSS3，无需安装，直接使用。
             .col-md-6.col-sm-6.featurettes-content
-              h4
-                | 搜索流行课件。
-                span.lighter 课件可按浏览量，喜欢次数顺序排列。用户只要选择筛选器后搜索即可。
-              img#tour-4.center-image.img-responsive(src='/img/small-screenshot.jpg', alt='feature')
+              h4.text-center 微信公众号已开通, 马上关注，全新体验。
+              img#tour-4.center-image.img-responsive.img-thumbnail(src='/img/weixinhao.jpg', alt='weixinhao')
 
             .col-md-6.col-sm-6.featurettes-content
-              h4
-                | 全面支持移动端访问。
-                span.lighter 随时随地编写或分享，不漏掉每一丝灵感。
-              .row.featurettes-inner-section
-                #tour-5.col-md-6.col-xs-6
+              h4.text-center 全面支持移动端访问。随时随地，与人分享。
+              .featurettes-inner-section
+                #tour-5.col-md-6.col-xs-8
                   .flexslider-featurettes
                     ul.slides
                       li
-                        img.center-image(src='/img/iphone-ss1.jpg', alt='feature')
+                        img.center-image.img-responsive(src='/img/iphone-ss1.jpg', alt='feature')
                       li
-                        img.center-image(src='/img/iphone-ss2.jpg', alt='feature')
-                .col-md-6.col-xs-6
+                        img.center-image.img-responsive(src='/img/iphone-ss2.jpg', alt='feature')
+                .col-md-6.col-xs-4
                   ul.checklist
-                    li.green-list 完美支持各种云服务器.
-                    li.green-list 支持安卓、苹果、微软等手机\平板移动终端。
-                    li.green-list 所有HTML页面全部升级采用HTML5技术。
-                    li.green-list 保证页面的访问速度和稳定性。
+                    li.green-list 苹果Retina©显示屏支持
+                    li.green-list 主流手机\平板电脑支持
+                    li.green-list 响应式页面设计
+                    li.green-list 数据云端存储
 
 
       //- .container
@@ -112,7 +102,7 @@ html.js.no-touch
       //- section#annotations
       //-   .container
       //-     .row
-      //-       .col-md-12.centered.section-title-wrapper
+      //-       .col-md-12.text-center.section-title-wrapper
       //-         h2.section-title
       //-           | 让我们来仔细看看
       //-         p.section-subtitle
@@ -131,14 +121,12 @@ html.js.no-touch
       section#breakline.dark-bg
         .container
           .row
-            .col-md-7.col-sm-7
-              h3.centered.normal 是否收费？不！牛课件完全免费！！心动了吗？马上开始使用吧！
-            #tour-9.col-md-5.col-sm-5
-              .row.jumbotron-alfa
-                .col-md-6.col-sm-6
-                  a.medium-btn.btn-default.btn-primary.pull-right(href='/login') 开始使用！
-                .col-md-6.col-sm-6
-                  a.medium-btn.btn-default.btn-warning(href='/signup') 没有账户？
+            .col-md-8.col-sm-8.vcenter
+              h3.text-center 与众不同？卓尔不凡？牛课件助你脱颖而出！
+            #tour-9.col-md-4.col-sm-4.vcenter
+              a.medium-btn.btn-default.btn-primary(href='/login') 开始使用！
+              | &nbsp;&nbsp;&nbsp;
+              a.medium-btn.btn-default.btn-warning(href='/signup') 没有账户？
       //- include partials/price-table
     footer
       section.container

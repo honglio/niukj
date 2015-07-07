@@ -10,7 +10,7 @@ define(["CustomView", "../themes/BackgroundProvider", "css!styles/app/headbar/th
 
             render: function() {
                 this.$el.append('<a data-target="#" data-toggle="dropdown" role="button" class="dropdown-toggle">' +
-                    '<i class="icon-gear"></i><strong>背景</strong></a>');
+                    '<i class="fa fa-bars"></i></a>');
                 this.$el.append(new BackgroundProvider(this.model).view().render().$el);
 
                 return this;
