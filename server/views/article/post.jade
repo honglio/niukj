@@ -14,46 +14,51 @@ append scripts
 block content
   .container.text-center
     section.page-header
-      h2 编辑文案
     .row
-      .col-md-12
-        h4= article.fileName
-        img(src=(article.picture.src || '/img/generic.png') alt='' dth="300" height="250")
-        section.meta.row
-          .col-md-6.col-md-offset-3
-            form#desc.form-horizontal(method="POST", action='/articles/' + article._id + '/desc', role="form", enctype="multipart/form-data")
-              input(type="hidden", name="_csrf", value=_csrf)
-              .form-group
-                label.col-sm-2.control-label(for='desc') 文档概述
-                .col-sm-10
-                  textarea.form-control(rows="5", name="desc", placeholder='良好的文档描述有助于提高观看此数。。。')=article.desc
+      .col-md-offset-2.col-md-8
+        .panel.panel-primary
+          .panel-heading
+            h5.text-center 课件介绍
+          .panel-body
+            h4= article.fileName
+            img(src=(article.picture.src || '/img/generic.png') alt='' dth="300" height="250")
+            section.meta.row
+              .col-md-8.col-md-offset-2
+                form#desc.form-horizontal(method="POST", action='/articles/' + article._id + '/desc', role="form", enctype="multipart/form-data")
+                  input(type="hidden", name="_csrf", value=_csrf)
+                  .form-group
+                    label.col-md-2.control-label(for='desc') 文档概述
+                    .col-md-10
+                      textarea.form-control(rows="5", name="desc", placeholder='良好的文档描述有助于提高观看此数。。。')=article.desc
 
-            form#tags.form-horizontal(method="POST", action='/articles/' + article._id + '/tags', role="form", enctype="multipart/form-data")
-              input(type="hidden", name="_csrf", value=_csrf)
-              .form-group
-                label.col-sm-2.control-label(for='tags') 标签
-                .col-sm-10
-                  input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开')
-              .col-sm-12
-                button.btn.btn-primary(type='button')
-                  i.fa.fa-save
-                  |  保存更新
-                | &nbsp;&nbsp;
-                a.btn.btn-default(href='/articles/my', title="cancel")
-                  i.fa.fa-ban
-                  |  取消修改
-    hr
+                form#tags.form-horizontal(method="POST", action='/articles/' + article._id + '/tags', role="form", enctype="multipart/form-data")
+                  input(type="hidden", name="_csrf", value=_csrf)
+                  .form-group
+                    label.col-md-2.control-label(for='tags') 标签
+                    .col-md-10
+                      input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开')
+                  .col-md-12
+                    button.btn.btn-primary(type='button')
+                      i.fa.fa-save
+                      |  保存更新
+                    | &nbsp;&nbsp;
+                    a.btn.btn-default(href='/articles/my', title="cancel")
+                      i.fa.fa-ban
+                      |  取消修改
     .row
-      .col-md-12
-        h2 文档管理
-        section.manage
-          form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
-            input(type='hidden', name='_csrf', value=_csrf)
-            a.btn.btn-success(href='/articles/'+article._id+'/edit', title="edit")
-              i.fa.fa-edit
-              |  编辑文档
-            | &nbsp;&nbsp;
-            input(type="hidden", name="_method", value="DELETE")
-            button.btn.btn-danger(type="submit")
-              i.fa.fa-trash-o
-              |  删除文档
+      .col-md-offset-2.col-md-8
+        .panel.panel-info
+          .panel-heading
+            h5.text-center 课件管理
+          .panel-body
+            section.manage
+              form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
+                input(type='hidden', name='_csrf', value=_csrf)
+                a.btn.btn-success(href='/articles/'+article._id+'/edit', title="edit")
+                  i.fa.fa-edit
+                  |  编辑文档
+                | &nbsp;&nbsp;
+                input(type="hidden", name="_method", value="DELETE")
+                button.btn.btn-danger(type="submit")
+                  i.fa.fa-trash-o
+                  |  删除文档
