@@ -9,9 +9,10 @@
     background-color: #eeeeee;
     background-image: url(../img/ss.jpg);
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-position: center center;
     background-size: cover;
+    /*background fixed scroll not working well in some browser*/
+    /*background-attachment: fixed;*/
 }
 
 /* Buttons */
@@ -156,7 +157,7 @@ hr.content-hr {
 }
 
 .product-teaser .product-teaser-desc {
-    color: #959eaa;
+    color: #666666;
 }
 
 .product-teaser .left-desc {
@@ -224,7 +225,7 @@ span.rollover:hover {
 /* =============================== */
 
 .marketing-icon {
-    margin-bottom: 10px;
+    margin: 10px 0;
     border-radius: 50%;
     box-shadow: 0 0 0 5px #272b31;
     -webkit-transition: 0.25s;

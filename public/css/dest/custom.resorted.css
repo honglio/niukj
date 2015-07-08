@@ -1520,8 +1520,10 @@ pre {
 .title {
     font-weight: 500;
 }
-.centered {
-    text-align: center !important;
+.vcenter {
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
 }
 .uppercase {
     text-transform: uppercase;
@@ -1538,6 +1540,9 @@ pre {
 .center-image {
     display: block;
     margin: 0 auto;
+}
+.nopadding {
+    padding: 0 !important;
 }
 /* Font Size */
 body {
