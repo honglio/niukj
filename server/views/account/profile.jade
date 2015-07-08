@@ -7,7 +7,7 @@ block content
       .col-sm-8.col-md-8
         .panel.panel-default
           .panel-heading
-            h5.text-center= title
+            h5.text-center.panel-title.bolder= title
           .panel-body
             form#profile.form-horizontal(name='profile' action='/account/profile', method='POST')
               input(type='hidden', name='_csrf', value=_csrf)
@@ -59,7 +59,7 @@ block content
       .col-sm-4.col-md-4
         .panel.panel-default
           .panel-heading
-            h5.text-center 朋友圈
+            h5.text-center.panel-title.bolder 朋友圈
           .panel-body
             ul.profile-info-sections.text-center
               li

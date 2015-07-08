@@ -13,12 +13,12 @@ append scripts
 
 block content
   .container.text-center
-    section.page-header
+    .page-header
     .row
       .col-md-offset-2.col-md-8
         .panel.panel-primary
           .panel-heading
-            h5.text-center 课件介绍
+            h5.text-center.panel-title.bolder 课件介绍
           .panel-body
             h4= article.fileName
             img(src=(article.picture.src || '/img/generic.png') alt='' dth="300" height="250")
@@ -49,7 +49,7 @@ block content
       .col-md-offset-2.col-md-8
         .panel.panel-info
           .panel-heading
-            h5.text-center 课件管理
+            h5.text-center.panel-title.bolder 课件管理
           .panel-body
             section.manage
               form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
