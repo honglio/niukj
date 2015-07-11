@@ -1,8 +1,7 @@
 var express = require("express"),
     // https       = require("https"),
     // http        = require("http"),
-    passport = require("passport"),
-    fs = require("fs");
+    passport = require("passport");
 
 // var options = {
 //   key: fs.readFileSync(__dirname + '/config/agent-key.pem'),
@@ -13,10 +12,8 @@ var app = express();
 
 // Import accounts to models
 var models_path = __dirname + '/server/models';
-fs.readdirSync(models_path).forEach(function(file) {
-    if (file[0] === '.') {
-        return;
-    }
+var files = ['Article.js', 'Account.js'];
+files.forEach(function(file) {
     if (file.indexOf('.js') !== -1) {
         require(models_path + '/' + file);
     }

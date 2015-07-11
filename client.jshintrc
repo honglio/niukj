@@ -80,6 +80,7 @@
         "$"              : true,
         "define"         : true,
         "console"        : true,
-        "zTracker"       : true
+        "zTracker"       : true,
+        "validator"      : true
     }
 }

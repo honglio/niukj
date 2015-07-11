@@ -1540,6 +1540,14 @@ pre {
 .nopadding {
   padding: 0 !important;
 }
+.invalid {
+  border-color: #bf4040;
+  background: #f2d9d9;
+}
+.valid {
+  background: #d9f2d9;
+  border-color: #40bf40;
+}
 /* Font Size */
 body {
   font-size: 15px;

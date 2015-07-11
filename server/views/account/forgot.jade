@@ -10,12 +10,12 @@ block content
             h5.text-center.panel-title.bolder= title
           .panel-body
             h5.text-center 输入您的Email地址，我们将发送确认信到您的邮箱中。
-            form.form-horizontal(role='forgot' method='POST')
+            form.form-horizontal(role='forgot' method='POST' onsubmit="return validateForm(this);" novalidate)
               input(type='hidden' name='_csrf' value=_csrf)
               .form-group
                 label.col-md-3.control-label(for='email') Email
                 .col-md-8
-                  input.form-control(type='email' name='email' placeholder='Email' autofocus required)
+                  input#email.form-control(type='email' name='email' placeholder='Email' data-toggle="popover" autofocus required)
               .form-group
                 .col-md-6.col-md-offset-3
                   button.btn.btn-primary(type='submit')

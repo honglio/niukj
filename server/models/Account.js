@@ -4,16 +4,6 @@ var crypto = require('crypto');
 var config = require('../../config/config');
 var OSS = require('aliyun-oss');
 
-
-var Status = new mongoose.Schema({
-    name: {
-        type: String
-    },
-    status: {
-        type: String
-    }
-});
-
 var ContactSchema = new mongoose.Schema({
     name: {
         type: String
@@ -22,10 +12,10 @@ var ContactSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Account'
     },
-    added: {
+    addedAt: {
         type: Date
     }, // When the contact was added
-    updated: {
+    updatedAt: {
         type: Date
     } // When the contact last updated
 });
@@ -62,7 +52,9 @@ var AccountSchema = new mongoose.Schema({
     tokens: {
         type: Array
     },
-
+    status: {
+        type: String
+    },
     profile: {
         name: {
             type: String
@@ -98,7 +90,7 @@ var AccountSchema = new mongoose.Schema({
         followers: [ContactSchema],
         followings: [ContactSchema]
     },
-    status: [Status], // My own status updates only
+    articles: [{ type : mongoose.Schema.ObjectId, ref : 'Article' }],
     viewNum: {
         type: Number,
         default: 0
@@ -176,8 +168,8 @@ AccountSchema.statics = {
         var follower = {
             name: addContact.name,
             accountId: addContact._id,
-            added: new Date(),
-            updated: new Date()
+            addedAt: new Date(),
+            updatedAt: new Date()
         };
         account.contacts.followers.push(follower);
     },
@@ -188,8 +180,8 @@ AccountSchema.statics = {
         var following = {
             name: addContact.name,
             accountId: addContact._id,
-            added: new Date(),
-            updated: new Date()
+            addedAt: new Date(),
+            updatedAt: new Date()
         };
         account.contacts.followings.push(following);
     },

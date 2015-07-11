@@ -8,17 +8,17 @@
         form.form-horizontal(role='form' action='/contact-form' method='POST')
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
-            label.col-sm-2.control-label(for='name') 用户名
+            label.col-sm-2.control-label(for='name') 姓名
             .col-sm-10
-              input.form-control(type='text' name='name' id='name' placeholder='请输入您的用户名' autofocus required)
+              input.form-control(type='text' name='name' placeholder='请输入您的姓名' autofocus required)
           .form-group
             label.col-sm-2.control-label(for='email') Email地址
             .col-sm-10
-              input.form-control(type='email' name='email' id='email' placeholder='方便联系您的Email地址' required)
+              input.form-control(type='email' name='email' placeholder='方便联系您的Email地址' required)
           .form-group
             label.col-sm-2.control-label(for='message') 问题内容
             .col-sm-10
-              textarea.form-control(type='text', name='message', id='message', rows='7' placeholder='您的问题' required)
+              textarea.form-control(type='text', name='message', rows='7' placeholder='您的问题' required)
           .form-group
             .col-sm-offset-2.col-sm-8
               button.btn.btn-primary(type='submit')

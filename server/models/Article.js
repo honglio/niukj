@@ -135,6 +135,10 @@ var ArticleSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    },
     hitCounter: {
         type: Number,
         default: 0
@@ -326,7 +330,6 @@ ArticleSchema.statics = {
         var criteria = options.criteria || {};
         var fields = options.fields || null;
         var opt = options.options || {};
-
         this.find(criteria, fields, opt)
             .populate('user', 'profile')
             .sort({
