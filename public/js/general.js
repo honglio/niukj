@@ -1,3 +1,24 @@
+$(function() {
+  var $searchIcon = $('#search-deck i');
+  $searchIcon.click(function(e){
+    $('#search-deck').submit();
+  });
+});
+
+var agent = window.navigator.userAgent;
+if (agent.indexOf('WebKit/') >= 0) {
+    window.browserPrefix = "-webkit-";
+} else if (agent.indexOf('Presto/') >= 0) {
+    window.browserPrefix = "-o-";
+} else if (agent.indexOf('Gecko/') >= 0) {
+    window.browserPrefix = "-moz-";
+} else if (agent.indexOf('Trident/') >= 0) {
+    window.browserPrefix = "-ms-";
+} else {
+    window.browserPrefix = "";
+}
+
+// validation
 function validateForm(form) {
   var $email = $('#email');
   var $password = $('#password');

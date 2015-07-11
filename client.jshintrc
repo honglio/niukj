@@ -81,6 +81,8 @@
         "define"         : true,
         "console"        : true,
         "zTracker"       : true,
-        "validator"      : true
+        "validator"      : true,
+        "WebUploader"    : true,
+        "alert"          : true
     }
 }
