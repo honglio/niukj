@@ -41,8 +41,8 @@ function validateForm(form) {
     return false;
   }
 
-  if($password.length > 0 && !validator.isAlphanumeric(form.password.value)
-      || !validator.isLength(form.password.value, 6, 14)) {
+  if($password.length > 0 && (!validator.isAlphanumeric(form.password.value)
+      || !validator.isLength(form.password.value, 6, 14))) {
     $password.popover({
       trigger: "manual",
       placement: "top",

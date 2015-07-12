@@ -4,8 +4,8 @@ var mongoose = require('mongoose'),
     _ = require('underscore'),
     math2 = require('../../lib/math2'),
     config = require('../../config/config'),
-    OSS = require('aliyun-oss');
-
+    OSS = require('aliyun-oss'),
+    validator = require('validator');
 /**
  * Load
  */
@@ -323,6 +323,10 @@ exports.present = function(req, res) {
 
 
 exports.uploadImg = function(req, res, next) {
+    // Should return a Ajax error.
+    if(!validator.isBase64(req.body.src)) {
+        return next(new Error('Not a base64 src.'));
+    }
     var imgBuf = new Buffer(req.body.src, 'base64');
     var filename = req.body.name;
     console.log(req.body);

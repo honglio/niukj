@@ -1,5 +1,5 @@
 {
-  "name": "牛课件",
+  "name": "Niukj",
   "description": "An Online Exhibition Platform - upload & present your drawing art",
   "version": "2.1.23",
   "private": true,
@@ -48,7 +48,8 @@
     "underscore": "^1.7.0",
     "node-linkedin": "^0.3.4",
     "view-helpers": "^0.1.5",
-    "aliyun-oss": "latest",
+    "aliyun-oss": "^0.6.0",
+    "validator": "^3.41.2",
     "raven": "^0.7.3"
   },
   "devDependencies": {

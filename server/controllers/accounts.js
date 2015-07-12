@@ -33,8 +33,14 @@ function findByString(searchStr, callback) {
 
 exports.accountbyId = function(req, res, next) {
 
-    var contactId = req.param('uid', null);
+    var contactId = req.params.uid;
 
+    req.assert(contactId, 'contactId is not valid mongoId').isMongoId();
+    var errors = req.validationErrors();
+    if (errors) {
+        req.flash('errors', errors);
+        return res.redirect(req.session.returnTo);
+    }
     Account.findById(req.user.id, function(err, user) {
         if (err) {
             return next(err);
@@ -97,8 +103,14 @@ exports.followingbyId = function(req, res, next) {
 };
 
 exports.removeContact = function(req, res, next) {
-    var contactId = req.param('uid', null);
+    var contactId = req.params.uid;
 
+    req.assert(contactId, 'contactId is not valid mongoId').isMongoId();
+    var errors = req.validationErrors();
+    if (errors) {
+        req.flash('errors', errors);
+        return res.redirect(req.session.returnTo);
+    }
     Account.findById(req.user.id, function(err, user) {
         if (err) {
             return next(err);
@@ -141,8 +153,14 @@ exports.removeContact = function(req, res, next) {
 
 
 exports.addContact = function(req, res, next) {
-    var contactId = req.param('uid', null);
+    var contactId = req.params.uid;
 
+    req.assert(contactId, 'contactId is not valid mongoId').isMongoId();
+    var errors = req.validationErrors();
+    if (errors) {
+        req.flash('errors', errors);
+        return res.redirect(req.session.returnTo);
+    }
     // Missing contactId, don't bother going any further, or
     // contactId is the same as accountId, you can't add yourself as contact.
     if (null == contactId || contactId === req.user.id) {
@@ -315,9 +333,9 @@ exports.getUpdatePassword = function(req, res) {
  */
 
 exports.postUpdatePassword = function(req, res, next) {
-    req.assert('password', 'Password must be at least 4 characters long').len(4);
+    req.assert('password', 'Password must be alphanumeric').isAlphanumeric();
+    req.assert('password', 'Password must be at least 6 characters long').len(6, 14);
     req.assert('confirm', 'Passwords do not match').equals(req.body.password);
-
     var errors = req.validationErrors();
 
     if (errors) {

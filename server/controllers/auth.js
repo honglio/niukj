@@ -5,7 +5,6 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var passport = require('passport');
 var config = require('../../config/config');
-
 /**
  * POST /login
  * Sign in using email and password.
@@ -14,14 +13,15 @@ var config = require('../../config/config');
  */
 
 exports.postLogin = function(req, res, next) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('password', 'Password cannot be blank').notEmpty();
+    req.assert('email', 'Email格式不正确').isEmail();
+    req.assert('password', '密码不能为空').notEmpty();
+    req.assert('password', '密码必须为6到14位').len(6, 14);
+    req.assert('password', '密码只能包含字母和数字').isAlphanumeric();
 
     var errors = req.validationErrors();
 
     if (errors) {
         req.flash('errors', errors);
-        console.log(errors);
         return res.redirect('/login');
     }
 
@@ -85,11 +85,11 @@ exports.createUser = function(profile, done) {
  */
 
 exports.postSignup = function(req, res, next) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('password', 'Password must be at least 4 characters long').len(4);
+    req.assert('email', 'Email格式不正确').isEmail();
+    req.assert('password', '密码不能为空').notEmpty();
+    req.assert('password', '密码必须为6到14位').len(6, 14);
+    req.assert('password', '密码只能包含字母和数字').isAlphanumeric();
     req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
-
-    var errors = req.validationErrors();
 
     if (errors) {
         req.flash('errors', errors);
@@ -159,7 +159,8 @@ exports.getReset = function(req, res) {
  */
 
 exports.postReset = function(req, res, next) {
-    req.assert('password', 'Password must be at least 4 characters long.').len(4);
+    req.assert('password', 'Password must be alphanumeric').isAlphanumeric();
+    req.assert('password', 'Password must be at least 6 characters long.').len(6, 14);
     req.assert('confirm', 'Passwords must match.').equals(req.body.password);
 
     var errors = req.validationErrors();
