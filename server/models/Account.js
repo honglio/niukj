@@ -90,7 +90,10 @@ var AccountSchema = new mongoose.Schema({
         followers: [ContactSchema],
         followings: [ContactSchema]
     },
-    articles: [{ type : mongoose.Schema.ObjectId, ref : 'Article' }],
+    articles: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Article'
+    }],
     viewNum: {
         type: Number,
         default: 0

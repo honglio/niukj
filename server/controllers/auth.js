@@ -91,6 +91,7 @@ exports.postSignup = function(req, res, next) {
     req.assert('password', '密码只能包含字母和数字').isAlphanumeric();
     req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
+    var errors = req.validationErrors();
     if (errors) {
         req.flash('errors', errors);
         return res.redirect('/signup');

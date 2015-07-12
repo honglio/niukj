@@ -6,7 +6,7 @@ var Auth = require('../../../server/controllers/auth');
 
 // support
 
-var password = exports.password = 'test';
+var password = exports.password = 'mytest';
 
 exports.createUser = function(done) {
   var email = Math.random().toString(32).substr(6) + '@test.com';

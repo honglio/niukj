@@ -324,7 +324,7 @@ exports.present = function(req, res) {
 
 exports.uploadImg = function(req, res, next) {
     // Should return a Ajax error.
-    if(!validator.isBase64(req.body.src)) {
+    if (!validator.isBase64(req.body.src)) {
         return next(new Error('Not a base64 src.'));
     }
     var imgBuf = new Buffer(req.body.src, 'base64');
