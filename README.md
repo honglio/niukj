@@ -1,6 +1,6 @@
 [ ![Codeship Status for honglio/niukj](https://codeship.io/projects/5c4fd850-11c8-0132-a74a-029e44e44534/status)](https://codeship.io/projects/33121)
 
-# 牛课件 #
+# Niukj #
 
 ## Getting started ##
 
