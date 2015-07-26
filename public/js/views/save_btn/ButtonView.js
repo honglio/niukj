@@ -1,7 +1,7 @@
 define(["CustomView", "../storage/StorageModal"], function(CustomView, StorageModal) {
 
     return CustomView.extend({
-        className: 'btn btn-info',
+        className: 'btn btn-dark',
         tagName: 'a',
         events: {
             click: '_clicked'

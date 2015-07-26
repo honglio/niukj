@@ -21,7 +21,7 @@ block content
                   input#password.form-control(type='password' name='password' placeholder='6-14位密码' required)
               .form-group
                 .col-md-6.col-md-offset-3
-                  button.btn.btn-primary(type='submit')
+                  button.btn.btn-primary.btn-addon(type='submit')
                     i.fa.fa-unlock-alt
                     |  登录
                   a.btn.btn-link(href='/forgot') 忘记密码?
@@ -31,20 +31,20 @@ block content
             .panel-heading
               h3.panel-title 使用其它帐号登录：
             .panel-body
-              .col-md-3
-                a.btn.btn-block.btn-weibo.btn-lg(href='/auth/weibo')
+              .col-md-3.col-sm-6.col-xs-12
+                a.btn.btn-warning.btn-block.btn-weibo.btn-lg.btn-addon(href='/auth/weibo')
                   i.fa.fa-weibo
                   |  微博
-              .col-md-3
-                a.btn.btn-block.btn-qq.btn-lg(href='/auth/qq')
+              .col-md-3.col-sm-6.col-xs-12
+                a.btn.btn-info.btn-block.btn-qq.btn-lg.btn-addon(href='/auth/qq')
                   i.fa.fa-qq
                   |  QQ
-              .col-md-3
-                a.btn.btn-block.btn-renren.btn-lg(href='/auth/renren')
+              .col-md-3.col-sm-6.col-xs-12
+                a.btn.btn-dark.btn-block.btn-renren.btn-lg.btn-addon(href='/auth/renren')
                   i.fa.fa-renren
                   |  人人
-              .col-md-3
-                a.btn.btn-block.btn-linkedin.btn-lg(href='/auth/linkedin')
+              .col-md-3.col-sm-6.col-xs-12
+                a.btn.btn-success.btn-block.btn-linkedin.btn-lg.btn-addon(href='/auth/linkedin')
                   i.fa.fa-linkedin
                   |  领英
 

@@ -39,11 +39,11 @@ block content
                     .col-md-10
                       input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开' data-role="tagsinput")
                   .col-md-12.text-center
-                    button.btn.btn-primary(type='button' onclick="submitForms()")
+                    button.btn.btn-success.btn-addon(type='button' onclick="submitForms()")
                       i.fa.fa-save
                       |  保存更新
                     | &nbsp;&nbsp;
-                    a.btn.btn-default(href='/articles/my', title="cancel")
+                    a.btn.btn-default.btn-addon(href='/articles/my', title="cancel")
                       i.fa.fa-ban
                       |  取消修改
     .row
@@ -55,11 +55,11 @@ block content
             section.manage.text-center
               form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
                 input(type='hidden', name='_csrf', value=_csrf)
-                a.btn.btn-success(href='/articles/'+article._id+'/edit', title="edit")
+                a.btn.btn-primary.btn-addon(href='/articles/'+article._id+'/edit', title="edit")
                   i.fa.fa-edit
                   |  编辑文档
                 | &nbsp;&nbsp;
                 input(type="hidden", name="_method", value="DELETE")
-                button.btn.btn-danger(type="submit")
+                button.btn.btn-danger.btn-addon(type="submit")
                   i.fa.fa-trash-o
                   |  删除文档

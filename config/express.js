@@ -184,13 +184,13 @@ module.exports = function(app, passport) {
 
     // Request body parsing middleware should be above methodOverride
     app.use(bodyParser.json({
-        limit: '50mb'
+        limit: '20mb'
     }));
     app.use(bodyParser.raw({
-        limit: '50mb'
+        limit: '20mb'
     }));
     app.use(bodyParser.urlencoded({
-        limit: '50mb',
+        limit: '20mb',
         extended: true
     }));
 
@@ -256,7 +256,7 @@ module.exports = function(app, passport) {
         if ((/(auth|login|logout|signup)$/i).test(path)) {
             return next();
         }
-        req.session.returnTo = req.path;
+        req.session.returnTo = req.header('referrer') || req.session.returnTo;
         next();
     });
 

@@ -4,6 +4,7 @@ var _ = require('underscore');
 var fs = require('fs');
 var config = require('../../config/config');
 var OSS = require('aliyun-oss');
+var validator = require('validator');
 
 function findByString(searchStr, callback) {
     var searchRegex = new RegExp(searchStr, 'i');
@@ -35,13 +36,15 @@ exports.accountbyId = function(req, res, next) {
 
     var contactId = req.params.uid;
 
-    req.assert(contactId, 'contactId is not valid mongoId').isMongoId();
-    var errors = req.validationErrors();
-    if (errors) {
-        req.flash('errors', errors);
-        return res.redirect(req.session.returnTo);
+    var valid = validator.isMongoId(contactId);
+    if (!valid) {
+        req.flash('errors', {
+            msg: 'Is not a valid MongoId!'
+        });
+        return res.redirect(req.session.returnTo || '/account/profile');
     }
     Account.findById(req.user.id, function(err, user) {
+        console.log(req.user.id);
         if (err) {
             return next(err);
         }
@@ -105,11 +108,12 @@ exports.followingbyId = function(req, res, next) {
 exports.removeContact = function(req, res, next) {
     var contactId = req.params.uid;
 
-    req.assert(contactId, 'contactId is not valid mongoId').isMongoId();
-    var errors = req.validationErrors();
-    if (errors) {
-        req.flash('errors', errors);
-        return res.redirect(req.session.returnTo);
+    var valid = validator.isMongoId(contactId);
+    if (!valid) {
+        req.flash('errors', {
+            msg: 'Is not a valid MongoId!'
+        });
+        return res.redirect(req.session.returnTo || '/account/profile');
     }
     Account.findById(req.user.id, function(err, user) {
         if (err) {
@@ -155,11 +159,12 @@ exports.removeContact = function(req, res, next) {
 exports.addContact = function(req, res, next) {
     var contactId = req.params.uid;
 
-    req.assert(contactId, 'contactId is not valid mongoId').isMongoId();
-    var errors = req.validationErrors();
-    if (errors) {
-        req.flash('errors', errors);
-        return res.redirect(req.session.returnTo);
+    var valid = validator.isMongoId(contactId);
+    if (!valid) {
+        req.flash('errors', {
+            msg: 'Is not a valid MongoId!'
+        });
+        return res.redirect(req.session.returnTo || '/account/profile');
     }
     // Missing contactId, don't bother going any further, or
     // contactId is the same as accountId, you can't add yourself as contact.
@@ -232,6 +237,13 @@ exports.findContact = function(req, res) {
  */
 
 exports.load = function(req, res, next, id) {
+    var valid = validator.isMongoId(id);
+    if (!valid) {
+        req.flash('errors', {
+            msg: 'Is not a valid MongoId!'
+        });
+        return res.redirect(req.session.returnTo || '/account/profile');
+    }
     Account.load(id, function(err, account) {
         if (err) {
             return next(err);
