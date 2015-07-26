@@ -1,18 +1,18 @@
 extends ../layout
 
 append scripts
+  script(type='text/javascript' src='/js/vendors/bootstrap-tagsinput.js')
   script(type='text/javascript').
-    $(function() {
-      var $tagBtn = $('#tags .btn');
-      $tagBtn.click(function(e){
-        console.log('test');
-        $('#tags').submit();
-        $('#desc').submit();
-      });
-    });
+    submitForms = function(){
+        var action = $('#desc').attr('action');
+        var data = $('#desc textarea').val();
+        var csrf = $('#desc input').val();
+        $.post(action, {_csrf: csrf, desc: data});
+        $("#tags").submit();
+    }
 
 block content
-  .container.text-center
+  .container
     .page-header
     .row
       .col-md-offset-2.col-md-8
@@ -20,11 +20,12 @@ block content
           .panel-heading
             h5.text-center.panel-title.bolder 课件介绍
           .panel-body
-            h4= article.fileName
-            img(src=(article.picture.src || '/img/generic.png') alt='' dth="300" height="250")
+            h4.article-title.text-center= article.fileName
+            .article-picture.text-center
+              img(src=(article.picture.src || '/img/generic.png') alt='' dth="300" height="250")
             section.meta.row
               .col-md-8.col-md-offset-2
-                form#desc.form-horizontal(method="POST", action='/articles/' + article._id + '/desc', role="form", enctype="multipart/form-data")
+                form#desc.form-horizontal(method="POST", action='/articles/' + article._id + '/desc')
                   input(type="hidden", name="_csrf", value=_csrf)
                   .form-group
                     label.col-md-2.control-label(for='desc') 文档概述
@@ -36,9 +37,9 @@ block content
                   .form-group
                     label.col-md-2.control-label(for='tags') 标签
                     .col-md-10
-                      input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开')
-                  .col-md-12
-                    button.btn.btn-primary(type='button')
+                      input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开' data-role="tagsinput")
+                  .col-md-12.text-center
+                    button.btn.btn-primary(type='button' onclick="submitForms()")
                       i.fa.fa-save
                       |  保存更新
                     | &nbsp;&nbsp;
@@ -51,7 +52,7 @@ block content
           .panel-heading
             h5.text-center.panel-title.bolder 课件管理
           .panel-body
-            section.manage
+            section.manage.text-center
               form(action="/articles/"+article.id, method="POST", onsubmit="return confirm('你确定吗?')")
                 input(type='hidden', name='_csrf', value=_csrf)
                 a.btn.btn-success(href='/articles/'+article._id+'/edit', title="edit")

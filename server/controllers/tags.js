@@ -34,7 +34,8 @@ exports.index = function(req, res) {
 
 exports.create = function(req, res) {
     var article = req.article;
-
+    console.log("create");
+    console.log(req.body);
     if (!req.body.tags) {
         return res.redirect('/articles/' + article.id + '/manage');
     }
