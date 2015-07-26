@@ -4,8 +4,16 @@ if (!window.presStarted) {
 }
 
 $(function() {
-
-
+    // Catch scroll event
+    $(window).scroll(function() {
+        if ($(this).scrollTop() < 600) {
+            $("#arrowLeft").show();
+            $("#arrowRight").show();
+        } else {
+            $("#arrowLeft").hide();
+            $("#arrowRight").hide();
+        }
+    });
     $('#arrowLeft').click(function(e) {
         window.pres().prev();
         e.preventDefault();
