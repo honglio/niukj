@@ -71,7 +71,7 @@ exports.explore = function(req, res) {
         perPage: perPage,
         page: page,
         options: {
-            limit: 50
+            limit: 48
         }
     };
     var amount;
