@@ -14,22 +14,26 @@ block content
               .form-group
                 label.col-sm-2.control-label(for='email') Email
                 .col-sm-10
-                  input.form-control(type='email', name='email', id='email', value='#{user.email}')
+                  input.form-control.hidden(type='email', name='email', id='email', value='#{user.email}')
+                  p.form-control-static= user.email
               .form-group
                 label.col-sm-2.control-label(for='name') 昵称
                 .col-sm-10
-                  input.form-control(type='text', name='name', id='name', value='#{user.profile.name}')
+                  input.form-control.hidden(type='text', name='name', id='name', value='#{user.profile.name}')
+                  p.form-control-static= user.profile.name
               .form-group
                 //- TODO: decorate radio button to iphone like
                 label.col-sm-2.control-label(for='gender') 性别
-                .col-sm-5
-                  label.radio
+                .col-sm-5.radio
+                  label.i-checks
                     input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
-                    span 男
-                .col-sm-5
-                  label.radio
+                    i
+                    | 男
+                .col-sm-5.radio
+                  label.i-checks
                     input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
-                    span 女
+                    i
+                    | 女
               .form-group
                 label.col-sm-2.control-label(for='location') 居住地
                 .col-sm-10
