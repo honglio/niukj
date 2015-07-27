@@ -1,27 +1,22 @@
-- if (comment && comment.user)
+if (comment && comment.user)
   - var name = comment.user.profile.name ? comment.user.profile.name : comment.user.email
 
   .comment
-    .row
-      .col-sm-12
-        .comment-thumb.pull-left
-          a(href='#')
-            img.img-circle(src='#{comment.user.profile.picture.url || comment.user.gravatar()}', height='40')
-        .comment-content(style="margin:0 50px;")
-          .comment-author
-            a(href='/account/'+comment.user._id)= name
-            | &nbsp;
-            span.time= timeSince(comment.createdAt)
+    a.comment-thumb.pull-left
+      img.img-circle(src='#{comment.user.profile.picture.url || comment.user.gravatar()}', height='40')
+    .comment-content.panel.panel-default
+      .panel-heading
+        span.comment-arrow.left
+        .comment-author
+          a(href='/account/'+comment.user.id)= name
+          .time.pull-right= timeSince(comment.createdAt)
             |  以前
-          blockquote.comment-text
-            = comment.body
-      - if (article.user && article.user.id === req.user.id)
-        p.text-muted
-          form.form-inline(role='form', method='POST', action='/articles/' + article._id + '/comments/' + comment._id, onsubmit='return confirm("你确定吗?")')
+      .panel-body
+        .comment-text= comment.body
+        if (article.user && req.user && comment.user.id === req.user.id)
+          form(role='form', method='POST', action='/articles/' + article._id + '/comments/' + comment._id, onsubmit='return confirm("你确定吗?")')
             input(type='hidden', name='_csrf', value=_csrf)
-            span.text-muted= formatDate(comment.createdAt)
-            | &#160;&#160;&#160;
             input(type='hidden', name='_method', value='DELETE')
-            button.btn.btn-danger.error(type='submit') Delete
-
-  br
+            button.btn.btn-danger.btn-xs(type='submit')
+              i.fa.fa-times
+              |  删除

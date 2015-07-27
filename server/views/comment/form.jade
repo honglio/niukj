@@ -1,5 +1,10 @@
-form.comment(method='POST', action='/articles/#{article._id}/comments', role='form')
-  input(type='hidden', name='_csrf', value=_csrf)
-  .form-group
-    textarea.form-control(type='text', rows='6', name='body', placeholder='在这里评论。。。')
-  button.btn.btn-primary(type='submit') 发表评论
+.comment.clearfix
+  if (req.user)
+    a.comment-thumb.pull-left
+      img.img-circle(src='#{req.user.profile.picture.url || req.user.gravatar()}', height='40')
+  form.comment-content(method='POST', action='/articles/#{article._id}/comments', role='form')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .input-group
+      input.form-control.input-lg(type='text', name='body', placeholder='在这里评论。。。')
+      span.input-group-btn
+        button.btn.btn-info.btn-lg(type='submit') 发表评论

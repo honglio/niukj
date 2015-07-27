@@ -2984,6 +2984,92 @@ a.text-#000000:hover {
   background-color: #dff0d8;
   border-color: #d6e9c6;
 }
+.i-checks {
+  padding-left: 20px;
+  cursor: pointer;
+}
+.i-checks input {
+  opacity: 0;
+  position: absolute;
+  margin-left: -20px;
+}
+.i-checks input:checked + i {
+  border-color: #53c5fd;
+}
+.i-checks input:checked + i:before {
+  left: 4px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: #53c5fd;
+}
+.i-checks input:checked + span .active {
+  display: inherit;
+}
+.i-checks input[type="radio"] + i,
+.i-checks input[type="radio"] + i:before {
+  border-radius: 50%;
+}
+.i-checks input[disabled] + i,
+fieldset[disabled] .i-checks input + i {
+  border-color: #eaeeef;
+}
+.i-checks input[disabled] + i:before,
+fieldset[disabled] .i-checks input + i:before {
+  background-color: #eaeeef;
+}
+.i-checks > i {
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  border: 1px solid #dce2e4;
+  background-color: #fff;
+  margin-left: -20px;
+  margin-top: -2px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+  position: relative;
+}
+.i-checks > i:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.i-checks > span {
+  margin-left: -20px;
+}
+.i-checks > span .active {
+  display: none;
+}
+.i-checks-sm input:checked + i:before {
+  left: 3px;
+  top: 3px;
+  width: 8px;
+  height: 8px;
+}
+.i-checks-sm > i {
+  width: 16px;
+  height: 16px;
+  margin-left: -18px;
+  margin-right: 6px;
+}
+.i-checks-lg input:checked + i:before {
+  left: 8px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+}
+.i-checks-lg > i {
+  width: 30px;
+  height: 30px;
+}
 /* Image Hover */
 /* Individual Caption Styles */
 /* Caption Style 1 */
@@ -3207,89 +3293,40 @@ a.text-#000000:hover {
   float: right;
   z-index: 1;
 }
-.i-checks {
-  padding-left: 20px;
-  cursor: pointer;
+.comment {
+  padding: 5px;
 }
-.i-checks input {
-  opacity: 0;
-  position: absolute;
-  margin-left: -20px;
+.comment-content {
+  margin-left: 80px;
 }
-.i-checks input:checked + i {
-  border-color: #53c5fd;
+.comment-author {
+  margin-top: -20px;
 }
-.i-checks input:checked + i:before {
-  left: 4px;
-  top: 4px;
-  width: 10px;
-  height: 10px;
-  background-color: #53c5fd;
+.comment-arrow {
+  z-index: 10;
+  border-width: 9px;
 }
-.i-checks input:checked + span .active {
-  display: inherit;
-}
-.i-checks input[type="radio"] + i,
-.i-checks input[type="radio"] + i:before {
-  border-radius: 50%;
-}
-.i-checks input[disabled] + i,
-fieldset[disabled] .i-checks input + i {
-  border-color: #eaeeef;
-}
-.i-checks input[disabled] + i:before,
-fieldset[disabled] .i-checks input + i:before {
-  background-color: #eaeeef;
-}
-.i-checks > i {
-  width: 20px;
-  height: 20px;
-  line-height: 1;
-  border: 1px solid #dce2e4;
-  background-color: #fff;
-  margin-left: -20px;
-  margin-top: -2px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 4px;
-  position: relative;
-}
-.i-checks > i:before {
+.comment-arrow:after {
+  border-width: 8px;
   content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0px;
-  height: 0px;
-  background-color: transparent;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
 }
-.i-checks > span {
-  margin-left: -20px;
+.comment-arrow.left {
+  left: -25px;
+  border-right-color: #dce2e4;
+  border-left-width: 0;
 }
-.i-checks > span .active {
-  display: none;
+.comment-arrow.left:after {
+  bottom: 8px;
+  left: 2px;
+  border-right-color: #f3f5f6;
+  border-left-width: 0;
 }
-.i-checks-sm input:checked + i:before {
-  left: 3px;
-  top: 3px;
-  width: 8px;
-  height: 8px;
-}
-.i-checks-sm > i {
-  width: 16px;
-  height: 16px;
-  margin-left: -18px;
-  margin-right: 6px;
-}
-.i-checks-lg input:checked + i:before {
-  left: 8px;
-  top: 8px;
-  width: 12px;
-  height: 12px;
-}
-.i-checks-lg > i {
-  width: 30px;
-  height: 30px;
+.comment-arrow,
+.comment-arrow:after {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
 }
