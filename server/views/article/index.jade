@@ -40,7 +40,19 @@ block content
                     |  #{article.love}
       - if (pages > 1)
         .row.text-center
-          ul.pagination
-            != createPagination(pages, page)
+          ul.pager
+            li
+              - var previous = page - 1 > 1 ? page - 1 : 1;
+              a(href="?page=#{previous}")
+                i.fa.fa-arrow-left
+                |  &nbsp;上一页
+            | &nbsp;&nbsp;&nbsp;&nbsp;
+            li
+              -var next = page + 1 < pages ? page + 1 : pages;
+              a(href="?page=#{next}")
+                | 下一页 &nbsp;
+                i.fa.fa-arrow-right
+          //- ul.pagination
+            //- != createPagination(pages, page)
     - else
       h4.text-muted.text-center 无课件！&nbsp; 亲，请在上方搜索栏中输入关键词，再搜索试试。
