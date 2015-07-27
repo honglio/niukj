@@ -1,3 +1,26 @@
+function BtnToggle(anchor) {
+    $(anchor + ' .edit').click(function(){
+        $(anchor + ' input').removeClass('hidden');
+        $(anchor + ' .save').removeClass('hidden');
+        $(anchor + ' p').hide();
+        $(this).hide();
+    });
+
+    $(anchor + ' .save').click(function() {
+        var $input = $(anchor + ' input');
+        var $p = $(anchor + ' p');
+        $input.addClass('hidden');
+        $p.text($input.val());
+        $(this).addClass('hidden');
+        $p.show();
+        $(anchor + ' .edit').show();
+    });
+}
+
+BtnToggle('#email');
+BtnToggle('#name');
+
+
 $('.submit-profile').click(function(e) {
     $('#profile').submit();
 });

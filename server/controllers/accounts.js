@@ -36,6 +36,10 @@ exports.accountbyId = function(req, res, next) {
 
     var contactId = req.params.uid;
 
+    // req.assert('uid', 'contactId is not a valid MongoId!').isMongoId();
+    // var errors = req.validationErrors();
+    // console.log(errors);
+
     var valid = validator.isMongoId(contactId);
     if (!valid) {
         req.flash('errors', {
@@ -237,6 +241,9 @@ exports.findContact = function(req, res) {
  */
 
 exports.load = function(req, res, next, id) {
+    // req.assert('uid', 'contactId is not a valid MongoId!').isMongoId();
+    // var errors = req.validationErrors();
+    // console.log(errors);
     var valid = validator.isMongoId(id);
     if (!valid) {
         req.flash('errors', {
