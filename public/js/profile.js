@@ -1,5 +1,5 @@
 function BtnToggle(anchor) {
-    $(anchor + ' .edit').click(function(){
+    $(anchor + ' .edit').click(function() {
         $(anchor + ' input').removeClass('hidden');
         $(anchor + ' .save').removeClass('hidden');
         $(anchor + ' p').hide();

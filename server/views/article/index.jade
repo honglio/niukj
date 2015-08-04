@@ -23,7 +23,7 @@ block content
                         i.text-muted.fa.fa-tag &nbsp;
                         a.tag(href="/tags/"+tag)= tag
                         | &nbsp;&nbsp;
-                  - if (article.user && article.user.id === req.user.id)
+                  if (article.user && req.user && article.user.id === req.user.id)
                     .image-buttons
                       a.btn.btn-dark(href='/articles/'+ article._id + '/manage')
                         i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='文档管理')

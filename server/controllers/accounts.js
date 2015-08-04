@@ -220,7 +220,7 @@ exports.addContact = function(req, res, next) {
 };
 
 exports.findContact = function(req, res) {
-    var searchStr = req.param('searchStr', null);
+    var searchStr = req.query.searchStr;
 
     if (null == searchStr) {
         res.send(400);

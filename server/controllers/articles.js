@@ -107,7 +107,7 @@ exports.explore = function(req, res) {
 
 exports.my = function(req, res) {
 
-    var page = (req.param.page > 0 ? req.param.page : 1) - 1;
+    var page = (req.query.page > 0 ? req.query.page : 1) - 1;
     var perPage = 8;
     var options = {
         perPage: perPage,

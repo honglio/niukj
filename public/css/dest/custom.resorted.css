@@ -1667,6 +1667,52 @@ pre,
 .has-switch {
     line-height: 1.62222;
 }
+.bootstrap-tagsinput {
+    display: inline-block;
+    max-width: 100%;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+    line-height: 22px;
+    color: #555555;
+    vertical-align: middle;
+    cursor: text;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.bootstrap-tagsinput input {
+    width: auto !important;
+    max-width: inherit;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.bootstrap-tagsinput input:focus {
+    border: none;
+    box-shadow: none;
+}
+.bootstrap-tagsinput .tag {
+    margin-right: 2px;
+    color: white;
+}
+.bootstrap-tagsinput .tag [data-role='remove'] {
+    margin-left: 8px;
+    cursor: pointer;
+}
+.bootstrap-tagsinput .tag [data-role='remove']:after {
+    padding: 0 2px;
+    content: 'x';
+}
+.bootstrap-tagsinput .tag [data-role='remove']:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.bootstrap-tagsinput .tag [data-role='remove']:hover:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
 .btn {
     font-weight: 500;
     border-radius: 2px;
@@ -2943,6 +2989,92 @@ a.text-#000000:hover {
     background-color: #dff0d8;
     border-color: #d6e9c6;
 }
+.i-checks {
+    padding-left: 20px;
+    cursor: pointer;
+}
+.i-checks input {
+    position: absolute;
+    margin-left: -20px;
+    opacity: 0;
+}
+.i-checks input:checked + i {
+    border-color: #53c5fd;
+}
+.i-checks input:checked + i:before {
+    top: 4px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    background-color: #53c5fd;
+}
+.i-checks input:checked + span .active {
+    display: inherit;
+}
+.i-checks input[type='radio'] + i,
+.i-checks input[type='radio'] + i:before {
+    border-radius: 50%;
+}
+.i-checks input[disabled] + i,
+fieldset[disabled] .i-checks input + i {
+    border-color: #eaeeef;
+}
+.i-checks input[disabled] + i:before,
+fieldset[disabled] .i-checks input + i:before {
+    background-color: #eaeeef;
+}
+.i-checks > i {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: -2px;
+    margin-right: 4px;
+    margin-left: -20px;
+    line-height: 1;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #dce2e4;
+}
+.i-checks > i:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    content: '';
+    background-color: transparent;
+    -webkit-transition: all 0.2s;
+            transition: all 0.2s;
+}
+.i-checks > span {
+    margin-left: -20px;
+}
+.i-checks > span .active {
+    display: none;
+}
+.i-checks-sm input:checked + i:before {
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+}
+.i-checks-sm > i {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    margin-left: -18px;
+}
+.i-checks-lg input:checked + i:before {
+    top: 8px;
+    left: 8px;
+    width: 12px;
+    height: 12px;
+}
+.i-checks-lg > i {
+    width: 30px;
+    height: 30px;
+}
 /* Image Hover */
 /* Individual Caption Styles */
 /* Caption Style 1 */
@@ -3165,4 +3297,41 @@ a.text-#000000:hover {
 .footer-right {
     z-index: 1;
     float: right;
+}
+.comment {
+    padding: 5px;
+}
+.comment-content {
+    margin-left: 80px;
+}
+.comment-author {
+    margin-top: -20px;
+}
+.comment-arrow {
+    z-index: 10;
+    border-width: 9px;
+}
+.comment-arrow:after {
+    content: '';
+    border-width: 8px;
+}
+.comment-arrow.left {
+    left: -25px;
+    border-right-color: #dce2e4;
+    border-left-width: 0;
+}
+.comment-arrow.left:after {
+    bottom: 8px;
+    left: 2px;
+    border-right-color: #f3f5f6;
+    border-left-width: 0;
+}
+.comment-arrow,
+.comment-arrow:after {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
 }

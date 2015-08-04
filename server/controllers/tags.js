@@ -10,7 +10,7 @@ exports.index = function(req, res) {
         tags: req.params.tag
     };
     var perPage = 5;
-    var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+    var page = (req.query.page > 0 ? req.query.page : 1) - 1;
     var options = {
         perPage: perPage,
         page: page,
@@ -23,7 +23,7 @@ exports.index = function(req, res) {
         }
         Article.count(criteria).exec(function(err, count) {
             res.render('article/index', {
-                title: '标签 ' + req.param('tag'),
+                title: '标签 ' + req.params.tag,
                 articles: articles,
                 page: page + 1,
                 pages: Math.ceil(count / perPage)

@@ -29,20 +29,15 @@ section#top-nav
             //- li
             //-   a(href='#lower-content') 价格表
             li
-              a.unscroll(href='/explore') 发现
+              a.unscroll(href='/articles/explore') 发现
 
         else if user
           ul.nav.nav-pills.navbar-nav
-            li(class=title=='探索课件'?'active':undefined)
-              a(href='/articles/explore') 探索课件
-            li(class=title=='我的课件'?'active':undefined)
-              a(href='/articles/my') 我的课件
             li(class=title=='创建课件'?'active':undefined)
               a(href='/articles/new') 创建课件
             //- li(class=title=='API Examples'?'active':undefined)
               a(href='/api') API Examples
-            li(class=title=='问题汇报'?'active':undefined)
-              a(href='#contactModal' data-toggle="modal") 问题汇报
+
           form#search-deck.search-form-full.navbar-left(role='search' method="GET" action="/articles")
             .form-group
               input.form-control(type='text' name='q' placeholder='课件标题...')
@@ -60,6 +55,8 @@ section#top-nav
                 | #{user.profile.name || user.email || user.id}&nbsp;
                 span.caret
               ul.dropdown-menu(role="menu")
+                li: a(href='/articles/my') 我的课件
+                li.divider
                 li: a(href='/account') 账户信息
                 li.divider
                 li: a(href='/account/password') 修改密码

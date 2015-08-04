@@ -143,7 +143,7 @@ module.exports = function(app, passport) {
     // article routes
     app.param('id', articles.load);
     app.get('/articles', passportConf.isAuthenticated, articles.search);
-    app.get('/articles/explore', passportConf.isAuthenticated, articles.explore);
+    app.get('/articles/explore', articles.explore);
     app.get('/articles/new', passportConf.isAuthenticated, articles.new);
     app.get('/articles/my', passportConf.isAuthenticated, articles.my);
     app.post('/articles', passportConf.isAuthenticated, articles.create);
