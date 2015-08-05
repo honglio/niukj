@@ -229,17 +229,23 @@ exports.desc = function(req, res) {
 
 var lastLover = {};
 exports.love = function(req, res) {
-    if (lastLover[req.user.email] == null) {
-        lastLover[req.user.email] = [];
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
+    console.log(ip);
+    if (lastLover[ip] == null) {
+        lastLover[ip] = [];
     }
 
-    if (lastLover[req.user.email].indexOf(req.article.fileName) === -1) {
-        req.article.love += 1;
+    if (lastLover[ip].indexOf(req.article.fileName) === -1) {
+        if (req.article.love) {
+            req.article.love += 1;
+        } else {
+            req.article.love = 1;
+        }
         req.article.save();
-        lastLover[req.user.email].push(req.article.fileName);
+        lastLover[ip].push(req.article.fileName);
+        console.log(req.article.love);
         return res.status(200).end('' + req.article.love);
     }
-
     res.status(200).end('' + req.article.love);
 };
 

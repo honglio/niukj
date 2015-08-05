@@ -3,7 +3,7 @@ extends ../layout
 block content
   .container
     .page-header
-      h2.text-center= title
+      .h2.text-center= title
     - if (articles.length)
       section#Grid.row
         - each article in articles
@@ -13,7 +13,7 @@ block content
                 a.cover-link(href='/articles/'+ article._id + '/present')
                 img.img-responsive(src=(article.picture.src || '/img/generic.png') alt='')
                 figcaption
-                  h4.text-center= article.fileName || '未命名'
+                  .h4.text-center= article.fileName || '未命名'
                   .meta
                     p=article.desc
 
@@ -54,5 +54,6 @@ block content
                 i.fa.fa-arrow-right
           //- ul.pagination
             //- != createPagination(pages, page)
+        section.blank
     - else
       h4.text-muted.text-center 无课件！&nbsp; 亲，请在上方搜索栏中输入关键词，再搜索试试。

@@ -12,49 +12,49 @@ block content
             form#profile.form-horizontal(name='profile' action='/account/profile', method='POST')
               input(type='hidden', name='_csrf', value=_csrf)
               #email.form-group
-                label.col-sm-2.control-label(for='email') Email
-                .col-sm-8
+                label.col-xs-2.control-label(for='email') Email
+                .col-xs-8
                   input.form-control.hidden(type='email', name='email', value='#{user.email}')
                   p.form-control-static= user.email
-                .col-sm-2
+                .col-xs-2
                   .edit.btn.btn-xs.btn-default
                     i.fa.fa-pencil
                   .save.btn.btn-xs.btn-success.hidden
                     i.fa.fa-save
               #name.form-group
-                label.col-sm-2.control-label(for='name') 昵称
-                .col-sm-8
+                label.col-xs-2.control-label(for='name') 昵称
+                .col-xs-8
                   input.form-control.hidden(type='text', name='name', value='#{user.profile.name}')
                   p.form-control-static= user.profile.name
-                .col-sm-2
+                .col-xs-2
                   .edit.btn.btn-xs.btn-default
                     i.fa.fa-pencil
                   .save.btn.btn-xs.btn-success.hidden
                     i.fa.fa-save
               .form-group
                 //- TODO: decorate radio button to iphone like
-                label.col-sm-2.control-label(for='gender') 性别
-                .col-sm-2.radio
+                label.col-xs-2.control-label(for='gender') 性别
+                .col-xs-2.radio
                   label.i-checks
                     input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
                     i
                     | 男
-                .col-sm-2.radio
+                .col-xs-2.radio
                   label.i-checks
                     input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
                     i
                     | 女
               .form-group
-                label.col-sm-2.control-label(for='location') 居住地
-                .col-sm-8
+                label.col-xs-2.control-label(for='location') 居住地
+                .col-xs-8
                   input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
               .form-group
-                label.col-sm-2.control-label(for='website') 个人网站
-                .col-sm-8
+                label.col-xs-2.control-label(for='website') 个人网站
+                .col-xs-8
                   input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
               .form-group
-                label.col-sm-2.control-label(for='gravatar') 个人头像
-                .col-sm-8
+                label.col-xs-2.control-label(for='gravatar') 个人头像
+                .col-xs-8
                   if (user.profile.picture.url)
                     //- = user.profile.picture
                     img(src="#{user.profile.picture.url}", class='profile', name='gravatar', width='100', height='100')
@@ -64,7 +64,7 @@ block content
                       #filePicker 点击上传头像
           footer.panel-footer.text-right.bg-light.lter
             .form-group.clearfix
-              .col-sm-4
+              .col-sm-4.col-xs-6
                 a.submit-profile.btn.btn-success.btn-addon(type='submit')
                   i.fa.fa-magnet
                   |  上传更新

@@ -71,7 +71,7 @@ script(type='text/javascript').
 //- Bootstrap CSS local fallback
 script(type='text/javascript').
   $(function() {
-    if($('body').css('color') !== 'rgb(51, 51, 51)') {
+    if($('body').css('color') !== 'rgb(51, 51, 51)') { // #333 in custom.js
       $("head").prepend('<link rel="stylesheet" href="/css/lib/bootstrap.min.css">')
     }
   });

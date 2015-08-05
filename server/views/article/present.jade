@@ -35,7 +35,7 @@ block content
   .container
     .present-footer
       .footer-left
-        .meta.h4
+        h4.meta
           | 创建于 &nbsp;
           span.text-muted= formatDate(article.createdAt, 'YYYY年MM月DD日')
           | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -43,9 +43,9 @@ block content
             span 作者 - &nbsp;
             - var name = article.user.profile.name ? article.user.profile.name : article.user.email
             a(href="/account/"+article.user._id)= name
-      .footer-right
-        .loves
-          i.fa.fa-heart.fa-2x.text-danger &nbsp;#{article.love}
+      //- .footer-right
+      //-   .loves
+      //-     i.fa.fa-heart.fa-2x.text-danger &nbsp;#{article.love}
     .comments
       h3 评论
       - each comment in article.comments
