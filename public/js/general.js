@@ -6,32 +6,32 @@ $(function() {
 
     // flex font size
     $('body').flowtype({
-       minimum : 500,
-       maximum : 1200
+        minimum: 500,
+        maximum: 1200
     });
     $('h1').flowtype({
-       minimum : 500,
-       maximum : 1200
+        minimum: 500,
+        maximum: 1200
     });
     $('h2').flowtype({
-       minimum : 500,
-       maximum : 1200
+        minimum: 500,
+        maximum: 1200
     });
     $('h3').flowtype({
-       minimum : 500,
-       maximum : 1200
+        minimum: 500,
+        maximum: 1200
     });
     $('h4').flowtype({
-       minimum : 500,
-       maximum : 1200
+        minimum: 500,
+        maximum: 1200
     });
     $('h5').flowtype({
-       minimum : 500,
-       maximum : 1200
+        minimum: 500,
+        maximum: 1200
     });
     $('h6').flowtype({
-       minimum : 500,
-       maximum : 1200
+        minimum: 500,
+        maximum: 1200
     });
 });
 
