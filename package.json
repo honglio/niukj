@@ -1,7 +1,7 @@
 {
   "name": "Niukj",
   "description": "An Online Exhibition Platform - upload & present your drawing art",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "private": true,
   "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
   "repository": {
