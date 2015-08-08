@@ -1540,6 +1540,18 @@ pre {
 .nopadding {
   padding: 0 !important;
 }
+.padding-sm {
+  padding: 5px 10px;
+}
+.padding-md {
+  padding: 6px 12px;
+}
+.padding-lg {
+  padding: 10px 16px;
+}
+.padding-xs {
+  padding: 1px 5px;
+}
 .invalid {
   border-color: #bf4040;
   background: #f2d9d9;

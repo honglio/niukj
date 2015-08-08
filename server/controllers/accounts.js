@@ -45,7 +45,7 @@ exports.accountbyId = function(req, res, next) {
         req.flash('errors', {
             msg: 'Is not a valid MongoId!'
         });
-        return res.redirect(req.session.returnTo || '/account/profile');
+        return res.redirect(req.session.returnTo || '/account');
     }
     Account.findById(req.user.id, function(err, user) {
         console.log(req.user.id);
@@ -117,7 +117,7 @@ exports.removeContact = function(req, res, next) {
         req.flash('errors', {
             msg: 'Is not a valid MongoId!'
         });
-        return res.redirect(req.session.returnTo || '/account/profile');
+        return res.redirect(req.session.returnTo || '/account');
     }
     Account.findById(req.user.id, function(err, user) {
         if (err) {
@@ -168,7 +168,7 @@ exports.addContact = function(req, res, next) {
         req.flash('errors', {
             msg: 'Is not a valid MongoId!'
         });
-        return res.redirect(req.session.returnTo || '/account/profile');
+        return res.redirect(req.session.returnTo || '/account');
     }
     // Missing contactId, don't bother going any further, or
     // contactId is the same as accountId, you can't add yourself as contact.
@@ -249,7 +249,7 @@ exports.load = function(req, res, next, id) {
         req.flash('errors', {
             msg: 'Is not a valid MongoId!'
         });
-        return res.redirect(req.session.returnTo || '/account/profile');
+        return res.redirect(req.session.returnTo || '/account');
     }
     Account.load(id, function(err, account) {
         if (err) {

@@ -74,17 +74,6 @@ exports.forgot = function(req, res) {
 };
 
 /**
- * GET /account
- * Profile page.
- */
-
-exports.account = function(req, res) {
-    res.render('account/profile', {
-        title: '账户信息'
-    });
-};
-
-/**
  * GET /api
  * List of API examples.
  */

@@ -4,88 +4,134 @@ block content
   .container
     section.page-header
     section.row
-      .col-sm-8.col-md-8
-        .panel.panel-default
-          .panel-heading
-            h5.text-center.panel-title.bolder= title
-          .panel-body
-            form#profile.form-horizontal(name='profile' action='/account/profile', method='POST')
-              input(type='hidden', name='_csrf', value=_csrf)
-              #email.form-group
-                label.col-xs-2.control-label(for='email') Email
-                .col-xs-8
-                  input.form-control.hidden(type='email', name='email', value='#{user.email}')
-                  p.form-control-static= user.email
-                .col-xs-2
-                  .edit.btn.btn-xs.btn-default
-                    i.fa.fa-pencil
-                  .save.btn.btn-xs.btn-success.hidden
-                    i.fa.fa-save
-              #name.form-group
-                label.col-xs-2.control-label(for='name') 昵称
-                .col-xs-8
-                  input.form-control.hidden(type='text', name='name', value='#{user.profile.name}')
-                  p.form-control-static= user.profile.name
-                .col-xs-2
-                  .edit.btn.btn-xs.btn-default
-                    i.fa.fa-pencil
-                  .save.btn.btn-xs.btn-success.hidden
-                    i.fa.fa-save
-              .form-group
-                //- TODO: decorate radio button to iphone like
-                label.col-xs-2.control-label(for='gender') 性别
-                .col-xs-2.radio
-                  label.i-checks
-                    input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
-                    i
-                    | 男
-                .col-xs-2.radio
-                  label.i-checks
-                    input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
-                    i
-                    | 女
-              .form-group
-                label.col-xs-2.control-label(for='location') 居住地
-                .col-xs-8
-                  input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
-              .form-group
-                label.col-xs-2.control-label(for='website') 个人网站
-                .col-xs-8
-                  input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
-              .form-group
-                label.col-xs-2.control-label(for='gravatar') 个人头像
-                .col-xs-8
-                  if (user.profile.picture.url)
-                    //- = user.profile.picture
-                    img(src="#{user.profile.picture.url}", class='profile', name='gravatar', width='100', height='100')
-                  else
-                    #uploader
-                      #filelist
-                      #filePicker 点击上传头像
-          footer.panel-footer.text-right.bg-light.lter
-            .form-group.clearfix
-              .col-sm-4.col-xs-6
-                a.submit-profile.btn.btn-success.btn-addon(type='submit')
-                  i.fa.fa-magnet
-                  |  上传更新
+      .col-xs-12.col-sm-3.col-md-3
+        .h4.text-center.panel-title.bolder= title
+        form#profile.form-horizontal(name='profile' action='/account/profile', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          #email.form-group
+            label.col-xs-3.control-label(for='email') Email
+            .col-xs-7
+              input.form-control.hidden(type='email', name='email', value='#{user.email}')
+              p.form-control-static= user.email
+            .col-xs-1
+              .edit.btn.btn-xs.btn-default
+                i.fa.fa-pencil
+              .save.btn.btn-xs.btn-success.hidden
+                i.fa.fa-save
+          #name.form-group
+            label.col-xs-3.control-label(for='name') 昵称
+            .col-xs-7
+              input.form-control.hidden(type='text', name='name', value='#{user.profile.name}')
+              p.form-control-static= user.profile.name
+            .col-xs-1
+              .edit.btn.btn-xs.btn-default
+                i.fa.fa-pencil
+              .save.btn.btn-xs.btn-success.hidden
+                i.fa.fa-save
+          .form-group
+            //- TODO: decorate radio button to iphone like
+            label.col-xs-3.control-label(for='gender') 性别
+            .col-xs-2.radio
+              label.i-checks
+                input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
+                i
+                | 男
+            .col-xs-2.radio
+              label.i-checks
+                input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
+                i
+                | 女
+          .form-group
+            label.col-xs-3.control-label(for='location') 位置
+            .col-xs-7
+              input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
+          .form-group
+            label.col-xs-3.control-label(for='website') 个人网站
+            .col-xs-7
+              input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
+          .form-group
+            label.col-xs-3.control-label(for='gravatar') 个人头像
+            .col-xs-8
+              if (user.profile.picture.url)
+                //- = user.profile.picture
+                img(src="#{user.profile.picture.url}", class='profile', name='gravatar', width='100', height='100')
+              else
+                #uploader
+                  #filelist
+                  #filePicker 点击上传头像
+        .text-right
+          .form-group.clearfix
+            a.submit-profile.btn.btn-success.btn-block.btn-addon(type='submit')
+              i.fa.fa-magnet
+              |  更新资料
 
+        .text-center
+          .col-sm-4.col-xs-12.padding-lg.bg-info
+            span.h3.text-white #{user.contacts.followers.length}
+            a.text-muted(href='/account/' + user.id + '/followers') 粉丝
+          .col-sm-4.col-xs-12.bg-info.dker.padding-lg
+            span.h3.text-white #{user.contacts.followings.length}
+            a.text-muted(href='/account/' + user.id + '/followings') 关注
+          .col-sm-4.col-xs-12.padding-lg.bg-info
+            span.h3.text-white #{user.viewNum}
+            small.text-muted 观看
 
-      .col-sm-4.col-md-4
+      .col-xs-12.col-sm-9.col-md-9
         .panel.panel-default
-          .panel-heading
-            h5.text-center.panel-title.bolder 朋友圈
           .panel-body
-            ul.profile-info-sections.text-center
-              li
-                .profile-stat
-                  h3 #{user.contacts.followers.length}
-                  span
-                    a(href='/account/' + user.id + '/followers') 粉丝
-              li
-                .profile-stat
-                  h3 #{user.contacts.followings.length}
-                  span
-                    a(href='/account/' + user.id + '/followings') 关注
+            if (articles.length)
+              section#Grid.row
+                each article in articles
+                  .col-xs-12.col-sm-6.col-md-4
+                    .grid.cs-style-1
+                      figure.single-deck
+                        a.cover-link(href='/articles/'+ article._id + '/present')
+                        img.img-responsive(src=(article.picture.src || '/img/generic.png') alt='')
+                        figcaption
+                          .h4.text-center= article.fileName || '未命名'
+                          .meta
+                            p=article.desc
+
+                            if (article.tags.length)
+                              span 标签 - &nbsp;
+                              - each tag in article.tags
+                                i.text-muted.fa.fa-tag &nbsp;
+                                a.tag(href="/tags/"+tag)= tag
+                                | &nbsp;&nbsp;
+                          if (article.user && req.user && article.user.id === req.user.id)
+                            .image-buttons
+                              a.btn.btn-dark(href='/articles/'+ article._id + '/manage')
+                                i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='文档管理')
+                      .meta.group.clearfix
+                        .stats
+                          .single-stat.comments
+                            i.fa.fa-comment
+                            |  #{article.comments.length}
+                          .single-stat.views
+                            i.fa.fa-eye
+                            |  #{article.hitCounter}
+                          .single-stat.loves
+                            i.fa.fa-heart
+                            |  #{article.love}
+              if (pages > 1)
+                .row.text-center
+                  ul.pager
+                    li
+                      - var previous = page - 1 > 1 ? page - 1 : 1;
+                      a(href="?page=#{previous}")
+                        i.fa.fa-arrow-left
+                        |  &nbsp;上一页
+                    | &nbsp;&nbsp;&nbsp;&nbsp;
+                    li
+                      -var next = page + 1 < pages ? page + 1 : pages;
+                      a(href="?page=#{next}")
+                        | 下一页 &nbsp;
+                        i.fa.fa-arrow-right
+                  //- ul.pagination
+                    //- != createPagination(pages, page)
+                section.blank
+            else
+              h4.text-muted.text-center 无课件！&nbsp; 亲，请在上方搜索栏中输入关键词，再搜索试试。
 
 append head
   link(rel="stylesheet", href='/css/webuploader.css', type='text/css')

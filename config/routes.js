@@ -37,7 +37,6 @@ module.exports = function(app, passport) {
      * Web page routes.
      */
     app.get('/', index.home);
-    app.get('/account', passportConf.isAuthenticated, index.account);
     app.get('/login', index.login);
     app.get('/logout', index.logout);
     app.get('/signup', index.signup);
@@ -63,9 +62,10 @@ module.exports = function(app, passport) {
      * user account routes.
      */
     app.param('uid', accounts.load);
-    app.post('/contacts/find/:str', passportConf.isAuthenticated, accounts.findContact);
+    app.get('/account', passportConf.isAuthenticated, articles.my);
     app.post('/account/profile', passportConf.isAuthenticated, accounts.postUpdateProfile);
     app.post('/account/password', passportConf.isAuthenticated, accounts.postUpdatePassword);
+    app.post('/account/uploadProfileImg', passportConf.isAuthenticated, accounts.uploadProfileImg);
     app.get('/account/manage', passportConf.isAuthenticated, accounts.getManage);
     app.post('/account/delete', passportConf.isAuthenticated, accounts.postDeleteAccount);
     app.get('/account/unlink/:provider', passportConf.isAuthenticated, accounts.getOauthUnlink);
@@ -75,7 +75,8 @@ module.exports = function(app, passport) {
     app.get('/account/:uid/followings', passportConf.isAuthenticated, accounts.followingbyId);
     app.post('/account/:uid/contact', passportConf.isAuthenticated, accounts.addContact);
     app.delete('/account/:uid/contact', passportConf.isAuthenticated, accounts.removeContact);
-    app.post('/account/uploadProfileImg', passportConf.isAuthenticated, accounts.uploadProfileImg);
+    app.post('/contacts/find/:str', passportConf.isAuthenticated, accounts.findContact);
+
     /**
      * 3rd party account routes.
      */
@@ -144,7 +145,6 @@ module.exports = function(app, passport) {
     app.get('/articles', passportConf.isAuthenticated, articles.search);
     app.get('/articles/explore', articles.explore);
     app.get('/articles/new', passportConf.isAuthenticated, articles.new);
-    app.get('/articles/my', passportConf.isAuthenticated, articles.my);
     app.post('/articles', passportConf.isAuthenticated, articles.create);
     app.get('/articles/:id/manage', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.show);
     app.get('/articles/:id/get', passportConf.isAuthenticated, articles.getContent);

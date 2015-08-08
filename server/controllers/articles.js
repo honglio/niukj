@@ -108,7 +108,7 @@ exports.explore = function(req, res) {
 exports.my = function(req, res) {
 
     var page = (req.query.page > 0 ? req.query.page : 1) - 1;
-    var perPage = 8;
+    var perPage = 9;
     var options = {
         perPage: perPage,
         page: page,
@@ -128,8 +128,8 @@ exports.my = function(req, res) {
             } else {
                 amount = count;
             }
-            res.render('article/index', {
-                title: '我的课件',
+            res.render('account/profile', {
+                title: '用户资料',
                 articles: articles,
                 page: page + 1,
                 pages: Math.ceil(amount / perPage),
