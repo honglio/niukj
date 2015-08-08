@@ -65,7 +65,6 @@ module.exports = function(app, passport) {
     app.param('uid', accounts.load);
     app.post('/contacts/find/:str', passportConf.isAuthenticated, accounts.findContact);
     app.post('/account/profile', passportConf.isAuthenticated, accounts.postUpdateProfile);
-    app.get('/account/password', passportConf.isAuthenticated, accounts.getUpdatePassword);
     app.post('/account/password', passportConf.isAuthenticated, accounts.postUpdatePassword);
     app.get('/account/manage', passportConf.isAuthenticated, accounts.getManage);
     app.post('/account/delete', passportConf.isAuthenticated, accounts.postDeleteAccount);

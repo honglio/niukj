@@ -335,17 +335,6 @@ exports.uploadProfileImg = function(req, res, next) {
 };
 
 /**
- * GET /account/password
- * Send Update password page.
- */
-
-exports.getUpdatePassword = function(req, res) {
-    res.render('account/reset', {
-        title: '密码修改'
-    });
-};
-
-/**
  * POST /account/password
  * Update current password.
  * @param password

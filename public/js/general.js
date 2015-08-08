@@ -5,10 +5,6 @@ $(function() {
     });
 
     // flex font size
-    $('body').flowtype({
-        minimum: 500,
-        maximum: 1200
-    });
     $('h1').flowtype({
         minimum: 500,
         maximum: 1200
