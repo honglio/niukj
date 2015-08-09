@@ -30,7 +30,7 @@ exports.postLogin = function(req, res, next) {
             return next(err);
         }
         if (!user) {
-            console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++');
+            // console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++');
             req.flash('errors', {
                 msg: info.message
             });
@@ -46,7 +46,7 @@ exports.postLogin = function(req, res, next) {
                 msg: 'Success! You are logged in.'
             });
             // res.redirect(req.session.returnTo || '/');
-            res.redirect('/articles');
+            res.redirect('/account');
         });
     })(req, res, next);
 };
