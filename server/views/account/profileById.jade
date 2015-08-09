@@ -80,10 +80,7 @@ block content
                                 i.text-muted.fa.fa-tag &nbsp;
                                 a.tag(href="/tags/"+tag)= tag
                                 | &nbsp;&nbsp;
-                          if (article.user && req.user && article.user.id === req.user.id)
-                            .image-buttons
-                              a.btn.btn-dark(href='/articles/'+ article._id + '/manage')
-                                i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='文档管理')
+
                       .meta.group.clearfix
                         .stats
                           .single-stat.comments
@@ -105,7 +102,7 @@ block content
                         |  &nbsp;上一页
                     | &nbsp;&nbsp;&nbsp;&nbsp;
                     li
-                      -var next = page + 1 < pages ? page + 1 : pages;
+                      - var next = page + 1 < pages ? page + 1 : pages;
                       a(href="?page=#{next}")
                         | 下一页 &nbsp;
                         i.fa.fa-arrow-right
@@ -113,4 +110,4 @@ block content
                     //- != createPagination(pages, page)
                 section.blank
             else
-              h4.text-muted.text-center
+              h4.text-muted.text-center 无课件了！
