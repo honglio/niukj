@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Account = mongoose.model('Account');
+var Article = mongoose.model('Article');
+var utils = require('../../lib/utils');
 var _ = require('underscore');
 var fs = require('fs');
 var config = require('../../config/config');
@@ -47,28 +49,72 @@ exports.accountbyId = function(req, res, next) {
         });
         return res.redirect(req.session.returnTo || '/account');
     }
-    Account.findById(req.user.id, function(err, user) {
-        console.log(req.user.id);
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            return next(new Error('not found'));
-        }
 
-        if (Account.hasFollowing(user, contactId)) {
-            res.render('account/profileById', {
-                title: '用户资料',
-                account: req.account,
-                followed: true
-            });
-        } else {
-            res.render('account/profileById', {
-                title: '用户资料',
-                account: req.account,
-                followed: false
-            });
+    var page = (req.query.page > 0 ? req.query.page : 1) - 1;
+    var perPage = 9;
+    var options = {
+        perPage: perPage,
+        page: page,
+        criteria: {
+            user: req.account
         }
+    };
+    var amount;
+
+    Article.list(options, function(err, articles) {
+        if (err) {
+            return res.render('500');
+        }
+        Article.count().exec(function(err, count) {
+            if (count > perPage && articles.length < perPage) {
+                amount = articles.length + perPage * page;
+            } else {
+                amount = count;
+            }
+            if (!req.user) {
+                res.render('account/profileById', {
+                    title: '用户资料',
+                    account: req.account,
+                    articles: articles,
+                    page: page + 1,
+                    pages: Math.ceil(amount / perPage),
+                    formatDate: utils.formatDate,
+                    followed: false
+                });
+            } else {
+                Account.findById(req.user.id, function(err, user) {
+                    // console.log(req.user.id);
+                    if (err) {
+                        return next(err);
+                    }
+                    if (!user) {
+                        return next(new Error('not found'));
+                    }
+
+                    if (Account.hasFollowing(user, contactId)) {
+                        res.render('account/profileById', {
+                            title: '用户资料',
+                            account: req.account,
+                            articles: articles,
+                            page: page + 1,
+                            pages: Math.ceil(amount / perPage),
+                            formatDate: utils.formatDate,
+                            followed: true
+                        });
+                    } else {
+                        res.render('account/profileById', {
+                            title: '用户资料',
+                            account: req.account,
+                            articles: articles,
+                            page: page + 1,
+                            pages: Math.ceil(amount / perPage),
+                            formatDate: utils.formatDate,
+                            followed: false
+                        });
+                    }
+                });
+            }
+        });
     });
 };
 

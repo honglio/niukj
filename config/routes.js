@@ -70,7 +70,7 @@ module.exports = function(app, passport) {
     app.post('/account/delete', passportConf.isAuthenticated, accounts.postDeleteAccount);
     app.get('/account/unlink/:provider', passportConf.isAuthenticated, accounts.getOauthUnlink);
 
-    app.get('/account/:uid', passportConf.isAuthenticated, accounts.accountbyId);
+    app.get('/account/:uid', accounts.accountbyId);
     app.get('/account/:uid/followers', passportConf.isAuthenticated, accounts.followerbyId);
     app.get('/account/:uid/followings', passportConf.isAuthenticated, accounts.followingbyId);
     app.post('/account/:uid/contact', passportConf.isAuthenticated, accounts.addContact);

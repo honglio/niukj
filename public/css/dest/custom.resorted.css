@@ -1544,6 +1544,18 @@ pre {
 .nopadding {
     padding: 0 !important;
 }
+.padding-sm {
+    padding: 5px 10px;
+}
+.padding-md {
+    padding: 6px 12px;
+}
+.padding-lg {
+    padding: 10px 16px;
+}
+.padding-xs {
+    padding: 1px 5px;
+}
 .invalid {
     background: #f2d9d9;
     border-color: #bf4040;
@@ -3334,4 +3346,91 @@ fieldset[disabled] .i-checks input + i:before {
     height: 0;
     border-color: transparent;
     border-style: solid;
+}
+.profile-info {
+    color: #ffffff;
+    background-color: #999999;
+}
+.profile-info.lt,
+.profile-info .lt {
+    background-color: #a6a6a6;
+}
+.profile-info.lter,
+.profile-info .lter {
+    background-color: #b3b3b3;
+}
+.profile-info.dk,
+.profile-info .dk {
+    background-color: #8f8989;
+}
+.profile-info.dker,
+.profile-info .dker {
+    background-color: #867979;
+}
+.profile-info.bg,
+.profile-info .bg {
+    background-color: #999999;
+}
+.profile-info a {
+    color: #ffffff;
+}
+.profile-info a:hover {
+    color: #ffffff;
+}
+.profile-info a.list-group-item:hover,
+.profile-info a.list-group-item:focus {
+    background-color: inherit;
+}
+.profile-info .nav > li:hover > a,
+.profile-info .nav > li:focus > a,
+.profile-info .nav > li.active > a {
+    color: #ffffff;
+    background-color: #8f8989;
+}
+.profile-info .nav > li > a {
+    color: #f2f2f2;
+}
+.profile-info .nav > li > a:hover,
+.profile-info .nav > li > a:focus {
+    background-color: #948f8f;
+}
+.profile-info .nav .open > a {
+    background-color: #8f8989;
+}
+.profile-info .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+.profile-info.navbar .nav > li.active > a {
+    color: #ffffff;
+    background-color: #8f8989;
+}
+.profile-info .open > a,
+.profile-info .open > a:hover,
+.profile-info .open > a:focus {
+    color: #ffffff;
+}
+.profile-info .text-muted {
+    color: #e6e6e6 !important;
+}
+.profile-info .text-lt {
+    color: #ffffff !important;
+}
+.profile-info.auto .list-group-item,
+.profile-info .auto .list-group-item {
+    background-color: transparent;
+    border-color: #8c8c8c !important;
+}
+.profile-info.auto .list-group-item:hover,
+.profile-info .auto .list-group-item:hover,
+.profile-info.auto .list-group-item:focus,
+.profile-info .auto .list-group-item:focus,
+.profile-info.auto .list-group-item:active,
+.profile-info .auto .list-group-item:active,
+.profile-info.auto .list-group-item.active,
+.profile-info .auto .list-group-item.active {
+    background-color: #8f8989 !important;
+}
+.profile-stat {
+    padding: 5px;
 }

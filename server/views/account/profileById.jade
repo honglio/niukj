@@ -3,69 +3,117 @@ extends ../layout
 block content
   .container
     section.page-header
-      h2.text-center= title
     section.row
-      .col-sm-2.col-sm-offset-2
-        a.profile-picture(href='#')
-          img.img-responsive.img-circle(src='#{account.profile.picture.url || account.gravatar()}')
-      .col-sm-4
-        ul.profile-info-sections
-          li
-            .profile-stat
-              h6
-                i.fa.fa-user
-                | &nbsp; 用户名：
-                span=  account.profile.name || '未填'
-          li
-            .profile-stat
-              p
-                i.fa.fa-envelope
-                | &nbsp; 电子邮件：
-                span= account.email || '未填'
-          li
-            .profile-stat
-              p
-                i.fa.fa-map-marker
-                | &nbsp; 地址：
-                span= account.profile.location || '未填'
-          li
-            .profile-stat
-              p
-                i.fa.fa-briefcase
-                | &nbsp; 网站：
-                span= account.profile.website || '未填'
-          li
-            .profile-stat
-              p
-                i.fa.fa-male
-                | &nbsp; 性别：
-                span= account.profile.gender || '未填'
+      .col-xs-12.col-sm-3
+        .h3.text-center= title
+        img.padding-lg.img-responsive.img-circle(src='#{account.profile.picture.url || account.gravatar()}')
+
+        .text-center.padding-lg
+          .text-muted
+            .h4=  account.profile.name || '未填'
+
+        ul.profile-info.text-center
+          //- li.padding-xs
+          //-   .profile-stat
+          //-     p
+          //-       i.fa.fa-envelope
+          //-       | &nbsp;：
+          //-       span= account.email || '未填'
+          li.padding-xs
+            .profile-stat.vcenter
+              i.fa.fa-map-marker
+              | &nbsp;：
+              span= account.profile.location || '未填'
+          li.padding-xs
+            .profile-stat.vcenter
+              i.fa.fa-briefcase
+              | &nbsp;：
+              span= account.profile.website || '未填'
+          li.padding-xs
+            .profile-stat.vcenter
+              i.fa.fa-male
+              | /
+              i.fa.fa-female
+              | &nbsp;：
+              span= account.profile.gender || '未填'
+
+        .text-center
+          .col-sm-4.col-xs-12.padding-lg.bg-info
+            span.h5.text-white #{account.contacts.followers.length}
+            | &nbsp;
+            a.text-muted(href='/account/' + account.id + '/followers') 粉丝
+          .col-sm-4.col-xs-12.bg-info.dker.padding-lg
+            span.h5.text-white #{account.contacts.followings.length}
+            | &nbsp;
+            a.text-muted(href='/account/' + account.id + '/followings') 关注
+          .col-sm-4.col-xs-12.padding-lg.bg-info
+            span.h5.text-white #{account.viewNum}
+            span.text-muted  观看
 
         form.form-horizontal(action='/account/' + account.id + '/contact' method='POST' enctype="application/x-www-form-urlencoded")
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
           if !followed
-            button.btn.btn-primary.btn-addon(type='submit')
+            button.btn.btn-primary.btn-addon.btn-block(type='submit')
               i.fa.fa-eye
               |  关注
           else
-            button.btn.btn-danger.btn-addon(type="submit" name="_method", value="DELETE")
+            button.btn.btn-danger.btn-addon.btn-block(type="submit" name="_method", value="DELETE")
               i.fa.fa-unlink
               |  取消关注
+      .col-xs-12.col-sm-9
+        .panel.panel-default
+          .panel-body
+            if (articles.length)
+              section#Grid.row
+                each article in articles
+                  .col-xs-12.col-sm-6.col-md-4
+                    .grid.cs-style-1
+                      figure.single-deck
+                        a.cover-link(href='/articles/'+ article._id + '/present')
+                        img.img-responsive(src=(article.picture.src || '/img/generic.png') alt='')
+                        figcaption
+                          .h4.text-center= article.fileName || '未命名'
+                          .meta
+                            p=article.desc
 
-      .col-sm-4
-        ul.follow-info
-          li
-            .profile-stat
-              h3 #{account.contacts.followers.length}
-              span
-                a(href='/account/' + account.id + '/followers') 粉丝
-          li
-            .profile-stat
-              h3 #{account.contacts.followings.length}
-              span
-                a(href='/account/' + account.id + '/followings') 关注
-
-
-
-
+                            if (article.tags.length)
+                              span 标签 - &nbsp;
+                              - each tag in article.tags
+                                i.text-muted.fa.fa-tag &nbsp;
+                                a.tag(href="/tags/"+tag)= tag
+                                | &nbsp;&nbsp;
+                          if (article.user && req.user && article.user.id === req.user.id)
+                            .image-buttons
+                              a.btn.btn-dark(href='/articles/'+ article._id + '/manage')
+                                i.fa.fa-edit(data-toggle='tooltip', data-placement='top', title='文档管理')
+                      .meta.group.clearfix
+                        .stats
+                          .single-stat.comments
+                            i.fa.fa-comment
+                            |  #{article.comments.length}
+                          .single-stat.views
+                            i.fa.fa-eye
+                            |  #{article.hitCounter}
+                          .single-stat.loves
+                            i.fa.fa-heart
+                            |  #{article.love}
+              if (pages > 1)
+                .row.text-center
+                  ul.pager
+                    li
+                      - var previous = page - 1 > 1 ? page - 1 : 1;
+                      a(href="?page=#{previous}")
+                        i.fa.fa-arrow-left
+                        |  &nbsp;上一页
+                    | &nbsp;&nbsp;&nbsp;&nbsp;
+                    li
+                      -var next = page + 1 < pages ? page + 1 : pages;
+                      a(href="?page=#{next}")
+                        | 下一页 &nbsp;
+                        i.fa.fa-arrow-right
+                  //- ul.pagination
+                    //- != createPagination(pages, page)
+                section.blank
+            else
+              h4.text-muted.text-center
