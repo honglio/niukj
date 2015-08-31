@@ -98,6 +98,19 @@
     background-position:top right;
 }
 
+#backtoList {
+    position:fixed;
+    right: 45px;
+    top: 35px;
+    cursor:pointer;
+    opacity:0.8;
+    border:none !important;
+    text-decoration:none !important;
+
+    -moz-transition:0.2s opacity;
+    -webkit-transition:0.2s opacity;
+    transition:0.2s opacity;
+}
 /* Hide the arrows if impress is not supported */
 
 #impress.impress-not-supported + .arrow,
