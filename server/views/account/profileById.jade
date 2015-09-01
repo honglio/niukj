@@ -4,10 +4,10 @@ block content
   .container
     section.page-header
     section.row
-      .col-xs-12.col-sm-3
-        .h3.text-center= title
-        img.padding-lg.img-responsive.img-circle(src='#{account.profile.picture.url || account.gravatar()}')
-        .text-muted.text-center.padding-lg.h4=  account.profile.name || '未填'
+      .col-xs-12.col-sm-3.text-center
+        .h3= title
+        img.padding-lg.img-responsive.img-circle.center-image(src='#{account.profile.picture.url || account.gravatar()}')
+        .text-muted.padding-lg.h4=  account.profile.name || '未填'
 
         ul.profile-info.text-center
           //- li.padding-xs
@@ -58,6 +58,7 @@ block content
             button.btn.btn-danger.btn-addon.btn-block(type="submit" name="_method", value="DELETE")
               i.fa.fa-unlink
               |  取消关注
+        br
       .col-xs-12.col-sm-9
         .panel.panel-default
           .panel-body
