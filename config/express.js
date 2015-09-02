@@ -129,7 +129,7 @@ module.exports = function(app, passport) {
     if (config.env === 'production') {
         app.set('views', join(config.root, '/built/server/views'));
         app.use(express.static(join(config.root, '/built'), {
-            maxAge: 30 * 1000
+            maxAge: 30 * 1000 * 60 * 60 * 24
         }));
         app.use(favicon(join(config.root, '/built/img/ico/favicon.ico')));
     } else {
