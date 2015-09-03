@@ -48,26 +48,26 @@ meta(name="msapplication-TileImage", content="/img/ico/mstile-144x144.png")
 meta(name="theme-color", content="#ffffff")
 
 //- Bootstrap CSS CDN
-link(rel='stylesheet' href='http://lib.sinaapp.com/js/bootstrap/3.0.0/css/bootstrap.min.css' type='text/css')
+link(rel='stylesheet' href='http://libs.baidu.com/bootstrap/3.3.4/css/bootstrap.min.css' type='text/css')
 //- Custom Font
 link(rel='stylesheet', href='/css/font.css', type='text/css')
 //- Custom Bootstrap
 link(rel='stylesheet', href='/css/custom.css', type='text/css')
 //- Custom font-icon
-link(rel='stylesheet' href='http://libs.baidu.com/fontawesome/4.1.0/css/font-awesome.min.css' type='text/css')
+link(rel='stylesheet' href='http://libs.baidu.com/fontawesome/4.2.0/css/font-awesome.min.css' type='text/css')
 
 //- jQuery CDN
 script(type='text/javascript' src='http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js')
 //- jQuery local fallback
 script(type='text/javascript').
   if (typeof jQuery === 'undefined')
-    document.write("<script type='text/javascript' src='/js/vendors/jquery.js'>")
+    document.write("<script type='text/javascript' src='/js/vendors/jquery.min.js'>")
 //- Bootstrap JS CDN
-script(type='text/javascript' src='http://lib.sinaapp.com/js/bootstrap/3.0.0/js/bootstrap.min.js')
+script(type='text/javascript' src='http://libs.baidu.com/bootstrap/3.3.4/js/bootstrap.min.js')
 //- Bootstrap JS local fallback
 script(type='text/javascript').
   if (typeof jQuery.fn.modal === 'undefined')
-    document.write("<script type='text/javascript' src='/js/vendors/bootstrap.js'>")
+    document.write("<script type='text/javascript' src='/js/vendors/bootstrap.min.js'>")
 //- Bootstrap CSS local fallback
 script(type='text/javascript').
   $(function() {
