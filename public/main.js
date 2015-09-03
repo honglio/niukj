@@ -1,10 +1,10 @@
 require.config({
     paths: {
         // vendor file
-        jquery: 'js/vendors/jquery',
+        jquery: 'js/vendors/jquery.min',
         underscore: 'js/vendors/underscore',
         backbone: "js/vendors/backbone",
-        bootstrap: 'js/vendors/bootstrap',
+        bootstrap: 'js/vendors/bootstrap.min',
         css: "js/vendors/css",
         hbs: 'js/vendors/hbs',
         etch: "js/vendors/etch/etch",
