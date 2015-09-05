@@ -1,12 +1,8 @@
 section#top-nav
   .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
     .navbar-header
-      if !user
-        a.navbar-brand.logo(href='/')
-          img(src='/img/ico/android-chrome-48x48.png' alt="展书")
-      else
-        a.navbar-brand.logo(href='#')
-          img(src='/img/ico/android-chrome-48x48.png' alt="展书")
+      a.navbar-brand.logo(href='/')
+        img(src='/img/ico/android-chrome-48x48.png' alt="展书")
       button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-collapse')
         span.sr-only Toggle navigation
         span.icon-bar

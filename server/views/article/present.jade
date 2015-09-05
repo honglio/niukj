@@ -30,8 +30,13 @@ block content
                     img(src='#{component.src}')
                   - if (component.type == 'TextBox')
                     div(style="font-family:#{component.face}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-decoration: #{component.decoration}; text-align: #{component.align}")= component.text
-      a#backtoList(href="/articles/explore")
-        i.fa.fa-2x.fa-list
+      if !user
+        a#backtoList(href="/articles/explore")
+          i.fa.fa-2x.fa-list
+      else
+        a#backtoList(href="/account")
+          i.fa.fa-2x.fa-list
+
       a#arrowLeft.arrow &lt;
       a#arrowRight.arrow &gt;
   .container

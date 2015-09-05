@@ -15,6 +15,9 @@ exports.notfound = function(req, res) {
  */
 
 exports.home = function(req, res) {
+    if (req.isAuthenticated()) {
+        return res.redirect(req.session.returnTo || '/account');
+    }
     res.render('home', {
         title: '首页'
     });
