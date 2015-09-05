@@ -255,10 +255,6 @@
     #top-nav {
         padding: 0 20px;
     }
-    .navbar .navbar-brand {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
     .navbar .nav-collapse .nav.pull-right {
         margin-bottom: 0;
     }

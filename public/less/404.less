@@ -1,0 +1,36 @@
+.error-template {
+    margin-top: -150px;
+    margin-bottom: 50px;
+    h1 {
+        font-size: 1400%;
+        font-weight: 700;
+        letter-spacing: 0;
+        padding: .25em 0 .325em;
+        display: block;
+        margin-bottom: -100px;
+        text-shadow: 0 0 80px rgba(255, 255, 255, .5);
+        background: url(../img/theme/slideback-blue.jpg) repeat-y;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: aitf 80s linear infinite;
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+    }
+    h2 {
+        margin-bottom: 4px;
+        font-size: 700%;
+    }
+}
+
+@media (max-width: 568px) {
+    .error-template {
+        h1 {
+            margin-top: 50px;
+            font-size: 900%;
+        }
+        h2 {
+            margin-bottom: 4px;
+            font-size: 400%;
+        }
+    }
+}
