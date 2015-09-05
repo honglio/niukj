@@ -211,7 +211,13 @@
     }
 }
 /* Landscape phone to portrait tablet */
-/*@media (max-width: 767px) {}*/
+@media (max-width: 767px) {
+    #tour-9 {
+        display: block;
+        text-align: center;
+    }
+}
+
 /* Landscape iphone5 and down */
 
 @media (max-width: 568px) {
