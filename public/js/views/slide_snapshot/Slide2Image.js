@@ -22,7 +22,7 @@ define(['jquery'], function($) {
         // sends the generated file to the client
         var saveFile = function(strData, deckId, cb) {
             $.ajax({
-                    url: '/articles/uploadImg',
+                    url: '/articles/uploadCoverImg',
                     type: 'POST',
                     data: {
                         src: strData,

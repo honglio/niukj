@@ -23,7 +23,8 @@ module.exports = {
     whitelist: [
         '/login',
         '/account/uploadProfileImg',
-        '/articles/uploadImg'
+        '/articles/uploadImg',
+        '/articles/uploadCoverImg'
     ],
     mail: {
         service: "user_log",

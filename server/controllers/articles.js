@@ -5,7 +5,9 @@ var mongoose = require('mongoose'),
     math2 = require('../../lib/math2'),
     config = require('../../config/config'),
     OSS = require('aliyun-oss'),
+    fs = require('fs'),
     validator = require('validator');
+
 /**
  * Load
  */
@@ -327,8 +329,19 @@ exports.present = function(req, res) {
     });
 };
 
-
 exports.uploadImg = function(req, res, next) {
+    var type = req.body.type.replace('image/', '.')
+    var filename = 'uploads/' + math2.genRand() + type;
+    var data = req.body.src.replace(/^data:image\/\w+;base64,/, "");
+    fs.writeFile(filename, data, 'base64', function(err){
+        if (err) {
+            return res.status(400).end("Image upload failed.");
+        }
+        res.status(200).end(filename.replace('uploads', ''));
+    });
+}
+
+exports.uploadCoverImg = function(req, res, next) {
     // Should return a Ajax error.
     if (!validator.isBase64(req.body.src)) {
         return next(new Error('Not a base64 src.'));

@@ -156,6 +156,7 @@ module.exports = function(app, passport) {
     app.post('/articles/:id/tags', passportConf.isAuthenticated, passportConf.article.isAuthorized, tags.create);
     app.get('/articles/:id/love', passportConf.isAuthenticated, articles.love);
     app.post('/articles/uploadImg', passportConf.isAuthenticated, articles.uploadImg);
+    app.post('/articles/uploadCoverImg', passportConf.isAuthenticated, articles.uploadCoverImg);
 
     // comment routes
     app.param('commentId', comments.load);

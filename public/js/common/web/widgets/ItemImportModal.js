@@ -33,6 +33,7 @@ define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal",
             var file = e.target.files[0]; // selected file
             console.log(file);
             this.fileName = file.name;
+            this.fileType = file.type;
             if (!file.type.match('image.*')) {
                 return;
             }
@@ -68,8 +69,8 @@ define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal",
             } else {
                 var self = this;
                 this._loadItem(e, function(res) {
-                    self.$preview.src = res.src;
-                    self.src = res.src;
+                    self.$preview.src = res;
+                    self.src = res;
                 });
             }
         },
@@ -79,38 +80,36 @@ define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal",
         _loadItem: function(e, cb) {
             var val = this.$input.val();
             console.log(val);
-            var reg = /[a-z]+:/;
-            var r = reg.exec(val);
-            if (r == null || r.index !== 0) {
-                val = 'http://' + val;
-            }
-            // else {
-            //     val = val.replace(/^data:image\/\w+;base64,/, "");
+            // var reg = /[a-z]+:/;
+            // var r = reg.exec(val);
+            // if (r == null || r.index !== 0) {
+            //     val = 'http://' + val;
             // }
-
-            console.log(val);
-            cb({
-                src: val,
-                name: this.fileName
-            });
-            // $.ajax({
-            //         url: '/articles/uploadImg',
-            //         type: 'POST',
-            //         data: {
-            //             src: val,
-            //             name: this.fileName
-            //         }
-            //     })
-            //     .success(function(res, status, body) {
-            //         console.log(res);
-            //         cb(res);
-            //     })
-            //     .error(function(body, status, err) {
-            //         console.log("error");
-            //         console.log('body' + body);
-            //         console.log('status' + status);
-            //         console.log('err' + err);
-            //     });
+            // cb({
+            //     src: val,
+            //     name: this.fileName
+            // });
+            $.ajax({
+                    url: '/articles/uploadImg',
+                    type: 'POST',
+                    data: {
+                        src: val,
+                        type: this.fileType
+                    }
+                })
+                .success(function(res, status, body) {
+                    // console.log("Success!!!");
+                    // console.log('res:' + res);
+                    // console.log('status:' + status);
+                    // console.log(body);
+                    cb(res);
+                })
+                .error(function(body, status, err) {
+                    console.log("Error!!!");
+                    console.log('body:' + body);
+                    console.log('status:' + status);
+                    console.log('err:' + err);
+                });
         },
         _itemLoadError: function() {
             this.$el.find('.ok').addClass('disabled');

@@ -131,10 +131,12 @@ module.exports = function(app, passport) {
         app.use(express.static(join(config.root, '/built'), {
             maxAge: 30 * 1000 * 60 * 60 * 24
         }));
+        app.use(express.static(join(config.root, '/uploads')));
         app.use(favicon(join(config.root, '/built/img/ico/favicon.ico')));
     } else {
         app.set('views', join(config.root, '/server/views'));
         app.use(express.static(join(config.root, '/public')));
+        app.use(express.static(join(config.root, '/uploads')));
         app.use(favicon(join(config.root, '/public/img/ico/favicon.ico')));
     }
 
