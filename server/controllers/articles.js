@@ -330,7 +330,7 @@ exports.present = function(req, res) {
 };
 
 exports.uploadImg = function(req, res, next) {
-    var type = req.body.type.replace('image/', '.')
+    var type = req.body.type.replace('image/', '.');
     var filename = 'uploads/' + math2.genRand() + type;
     var data = req.body.src.replace(/^data:image\/\w+;base64,/, "");
     fs.writeFile(filename, data, 'base64', function(err){
@@ -339,7 +339,7 @@ exports.uploadImg = function(req, res, next) {
         }
         res.status(200).end(filename.replace('uploads', ''));
     });
-}
+};
 
 exports.uploadCoverImg = function(req, res, next) {
     // Should return a Ajax error.
