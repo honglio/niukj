@@ -1,3 +1,8 @@
+//jQuery whole HTML page load with spinner
+$(window).load(function(){
+    $('#cover').fadeOut(1000);
+});
+
 $(function() {
     var $searchIcon = $('#search-deck i');
     $searchIcon.click(function(e) {
