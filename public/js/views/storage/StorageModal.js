@@ -48,7 +48,7 @@ define(["CustomView",
             this.$alert.html('<strong>' + title + '</strong> ' + text);
             this.$alert.removeClass('hide');
             this.$alert.addClass(klass);
-            setTimeout(this.hideAlert, 3000);
+            setTimeout(this.hideAlert, 1000);
         },
 
         hideAlert: function() {
@@ -82,7 +82,7 @@ define(["CustomView",
                         setTimeout(function() {
                             self.$el.modal('hide');
                             window.location.replace("/articles/" + id + '/edit');
-                        }, 4000);
+                        }, 1400);
                     }
                 });
             } else {
@@ -93,7 +93,7 @@ define(["CustomView",
                         setTimeout(function() {
                             self.$el.modal('hide');
                             window.location.replace("/articles/" + id + '/edit');
-                        }, 4000);
+                        }, 1400);
                     }
                 });
             }
