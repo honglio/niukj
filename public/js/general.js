@@ -49,7 +49,7 @@ if (agent.indexOf('WebKit/') >= 0) {
     window.browserPrefix = "";
 }
 if (agent.match(/Android/i)) {
-    noContextMenu.addEventListener('contextmenu', function (e) { e.preventDefault() });
+    document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 }
 
 // validation
