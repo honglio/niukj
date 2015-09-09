@@ -1,5 +1,5 @@
 //jQuery whole HTML page load with spinner
-$(window).load(function(){
+$(window).load(function() {
     $('#cover').fadeOut(1000);
 });
 
@@ -49,7 +49,9 @@ if (agent.indexOf('WebKit/') >= 0) {
     window.browserPrefix = "";
 }
 if (agent.match(/Android/i)) {
-    document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
 }
 
 // validation

@@ -112,7 +112,7 @@ describe('app', function() {
       // console.log(support.password);
       login(support.password)
         .expect(302)
-        .expect('location', /\/articles/)
+        .expect('location', /\/account/)
         .end(done);
     });
 
@@ -184,9 +184,9 @@ describe('app', function() {
         });
     });
 
-    it('should see page on GET /articles/my', function(done) {
+    it('should see page on GET /account', function(done) {
       request(app)
-        .get('/articles/my')
+        .get('/account')
         .set('Cookie', cookies)
         .expect(200)
         .end(done);

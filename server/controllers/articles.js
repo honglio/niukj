@@ -333,7 +333,7 @@ exports.uploadImg = function(req, res, next) {
     var type = req.body.type.replace('image/', '.');
     var filename = 'uploads/' + math2.genRand() + type;
     var data = req.body.src.replace(/^data:image\/\w+;base64,/, "");
-    fs.writeFile(filename, data, 'base64', function(err){
+    fs.writeFile(filename, data, 'base64', function(err) {
         if (err) {
             return res.status(400).end("Image upload failed.");
         }

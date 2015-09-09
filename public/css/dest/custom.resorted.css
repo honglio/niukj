@@ -1,3 +1,12 @@
+.noselect {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+     -khtml-user-select: none;
+    -webkit-touch-callout: none;
+}
 .animated {
     -webkit-animation-duration: 0.5s;
        -moz-animation-duration: 0.5s;
@@ -3433,4 +3442,38 @@ fieldset[disabled] .i-checks input + i:before {
 }
 .profile-stat {
     padding: 5px;
+}
+.error-template {
+    margin-top: -150px;
+    margin-bottom: 50px;
+}
+.error-template h1 {
+    display: block;
+    padding: 0.25em 0 0.325em;
+    margin-bottom: -100px;
+    font-size: 1400%;
+    font-weight: 700;
+    text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+    letter-spacing: 0;
+    background: url(../img/theme/slideback-blue.jpg) repeat-y;
+    -webkit-background-clip: text;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: aitf 80s linear infinite;
+
+    -webkit-backface-visibility: hidden;
+    -webkit-text-fill-color: transparent;
+}
+.error-template h2 {
+    margin-bottom: 4px;
+    font-size: 700%;
+}
+@media (max-width: 568px) {
+    .error-template h1 {
+        margin-top: 50px;
+        font-size: 900%;
+    }
+    .error-template h2 {
+        margin-bottom: 4px;
+        font-size: 400%;
+    }
 }

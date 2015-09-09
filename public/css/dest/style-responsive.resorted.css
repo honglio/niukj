@@ -96,10 +96,6 @@
     #top-nav {
         padding: 0;
     }
-    .navbar .navbar-brand {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
     .navbar .nav.pull-right {
         margin-top: 6px;
     }
@@ -215,7 +211,13 @@
     }
 }
 /* Landscape phone to portrait tablet */
-/*@media (max-width: 767px) {}*/
+@media (max-width: 767px) {
+    #tour-9 {
+        display: block;
+        text-align: center;
+    }
+}
+
 /* Landscape iphone5 and down */
 
 @media (max-width: 568px) {
@@ -258,10 +260,6 @@
 
     #top-nav {
         padding: 0 20px;
-    }
-    .navbar .navbar-brand {
-        padding-top: 0;
-        padding-bottom: 0;
     }
     .navbar .nav-collapse .nav.pull-right {
         margin-bottom: 0;
