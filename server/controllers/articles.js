@@ -53,7 +53,7 @@ exports.search = function(req, res) {
                 amount = count;
             }
             res.render('article/index', {
-                title: '搜索到的课件',
+                title: '搜索结果',
                 articles: articles,
                 page: page + 1,
                 pages: Math.ceil(amount / perPage),
@@ -387,12 +387,12 @@ exports.destroy = function(req, res) {
             req.flash('errors', {
                 msg: 'Delete failed!'
             });
-            res.redirect('/articles/my');
+            res.redirect('/account');
         } else {
             req.flash('inform', {
                 msg: 'Deleted successfully!'
             });
-            res.redirect('/articles/my');
+            res.redirect('/account');
         }
     });
 };
