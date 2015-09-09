@@ -48,6 +48,9 @@ if (agent.indexOf('WebKit/') >= 0) {
 } else {
     window.browserPrefix = "";
 }
+if (agent.match(/Android/i)) {
+    noContextMenu.addEventListener('contextmenu', function (e) { e.preventDefault() });
+}
 
 // validation
 function validateForm(form) {

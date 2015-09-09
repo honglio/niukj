@@ -4,7 +4,7 @@ block content
   .container
     section.page-header
     section.row
-      .col-xs-12.col-sm-3.col-md-3
+      .col-xs-12.col-sm-3.col-md-3.noselect
         .h4.text-center.panel-title.bolder= title
         form#profile.form-horizontal(name='profile' action='/account/profile', method='POST')
           input(type='hidden', name='_csrf', value=_csrf)
@@ -31,12 +31,12 @@ block content
           .form-group
             //- TODO: decorate radio button to iphone like
             label.col-xs-3.control-label(for='gender') 性别
-            .col-xs-2.radio
+            .col-xs-3.radio
               label.i-checks
                 input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
                 i
                 | 男
-            .col-xs-2.radio
+            .col-xs-3.radio
               label.i-checks
                 input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
                 i
@@ -80,7 +80,7 @@ block content
 
       .col-xs-12.col-sm-9.col-md-9
         .panel.panel-default
-          .panel-body
+          .panel-body.noselect
             if (articles.length)
               section#Grid.row
                 each article in articles
