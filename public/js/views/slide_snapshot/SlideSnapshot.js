@@ -178,7 +178,7 @@ define(["underscore",
 
         _toImage: function(oCanvas, deckId, cb) {
             // true: save img to db. false: save img to aliyun-oss
-            return Slide2Image.saveAsPNG(oCanvas, false, 300, 250, deckId, cb);
+            return Slide2Image.saveAsPNG(oCanvas, false, 300, 195, deckId, cb);
         }
     });
 });
