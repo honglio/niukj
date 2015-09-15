@@ -23,13 +23,13 @@ define(["backbone",
 
             var storageInterface = new StorageInterface();
 
-            var length = Backbone.history.location.href.length;
-
             var id;
-            if (length > 34) {
-                id = Backbone.history.location.href.substr(length - 29, 24);
+            if (Backbone.history.location.href.indexOf('/new') === -1) {
+                var start = Backbone.history.location.href.indexOf('articles/') + 9;
+                // because the MongoId is length in 24.
+                id = Backbone.history.location.href.substr(start, 24);
             }
-
+            // console.log(Backbone.history.location.href);
             var self = this;
             if (id == null) {
                 this.addSlide(0);
@@ -54,23 +54,28 @@ define(["backbone",
             }
 
             var exportData = this._deck.toJSON();
-            exportData.activeSlide = this._deck.get('activeSlide').toJSON();
-            this._deck.get('activeSlide').get('components').forEach(function(component, i) {
-                var text = cleanHTMLTag(component.get('text'));
-                component.set('text', text);
-                exportData.activeSlide.components[i] = component.toJSON();
-            });
-
-            exportData.slides = this._deck.get('slides').toJSON();
-            this._deck.get('slides').forEach(function(slide, i) {
-                slide.get('components').forEach(function(component, j) {
+            if (this._deck.get) {
+                exportData.activeSlide = this._deck.get('activeSlide').toJSON();
+                this._deck.get('activeSlide').get('components').forEach(function(component, i) {
                     if (component.get) {
                         var text = cleanHTMLTag(component.get('text'));
                         component.set('text', text);
-                        exportData.slides[i].components[j] = component.toJSON();
                     }
+                    exportData.activeSlide.components[i] = component.toJSON();
                 });
-            });
+
+                exportData.slides = this._deck.get('slides').toJSON();
+                this._deck.get('slides').forEach(function(slide, i) {
+                    slide.get('components').forEach(function(component, j) {
+                        if (component.get) {
+                            var text = cleanHTMLTag(component.get('text'));
+                            component.set('text', text);
+                            exportData.slides[i].components[j] = component.toJSON();
+                        }
+                    });
+                });
+            }
+
             return exportData;
         },
 

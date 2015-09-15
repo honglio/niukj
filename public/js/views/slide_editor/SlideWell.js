@@ -147,7 +147,7 @@ define(["jquery", "underscore",
             var item = this._clipboard.item;
             if (item && item.type === 'slide') {
                 var slide = this._deck.get('activeSlide');
-                var index = slide.get('index') ? slide.get('index') : slide.index;
+                var index = slide.index ? slide.index : slide.get('index');
                 this._deck.add(item.clone(), index);
             }
         },

@@ -11,7 +11,11 @@ define(function() {
      */
     function BaseCommand(initial, component, attr, name) {
         this.start = initial;
-        this.end = component.get(attr) || 0;
+        if (component.get) {
+            this.end = component.get(attr) || 0;
+        } else {
+            this.end = 0;
+        }
         this.component = component;
         this.name = name;
         this.attr = attr;
