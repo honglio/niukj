@@ -139,7 +139,7 @@ define(["underscore",
         },
 
         render: function() {
-
+            // console.log(this);
             if (this._slideDrawer) {
                 this._slideDrawer.dispose();
             }

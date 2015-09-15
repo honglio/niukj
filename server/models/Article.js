@@ -11,7 +11,7 @@ var ComponentSchema = new mongoose.Schema({
         type: String
     },
     selected: {
-        type: String
+        type: Boolean
     },
     face: {
         type: String
@@ -50,13 +50,13 @@ var ComponentSchema = new mongoose.Schema({
 
 var SlideSchema = new mongoose.Schema({
     active: {
-        type: String
+        type: Boolean
     },
     index: {
         type: String
     },
     selected: {
-        type: String
+        type: Boolean
     },
     components: [ComponentSchema],
     background: {
@@ -73,13 +73,13 @@ var ArticleSchema = new mongoose.Schema({
     slides: [SlideSchema],
     activeSlide: {
         active: {
-            type: String
+            type: Boolean
         },
         index: {
             type: String
         },
         selected: {
-            type: String
+            type: Boolean
         },
         x: {
             type: String

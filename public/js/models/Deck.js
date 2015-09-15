@@ -58,23 +58,24 @@ define(["underscore",
             var allSlides = this.get('slides');
 
             var activeSlide = this.get('activeSlide');
-            if (activeSlide !== undefined && activeSlide !== null) {
-                activeSlide.unselectComponents();
-            }
+
             allSlides.reset(rawObj.slides);
 
             allSlides.models.forEach(function(slide) {
                 this._registerWithSlide(slide);
-                if (slide.get('active') === "true") {
+                if (slide.get('active') && !activeSlide) {
                     activeSlide = slide;
                 }
             }, this);
+
+            activeSlide.unselectComponents();
 
             this.set('activeSlide', activeSlide);
             this.set('fileName', rawObj.fileName);
             this.set('id', rawObj._id);
             this.set('picture', rawObj.picture);
             undoHistory.clear();
+            // console.log(this);
         },
 
         /**
