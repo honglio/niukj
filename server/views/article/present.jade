@@ -50,6 +50,16 @@ block content
             span 作者 - &nbsp;
             - var name = article.user.profile.name ? article.user.profile.name : article.user.email
             a(href="/account/"+article.user._id)= name
+      .sharebtn
+        .bshare-custom.icon-medium-plus
+          a.bshare-sinaminiblog(title='分享到新浪微博')
+          a.bshare-qqmb(title='分享到腾讯微博')
+          a.bshare-weixin(title='分享到微信')
+          a.bshare-qzone(title='分享到QQ空间')
+          a.bshare-renren(title='分享到人人网')
+          a.bshare-more.bshare-more-icon.more-style-addthis(title='更多平台')
+          span.BSHARE_COUNT.bshare-share-count 0
+        a.bshareDiv(onclick='javascript:return false;')
       //- .footer-right
       //-   .loves
       //-     i.fa.fa-heart.fa-2x.text-danger &nbsp;#{article.love}
@@ -63,3 +73,6 @@ block content
 append scripts
   script(type='text/javascript', src='/js/vendors/impress.js')
   script(type='text/javascript', src='/js/present.js')
+  script(type='text/javascript', charset='utf-8', src='http://static.bshare.cn/b/button.js#style=-1&uuid=&pophcol=3&lang=zh')
+  script(type='text/javascript', charset='utf-8', src='http://static.bshare.cn/b/bshareC0.js')
+

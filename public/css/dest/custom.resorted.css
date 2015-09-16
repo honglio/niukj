@@ -3314,6 +3314,7 @@ fieldset[disabled] .i-checks input + i:before {
 .footer-left {
     z-index: 1;
     float: left;
+    margin-right: 20px;
 }
 .footer-right {
     z-index: 1;
