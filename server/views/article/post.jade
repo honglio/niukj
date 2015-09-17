@@ -22,7 +22,7 @@ block content
           .panel-body
             h4.article-title.text-center= article.fileName
             .article-picture.text-center
-              img(src=(article.picture.src || '/img/generic.png') alt='' dth="300" height="250")
+              img(src=(article.picture.src || '/img/generic.png') alt='' width="300" height="195")
             section.meta.row
               .col-md-8.col-md-offset-2
                 form#desc.form-horizontal(method="POST", action='/articles/' + article._id + '/desc')

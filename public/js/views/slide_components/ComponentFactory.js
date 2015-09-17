@@ -14,7 +14,7 @@ define(['models/TextBox',
             return ComponentFactory.prototype.instance;
         }
         ComponentFactory.prototype.instance = this;
-        // Look up cloudslide.Component s
+        // Look up Component s
         // create our view map based on their component types
         // ComponentType must be same in model and view.
         // it is how they are mapped to one another.

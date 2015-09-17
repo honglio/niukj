@@ -16,7 +16,7 @@ define(["./ButtonView"], function(Button) {
     return {
         initialize: function(registry) {
             registry.register({
-                interfaces: 'cloudslide.ScreenHelpButtonProvider'
+                interfaces: 'presentbook.ScreenHelpButtonProvider'
             }, service);
         }
     };

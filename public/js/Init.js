@@ -6,7 +6,7 @@ define(['AppView', 'etch_extension', 'bootstrap', 'colorpicker'], function(AppVi
             var len = localStorage.length;
             for (var i = 0; i < len; i += 1) {
                 var key = localStorage.key(i);
-                if (key && key.indexOf(".cloudslide") !== -1) {
+                if (key && key.indexOf(".presentbook") !== -1) {
                     localStorage.removeItem(key);
                 }
             }
