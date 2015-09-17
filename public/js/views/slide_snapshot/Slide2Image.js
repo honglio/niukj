@@ -30,8 +30,8 @@ define(['jquery'], function($) {
                     }
                 })
                 .success(function(res, status, body) {
-                    console.log(res);
-                    // cb(res);
+                    // console.log(res);
+                    cb(res);
                 })
                 .error(function(body, status, err) {
                     // console.log("error");

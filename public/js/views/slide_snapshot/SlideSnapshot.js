@@ -172,7 +172,8 @@ define(["underscore",
             // if (this.isSelected() && this.model.get('index') === '0') {
             var self = this;
             var canvas = this.$el.find('canvas')[0];
-            this._toImage(canvas, this.options.deck.id, function(img) {
+            var id = this.options.deck.id || _.random(0, 100000);
+            this._toImage(canvas, id, function(img) {
                 self.options.deck.set('picture', img);
             });
 
