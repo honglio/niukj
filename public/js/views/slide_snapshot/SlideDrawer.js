@@ -11,7 +11,7 @@ define(["underscore",
         this.model = model;
         this.g2d = g2d;
         this.bg = bg;
-        console.log(bg);
+        // console.log(bg);
         this.size = {
             width: this.g2d.canvas.width,
             height: this.g2d.canvas.height
@@ -48,7 +48,6 @@ define(["underscore",
         __paintbgImg: function(bg) {
             var oImg = new Image();
             oImg.src = bg;
-            console.log(oImg);
             var self = this;
             this.g2d.save();
             setTimeout(function() {

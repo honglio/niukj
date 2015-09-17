@@ -37,11 +37,9 @@ define(["./AvailableBackgrounds",
 
             var target = (e.srcElement) ? e.srcElement : e.currentTarget;
             var className = target.dataset['class'] ? target.dataset['class'] : target.className;
-            console.log(className);
             if (className === 'img-bg') {
                 var self = this;
                 imgUploadModal.show(function(src) {
-                    console.log(src);
                     self._editorModel.activeSlide().set('background', 'img:' + src);
                 });
                 return;

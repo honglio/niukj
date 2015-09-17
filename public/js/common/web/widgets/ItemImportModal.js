@@ -31,7 +31,6 @@ define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal",
         },
         _fileChosen: function(e) {
             var file = e.target.files[0]; // selected file
-            console.log(file);
             this.fileName = file.name;
             this.fileType = file.type;
             if (!file.type.match('image.*')) {
@@ -43,9 +42,7 @@ define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal",
 
             // run after file chosen
             reader.onload = function(e) {
-                console.log(e.target.result);
                 self.$input.val(e.target.result); // reader's return value after read.
-                console.log(self.$input.val());
                 return self._urlChanged({ // just return any return value of urlChanged func
                     which: -1 // keyup is -1
                 });
@@ -79,7 +76,7 @@ define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal",
          */
         _loadItem: function(e, cb) {
             var val = this.$input.val();
-            console.log(val);
+
             // var reg = /[a-z]+:/;
             // var r = reg.exec(val);
             // if (r == null || r.index !== 0) {
@@ -105,10 +102,10 @@ define(["underscore", "jquery", "CustomView", "hbs!./templates/ItemImportModal",
                     cb(res);
                 })
                 .error(function(body, status, err) {
-                    console.log("Error!!!");
-                    console.log('body:' + body);
-                    console.log('status:' + status);
-                    console.log('err:' + err);
+                    // console.log("Error!!!");
+                    // console.log('body:' + body);
+                    // console.log('status:' + status);
+                    // console.log('err:' + err);
                 });
         },
         _itemLoadError: function() {

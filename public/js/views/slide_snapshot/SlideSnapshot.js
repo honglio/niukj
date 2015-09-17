@@ -93,7 +93,7 @@ define(["underscore",
 
         _bgChanged: function() {
             var bg = this.model.get('background') || 'defaultbg';
-            console.log(bg);
+
             if (bg.indexOf('img:') === -1) {
                 switch (bg) {
                     case 'grad-bg-pink':
@@ -173,7 +173,6 @@ define(["underscore",
             var self = this;
             var canvas = this.$el.find('canvas')[0];
             this._toImage(canvas, this.options.deck.id, function(img) {
-                console.log(img);
                 self.options.deck.set('picture', img);
             });
 

@@ -105,7 +105,7 @@ define(['backbone'], function(Backbone) {
             var style = textBox.get('style');
             var decoration = textBox.get('decoration');
 
-            console.log(color);
+            // console.log(color);
 
             this.$fontFamilyReadout.text(face); // update font face
             this.$colorChooser.spectrum('set', color); // udpate font color
@@ -144,7 +144,7 @@ define(['backbone'], function(Backbone) {
         },
 
         _fontSizeChanged: function(model, value) {
-            console.log(value);
+            // console.log(value);
             if (value == 72) {
                 this.$fontSizeReadout.text('大');
             }
@@ -157,7 +157,7 @@ define(['backbone'], function(Backbone) {
         },
 
         changeButtons: function() {
-            console.log("Change btns");
+            // console.log("Change btns");
             // render the buttons into the editor-panel
             this.$el.empty();
             var view = this;

@@ -31,13 +31,13 @@ define(['jquery'], function($) {
                 })
                 .success(function(res, status, body) {
                     console.log(res);
-                    cb(res);
+                    // cb(res);
                 })
                 .error(function(body, status, err) {
-                    console.log("error");
-                    console.log('body' + body);
-                    console.log('status' + status);
-                    console.log('err' + err);
+                    // console.log("error");
+                    // console.log('body' + body);
+                    // console.log('status' + status);
+                    // console.log('err' + err);
                 });
         };
 

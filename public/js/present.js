@@ -52,7 +52,7 @@ $(function() {
     $loveIcon.click(function(e) {
         $loveIcon.toggleClass('getbigger');
         $.get('/articles/' + articleId + '/love', function(data) {
-            console.log(data);
+            // console.log(data);
             $loveIcon.text(' ' + data);
         });
     });
