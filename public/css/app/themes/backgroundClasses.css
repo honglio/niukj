@@ -45,7 +45,7 @@
 .nobg {
     background: url(img/nobg.png) no-repeat center;
     /*background-size*/
-    
+
     -webkit-background-size: 30px 30px;
     -moz-background-size: 30px 30px;
     -o-background-size: 30px 30px;
@@ -59,4 +59,8 @@
 
 #impress .step {
     overflow: hidden;
+}
+
+.img-bg {
+    padding: 9px 2px;
 }

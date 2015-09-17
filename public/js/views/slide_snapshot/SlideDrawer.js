@@ -11,7 +11,7 @@ define(["underscore",
         this.model = model;
         this.g2d = g2d;
         this.bg = bg;
-
+        console.log(bg);
         this.size = {
             width: this.g2d.canvas.width,
             height: this.g2d.canvas.height
@@ -34,11 +34,32 @@ define(["underscore",
     SlideDrawer.prototype = {
 
         paint: function() {
+            if (this.bg.indexOf('img:') === -1) {
+                this.g2d.save();
+                this.g2d.fillStyle = this.bg;
+                this.g2d.fillRect(0, 0, this.size.width, this.size.height);
+                this.g2d.restore();
+                this.__paintComponent();
+            } else {
+                this.__paintbgImg(this.bg.substring(4));
+            }
+        },
+
+        __paintbgImg: function(bg) {
+            var oImg = new Image();
+            oImg.src = bg;
+            console.log(oImg);
+            var self = this;
             this.g2d.save();
-            this.g2d.fillStyle = this.bg;
-            this.g2d.fillRect(0, 0, this.size.width, this.size.height);
-            this.g2d.restore();
-            // paint component
+            setTimeout(function() {
+                // ensure bg img is loaded
+                self.g2d.drawImage(oImg, 0, 0, 300, 195);
+                self.g2d.restore();
+                self.__paintComponent();
+            }, 100);
+        },
+
+        __paintComponent: function() {
             var components = this.model.get('components');
             for (var i in components) {
                 if (components.hasOwnProperty(i)) {
@@ -53,14 +74,6 @@ define(["underscore",
                 }
             }
         },
-
-        // __paintbgImg: function(bg) {
-        //     var oImg = new Image();
-        //     oImg.src = bg;
-        //     console.log(oImg);
-
-        //     this.g2d.drawImage(oImg, 0, 0);
-        // },
 
 
         dispose: function() {

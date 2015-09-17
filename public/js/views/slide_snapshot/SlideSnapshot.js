@@ -93,42 +93,45 @@ define(["underscore",
 
         _bgChanged: function() {
             var bg = this.model.get('background') || 'defaultbg';
-            // this.$el.removeClass();
-            // var classStr = 'slideSnapshot ' + bg;
-            // this.$el.addClass(classStr);
-            switch (bg) {
-                case 'grad-bg-pink':
-                    this.$el.css('background-color', '#E53D5E');
-                    break;
-                case 'grad-bg-orange':
-                    this.$el.css('background-color', '#EEA523');
-                    break;
-                case 'grad-bg-yellow':
-                    this.$el.css('background-color', '#FBC850');
-                    break;
-                case 'grad-bg-grass':
-                    this.$el.css('background-color', '#95CA58');
-                    break;
-                case 'grad-bg-green':
-                    this.$el.css('background-color', '#23AD5E');
-                    break;
-                case 'grad-bg-sky':
-                    this.$el.css('background-color', '#7394CC');
-                    break;
-                case 'grad-bg-lavender':
-                    this.$el.css('background-color', '#7E6AAD');
-                    break;
-                case 'grad-bg-purple':
-                    this.$el.css('background-color', '#8E336C');
-                    break;
-                case 'grad-bg-black':
-                    this.$el.css('background-color', '#000');
-                    break;
-                case 'grad-bg-light':
-                    this.$el.css('background-color', '#fff');
-                    break;
-                case 'defaultbg':
-                    this.$el.css('background-color', '#ddd');
+            console.log(bg);
+            if (bg.indexOf('img:') === -1) {
+                switch (bg) {
+                    case 'grad-bg-pink':
+                        this.$el.css('background-color', '#E53D5E');
+                        break;
+                    case 'grad-bg-orange':
+                        this.$el.css('background-color', '#EEA523');
+                        break;
+                    case 'grad-bg-yellow':
+                        this.$el.css('background-color', '#FBC850');
+                        break;
+                    case 'grad-bg-grass':
+                        this.$el.css('background-color', '#95CA58');
+                        break;
+                    case 'grad-bg-green':
+                        this.$el.css('background-color', '#23AD5E');
+                        break;
+                    case 'grad-bg-sky':
+                        this.$el.css('background-color', '#7394CC');
+                        break;
+                    case 'grad-bg-lavender':
+                        this.$el.css('background-color', '#7E6AAD');
+                        break;
+                    case 'grad-bg-purple':
+                        this.$el.css('background-color', '#8E336C');
+                        break;
+                    case 'grad-bg-black':
+                        this.$el.css('background-color', '#000');
+                        break;
+                    case 'grad-bg-light':
+                        this.$el.css('background-color', '#fff');
+                        break;
+                    case 'defaultbg':
+                        this.$el.css('background-color', '#ddd');
+                        break;
+                }
+            } else {
+                this.imgbg = true;
             }
         },
 
@@ -155,7 +158,7 @@ define(["underscore",
             // draw snapshot
             var canvas = this.$el.find('canvas');
             var g2d = canvas[0].getContext("2d");
-            var bg = this.$el.css('background-color');
+            var bg = this.imgbg ? this.model.get('background') : this.$el.css('background-color');
 
             this._slideDrawer = new SlideDrawer(this.model, g2d, bg);
             this._slideDrawer.paint();

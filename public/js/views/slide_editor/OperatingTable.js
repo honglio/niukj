@@ -48,7 +48,15 @@ define(["CustomView",
             this._$slideContainer.css(Config.slide.size);
 
             var background = this._activeSlide ? this._activeSlide.get('background') : 'defaultbg';
-            this._$slideContainer.addClass(background);
+
+            if (background.indexOf('img:') === -1) {
+                this._$slideContainer.addClass(background);
+            } else {
+                this.$el.css('background-image', 'url(' + background.substring(4) + ')');
+                this.$el.css('background-repeat', 'no-repeat');
+                this.$el.css('background-size', '100% 100%');
+                this.$el.css('background-position', 'center');
+            }
             this._$slideContainer.data('background', background);
 
             var self = this;
@@ -63,8 +71,16 @@ define(["CustomView",
             if (!this._$slideContainer) {
                 return;
             }
+            this.$el.css('background-image', '');
             this._$slideContainer.removeClass();
-            this._$slideContainer.addClass('slideContainer ' + (bg || 'defaultbg'));
+            if (bg.indexOf('img:') === -1) {
+                this._$slideContainer.addClass('slideContainer ' + (bg || 'defaultbg'));
+            } else {
+                this.$el.css('background-image', 'url(' + bg.substring(4) + ')');
+                this.$el.css('background-repeat', 'no-repeat');
+                this.$el.css('background-size', '100% 100%');
+                this.$el.css('background-position', 'center');
+            }
             this._$slideContainer.data('background', (bg || 'defaultbg'));
         },
 

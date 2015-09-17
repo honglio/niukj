@@ -1,7 +1,8 @@
 define(["./AvailableBackgrounds",
+    "common/web/widgets/ItemImportModal",
     "common/web/widgets/Dropdown",
     "hbs!templates/BackgroundChooser"
-], function(Backgrounds, View, BackgroundChooser) {
+], function(Backgrounds, ItemImportModal, View, BackgroundChooser) {
 
 
     function BackgroundProvider(editorModel) {
@@ -13,6 +14,12 @@ define(["./AvailableBackgrounds",
         this._view.on("selected", this._setBackground, this);
         // Bind to selection events fired from view
     }
+
+    var imgUploadModal = ItemImportModal.get({
+        tag: 'img',
+        title: '插入背景图片',
+        browsable: false
+    });
 
     BackgroundProvider.prototype = {
         view: function() {
@@ -27,9 +34,20 @@ define(["./AvailableBackgrounds",
         },
 
         _setBackground: function(e) {
+
             var target = (e.srcElement) ? e.srcElement : e.currentTarget;
             var className = target.dataset['class'] ? target.dataset['class'] : target.className;
-            this._editorModel.activeSlide().set('background', className || 'defaultbg');
+            console.log(className);
+            if (className === 'img-bg') {
+                var self = this;
+                imgUploadModal.show(function(src) {
+                    console.log(src);
+                    self._editorModel.activeSlide().set('background', 'img:' + src);
+                });
+                return;
+            } else {
+                this._editorModel.activeSlide().set('background', className || 'defaultbg');
+            }
         },
 
         _restoreBackground: function(e) {
