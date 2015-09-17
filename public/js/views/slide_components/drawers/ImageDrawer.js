@@ -18,7 +18,7 @@ define(["underscore", "./AbstractDrawer"], function(_, AbstractDrawer) {
             x: (imageModel.x ? imageModel.x : imageModel.get('x')) * this.scale.x,
             y: (imageModel.y ? imageModel.y : imageModel.get('y')) * this.scale.y,
             width: (image.naturalWidth ? image.naturalWidth : 0) * this.scale.x * 1.5,
-            height: (image.naturalHeight ? image.naturalHeight: 0) * this.scale.y * 1.5
+            height: (image.naturalHeight ? image.naturalHeight : 0) * this.scale.y * 1.5
         };
         this.applyTransforms(imageModel, bbox);
         this.g2d.drawImage(image, bbox.x, bbox.y, bbox.width, bbox.height);
