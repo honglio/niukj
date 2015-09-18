@@ -130,7 +130,7 @@ define(['backbone'], function(Backbone) {
 
         changeEditable: function() {
             this.setButtonClass();
-            $('.operatingTable').prepend(this.$el);
+            $('.text-edit-buttons').prepend(this.$el);
             // Im assuming that Ill add more functionality here
         },
 
