@@ -119,11 +119,19 @@ exports.my = function(req, res) {
         }
     };
     var amount;
-
     Article.list(options, function(err, articles) {
         if (err) {
             return res.render('500');
         }
+        // calculate ViewNum of the reqested user
+        var viewNum = 0;
+        for (var i in articles) {
+            if (articles.hasOwnProperty(i)) {
+                viewNum += articles[i].hitCounter;
+            }
+        }
+        req.user.viewNum = viewNum;
+
         Article.count().exec(function(err, count) {
             if (count > perPage && articles.length < perPage) {
                 amount = articles.length + perPage * page;
@@ -270,7 +278,7 @@ exports.show = function(req, res) {
 /**
  * Present
  */
-var lastUser = {};
+// var lastUser = {};
 exports.present = function(req, res) {
     var cnt = 0,
         slides = req.article.slides;
@@ -286,17 +294,17 @@ exports.present = function(req, res) {
         cnt += 1;
     });
 
-    if (req.user) {
-        if (lastUser[req.user.email] == null) {
-            lastUser[req.user.email] = [];
-        }
+    // if (req.user) {
+        // if (lastUser[req.user.email] == null) {
+        //     lastUser[req.user.email] = [];
+        // }
 
-        if (lastUser[req.user.email].indexOf(req.article.fileName) === -1) {
+        // if (lastUser[req.user.email].indexOf(req.article.fileName) === -1) {
             req.article.hitCounter += 1;
             req.article.save();
-            lastUser[req.user.email].push(req.article.fileName);
-        }
-    }
+            // lastUser[req.user.email].push(req.article.fileName);
+        // }
+    // }
 
     res.render('article/present', {
         title: '放映课件' + req.article.fileName,

@@ -65,6 +65,16 @@ exports.accountbyId = function(req, res, next) {
         if (err) {
             return res.render('500');
         }
+
+        // calculate ViewNum of the reqested account
+        var viewNum = 0;
+        for (var i in articles) {
+            if (articles.hasOwnProperty(i)) {
+                viewNum += articles[i].hitCounter;
+            }
+        }
+        req.account.viewNum = viewNum;
+
         Article.count().exec(function(err, count) {
             if (count > perPage && articles.length < perPage) {
                 amount = articles.length + perPage * page;
