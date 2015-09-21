@@ -295,15 +295,15 @@ exports.present = function(req, res) {
     });
 
     // if (req.user) {
-        // if (lastUser[req.user.email] == null) {
-        //     lastUser[req.user.email] = [];
-        // }
+    // if (lastUser[req.user.email] == null) {
+    //     lastUser[req.user.email] = [];
+    // }
 
-        // if (lastUser[req.user.email].indexOf(req.article.fileName) === -1) {
-            req.article.hitCounter += 1;
-            req.article.save();
-            // lastUser[req.user.email].push(req.article.fileName);
-        // }
+    // if (lastUser[req.user.email].indexOf(req.article.fileName) === -1) {
+    req.article.hitCounter += 1;
+    req.article.save();
+    // lastUser[req.user.email].push(req.article.fileName);
+    // }
     // }
 
     res.render('article/present', {

@@ -3200,7 +3200,7 @@ fieldset[disabled] .i-checks input + i:before {
 .grid figcaption {
     position: absolute;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(237, 240, 241, 0.7);
 }
 .grid figcaption h4 {
     padding: 0;
@@ -3211,6 +3211,8 @@ fieldset[disabled] .i-checks input + i:before {
     font-style: italic;
 }
 .grid .stats {
+    max-width: 300px;
+    margin: 0 auto;
     background-color: #999999;
 }
 .grid .stats .single-stat {

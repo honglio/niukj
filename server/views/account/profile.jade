@@ -68,15 +68,15 @@ block content
         .text-center
           .col-sm-4.col-xs-12.padding-lg.bg-info
             span.h3.text-white #{user.contacts.followers.length}
-            | &nbsp;
-            a.text-muted(href='/account/' + user.id + '/followers') 粉丝
+            a.text-muted(href='/account/' + user.id + '/followers')
+              h6 粉丝
           .col-sm-4.col-xs-12.bg-info.dker.padding-lg
             span.h3.text-white #{user.contacts.followings.length}
-            | &nbsp;
-            a.text-muted(href='/account/' + user.id + '/followings') 关注
+            a.text-muted(href='/account/' + user.id + '/followings')
+              h6 关注
           .col-sm-4.col-xs-12.padding-lg.bg-info
             span.h3.text-white #{user.viewNum}
-            span.text-muted  观看
+            h6.text-muted  观看
         section.space
           | &nbsp;
       .col-xs-12.col-sm-9.col-md-9
