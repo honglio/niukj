@@ -5,13 +5,13 @@ block content
     section.page-header
       .row
         .col-md-9.col-sm-9.col-xs-9
-          a.profile-picture.pull-left.pull-none-xsm(href='#')
-            img.img-responsive.img-circle(src='#{account.profile.picture.url || account.gravatar()}' width='70')
+          .profile-picture.pull-left.pull-none-xsm
+            img.img-responsive.img-circle(src=account.profile.picture.url || account.gravatar() width='70')
           .profile-name(style="margin:0 100px;padding-top:25px;")
             strong
               if account
-                a(href='/account/' + account.id) #{account.profile.name || '未填'}
-            | &#160;&#160;&#160;
+                a(href='/account/' + account.id)= account.profile.name || '未填'
+            | &nbsp;
             code
               | 的#{title}
         .col-md-3.col-sm-3.col-xs-3
@@ -23,26 +23,27 @@ block content
     - each follower in account.contacts.followers
       if follower
         section.member-entry.clearfix
-          .member-img(href='#')
-              img.img-rounded(src='#{follower.profile.picture || follower.gravatar()}', alt='', width='60')
+          .member-img
+              img.img-responsive.img-circle(src=follower.profile.picture.url || follower.gravatar(), alt='', width='60')
           .member-details
             h4
-                a(href='/account/' + follower.id) #{follower.profile.name || '未填'}
+              a(href='/account/' + follower.id)= follower.profile.name || '未填'
             .row.info-list
-              .col-sm-4
+              .col-sm-3
                 i.fa.fa-envelope
                 | &nbsp; 电子邮件：
-                a.text-primary.strong(href='') #{follower.profile.email || '未填'}
-              .col-sm-4
+                p.text-muted.strong= follower.profile.email || '未填'
+              .col-sm-3
                 i.fa.fa-map-marker
                 | &nbsp; 地址：
-                a.text-primary.strong(href='') #{follower.profile.location || '未填'}
-              .col-sm-4
+                p.text-muted.strong= follower.profile.location || '未填'
+              .col-sm-3
                 i.fa.fa-briefcase
                 | &nbsp; 网站：
-                a.text-primary.strong(href='') #{follower.profile.website || '未填'}
-              .clear
-              .col-sm-4
+                p.text-muted.strong= follower.profile.website || '未填'
+              .col-sm-3
                 i.fa.fa-male
+                | /
+                i.fa.fa-female
                 | &nbsp; 性别：
-                a.text-primary.strong(href='') #{follower.profile.gender || '未填'}
+                p.text-muted.strong= follower.profile.gender || '未填'
