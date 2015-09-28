@@ -46,11 +46,11 @@ block content
             .col-xs-7
               input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
           .form-group
-            label.col-xs-3.control-label(for='website') 个人网站
+            label.col-xs-3.control-label(for='website') 网站
             .col-xs-7
               input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
           .form-group
-            label.col-xs-3.control-label(for='gravatar') 个人头像
+            label.col-xs-3.control-label(for='gravatar') 头像
             .col-xs-8
               if (user.profile.picture.url)
                 //- = user.profile.picture

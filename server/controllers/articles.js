@@ -307,7 +307,7 @@ exports.present = function(req, res) {
     // }
 
     res.render('article/present', {
-        title: '放映课件' + req.article.fileName,
+        title: req.article.fileName,
         article: req.article,
         Math2: math2,
         timeSince: function(date) {
