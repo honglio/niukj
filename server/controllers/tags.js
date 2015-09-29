@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
 
 exports.index = function(req, res) {
     var criteria = {
-        tags: req.params.tag
+        tags: req.params.tag,
+        draft: false
     };
     var perPage = 5;
     var page = (req.query.page > 0 ? req.query.page : 1) - 1;
@@ -34,16 +35,21 @@ exports.index = function(req, res) {
 
 exports.create = function(req, res) {
     var article = req.article;
-    console.log("create");
-    console.log(req.body);
-    if (!req.body.tags) {
-        return res.redirect('/articles/' + article.id + '/manage');
-    }
+
+    // if (!req.body.tags) {
+    //     return res.redirect('/articles/' + article.id + '/manage');
+    // }
 
     article.addTag(req.body.tags, function(err) {
         if (err) {
+            req.flash('errors', {
+                msg: '更新课件信息失败！'
+            });
             return res.render('500');
         }
+        req.flash('successful', {
+            msg: '更新课件信息成功！'
+        });
         res.redirect('/articles/' + article.id + '/manage');
     });
 };

@@ -65,6 +65,10 @@ var SlideSchema = new mongoose.Schema({
 });
 
 var ArticleSchema = new mongoose.Schema({
+    draft: {
+        type: Boolean,
+        default: true
+    },
     fileName: {
         type: String,
         default: '',
@@ -257,12 +261,19 @@ ArticleSchema.methods = {
      * @api private
      */
     addTag: function(tag, cb) {
-        var tags = setTags(tag);
-        if (tags.reduce) {
-            this.tags = tags;
+        var tags;
+
+        if (tag) {
+            tags = setTags(tag);
+            if (tags.reduce) { // if tags is Array.
+                this.tags = tags;
+            } else { // if tags is String.
+                this.tags.push(tags);
+            }
         } else {
-            this.tags.push(tags);
+            this.tags = [];
         }
+
         this.save(cb);
     },
 

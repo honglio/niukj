@@ -4,11 +4,14 @@ append scripts
   script(type='text/javascript' src='/js/vendors/bootstrap-tagsinput.js')
   script(type='text/javascript').
     submitForms = function(){
+        // update desc
         var action = $('#desc').attr('action');
         var data = $('#desc textarea').val();
         var csrf = $('#desc input').val();
         $.post(action, {_csrf: csrf, desc: data});
-        $("#tags").submit();
+        // update tags
+        var $tags = $("#tags");
+        $tags.submit();
     }
 
 block content

@@ -36,7 +36,8 @@ exports.search = function(req, res) {
         perPage: perPage,
         page: page,
         criteria: {
-            fileName: req.query.q
+            fileName: req.query.q,
+            draft: false
         }
     };
     var amount;
@@ -73,7 +74,8 @@ exports.explore = function(req, res) {
         perPage: perPage,
         page: page,
         options: {
-            limit: 48
+            limit: 48,
+            draft: false
         }
     };
     var amount;
@@ -224,16 +226,22 @@ exports.update = function(req, res, next) {
 exports.desc = function(req, res) {
     var article = req.article;
 
-    if (!req.body.desc) {
-        return res.redirect('/articles/' + article.id + '/manage');
-    }
+    // if (!req.body.desc) {
+    //     return res.redirect('/articles/' + article.id + '/manage');
+    // }
 
     article.updateDesc(req.body.desc, function(err) {
         if (err) {
             console.log(err);
+            req.flash('errors', {
+                msg: '更新课件信息失败！'
+            });
             return res.sendStatus(500);
         }
-        res.redirect('/articles/' + article.id + '/manage');
+        req.flash('successful', {
+            msg: '更新课件信息成功！'
+        });
+        // res.redirect('/articles/' + article.id + '/manage');
     });
 };
 
