@@ -153,6 +153,7 @@ module.exports = function(app, passport) {
     app.delete('/articles/:id', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.destroy);
     app.get('/articles/:id/present', articles.present);
     app.post('/articles/:id/desc', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.desc);
+    app.post('/articles/:id/draft', passportConf.isAuthenticated, passportConf.article.isAuthorized, articles.draft);
     app.post('/articles/:id/tags', passportConf.isAuthenticated, passportConf.article.isAuthorized, tags.create);
     app.get('/articles/:id/love', passportConf.isAuthenticated, articles.love);
     app.post('/articles/uploadImg', passportConf.isAuthenticated, articles.uploadImg);

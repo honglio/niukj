@@ -254,6 +254,18 @@ ArticleSchema.methods = {
     },
 
     /**
+     * Update draft
+     *
+     * @param {draft} String
+     * @param {Function} cb
+     * @api private
+     */
+    updateDraft: function(draft, cb) {
+        this.draft = draft;
+        this.save(cb);
+    },
+
+    /**
      * Add tag
      *
      * @param {tag} String

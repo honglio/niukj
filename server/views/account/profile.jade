@@ -90,9 +90,13 @@ block content
                       figure.single-deck
                         a.cover-link(href='/articles/'+ article._id + '/present')
                         img.img-responsive(src=(article.picture.src || '/img/generic.png') alt='')
-                        figcaption
-                          .h4.text-center= article.fileName || '未命名'
-                          .meta
+                        figcaption.text-center
+                          if (article.draft)
+                            span.h4= article.fileName || '未命名'
+                            span.text-danger &nbsp;草稿
+                          else
+                            .h4= article.fileName || '未命名'
+                          .meta.text-left
                             p=article.desc
 
                             if (article.tags.length)

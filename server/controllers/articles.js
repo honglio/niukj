@@ -245,6 +245,17 @@ exports.desc = function(req, res) {
     });
 };
 
+exports.draft = function(req, res) {
+    var article = req.article;
+    console.log(req.body);
+    article.updateDraft(req.body.draft, function(err) {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        return res.sendStatus(200);
+    });
+};
+
 var lastLover = {};
 exports.love = function(req, res) {
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;

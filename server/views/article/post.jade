@@ -14,6 +14,19 @@ append scripts
         $tags.submit();
     }
 
+    $('#draft .i-switch input').click(function() {
+      var action = $('#draft').attr('action');
+      var csrf = $('#desc input').val();
+      if ($(this).prop('checked')) {
+        //- console.log('checked');
+        $.post(action, {_csrf: csrf, draft: true});
+      } else {
+        //- console.log('Not checked');
+        $.post(action, {_csrf: csrf, draft: false});
+      }
+    })
+
+
 block content
   .container
     .page-header
@@ -40,8 +53,8 @@ block content
                   .form-group
                     label.col-md-2.control-label(for='tags') 标签
                     .col-md-10
-                      input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开' data-role="tagsinput")
-                  .col-md-12.text-center
+                      input.form-control(type='text', name="tags", value=article.getTag(), placeholder='多个标签用逗号隔开或按回车键提交' data-role="tagsinput")
+                  .col-md-10.col-md-offset-2
                     button.btn.btn-success.btn-addon(type='button' onclick="submitForms()")
                       i.fa.fa-save
                       |  保存更新
@@ -49,6 +62,19 @@ block content
                     a.btn.btn-default.btn-addon(href='/account', title="cancel")
                       i.fa.fa-ban
                       |  取消修改
+                br
+                br
+                form#draft.form-horizontal(action='/articles/' + article._id + '/draft' method="POST")
+                  .form-group
+                    label.switch.col-md-2.control-label 草稿
+                    .col-md-10
+                      label.i-switch.i-switch-lg.bg-info
+                        if (article.draft)
+                          input(type="checkbox" name="draft" checked)
+                          i
+                        else
+                          input(type="checkbox" name="draft")
+                          i
     .row
       .col-md-offset-2.col-md-8
         .panel.panel-info
