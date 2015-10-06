@@ -1429,9 +1429,6 @@ pre {
   border: none;
   margin: -5px 0;
 }
-.dropdown-menu > li > a {
-  padding: 5px 15px;
-}
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-menu > .active > a,

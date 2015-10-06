@@ -9,7 +9,7 @@ var smtpTransport = nodemailer.createTransport('SMTP', config.mail);
  * @param name
  * @param message
  */
-
+//TODO: Use Ajax to send email without refresh the page.
 exports.postContact = function(req, res) {
     req.assert('name', 'Name cannot be blank').notEmpty();
     req.assert('email', 'Email is not valid').isEmail();
@@ -27,10 +27,10 @@ exports.postContact = function(req, res) {
     var body = req.body.message;
 
     var mailOptions = {
-        to: 'discus@niukj.com',
-        from: 'info@niukj.com',
+        to: config.mail.auth.user,
+        from: config.mail.auth.user,
         subject: email,
-        text: name + body
+        text: name + ': ' + body
     };
 
     smtpTransport.sendMail(mailOptions, function(err) {
@@ -57,8 +57,8 @@ exports.subscribe = function(req, res) {
     }
 
     var mailOptions = {
-        to: 'subscribe@niukj.com',
-        from: 'info@niukj.com',
+        to: config.mail.auth.user,
+        from: config.mail.auth.user,
         subject: req.body.email,
         text: 'subscribe'
     };

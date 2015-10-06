@@ -61,6 +61,9 @@ var SlideSchema = new mongoose.Schema({
     components: [ComponentSchema],
     background: {
         type: String
+    },
+    theme: {
+        type: String
     }
 });
 

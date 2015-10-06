@@ -73,7 +73,7 @@ exports.explore = function(req, res) {
     var options = {
         perPage: perPage,
         page: page,
-        options: {
+        criteria: {
             limit: 48,
             draft: false
         }
@@ -247,7 +247,6 @@ exports.desc = function(req, res) {
 
 exports.draft = function(req, res) {
     var article = req.article;
-    console.log(req.body);
     article.updateDraft(req.body.draft, function(err) {
         if (err) {
             return res.sendStatus(500);

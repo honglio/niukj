@@ -52,13 +52,9 @@
     background-size: 30px 30px;
 }
 
-.thumbnail > a {
+#backgroundProvider .thumbnail > a {
     height: 40px;
     width: 40px;
-}
-
-#impress .step {
-    overflow: hidden;
 }
 
 .img-bg {

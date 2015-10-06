@@ -1,4 +1,4 @@
-niukj - A Presentation Slide Authoring Platform / 新一代的课件创建与演示平台
+PresentBook - A Presentation Slide Authoring Platform / 新一代的课件创建与演示平台
 
 Copyright (c) 2012 Honglio LLC
 

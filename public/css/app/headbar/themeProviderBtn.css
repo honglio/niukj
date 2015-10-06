@@ -1,4 +1,19 @@
-.dropdown-toggle,
-.dropdown-toggle:hover {
-    color: #fff;
+#themeProvider .dropdown-toggle,
+#themeProvider .dropdown-toggle:hover {
+  color: #fff;
+}
+
+#themeProvider .dropdown-menu {
+  min-width: 154px;
+}
+
+#themeProvider .dropdown-menu .thumbnail {
+  padding: 1px;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+#themeProvider .dropdown-menu .thumbnail a:hover {
+  opacity: 0.5;
 }

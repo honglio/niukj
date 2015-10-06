@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
     env: 'test',
     app: {
-        name: 'Niukj'
+        name: 'PresentBook'
     },
     server: {
         port: 3000,
@@ -16,8 +16,8 @@ module.exports = {
     },
     db: process.env.MONGODB || 'mongodb://localhost/niukj',
     root: path.normalize(__dirname + '/../..'),
-    sessionSecret: process.env.SESSION_SECRET || 'Niukj',
-    apiurl: 'http://127.0.0.1:9698/',
+    sessionSecret: process.env.SESSION_SECRET || 'PresentBook',
+    // apiurl: 'http://127.0.0.1:9698/',
     // Copy in your particulars and rename this to mail.js
 
     whitelist: [
@@ -31,10 +31,10 @@ module.exports = {
         host: "smtp.mxhichina.com",
         port: 25,
         secureConnection: false,
-        name: "niukj.com",
+        name: "presentbook.cn",
         auth: {
-            user: "info@niukj.com",
-            pass: "asdf7890"
+            user: "info@presentbook.cn",
+            pass: "YFLasdfama3"
         },
         ignoreTLS: false,
         debug: true,
@@ -45,9 +45,9 @@ module.exports = {
         host: "smtp.mxhichina.com",
         port: 25,
         secureConnection: false,
-        name: "niukj.com",
+        name: "presentbook.cn",
         auth: {
-            user: "winston@niukj.com",
+            user: "log@presentbook.cn",
             pass: "YFLasdfama3"
         },
         ignoreTLS: false,

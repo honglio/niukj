@@ -1,7 +1,7 @@
 define(function() {
 
 
-    var prefix = "niukj-";
+    var prefix = "presentbook-";
 
     function LocalStorageProvider() {
         this.storageImpl = localStorage;

@@ -29,7 +29,7 @@ require('./config/routes')(app, passport);
 require('./config/database')(app);
 
 app.listen(3000);
-console.log("Niukj is listening to port 3000.");
+console.log("PresentBook is listening to port 3000.");
 
 // expose app
 exports = module.exports = app;

@@ -1,10 +1,11 @@
 define(["CustomView",
     "../save_btn/ButtonView",
+    "./BackgroundProviderBtn",
     "./ThemeProviderBtn",
     "../slide_components/view/ComponentButton",
     "../slide_components/view/ComponentImportButton",
     "hbs!templates/Headbar"
-], function(CustomView, SaveButton, ThemeProviderBtn,
+], function(CustomView, SaveButton, BackgroundProviderBtn, ThemeProviderBtn,
     ComponentButton, ComponentImportButton, HeadbarTemplate) {
 
     return CustomView.extend({
@@ -18,6 +19,9 @@ define(["CustomView",
         },
         initialize: function() {
             this._saveButton = new SaveButton({
+                model: this.model
+            });
+            this._BackgroundProviderBtn = new BackgroundProviderBtn({
                 model: this.model
             });
             this._ThemeProviderBtn = new ThemeProviderBtn({
@@ -58,6 +62,7 @@ define(["CustomView",
             var $createCompButtons = this.$el.find('.create-comp-buttons > div');
             $createCompButtons.append(this._textBoxButton.render().$el);
             $createCompButtons.append(this._imageButton.render().$el);
+            $createCompButtons.append(this._BackgroundProviderBtn.render().$el);
             $createCompButtons.append(this._ThemeProviderBtn.render().$el);
 
             if (this.model._undoHistory.count <= 0) {
@@ -103,6 +108,7 @@ define(["CustomView",
 
         dispose: function() {
             this._saveButton.dispose();
+            this._BackgroundProviderBtn.dispose();
             this._ThemeProviderBtn.dispose();
             this._textBoxButton.dispose();
             this._imageButton.dispose();

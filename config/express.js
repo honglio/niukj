@@ -80,9 +80,9 @@ function MailLogger(options) {
 util.inherits(MailLogger, winston.Transport);
 MailLogger.prototype.log = function(level, msg, meta, done) {
     smtpTransport.sendMail({
-        from: 'winston@niukj.com',
-        to: 'dev@niukj.com',
-        subject: 'Niukj: ' + config.env + ' Server Error ' + level.toUpperCase(),
+        from: config.logmail.auth.user,
+        to: config.logmail.auth.user,
+        subject: 'PresentBook: ' + config.env + ' Server Error ' + level.toUpperCase(),
         tags: 'logging,' + level,
         text: msg + '\n' + util.inspect(meta)
     }, done);
@@ -164,8 +164,8 @@ module.exports = function(app, passport) {
     // Add custom variables to log
     logger.token('userId', function getSession(req) {
         var userId;
-        if (req.session !== undefined && !_.isEmpty(req.session.passport)) {
-            userId = req.session.passport.user.id;
+        if (!_.isEmpty(req.session) && !_.isEmpty(req.session.passport)) {
+            userId = req.session.passport.user.id || req.session.passport.user;
         }
         return 'userId: ' + userId;
     });
@@ -186,13 +186,13 @@ module.exports = function(app, passport) {
 
     // Request body parsing middleware should be above methodOverride
     app.use(bodyParser.json({
-        limit: '20mb'
+        limit: '10mb'
     }));
     app.use(bodyParser.raw({
         limit: '20mb'
     }));
     app.use(bodyParser.urlencoded({
-        limit: '20mb',
+        limit: '10mb',
         extended: true
     }));
 
@@ -230,7 +230,7 @@ module.exports = function(app, passport) {
     // connect flash for flash messages - should be declared after sessions
     app.use(flash());
     // should be declared after session and flash
-    app.use(helpers('Niukj'));
+    app.use(helpers('PresentBook'));
     // adds CSRF attack protect
     app.use(function(req, res, next) {
         if (config.whitelist.indexOf(req.path) !== -1) {

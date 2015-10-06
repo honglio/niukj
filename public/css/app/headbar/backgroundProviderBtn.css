@@ -1,0 +1,33 @@
+/* for background provider btn */
+#backgroundProvider {
+  padding: 6px 11px;
+}
+
+#backgroundProvider .dropdown-toggle,
+#backgroundProvider .dropdown-toggle:hover {
+  color: #fff;
+}
+
+#backgroundProvider .dropdown-menu {
+  min-width: 140px;
+}
+/* for size of color bg*/
+#backgroundProvider .dropdown-menu .thumbnail {
+  padding: 1px;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+#backgroundProvider .dropdown-menu .thumbnail a:hover {
+  opacity: 0.5;
+}
+/* for size of img-bg */
+#backgroundProvider .dropdown-menu > li > a{
+  padding: 1px 11px;
+}
+
+#backgroundProvider .dropdown-menu .img-bg {
+  margin-left: 1px;
+  margin-right: 1px;
+}
