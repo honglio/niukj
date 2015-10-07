@@ -20,6 +20,7 @@ define(["underscore",
             this.model.on("change:active", this._activeChanged, this);
             this.model.on("contentsChanged", this.render, this);
             this.model.on("change:background", this.render, this);
+            this.model.on("change:theme", this.render, this);
             this.model.on("saveBtnClicked", this.genCoverPic, this);
         },
 
@@ -159,8 +160,9 @@ define(["underscore",
             var canvas = this.$el.find('canvas');
             var g2d = canvas[0].getContext("2d");
             var bg = this.imgbg ? this.model.get('background') : this.$el.css('background-color');
+            var theme = this.model.get('theme') || '';
 
-            this._slideDrawer = new SlideDrawer(this.model, g2d, bg);
+            this._slideDrawer = new SlideDrawer(this.model, g2d, bg, theme);
             this._slideDrawer.paint();
 
             return this;

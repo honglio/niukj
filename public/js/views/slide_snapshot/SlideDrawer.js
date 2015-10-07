@@ -7,10 +7,11 @@ define(["underscore",
     /**
      * Slide snapshot drawer. Paints all elements on little slide thumbnail in SlideWell.
      */
-    function SlideDrawer(model, g2d, bg) {
+    function SlideDrawer(model, g2d, bg, theme) {
         this.model = model;
         this.g2d = g2d;
         this.bg = bg;
+        this.theme = theme;
         // console.log(bg);
         this.size = {
             width: this.g2d.canvas.width,
@@ -34,11 +35,15 @@ define(["underscore",
     SlideDrawer.prototype = {
 
         paint: function() {
+            // paint background first, then paint theme, finally paint component
             if (this.bg.indexOf('img:') === -1) {
+                // paint background
                 this.g2d.save();
                 this.g2d.fillStyle = this.bg;
                 this.g2d.fillRect(0, 0, this.size.width, this.size.height);
                 this.g2d.restore();
+
+                this.__paintTheme(this.theme);
                 this.__paintComponent();
             } else {
                 this.__paintbgImg(this.bg.substring(4));
@@ -54,8 +59,37 @@ define(["underscore",
                 // ensure bg img is loaded
                 self.g2d.drawImage(oImg, 0, 0, 300, 195);
                 self.g2d.restore();
+
+                self.__paintTheme(this.theme);
                 self.__paintComponent();
             }, 100);
+        },
+
+        __paintTheme: function(theme) {
+            this.g2d.save();
+            this.g2d.fillStyle = "rgba(0,0,0,0.5)";
+            // console.log(typeof this.size.width);
+            switch (theme) {
+                case 'theme-top':
+                    this.g2d.fillRect(0, this.size.height * 0.1, this.size.width, this.size.height * 0.3);
+                    break;
+                case 'theme-middle':
+                    this.g2d.fillRect(0, this.size.height * 0.35, this.size.width, this.size.height * 0.3);
+                    break;
+                case 'theme-bottom':
+                    this.g2d.fillRect(0, this.size.height * 0.6, this.size.width, this.size.height * 0.3);
+                    break;
+                case 'theme-left':
+                    this.g2d.fillRect(0, 0, this.size.width * 0.4, this.size.height);
+                    break;
+                case 'theme-right':
+                    this.g2d.fillRect(this.size.width * 0.6, 0, this.size.width, this.size.height);
+                    break;
+                case 'theme-full':
+                    this.g2d.fillRect(0, this.size.height * 0.1, this.size.width, this.size.height * 0.8);
+                    break;
+            }
+            this.g2d.restore();
         },
 
         __paintComponent: function() {
