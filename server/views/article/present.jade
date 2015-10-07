@@ -76,9 +76,9 @@ block content
           a.bshare-more.bshare-more-icon.more-style-addthis(title='更多平台')
           span.BSHARE_COUNT.bshare-share-count 0
         a.bshareDiv(onclick='javascript:return false;')
-      //- .footer-right
-      //-   .loves
-      //-     i.fa.fa-heart.fa-2x.text-danger &nbsp;#{article.love}
+      .footer-right
+        .loves
+          i.fa.fa-heart.fa-2x.text-danger &nbsp;#{article.love}
     .comments
       h3 评论
       - each comment in article.comments

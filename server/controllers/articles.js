@@ -44,7 +44,7 @@ exports.search = function(req, res) {
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.render('500');
+            return res.sendStatus(500);
         }
         // console.log(utils.formatDate);
         Article.count().exec(function(err, count) {
@@ -74,15 +74,17 @@ exports.explore = function(req, res) {
         perPage: perPage,
         page: page,
         criteria: {
-            limit: 48,
             draft: false
+        },
+        options: {
+            limit: 48
         }
     };
     var amount;
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.render('500');
+            return res.sendStatus(500);
         }
         Article.count().exec(function(err, count) {
             // console.log(options.page);
@@ -123,7 +125,7 @@ exports.my = function(req, res) {
     var amount;
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.render('500');
+            return res.sendStatus(500);
         }
         // calculate ViewNum of the reqested user
         var viewNum = 0;
@@ -257,8 +259,9 @@ exports.draft = function(req, res) {
 
 var lastLover = {};
 exports.love = function(req, res) {
-    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
-    console.log(ip);
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip || 'annoy';
+    // console.log(ip);
+    // console.log(req.article);
     if (lastLover[ip] == null) {
         lastLover[ip] = [];
     }
@@ -271,7 +274,7 @@ exports.love = function(req, res) {
         }
         req.article.save();
         lastLover[ip].push(req.article.fileName);
-        console.log(req.article.love);
+        // console.log(req.article.love);
         return res.status(200).end('' + req.article.love);
     }
     res.status(200).end('' + req.article.love);

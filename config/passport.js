@@ -42,7 +42,7 @@ passport.use(new LocalStrategy({
                     return done(null, user);
                 } else {
                     return done(null, false, {
-                        message: 'Invalid email or password.'
+                        message: '用户名或密码不正确。'
                     });
                 }
             });
@@ -58,9 +58,9 @@ passport.use(new RenrenStrategy(config.renren, function(req, accessToken, tokenS
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a RenRen account that belongs to you. ' +
-                        'Sign in with that account or delete it, ' +
-                        'then link it with your current account.'
+                    msg: '你已经用人人账号注册过了！' +
+                        '用注册的账号登陆或者删除它，' +
+                        '然后再重试。'
                 });
                 done(err);
             } else {
@@ -74,7 +74,7 @@ passport.use(new RenrenStrategy(config.renren, function(req, accessToken, tokenS
                     user.profile.picture = user.profile.picture || profile.picture;
                     user.save(function(err) {
                         req.flash('inform', {
-                            msg: 'RenRen account has been linked.'
+                            msg: '人人账号关联成功。'
                         });
                         done(err, user);
                     });
@@ -122,9 +122,9 @@ passport.use(new WeiboStrategy(config.weibo, function(req, accessToken, tokenSec
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a Weibo account that belongs to you. ' +
-                        'Sign in with that account or delete it, ' +
-                        'then link it with your current account.'
+                    msg: '你已经用微博账号注册过了！' +
+                        '用注册的账号登陆或者删除它，' +
+                        '然后再重试。'
                 });
                 done(err);
             } else {
@@ -137,7 +137,7 @@ passport.use(new WeiboStrategy(config.weibo, function(req, accessToken, tokenSec
                     user.profile.name = user.profile.name || profile.displayName;
                     user.save(function(err) {
                         req.flash('inform', {
-                            msg: 'Weibo account has been linked.'
+                            msg: '微博账号关联成功。'
                         });
                         done(err, user);
                     });
@@ -184,9 +184,9 @@ passport.use(new QQStrategy(config.qq, function(req, accessToken, refreshToken, 
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a QQ account that belongs to you. ' +
-                        'Sign in with that account or delete it, ' +
-                        'then link it with your current account.'
+                    msg: '你已经用 QQ 账号注册过了！' +
+                        '用注册的账号登陆或者删除它，' +
+                        '然后再重试。'
                 });
                 done(err);
             } else {
@@ -200,7 +200,7 @@ passport.use(new QQStrategy(config.qq, function(req, accessToken, refreshToken, 
                     user.profile.gender = user.profile.gender || profile.gender;
                     user.save(function(err) {
                         req.flash('inform', {
-                            msg: 'QQ account has been linked.'
+                            msg: 'QQ 账号关联成功。'
                         });
                         done(err, user);
                     });
@@ -248,9 +248,9 @@ passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, re
         }, function(err, existingUser) {
             if (existingUser) {
                 req.flash('errors', {
-                    msg: 'There is already a LinkedIn account that belongs to you. ' +
-                        'Sign in with that account or delete it, ' +
-                        'then link it with your current account.'
+                    msg: '你已经用领英账号注册过了！' +
+                        '用注册的账号登陆或者删除它，' +
+                        '然后再重试。'
                 });
                 done(err);
             } else {
@@ -266,7 +266,7 @@ passport.use(new LinkedInStrategy(config.linkedin, function(req, accessToken, re
                     user.profile.website = user.profile.website || profile._json.publicProfileUrl;
                     user.save(function(err) {
                         req.flash('inform', {
-                            msg: 'LinkedIn account has been linked.'
+                            msg: '领英账号关联成功。'
                         });
                         done(err, user);
                     });
@@ -339,7 +339,7 @@ exports.user = {
         console.log(req.user);
         if (req.profile.id !== req.user.id) {
             req.flash('errors', {
-                msg: 'You are not authorized'
+                msg: '您还没有登陆。'
             });
             return res.redirect('/account/' + req.user.id);
         }
@@ -352,7 +352,7 @@ exports.article = {
     isAuthorized: function(req, res, next) {
         if (req.user.id !== req.article.user.id) {
             req.flash('errors', {
-                msg: 'You are not authorized'
+                msg: '您还没有登陆。'
             });
             return res.redirect('/articles/' + req.article.id);
         }
@@ -370,7 +370,7 @@ exports.comment = {
             next();
         } else {
             req.flash('errors', {
-                msg: 'You are not authorized'
+                msg: '您还没有登陆。'
             });
             res.redirect('/articles/' + req.article.id);
         }
