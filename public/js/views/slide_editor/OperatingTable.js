@@ -59,6 +59,10 @@ define(["CustomView",
             }
             this._$slideContainer.data('background', background);
 
+            var theme = this._activeSlide ? this._activeSlide.get('theme') : '';
+            this._$slideContainer.addClass(theme);
+            this._$slideContainer.data('theme', theme);
+
             var self = this;
             setTimeout(function() {
                 // self._calculateLayout();

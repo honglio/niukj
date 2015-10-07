@@ -60,3 +60,56 @@
     height: 52px;
     width: 70px;
 }
+
+.theme-top:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    top: 10%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.theme-middle:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    top: 35%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.theme-bottom:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 10%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.theme-left:before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.theme-right:before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.theme-full:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 10%;
+    background-color: rgba(0,0,0,0.5);
+}
