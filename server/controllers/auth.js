@@ -43,7 +43,7 @@ exports.postLogin = function(req, res, next) {
                 return next(err);
             }
             req.flash('successful', {
-                msg: 'Success! You are logged in.'
+                msg: '您已登录成功！'
             });
             // res.redirect(req.session.returnTo || '/');
             res.redirect('/account');
@@ -89,7 +89,7 @@ exports.postSignup = function(req, res, next) {
     req.assert('password', '密码不能为空').notEmpty();
     req.assert('password', '密码必须为6到14位').len(6, 14);
     req.assert('password', '密码只能包含字母和数字').isAlphanumeric();
-    req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+    req.assert('confirmPassword', '密码不一致').equals(req.body.password);
 
     var errors = req.validationErrors();
     if (errors) {
@@ -107,7 +107,7 @@ exports.postSignup = function(req, res, next) {
     }, function(err, existingUser) {
         if (existingUser) {
             req.flash('errors', {
-                msg: 'Account with that email address already exists.'
+                msg: '用户名已存在!'
             });
             return res.redirect('/signup');
         }
@@ -144,7 +144,7 @@ exports.getReset = function(req, res) {
         .exec(function(err, user) {
             if (!user) {
                 req.flash('errors', {
-                    msg: 'Password reset token is invalid or has expired.'
+                    msg: '密码重置请求已超时或网址不正确。'
                 });
                 return res.redirect('/forgot');
             }
@@ -160,9 +160,10 @@ exports.getReset = function(req, res) {
  */
 
 exports.postReset = function(req, res, next) {
-    req.assert('password', 'Password must be alphanumeric').isAlphanumeric();
-    req.assert('password', 'Password must be at least 6 characters long.').len(6, 14);
-    req.assert('confirm', 'Passwords must match.').equals(req.body.password);
+    req.assert('password', '密码不能为空').notEmpty();
+    req.assert('password', '密码只能包含字母和数字').isAlphanumeric();
+    req.assert('password', '密码必须为6到14位').len(6, 14);
+    req.assert('confirm', '密码不一致').equals(req.body.password);
 
     var errors = req.validationErrors();
 
@@ -181,7 +182,7 @@ exports.postReset = function(req, res, next) {
                 .exec(function(err, user) {
                     if (!user) {
                         req.flash('errors', {
-                            msg: 'Password reset token is invalid or has expired.'
+                            msg: '密码重置请求已超时或网址不正确。'
                         });
                         return res.redirect('back');
                     }
@@ -205,13 +206,13 @@ exports.postReset = function(req, res, next) {
             var mailOptions = {
                 to: user.email,
                 from: config.mail.auth.user,
-                subject: 'Your PresentBook password has been changed',
-                text: 'Hello,\n\n' +
-                    'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+                subject: '您在展书的密码已被重置',
+                text: '您好,\n\n' +
+                    '这是一封确认信：您的账户 ' + user.email + ' 的密码已经被重置。\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {
                 req.flash('successful', {
-                    msg: 'Success! Your password has been changed.'
+                    msg: '您的密码已经被重置！'
                 });
                 done(err);
             });
@@ -231,7 +232,7 @@ exports.postReset = function(req, res, next) {
  */
 
 exports.postForgot = function(req, res, next) {
-    req.assert('email', 'Please enter a valid email address.').isEmail();
+    req.assert('email', 'Email格式不正确').isEmail();
 
     var errors = req.validationErrors();
 
@@ -253,7 +254,7 @@ exports.postForgot = function(req, res, next) {
             }, function(err, user) {
                 if (!user) {
                     req.flash('errors', {
-                        msg: 'No account with that email address exists.'
+                        msg: '用户名不存在！'
                     });
                     return res.redirect('/forgot');
                 }
@@ -271,16 +272,15 @@ exports.postForgot = function(req, res, next) {
             var mailOptions = {
                 to: user.email,
                 from: config.mail.auth.user,
-                subject: 'Reset your password on PresentBook',
-                text: 'You are receiving this email because you (or someone else) have requested the reset of the' +
-                    ' password for your account.\n\n' +
-                    'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                subject: '展书账户密码重置',
+                text: '您收到这封邮件是因为您或者他人请求重置您的账户的密码。\n\n' +
+                    '请点击下放链接, or 或者复制粘贴到浏览器的地址栏来完成重置操作:\n\n' +
                     'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-                    'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+                    '如果不是您做出的请求, 请忽略此邮件，您的账户密码不会更改。\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {
                 req.flash('inform', {
-                    msg: 'An e-mail has been sent to ' + user.email + ' with further instructions.'
+                    msg: '一封电子邮件已经被发送到 ' + user.email + '。 请根据邮件中的提示操作。'
                 });
                 done(err, 'done');
             });

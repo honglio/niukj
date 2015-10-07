@@ -45,7 +45,7 @@ exports.accountbyId = function(req, res, next) {
     var valid = validator.isMongoId(contactId);
     if (!valid) {
         req.flash('errors', {
-            msg: 'Is not a valid MongoId!'
+            msg: '用户ID不正确!'
         });
         return res.redirect(req.session.returnTo || '/account');
     }
@@ -63,7 +63,7 @@ exports.accountbyId = function(req, res, next) {
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.render('500');
+            return res.sendStatus(500);
         }
 
         // calculate ViewNum of the reqested account
@@ -222,7 +222,7 @@ exports.addContact = function(req, res, next) {
     var valid = validator.isMongoId(contactId);
     if (!valid) {
         req.flash('errors', {
-            msg: 'Is not a valid MongoId!'
+            msg: '用户ID不正确!'
         });
         return res.redirect(req.session.returnTo || '/account');
     }
@@ -230,7 +230,7 @@ exports.addContact = function(req, res, next) {
     // contactId is the same as accountId, you can't add yourself as contact.
     if (null == contactId || contactId === req.user.id) {
         req.flash('errors', {
-            msg: 'Can not add yourself as contact.'
+            msg: '不能添加自己。'
         });
         return res.redirect('/account/' + contactId);
     }
@@ -249,26 +249,26 @@ exports.addContact = function(req, res, next) {
             if (!contact) {
                 return next(new Error('not found'));
             }
-            console.log('Add Contact:');
+            // console.log('Add Contact:');
 
             Account.addFollowing(user, contact);
             Account.addFollower(contact, user);
 
             user.save(function(err) {
                 if (err) {
-                    console.log('Error saving account: ' + err);
+                    // console.log('Error saving account: ' + err);
                     return next(err);
                 }
             });
             contact.save(function(err) {
                 if (err) {
-                    console.log('Error saving account: ' + err);
+                    // console.log('Error saving account: ' + err);
                     return next(err);
                 }
             });
 
             req.flash('successful', {
-                msg: 'Contact Added.'
+                msg: '添加成功.'
             });
             return res.redirect('/account/' + contactId);
         });
@@ -303,7 +303,7 @@ exports.load = function(req, res, next, id) {
     var valid = validator.isMongoId(id);
     if (!valid) {
         req.flash('errors', {
-            msg: 'Is not a valid MongoId!'
+            msg: '用户ID不正确!'
         });
         return res.redirect(req.session.returnTo || '/account');
     }
@@ -341,7 +341,7 @@ exports.postUpdateProfile = function(req, res, next) {
                 return next(err);
             }
             req.flash('successful', {
-                msg: 'Profile information updated.'
+                msg: '用户信息更新成功。'
             });
             res.redirect('/account');
         });
@@ -397,9 +397,9 @@ exports.uploadProfileImg = function(req, res, next) {
  */
 
 exports.postUpdatePassword = function(req, res, next) {
-    req.assert('password', 'Password must be alphanumeric').isAlphanumeric();
-    req.assert('password', 'Password must be at least 6 characters long').len(6, 14);
-    req.assert('confirm', 'Passwords do not match').equals(req.body.password);
+    req.assert('password', '密码只能包含字母和数字').isAlphanumeric();
+    req.assert('password', '密码必须为6到14位').len(6, 14);
+    req.assert('confirm', '密码不一致').equals(req.body.password);
     var errors = req.validationErrors();
 
     if (errors) {
@@ -419,7 +419,7 @@ exports.postUpdatePassword = function(req, res, next) {
                 return next(err);
             }
             req.flash('successful', {
-                msg: 'Password has been changed.'
+                msg: '密码已更改.'
             });
             res.redirect('/account');
         });
@@ -490,7 +490,7 @@ exports.getOauthUnlink = function(req, res, next) {
                 return next(err);
             }
             req.flash('inform', {
-                msg: provider + ' account has been unlinked.'
+                msg: provider + ' 账户已经取消关联。'
             });
             res.redirect('/account');
         });

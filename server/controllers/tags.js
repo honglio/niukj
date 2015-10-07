@@ -20,7 +20,7 @@ exports.index = function(req, res) {
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.render('500');
+            return res.sendStatus(500);
         }
         Article.count(criteria).exec(function(err, count) {
             res.render('article/index', {
@@ -64,11 +64,11 @@ exports.destroy = function(req, res) {
     article.removeTag(req.body.tags, function(err) {
         if (err) {
             req.flash('errors', {
-                msg: 'Oops! The tags was not found'
+                msg: '错误! 标签未找到。'
             });
         } else {
             req.flash('inform', {
-                msg: 'Removed tags'
+                msg: '删除标签成功。'
             });
         }
         res.redirect('/articles/' + article.id + '/manage');

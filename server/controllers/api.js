@@ -132,12 +132,12 @@ exports.postImage = function(req, res, next) {
         var json = JSON.parse(body);
 
         if (json.picture && !json.picture.result) {
-            return res.status(400).end("uploadError");
+            return res.status(400).end("上传失败");
         }
         req.session.bcImage = json.picture.path;
         console.log(req.session);
         // TODO: end with a json?
-        res.status(200).end("uploadSuccess");
+        res.status(200).end("上传成功");
     };
     // console.log(config);
     var api = request.post(config.apiurl + 'passports/upload/', callback);

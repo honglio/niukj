@@ -11,9 +11,9 @@ var smtpTransport = nodemailer.createTransport('SMTP', config.mail);
  */
 //TODO: Use Ajax to send email without refresh the page.
 exports.postContact = function(req, res) {
-    req.assert('name', 'Name cannot be blank').notEmpty();
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('message', 'Message cannot be blank').notEmpty();
+    req.assert('name', '姓名不能为空').notEmpty();
+    req.assert('email', 'Email格式不正确').isEmail();
+    req.assert('message', '问题内容不能为空').notEmpty();
 
     var errors = req.validationErrors();
 
@@ -41,7 +41,7 @@ exports.postContact = function(req, res) {
             return res.redirect(req.session.returnTo || '#contact-form');
         }
         req.flash('successful', {
-            msg: 'Email has been sent successfully!'
+            msg: '邮件已成功发送!'
         });
         res.redirect(req.session.returnTo || '#contact-form');
     });

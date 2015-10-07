@@ -46,11 +46,11 @@ exports.destroy = function(req, res) {
     article.removeComment(req.param('commentId'), function(err) {
         if (err) {
             req.flash('errors', {
-                msg: 'Oops! The comment was not found'
+                msg: '出错啦! 评论删除失败。'
             });
         } else {
             req.flash('inform', {
-                msg: 'Removed comment'
+                msg: '评论删除成功。'
             });
         }
         res.redirect('/articles/' + article.id + '/present');

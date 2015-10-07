@@ -179,7 +179,7 @@ exports.create = function(req, res, next) {
             return next(err);
         }
         req.flash('successful', {
-            msg: 'Successfully created article!'
+            msg: '课件创建成功!'
         });
         return res.send(article._id);
     });
@@ -364,7 +364,7 @@ exports.uploadImg = function(req, res, next) {
     var data = req.body.src.replace(/^data:image\/\w+;base64,/, "");
     fs.writeFile(filename, data, 'base64', function(err) {
         if (err) {
-            return res.status(400).end("Image upload failed.");
+            return res.status(400).end("图片上传失败。");
         }
         res.status(200).end(filename.replace('uploads', ''));
     });
@@ -373,7 +373,7 @@ exports.uploadImg = function(req, res, next) {
 exports.uploadCoverImg = function(req, res, next) {
     // Should return a Ajax error.
     if (!validator.isBase64(req.body.src)) {
-        return next(new Error('Not a base64 src.'));
+        return next(new Error('不是base64格式。'));
     }
     var imgBuf = new Buffer(req.body.src, 'base64');
     var filename = req.body.name;
@@ -414,12 +414,12 @@ exports.destroy = function(req, res) {
     article.remove(function(err) {
         if (err) {
             req.flash('errors', {
-                msg: 'Delete failed!'
+                msg: '删除失败!'
             });
             res.redirect('/account');
         } else {
             req.flash('inform', {
-                msg: 'Deleted successfully!'
+                msg: '删除成功!'
             });
             res.redirect('/account');
         }

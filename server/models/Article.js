@@ -160,7 +160,7 @@ var ArticleSchema = new mongoose.Schema({
  * Validations
  */
 
-ArticleSchema.path('fileName').required(true, 'Article title cannot be blank');
+ArticleSchema.path('fileName').required(true, '课件名不能为空。');
 
 /**
  * Pre-remove hook
@@ -239,7 +239,7 @@ ArticleSchema.methods = {
         if (index !== -1) {
             this.comments.splice(index, 1);
         } else {
-            return cb('not found');
+            return cb('没有找到。');
         }
         this.save(cb);
     },
@@ -315,7 +315,7 @@ ArticleSchema.methods = {
         if (index !== -1) {
             this.tags.splice(index, 1);
         } else {
-            return cb('not found');
+            return cb('没有找到。');
         }
         this.save(cb);
     }
