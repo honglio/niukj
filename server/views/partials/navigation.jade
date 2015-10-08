@@ -40,8 +40,8 @@ section#top-nav
           if !user
             li(class=title=='登录'?'active':undefined)
               a(href='/login') 登录
-            //- li(class=title=='注册'?'active':undefined)
-            //-   a(href='/signup') 注册
+            li(class=title=='注册'?'active':undefined)
+              a(href='/signup') 注册
           else
             li.dropdown(class=title=='账户管理'?'active':undefined)
               a.dropdown-toggle(data-target="#" data-toggle='dropdown' role="button")
