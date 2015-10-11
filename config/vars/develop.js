@@ -63,27 +63,27 @@ module.exports = {
         }
     },
     weibo: {
-        clientID: "1876751546",
-        clientSecret: "620aab5cbf338f43a24034d28b7c32eb",
-        callbackURL: "http://www.niukj.com/auth/weibo/callback",
+        clientID: "1323751576",
+        clientSecret: "b12169b7552b82d02f40e8eb3fbafd36",
+        callbackURL: "http://www.presentbook.cn/auth/weibo/callback",
         passReqToCallback: true
     },
     renren: {
-        clientID: "ba40c5205da348c18222238f8f93bc0f",
-        clientSecret: "5095fd1142cd432a9c0da9b1e87eee70",
-        callbackURL: "http://www.niukj.com/auth/renren/callback",
+        clientID: "6a95c4020780431385f3cfcbf57d83a7",
+        clientSecret: "ac5397f0b5fb4066ae50efebcc84871b",
+        callbackURL: "http://www.presentbook.cn/auth/renren/callback",
         passReqToCallback: true
     },
     qq: {
-        clientID: "101101356",
-        clientSecret: "6a1622fbe03ae484f4895394afdb5c28",
-        callbackURL: "http://www.niukj.com/auth/qq/callback",
+        clientID: "101258472",
+        clientSecret: "1270b2dc11ca15639f5adfe37bdc4ec9",
+        callbackURL: "http://www.presentbook.cn/auth/qq/callback",
         passReqToCallback: true
     },
     linkedin: {
-        clientID: "75d51iuwfnv5g9",
-        clientSecret: "xlvBqhYm4lKLjNNb",
-        callbackURL: "http://www.niukj.com/auth/linkedin/callback",
+        clientID: "756t1t3x5kxidt",
+        clientSecret: "Lu6nDOrcS6iw4lhG",
+        callbackURL: "http://www.presentbook.cn/auth/linkedin/callback",
         passReqToCallback: true
     }
 };
