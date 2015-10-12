@@ -20,7 +20,10 @@ exports.index = function(req, res) {
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.sendStatus(500);
+            req.flash('errors', {
+                msg: '更新课件信息失败！'
+            });
+            return res.sendStatus(403);
         }
         Article.count(criteria).exec(function(err, count) {
             res.render('article/index', {
@@ -45,7 +48,7 @@ exports.create = function(req, res) {
             req.flash('errors', {
                 msg: '更新课件信息失败！'
             });
-            return res.render('500');
+            return res.sendStatus(403);
         }
         req.flash('successful', {
             msg: '更新课件信息成功！'

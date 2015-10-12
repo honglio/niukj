@@ -63,7 +63,10 @@ exports.accountbyId = function(req, res, next) {
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.sendStatus(500);
+            req.flash('errors', {
+                msg: '更新信息失败！'
+            });
+            return res.sendStatus(403);
         }
 
         // calculate ViewNum of the reqested account
@@ -381,7 +384,10 @@ exports.uploadProfileImg = function(req, res, next) {
             // user.profile.picture.contentType = req.files.file.mimetype;
             user.save(function(err) {
                 if (err) {
-                    res.sendStatus(500);
+                    req.flash('errors', {
+                        msg: '更新信息失败！'
+                    });
+                    res.sendStatus(403);
                     return next(err);
                 }
                 res.sendStatus(200);

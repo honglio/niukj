@@ -44,7 +44,10 @@ exports.search = function(req, res) {
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.sendStatus(500);
+            req.flash('errors', {
+                msg: '更新课件失败！'
+            });
+            return res.sendStatus(403);
         }
         // console.log(utils.formatDate);
         Article.count().exec(function(err, count) {
@@ -84,7 +87,10 @@ exports.explore = function(req, res) {
 
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.sendStatus(500);
+            req.flash('errors', {
+                msg: '请求课件失败！'
+            });
+            return res.sendStatus(403);
         }
         Article.count().exec(function(err, count) {
             // console.log(options.page);
@@ -125,7 +131,10 @@ exports.my = function(req, res) {
     var amount;
     Article.list(options, function(err, articles) {
         if (err) {
-            return res.sendStatus(500);
+            req.flash('errors', {
+                msg: '请求课件失败！'
+            });
+            return res.sendStatus(403);
         }
         // calculate ViewNum of the reqested user
         var viewNum = 0;
@@ -238,7 +247,7 @@ exports.desc = function(req, res) {
             req.flash('errors', {
                 msg: '更新课件信息失败！'
             });
-            return res.sendStatus(500);
+            return res.sendStatus(403);
         }
         req.flash('successful', {
             msg: '更新课件信息成功！'
@@ -251,7 +260,10 @@ exports.draft = function(req, res) {
     var article = req.article;
     article.updateDraft(req.body.draft, function(err) {
         if (err) {
-            return res.sendStatus(500);
+            req.flash('errors', {
+                msg: '更新课件信息失败！'
+            });
+            return res.sendStatus(403);
         }
         return res.sendStatus(200);
     });

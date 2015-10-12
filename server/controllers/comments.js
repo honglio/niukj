@@ -31,7 +31,10 @@ exports.create = function(req, res) {
 
     article.addComment(user, req.body, function(err) {
         if (err) {
-            return res.render('500');
+            req.flash('errors', {
+                msg: '新建评论失败！'
+            });
+            return res.sendStatus(403);
         }
         res.redirect('/articles/' + article.id + '/present');
     });
