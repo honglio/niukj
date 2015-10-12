@@ -1,7 +1,7 @@
 {
   "name": "PresentBook",
   "description": "An Online Exhibition Platform - upload & present your drawing art",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "private": true,
   "author": "Hong Liu <hong.liu@live.cn> (http://honglio.github.io)",
   "repository": {

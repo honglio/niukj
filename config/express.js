@@ -215,7 +215,9 @@ module.exports = function(app, passport) {
             url: config.db,
             auto_reconnect: true
         }),
-        cookie: {maxAge: 360*500000}
+        cookie: {
+            maxAge: 360 * 500000
+        }
     }));
     // express/redis session storage
     // app.use( session( {
