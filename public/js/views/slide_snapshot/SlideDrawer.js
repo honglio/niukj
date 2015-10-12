@@ -60,7 +60,7 @@ define(["underscore",
                 self.g2d.drawImage(oImg, 0, 0, 300, 195);
                 self.g2d.restore();
 
-                self.__paintTheme(this.theme);
+                self.__paintTheme(self.theme);
                 self.__paintComponent();
             }, 100);
         },

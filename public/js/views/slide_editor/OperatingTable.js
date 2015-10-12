@@ -84,6 +84,7 @@ define(["CustomView",
                 this.$el.css('background-repeat', 'no-repeat');
                 this.$el.css('background-size', '100% 100%');
                 this.$el.css('background-position', 'center');
+                this._$slideContainer.addClass('slideContainer img-bg');
             }
             this._$slideContainer.data('background', (bg || 'defaultbg'));
         },

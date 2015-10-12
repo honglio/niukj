@@ -20,7 +20,7 @@ define(["./AvailableThemes",
         },
 
         _previewTheme: function(e) {
-            console.log('_previewTheme');
+            // console.log('_previewTheme');
             var $slideContainer = $('.slideContainer');
             var target = (e.srcElement) ? e.srcElement : e.currentTarget;
             var className = target.dataset['class'] ? target.dataset['class'] : target.className;
@@ -29,7 +29,7 @@ define(["./AvailableThemes",
         },
 
         _setTheme: function(e) {
-            console.log('_setTheme');
+            // console.log('_setTheme');
             var target = (e.srcElement) ? e.srcElement : e.currentTarget;
             var className = target.dataset['class'] ? target.dataset['class'] : target.className;
 
@@ -37,14 +37,14 @@ define(["./AvailableThemes",
         },
 
         _restoreTheme: function(e) {
-            console.log('_restoreTheme');
+            // console.log('_restoreTheme');
             var theme = this._editorModel.activeSlide().get('theme');
             var $slideContainer = $('.slideContainer');
             this._swapTheme($slideContainer, theme || '');
         },
 
         _swapTheme: function($el, newTheme) {
-            console.log('_swapTheme');
+            // console.log('_swapTheme');
             $el.removeClass($el.attr('theme')).addClass(newTheme);
             $el.attr('theme', newTheme);
         },
