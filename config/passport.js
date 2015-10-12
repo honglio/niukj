@@ -16,7 +16,9 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
-        done(err, user);
+        console.log(user);
+        if(!err) {done(null, user);}
+        else { done(err, null); }
     });
 });
 
@@ -120,6 +122,7 @@ passport.use(new WeiboStrategy(config.weibo, function(req, accessToken, tokenSec
         User.findOne({
             weibo: profile.id
         }, function(err, existingUser) {
+            if(err) {return done(err);}
             if (existingUser) {
                 req.flash('errors', {
                     msg: '你已经用微博账号注册过了！' +
@@ -148,6 +151,7 @@ passport.use(new WeiboStrategy(config.weibo, function(req, accessToken, tokenSec
         User.findOne({
             weibo: profile.id
         }, function(err, existingUser) {
+            if(err) {return done(err);}
             if (existingUser) {
                 return done(null, existingUser);
             }

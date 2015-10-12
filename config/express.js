@@ -214,7 +214,8 @@ module.exports = function(app, passport) {
         store: new mongoStore({
             url: config.db,
             auto_reconnect: true
-        })
+        }),
+        cookie: {maxAge: 360*5}
     }));
     // express/redis session storage
     // app.use( session( {

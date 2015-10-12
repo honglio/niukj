@@ -24,42 +24,42 @@ block content
                   button.btn.btn-warning.btn-reset.btn-addon(type='submit')
                     i.fa.fa-keyboard-o
                     |  修改密码
-        .panel.panel-primary
-          .panel-heading
-            h5.panel-title.bolder 关联账户
-          .panel-body
-            if user.qq
-              p: a.btn.btn-danger.btn-addon(href='/account/unlink/qq')
-                i.fa.fa-unlink
-                | 取消 QQ 关联
-            else
-              p: a.btn.btn-info.btn-addon(href='/auth/qq')
-                i.fa.fa-link
-                | 关联 QQ 账户
-            if user.weibo
-              p: a.btn.btn-danger.btn-addon(href='/account/unlink/weibo')
-                i.fa.fa-unlink
-                | 取消 Weibo 关联
-            else
-              p: a.btn.btn-warning.btn-addon(href='/auth/weibo')
-                i.fa.fa-link
-                | 关联 Weibo 账户
-            if user.renren
-              p: a.btn.btn-danger.btn-addon(href='/account/unlink/renren')
-                i.fa.fa-unlink
-                | 取消 Renren 关联
-            else
-              p: a.btn.btn-dark.btn-addon(href='/auth/renren')
-                i.fa.fa-link
-                | 关联 Renren 账户
-            if user.linkedin
-              p: a.btn.btn-danger.btn-addon(href='/account/unlink/linkedin')
-                i.fa.fa-unlink
-                | 取消 LinkedIn 关联
-            else
-              p: a.btn.btn-success.btn-addon(href='/auth/linkedin')
-                i.fa.fa-link
-                | 关联 LinkedIn 账户
+        //- .panel.panel-primary
+        //-   .panel-heading
+        //-     h5.panel-title.bolder 关联账户
+        //-   .panel-body
+        //-     if user.qq
+        //-       p: a.btn.btn-danger.btn-addon(href='/account/unlink/qq')
+        //-         i.fa.fa-unlink
+        //-         | 取消 QQ 关联
+        //-     else
+        //-       p: a.btn.btn-info.btn-addon(href='/auth/qq')
+        //-         i.fa.fa-link
+        //-         | 关联 QQ 账户
+        //-     if user.weibo
+        //-       p: a.btn.btn-danger.btn-addon(href='/account/unlink/weibo')
+        //-         i.fa.fa-unlink
+        //-         | 取消 Weibo 关联
+        //-     else
+        //-       p: a.btn.btn-warning.btn-addon(href='/auth/weibo')
+        //-         i.fa.fa-link
+        //-         | 关联 Weibo 账户
+        //-     if user.renren
+        //-       p: a.btn.btn-danger.btn-addon(href='/account/unlink/renren')
+        //-         i.fa.fa-unlink
+        //-         | 取消 Renren 关联
+        //-     else
+        //-       p: a.btn.btn-dark.btn-addon(href='/auth/renren')
+        //-         i.fa.fa-link
+        //-         | 关联 Renren 账户
+        //-     if user.linkedin
+        //-       p: a.btn.btn-danger.btn-addon(href='/account/unlink/linkedin')
+        //-         i.fa.fa-unlink
+        //-         | 取消 LinkedIn 关联
+        //-     else
+        //-       p: a.btn.btn-success.btn-addon(href='/auth/linkedin')
+        //-         i.fa.fa-link
+        //-         | 关联 LinkedIn 账户
         .panel.panel-danger
           .panel-heading
             h5.panel-title.bolder 删除账户
