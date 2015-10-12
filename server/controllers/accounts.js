@@ -356,7 +356,7 @@ exports.postUpdateProfile = function(req, res, next) {
  * Image upload API when user manage profile.
  */
 exports.uploadProfileImg = function(req, res, next) {
-    console.log(req.files);
+    // console.log(req.files);
     var imgPath = req.files.file.path;
     var filename = req.files.file.name;
     var oss = OSS.createClient(config.oss);

@@ -33,7 +33,8 @@ define(["./AvailableThemes",
             var target = (e.srcElement) ? e.srcElement : e.currentTarget;
             var className = target.dataset['class'] ? target.dataset['class'] : target.className;
 
-            this._editorModel.activeSlide().set('theme', this.__getTheme(className) || '');
+            this._editorModel.activeSlide().set('theme', this.__getTheme(className || '') );
+            // console.log(this._editorModel.activeSlide());
         },
 
         _restoreTheme: function(e) {

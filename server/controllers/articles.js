@@ -389,7 +389,7 @@ exports.uploadCoverImg = function(req, res, next) {
     }
     var imgBuf = new Buffer(req.body.src, 'base64');
     var filename = req.body.name;
-    console.log(req.body);
+    // console.log(req.body);
     var oss = OSS.createClient(config.oss);
     var aliImg = {
         src: '',

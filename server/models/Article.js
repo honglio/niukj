@@ -178,7 +178,7 @@ ArticleSchema.pre('remove', function(next) {
         if (err) {
             return next(err);
         }
-        console.log(response);
+        // console.log(response);
         next(response.status);
     });
 });

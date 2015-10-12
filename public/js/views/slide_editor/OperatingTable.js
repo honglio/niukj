@@ -71,6 +71,14 @@ define(["CustomView",
             return this;
         },
 
+        _updateTheme: function(slide, theme) {
+            if (!this._$slideContainer) {
+                return;
+            }
+            this._$slideContainer.addClass(theme);
+            this._$slideContainer.data('theme', theme);
+        },
+
         _updateBg: function(slide, bg) {
             if (!this._$slideContainer) {
                 return;
@@ -200,8 +208,10 @@ define(["CustomView",
 
             if (this.modelActive) {
                 this._updateBg(this.modelActive, this.modelActive.get('background'));
+                this._updateTheme(this.modelActive, this.modelActive.get('theme'));
                 this.modelActive.on("change:components.add", this._componentAdded, this);
                 this.modelActive.on("change:background", this._updateBg, this);
+                this.modelActive.on("change:theme", this._updateTheme, this);
             }
             return this;
         },

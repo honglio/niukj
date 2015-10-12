@@ -33,7 +33,7 @@ block content
                     - if (component.type == 'TextBox')
                       div(style="font-family:#{component.face}; font-size:#{component.size}px; font-weight:#{component.weight}; font-style:#{component.style}; color: #{component.color}; text-decoration: #{component.decoration}; text-align: #{component.align}")= component.text
             else
-              div(style="width:#{article.width}px; height:#{article.height}px; background: url(#{slide.background.substring(4)}) no-repeat center; background-size: 100% 100%;")
+              div(class="#{slide.theme}" style="width:#{article.width}px; height:#{article.height}px; background: url(#{slide.background.substring(4)}) no-repeat center; background-size: 100% 100%;")
                 - each component in slide.components
                   - var top = round(component.y) + 'px';
                   - var left = round(component.x) + 'px';
