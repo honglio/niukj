@@ -142,7 +142,9 @@ exports.postImage = function(req, res, next) {
     // console.log(config);
     var api = request.post(config.apiurl + 'passports/upload/', callback);
     var form = api.form();
-    form.append('picture', fs.createReadStream(req.files.file.path));
+    if (typeof req.files.file != 'undefined') {
+      form.append('picture', fs.createReadStream(req.files.file.path));
+    }
     // var image = req.files.business_card;
     // form.append('picture', fs.createReadStream(image.path));
 };
