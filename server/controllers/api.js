@@ -192,3 +192,41 @@ exports.getBrandList = function(req, res, next) {
     var form = api.form();
     form.append('brand', req.body.brand);
 };
+
+
+exports.editAnswersStatus = function (req, res, next) {
+
+  var loopcalls = [];
+  
+  req.body.forEach(function(item) {
+    loopcalls.push(loopcall(item));
+  });
+  
+  function loopcall(item) {
+    return function(callback) { // callback could be extend as a function
+      sendAnswerStatus(item, callback);
+    };
+  }
+  
+  function sendAnswerStatus (item, done) {
+    var callback = function(err, response, body) {
+      if(err) {
+        return console.log('Error!');
+      }
+      var json = JSON.parse(body);
+      done(err, json);
+    };
+    
+    var api = request.post(urlRoot + 'questions/answer', callback);
+    var form = api.form();
+    form.append('status', item.status);
+    form.append('passport', item.passport);
+  }
+  
+  async.parallel(loopcalls, function(err, results) {
+    if (err) {
+      return next(err);
+    }
+    res.send(results);
+  });
+}
