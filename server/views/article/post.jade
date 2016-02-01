@@ -3,7 +3,7 @@ extends ../layout
 append scripts
   script(type='text/javascript' src='/js/vendors/bootstrap-tagsinput.js')
   script(type='text/javascript').
-    submitForms = function(){
+    var submitForms = function(){
         // update desc
         var action = $('#desc').attr('action');
         var data = $('#desc textarea').val();
