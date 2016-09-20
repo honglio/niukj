@@ -2,6 +2,10 @@
 
 # Niukj #
 
+## Browser Support
+
+__Chrome__, __Safari__, __Firefox 3.6+__, __Opera__, __IE9-11__.  
+
 ## Getting started ##
 
 Details of contributing on this project can be found in the [wiki](https://github.com/honglio/niukj/wiki).
