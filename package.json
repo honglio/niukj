@@ -19,7 +19,7 @@
   "dependencies": {
     "express": "^4.10.2",
     "jade": "^1.7.0",
-    "mongoose": "^3.8.19",
+    "mongoose": "^5.9.7",
     "nodemailer": "^0.6.5",
     "connect-mongo": "^0.4.1",
     "connect-redis": "^2.1.0",
